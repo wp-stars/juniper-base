@@ -3,6 +3,10 @@
 $primary: #B4D43D;
 $text: #093642;
 
+.text {
+    color: $text;
+}
+
 /* General styles */
 body {
     font-family: 'Red Hat Mono';
@@ -43,6 +47,16 @@ h3 {
     font-style: normal;
     font-weight: 700;
     line-height: 3rem; /* 133.333% */
+}
+
+h6 {
+    color: var(--primary-petrol-dark, #093642);
+    /* Desktop/Headline6 */
+    font-family: "Red Hat Mono";
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.0625rem; /* 165% */
 }
 
 .tagline {

@@ -8,7 +8,9 @@
 }
 
 .simple-slider .swiper-button-next, 
-.simple-slider .swiper-button-prev {
+.simple-slider .swiper-button-prev,
+.blog-slider .swiper-button-next, 
+.blog-slider .swiper-button-prev {
     position: relative;
     left: unset;
     right: unset;
@@ -19,7 +21,9 @@
 
 
 .simple-slider .swiper-button-next:after, 
-.simple-slider .swiper-button-prev:after {
+.simple-slider .swiper-button-prev:after,
+.blog-slider .swiper-button-next:after, 
+.blog-slider .swiper-button-prev:after{
     display: none;
 }
 
@@ -52,6 +56,17 @@
     background: var(--primary-petrol-dark, #093642);
 }
 
+.blog-slider-background {
+    height: 1000px;
+    width: 200%;
+    transform: rotate(-5deg);
+    top: 100px;
+    left: -50%;
+    min-height: 500px;
+    border-top: 12px solid var(--primary-green, #B4D43D);
+    background: var(--primary-petrol-dark, #093642);
+}
+
 .quote-swiper-outer .swiper-button-next,
 .quote-swiper-outer .swiper-button-prev {
     bottom: 4rem;
@@ -80,8 +95,14 @@
     content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none"><path d="M12.4531 1.9876L1.94693 12.4938L12.4531 23" stroke="%23093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="31.4409" y="14.2451" width="15.7593" height="3.50207" rx="1.75103" transform="rotate(-180 31.4409 14.2451)" fill="%23093642"/><rect x="41.947" y="14.2451" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 41.947 14.2451)" fill="%23093642"/></svg>');
 }
 
+.blog-slider .swiper-pagination {
+    width: calc(100% - 120px);
+    margin: auto;
+}
+
 .quote-swiper-outer .swiper-pagination-bullet,
-.split-slider .swiper-pagination-bullet {
+.split-slider .swiper-pagination-bullet,
+.blog-slider .swiper-pagination-bullet {
     border-radius: 0;
     width: 2rem;
     background: var(--greyscale-white, #F9F9F9);
@@ -89,7 +110,8 @@
 }
 
 .quote-swiper-outer .swiper-pagination-bullet.swiper-pagination-bullet-active,
-.split-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
+.split-slider .swiper-pagination-bullet.swiper-pagination-bullet-active,
+.blog-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
     width: 5rem;
     background: var(--primary-green, #B4D43D);
 }
@@ -151,4 +173,11 @@
     font-style: normal;
     font-weight: 500;
     line-height: 1.875rem; /* 166.667% */
+}
+
+
+.blog-slider .image-wrapper img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
