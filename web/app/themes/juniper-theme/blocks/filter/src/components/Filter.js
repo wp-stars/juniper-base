@@ -1,14 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import AlternatingResult from "./AlternatingResult"
 import ArticleResult from "./ArticleResult"
 import axios from 'axios'
 
 const Filter = ( data ) => {
     const [selectedFilterVals, setSelectedFilterVals] = useState([])
+    const [posts, setPosts] = useState(data.posts)
 
     const updateFilterVals = (e, term_id) => {
         e.preventDefault()
-        let shallowFilterVals = {...selectedFilterVals}
+        let shallowFilterVals = [...selectedFilterVals]
         if(shallowFilterVals.includes(term_id)) {
             shallowFilterVals = shallowFilterVals.splice(shallowFilterVals.indexOf(term_id), 1)
         } else {
@@ -18,9 +19,19 @@ const Filter = ( data ) => {
         setSelectedFilterVals(shallowFilterVals)
     }
 
-    // useEffect(() => {
-    //     axios.get(`/`)
-    // }, selectedFilterVals)
+    useEffect(() => {
+        if(!selectedFilterVals.length) return
+
+        const queryString = selectedFilterVals.join(",")
+        axios.get(`${data.restUrl}wps/v1/projects?project_category=${queryString}`)
+            .then(res => {
+                console.log(res)
+                setPosts(res.data.posts)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }, [selectedFilterVals])
 
     return (
         <div className="w-full">
@@ -29,8 +40,12 @@ const Filter = ( data ) => {
                     <h3 className="text-white">Filter</h3>
                     <div className="grid grid-cols-4 gap-8 justify-center">
                         {data.terms.map((term, index) => {
+                            let isActive = selectedFilterVals.includes(term.id)
                             return (
-                                <button key={index} className="filter-btn w-fit" type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>{term.name}</button>
+                                <button key={index} className={`filter-btn w-fit inline-flex ${isActive ? 'active' : ''}`} type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>
+                                    <span className="bg-light h-full"><img src={term.fields.svg_icon} alt="Term Icon" /></span>
+                                    <span className="btn-inner">{term.name}</span>
+                                </button>
                             )
                         })}
                     </div>
@@ -43,7 +58,7 @@ const Filter = ( data ) => {
                 </div>
             </div>
             <div className="w-full relative">
-                {data.posts.map((post, index) => {
+                {posts.map((post, index) => {
 
                     if(data.style === "alternating") {
                         return <AlternatingResult key={index} index={index} post={post} />

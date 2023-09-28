@@ -8,6 +8,9 @@
 
 .filter-btn {
     border: 2px solid #F9F9F9;
+}
+
+.filter-btn .btn-inner {
     padding: 0.5rem 0.25rem;
 }
 

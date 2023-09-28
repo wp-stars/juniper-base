@@ -2273,11 +2273,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const Filter = data => {
   const [selectedFilterVals, setSelectedFilterVals] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(data.posts);
   const updateFilterVals = (e, term_id) => {
     e.preventDefault();
-    let shallowFilterVals = {
-      ...selectedFilterVals
-    };
+    let shallowFilterVals = [...selectedFilterVals];
     if (shallowFilterVals.includes(term_id)) {
       shallowFilterVals = shallowFilterVals.splice(shallowFilterVals.indexOf(term_id), 1);
     } else {
@@ -2285,11 +2284,16 @@ const Filter = data => {
     }
     setSelectedFilterVals(shallowFilterVals);
   };
-
-  // useEffect(() => {
-  //     axios.get(`/`)
-  // }, selectedFilterVals)
-
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!selectedFilterVals.length) return;
+    const queryString = selectedFilterVals.join(",");
+    axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/projects?project_category=${queryString}`).then(res => {
+      console.log(res);
+      setPosts(res.data.posts);
+    }).catch(err => {
+      console.error(err);
+    });
+  }, [selectedFilterVals]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2301,12 +2305,20 @@ const Filter = data => {
   }, "Filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-4 gap-8 justify-center"
   }, data.terms.map((term, index) => {
+    let isActive = selectedFilterVals.includes(term.id);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       key: index,
-      className: "filter-btn w-fit",
+      className: `filter-btn w-fit inline-flex ${isActive ? 'active' : ''}`,
       type: "button",
       onClick: e => updateFilterVals(e, term.term_id)
-    }, term.name);
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "bg-light h-full"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: term.fields.svg_icon,
+      alt: "Term Icon"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "btn-inner"
+    }, term.name));
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "background bg-dark"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2323,7 +2335,7 @@ const Filter = data => {
     fillOpacity: "0.6"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full relative"
-  }, data.posts.map((post, index) => {
+  }, posts.map((post, index) => {
     if (data.style === "alternating") {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AlternatingResult__WEBPACK_IMPORTED_MODULE_2__["default"], {
         key: index,
