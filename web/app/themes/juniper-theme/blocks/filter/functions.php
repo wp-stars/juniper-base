@@ -29,7 +29,7 @@ add_filter(
     'timber/acf-gutenberg-blocks-data/filter',
     function ( $context ) {
         $post_type = $context['fields']['post_type'];
-        $data_arr = wps_get_filter_posts( $post_type, new stdClass());
+        $data_arr = wps_get_filter_posts( $post_type, new stdClass(), 1);
 
         $data_arr['style'] = $context['fields']['style'];
         $data_arr['restUrl'] = get_rest_url();
@@ -62,10 +62,12 @@ function wps_filter_callback() {
     $taxonomies = new stdClass();
     $taxonomies->projectcategory = $project_categories;
 
-    return wps_get_filter_posts( 'projects', $taxonomies );
+    $page = !empty($_GET['page']) ? intval($_GET['page']) : 1;
+
+    return wps_get_filter_posts( 'projects', $taxonomies, $page );
 }
 
-function wps_get_filter_posts( $post_type, $taxonomies ) {
+function wps_get_filter_posts( $post_type, $taxonomies, $page ) {
     $data_arr = array();
     $tax_query = array();
     if(!empty($taxonomies->projectcategory)) {
@@ -80,17 +82,8 @@ function wps_get_filter_posts( $post_type, $taxonomies ) {
     $initial_posts = new WP_Query(
         array(
             'post_type' => 'projects',
-            //'tax_query' => $tax_query
-            'tax_query' => array(
-                'relation' => 'AND',
-                array(
-                    'taxonomy' => 'project_category',
-                    'terms' => array( '12' ),
-                    'field' => 'term_id',
-                    'include_children' => false,
-                    'operator' => 'IN',
-                ),
-            )
+            'paged' => $page,
+            'tax_query' => $tax_query
         )
     );
 
