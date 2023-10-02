@@ -168,3 +168,12 @@ function wps_mime_type($mimes) {
 	$mimes['ico'] = 'image/x-icon';
     return $mimes;
 }
+
+function my_acf_init() {
+    
+    acf_update_setting('google_api_key', 'AIzaSyA2nwpgRNcXh27RBL41e47d6pFcJda9qiY');
+}
+
+add_action('acf/init', 'my_acf_init');
+
+
