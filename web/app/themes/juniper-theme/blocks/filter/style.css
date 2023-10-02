@@ -9,6 +9,7 @@
 .filter-btn {
     border: 2px solid #F9F9F9;
     position: relative;
+    margin: 1rem 2rem;
 }
 
 .filter-btn .btn-inner {
@@ -70,4 +71,18 @@
     position: absolute;
     left: 3rem;
     top: 250px;
+}
+
+.article-row {
+    border: 4px solid var(--primary-petrol-dark, #093642);
+}
+
+.article-text {
+    padding: 1.5rem 3rem;
+}
+
+.img-content img {
+    height: 500px;
+    width: 500px;
+    object-fit: cover;
 }

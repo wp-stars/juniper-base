@@ -2185,7 +2185,9 @@ const AlternatingResult = _ref => {
     index,
     post
   } = _ref;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: post.link
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `w-full min-h-[600px] mb-40 inline-flex ${index % 2 === 0 ? 'even flex-row' : 'odd flex-row-reverse'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-1/2"
@@ -2211,7 +2213,7 @@ const AlternatingResult = _ref => {
   }, post.excerpt), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     className: "btn-underline",
     href: `/${post.post_type}/${post.post_name}`
-  }, "Mehr \xFCber ", post.post_title)));
+  }, "Mehr \xFCber ", post.post_title))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AlternatingResult);
 
@@ -2240,8 +2242,25 @@ const ArticleResult = _ref => {
     post
   } = _ref;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `flex-row ${index % 2 === 0 ? 'row-reverse' : ''}`
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title, " // 2022"));
+    className: "container mx-auto mb-5"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `w-full article-row flex flex-row ${index % 2 === 0 ? 'even' : 'odd'}`
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "img-content w-5/12"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: post.featured_image
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "article-text flex flex-col items-start text-left justify-center w-7/12"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
+    className: "mb-5"
+  }, post.post_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "mb-5"
+  }, post.post_author, " // ", post.post_date, " // ", post.terms.map(term => term.name).join(' // ')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "mb-10"
+  }, post.excerpt), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: post.link,
+    className: "btn-underline"
+  }, "weiter lesen"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ArticleResult);
 
@@ -2290,7 +2309,6 @@ const Filter = data => {
   };
   const removeTerm = (event, termId) => {
     event.stopPropagation();
-    console.log(selectedFilterVals.indexOf(termId));
     let newSelectedFilterVals = [...selectedFilterVals],
       targetIndex = newSelectedFilterVals.indexOf(termId);
     newSelectedFilterVals.splice(targetIndex, 1);
@@ -2299,7 +2317,7 @@ const Filter = data => {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (!selectedFilterVals.length) return;
     const queryString = selectedFilterVals.join(",");
-    axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/projects?project_category=${queryString}&page=${page}`).then(res => {
+    axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&${data.taxonomy}=${queryString}&page=${page}`).then(res => {
       console.log(res);
       setPosts(res.data.posts);
     }).catch(err => {
@@ -2315,9 +2333,8 @@ const Filter = data => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "text-white"
   }, "Filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-4 gap-8 justify-center"
+    className: "inline-flex flex-wrap justify-center"
   }, data.terms.map((term, index) => {
-    console.log(selectedFilterVals, term.term_id);
     let isActive = selectedFilterVals.includes(term.term_id);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       key: index,
@@ -2389,10 +2406,10 @@ const Filter = data => {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex justify-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, console.log(data), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => loadMorePosts(),
     className: "btn btn-primary"
-  }, "mehr Projekte zeigen")));
+  }, "mehr ", data.postType, " zeigen")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Filter);
 
