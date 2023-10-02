@@ -12,7 +12,7 @@
  	SupportsMultiple: true
 #}
 
-<div class="w-full relative min-h-[800px]">
+<div class="w-full relative min-h-[800px] applynow">
 	<div class="container mx-auto relative">
 		<div class="inline-flex">
 			<div class="w-full">
@@ -25,11 +25,12 @@
 						<a href="tel:{{ fields.contact_phone }}" class="mb-3 contact-link">{{ fields.contact_phone }}</p>
 					</div>
 				</div>
-				<a class="btn btn-primary w-full" href="#">Jetzt Bewerben</a>
+				<a class="btn btn-primary w-full" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
 			</div>
 		</div>
 	</div>
-	<div class="absolute right-0 top-0">
-		<img src="{{ fields.image }}" />
+	<div class="img-content">
+		<div class="img-decoration"></div>					
+		<div class="content-image" style="background-image: url('{{ fields.image }}');"></div>
 	</div>
 </div>
