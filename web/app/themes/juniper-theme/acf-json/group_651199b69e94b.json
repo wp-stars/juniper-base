@@ -49,6 +49,29 @@
             "placeholder": ""
         },
         {
+            "key": "field_651aba2349afb",
+            "label": "Taxonomy",
+            "name": "taxonomy",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [],
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_6511a1f41ab6d",
             "label": "Style",
             "name": "style",
@@ -93,5 +116,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1695654421
+    "modified": 1696250437
 }

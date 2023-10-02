@@ -8,7 +8,29 @@
 
 .filter-btn {
     border: 2px solid #F9F9F9;
+    position: relative;
+    margin: 1rem 2rem;
+}
+
+.filter-btn .btn-inner {
     padding: 0.5rem 0.25rem;
+}
+
+.filter-btn.active {
+    border: 2px solid #B4D43D;
+}
+
+.filter-btn.active {
+    color: #B4D43D;
+}
+
+.filter-btn .remove-term {
+    border-radius: 50%;
+    background-color: #B4D43D;
+    padding: 0.25rem;
+    position: absolute;
+    top: -11px;
+    right: -11px;
 }
 
 .teaser-image img {
@@ -49,4 +71,18 @@
     position: absolute;
     left: 3rem;
     top: 250px;
+}
+
+.article-row {
+    border: 4px solid var(--primary-petrol-dark, #093642);
+}
+
+.article-text {
+    padding: 1.5rem 3rem;
+}
+
+.img-content img {
+    height: 500px;
+    width: 500px;
+    object-fit: cover;
 }

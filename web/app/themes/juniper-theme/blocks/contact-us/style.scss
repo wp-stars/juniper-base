@@ -1,0 +1,15 @@
+.contact-us {}
+
+body.wp-admin {
+	.contact-us {}
+}
+
+
+.contact-us img{
+    position: absolute;
+    top: 0;
+    left: -100px;
+    transform: rotate(6.3deg);
+    box-shadow: 15px 20px 0px 0px #B4D43D;
+}
+

@@ -1,0 +1,40 @@
+{#
+ 	Title: Simple Contact
+ 	Description: contact widget to get to the contact formular
+ 	Category: formatting
+ 	Icon: admin-comments
+ 	Keywords: contact contact-us
+ 	Mode: edit
+ 	Align: full
+ 	PostTypes: page post jobs projects
+ 	SupportsAlign: left right full
+ 	SupportsMode: true
+ 	SupportsMultiple: true
+#}
+
+
+<section class="contact-us relative mx-auto py-10 ">
+	<div class="text-container flex justify-center items-center gap-8 md:gap-20 flex-col pt-[5rem]">
+		<div class="self-stretch flex-col justify-start items-start gap-12 flex">
+			<div class="self-stretch  flex-col justify-start items-start gap-2 md:gap-8 flex">
+				<div class="self-stretch  flex-col justify-start items-start flex gap-2">
+					<div class="self-stretch text-center md:text-xl text-sm font-semibold font-['Red Hat Mono'] uppercase sm:leading-3 md:leading-7">{{fields.subheadline}}</div>
+					<div class="self-stretch text-center text-4xl md:text-5xl font-bold font-['Red Hat Display'] leading-10">{{fields.headline}}</div>
+				</div>
+				<div class="self-stretch text-center text-stone-900 text-base md:text-lg font-medium font-['Red Hat Mono'] leading-loose">{{fields.text}}</div>
+			</div>
+		</div>
+		<a href={{fields.link}} class="btn-primary md:w-[45vw] w-[70vw] cursor-pointer text-base ">Termin vereinbaren</a>
+	</div>
+	<img class="w-96 h-96 left-[0px] top-[20px] absolute origin-top-left rotate-[6.30deg] shadow object-cover" src={{ fields.image.sizes.large }}/>
+	<div class="svg-1">
+		<svg xmlns="http://www.w3.org/2000/svg" width="67" height="483" viewbox="0 0 67 483" fill="none">
+			<path d="M0 312.5L69.5 0L78.5 483L0 312.5Z" fill="#B4D43D" fill-opacity="0.6"/>
+		</svg>
+		<div class="svg-2">
+			<svg xmlns="http://www.w3.org/2000/svg" width="134" height="584" viewbox="0 0 134 584" fill="none">
+				<path d="M0 355L150 0V583.5L0 355Z" fill="#093642"/>
+			</svg>
+		</div>
+	</div>
+</section>
