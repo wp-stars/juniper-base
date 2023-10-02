@@ -64,7 +64,7 @@ class Projects {
 		register_rest_field( 'project', 'fields', array(
 				'get_callback'    	  => 'get_post_meta_for_api',
 				'schema'              => null,
-				'permission_callback' => "__return_true"
+				'permission_callback' => '__return_true',
 			)
 		);
 	}
