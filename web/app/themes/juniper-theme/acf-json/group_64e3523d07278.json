@@ -132,7 +132,7 @@
                 },
                 {
                     "key": "field_64e353c4d5e7c",
-                    "label": "Name",
+                    "label": "City",
                     "name": "name",
                     "aria-label": "",
                     "type": "text",
@@ -255,5 +255,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1692631456
+    "modified": 1695898755
 }

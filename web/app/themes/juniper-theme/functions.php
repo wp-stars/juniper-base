@@ -160,9 +160,9 @@ function wps_add_to_context( $context ) {
 /**
  * Mime Type SVG enablen zum Upload
  */
-add_filter('upload_mimes', 'wps_mime_type_svg');
+add_filter('upload_mimes', 'wps_mime_type');
 
-function wps_mime_type_svg($mimes) {
+function wps_mime_type($mimes) {
     
     $mimes['svg'] = 'image/svg+xml';
 	$mimes['ico'] = 'image/x-icon';
