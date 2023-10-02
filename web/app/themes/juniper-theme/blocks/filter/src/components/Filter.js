@@ -26,7 +26,6 @@ const Filter = ( data ) => {
 
     const removeTerm = ( event, termId ) => {
         event.stopPropagation()
-        console.log(selectedFilterVals.indexOf(termId))
         let newSelectedFilterVals = [...selectedFilterVals],
             targetIndex = newSelectedFilterVals.indexOf(termId)
         newSelectedFilterVals.splice(targetIndex, 1)
@@ -37,7 +36,7 @@ const Filter = ( data ) => {
         if(!selectedFilterVals.length) return
 
         const queryString = selectedFilterVals.join(",")
-        axios.get(`${data.restUrl}wps/v1/projects?project_category=${queryString}&page=${page}`)
+        axios.get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&${data.taxonomy}=${queryString}&page=${page}`)
             .then(res => {
                 console.log(res)
                 setPosts(res.data.posts)
@@ -52,9 +51,8 @@ const Filter = ( data ) => {
             <div className="filter-choices min-h-[400px] relative text-center text-white py-20">
                 <div className="container mx-auto">
                     <h3 className="text-white">Filter</h3>
-                    <div className="grid grid-cols-4 gap-8 justify-center">
+                    <div className="inline-flex flex-wrap justify-center">
                         {data.terms.map((term, index) => {
-                            console.log(selectedFilterVals, term.term_id)
                             let isActive = selectedFilterVals.includes(term.term_id)
                             return (
                                 <button key={index} className={`filter-btn w-fit inline-flex ${isActive ? 'active' : ''}`} type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>
@@ -98,7 +96,8 @@ const Filter = ( data ) => {
                 })}
             </div>
             <div className="w-full flex justify-center">
-                <button onClick={() => loadMorePosts()} className="btn btn-primary">mehr Projekte zeigen</button>
+                {console.log(data)}
+                <button onClick={() => loadMorePosts()} className="btn btn-primary">mehr {data.postType} zeigen</button>
             </div>
         </div>
     )
