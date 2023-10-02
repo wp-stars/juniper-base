@@ -62,8 +62,9 @@ class Projects {
 	public function create_api_projects_acf_fields() {
 
 		register_rest_field( 'project', 'fields', array(
-				'get_callback'    => 'get_post_meta_for_api',
-				'schema'          => null,
+				'get_callback'    	  => 'get_post_meta_for_api',
+				'schema'              => null,
+				'permission_callback' => "__return_true"
 			)
 		);
 	}

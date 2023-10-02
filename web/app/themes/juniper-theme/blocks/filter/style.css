@@ -8,10 +8,28 @@
 
 .filter-btn {
     border: 2px solid #F9F9F9;
+    position: relative;
 }
 
 .filter-btn .btn-inner {
     padding: 0.5rem 0.25rem;
+}
+
+.filter-btn.active {
+    border: 2px solid #B4D43D;
+}
+
+.filter-btn.active {
+    color: #B4D43D;
+}
+
+.filter-btn .remove-term {
+    border-radius: 50%;
+    background-color: #B4D43D;
+    padding: 0.25rem;
+    position: absolute;
+    top: -11px;
+    right: -11px;
 }
 
 .teaser-image img {
