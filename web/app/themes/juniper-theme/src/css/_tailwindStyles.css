@@ -758,8 +758,20 @@ video {
   margin-top: 1.75rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .mt-auto {
   margin-top: auto;
+}
+
+.mb-64 {
+  margin-bottom: 16rem;
+}
+
+.mb-52 {
+  margin-bottom: 13rem;
 }
 
 .block {
@@ -1284,6 +1296,10 @@ video {
 
 .pr-4 {
   padding-right: 1rem;
+}
+
+.pt-\[3rem\] {
+  padding-top: 3rem;
 }
 
 .pt-\[5rem\] {

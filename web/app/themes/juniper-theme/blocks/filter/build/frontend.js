@@ -2185,10 +2185,8 @@ const AlternatingResult = _ref => {
     index,
     post
   } = _ref;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: post.link
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `w-full min-h-[600px] mb-40 inline-flex ${index % 2 === 0 ? 'even flex-row' : 'odd flex-row-reverse'}`
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `container mx-auto min-h-[600px] mb-52 inline-flex ${index % 2 === 0 ? 'even flex-row' : 'odd flex-row-reverse'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-1/2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2205,7 +2203,7 @@ const AlternatingResult = _ref => {
     alt: "Showcase Image",
     src: post.fields.showcase_image
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-1/2 flex flex-col justify-center"
+    className: "w-1/2 flex flex-col justify-center text-left"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title, " // ", post.fields.year), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "mb-10"
   }, post.terms.map(term => term.name).join(" // ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2213,7 +2211,7 @@ const AlternatingResult = _ref => {
   }, post.excerpt), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     className: "btn-underline",
     href: `/${post.post_type}/${post.post_name}`
-  }, "Mehr \xFCber ", post.post_title))));
+  }, "Mehr \xFCber ", post.post_title)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AlternatingResult);
 
