@@ -122,8 +122,12 @@
                 "id": ""
             },
             "choices": {
-                "dark": "Dark",
-                "light": "Light"
+                "dark": "Dark with image left",
+                "darktriangle": "Dark triangle on the right with image - no background-border",
+                "imgbottomright": "Light - Image bottom right",
+                "imgtopright": "Light - Image top right",
+                "imgtoprighttriangle": "Light - Image top right and green triangle on left side",
+                "imgleft": "Light - Image left with blue background-border"
             },
             "default_value": false,
             "return_format": "value",
@@ -132,31 +136,6 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": ""
-        },
-        {
-            "key": "field_645a0e1569ec8",
-            "label": "Orientation",
-            "name": "orientation",
-            "aria-label": "",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "textleft": "Text Left",
-                "textright": "Text Right"
-            },
-            "default_value": "",
-            "return_format": "value",
-            "allow_null": 0,
-            "other_choice": 0,
-            "layout": "vertical",
-            "save_other_choice": 0
         },
         {
             "key": "field_646caed07a8c3",
@@ -217,5 +196,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1684844262
+    "modified": 1696335368
 }
