@@ -89,7 +89,8 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 function juniper_theme_enqueue() {
 	$refresh_cache_time = time();
 	wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', array(), $refresh_cache_time );
-	wp_enqueue_script( 'app-js', get_template_directory_uri() . 'src/js/_app.js', array(), $refresh_cache_time, true );
+	// wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
+    wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', array(), $refresh_cache_time, true );
 
     check_for_recompile( __DIR__ . '/src/scss/_project.scss', true, __DIR__ . '/src/scss/_project.scss');
 	wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/src/css/theme.min.css', array(), $refresh_cache_time );
