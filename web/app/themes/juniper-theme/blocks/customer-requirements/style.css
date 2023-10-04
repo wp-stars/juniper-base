@@ -1,0 +1,13 @@
+.customer-requirements li::before{
+    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none"><path d="M12.0759 18L16.0204 12.7104C16.8507 11.599 16.8075 10.0647 15.919 8.99813L13.3682 5.93887L13.1334 5.66008L8.41689 -1.47165e-06L0 0L9.07807 10.9965L3.75295 18L12.074 18L12.0759 18ZM9.67914 10.2106L2.15822 1.09459L8.06563 1.09459L12.5117 6.48149L9.67914 10.2106Z" fill="%23093642"/></svg>');
+    padding-right: 0.9rem;
+}
+
+@media screen and (max-width:840px) {
+    .customer-requirements .svg-1{
+        display: none;
+    }
+    .customer-requirements .svg-2{
+        display: none;
+    }
+}
