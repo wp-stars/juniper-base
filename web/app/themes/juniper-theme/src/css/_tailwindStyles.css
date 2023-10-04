@@ -905,6 +905,10 @@ video {
   margin-bottom: 8rem;
 }
 
+.mb-\[0\.6rem\] {
+  margin-bottom: 0.6rem;
+}
+
 .block {
   display: block;
 }
@@ -1778,6 +1782,11 @@ video {
 
   .md\:col-span-1 {
     grid-column: span 1 / span 1;
+  }
+
+  .md\:mx-\[0rem\] {
+    margin-left: 0rem;
+    margin-right: 0rem;
   }
 
   .md\:mb-0 {
