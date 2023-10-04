@@ -1,0 +1,60 @@
+.applynow {
+    position: relative;
+}
+
+.applynow .img-content {
+    object-fit: cover;
+    position: absolute;
+    right: -200px;
+    top: 100px;
+    height: 600px;
+    width: 600px;
+}
+
+.applynow .img-content .img-decoration {
+    background-color: #B4D43D;
+    height: 600px;
+    width: 600px;
+    top: 14px;
+    right: 25px;
+    clip-path: polygon(20% 0, 100% 20%, 80% 100%, 0 80%);
+    position: absolute;
+    z-index: 1;
+}
+
+.applynow .img-content .content-image {
+    clip-path: polygon(20% 0, 100% 20%, 80% 100%, 0 80%);
+    position: relative;
+    z-index: 3;
+    background-size: cover;
+}
+
+.applynow .img-content .content-image {
+    height: 600px;
+    width: 600px;
+    background-repeat: no-repeat;
+}
+
+.applynow .contentleft {
+    justify-content: start;
+}
+
+.applynow .contentright {
+    display: flex;
+    align-items: center;
+    height: 800px;
+}
+
+.applynow .contentright .inner {
+    margin-left: calc(50% - 80px);
+}
+
+.applynow .contentright .img-content {
+    left: -150px;
+    top: 100px;
+}
+
+.applynow .contentright .img-content .img-decoration {
+    top: 25px;
+    right: -14px;
+}

@@ -2,8 +2,7 @@ import React, {useState} from "react"
 
 const AlternatingResult = ({ index, post }) => {
     return (
-        <div className={`w-full min-h-[600px] mb-40 inline-flex ${index % 2 === 0 ? 'even flex-row' : 'odd flex-row-reverse'}`}>
-            
+        <div className={`container mx-auto min-h-[600px] mb-52 inline-flex ${index % 2 === 0 ? 'even flex-row' : 'odd flex-row-reverse'}`}>
             <div className="w-1/2">
                 <div className="teaser-image absolute z-0">
                     <div className="absolute decoration"></div>
@@ -13,7 +12,7 @@ const AlternatingResult = ({ index, post }) => {
                     <img className="max-w-[300px]" alt="Showcase Image" src={post.fields.showcase_image} />
                 </div>
             </div>
-            <div className="w-1/2 flex flex-col justify-center">
+            <div className="w-1/2 flex flex-col justify-center text-left">
                 <h3>{post.post_title} // {post.fields.year}</h3>
                 <p className="mb-10">{post.terms.map(term => term.name).join(" // ")}</p>
                 <div className="mb-20">
@@ -23,7 +22,6 @@ const AlternatingResult = ({ index, post }) => {
                     Mehr über {post.post_title}
                 </a>
             </div>
-           
         </div>
     )
 }

@@ -1,11 +1,11 @@
 {
-    "key": "group_6491e37926a49",
-    "title": "Card Grid",
+    "key": "group_651d47c27b213",
+    "title": "Featured Persons",
     "fields": [
         {
-            "key": "field_6492a2ea60d4a",
-            "label": "Subtitle",
-            "name": "subtitle",
+            "key": "field_651d4822d5c05",
+            "label": "Tagline",
+            "name": "tagline",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -23,7 +23,7 @@
             "append": ""
         },
         {
-            "key": "field_6492a35260d4b",
+            "key": "field_651d4828d5c06",
             "label": "Title",
             "name": "title",
             "aria-label": "",
@@ -43,29 +43,9 @@
             "append": ""
         },
         {
-            "key": "field_6492a35860d4c",
-            "label": "Intro",
-            "name": "intro",
-            "aria-label": "",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "rows": "",
-            "placeholder": "",
-            "new_lines": ""
-        },
-        {
-            "key": "field_6491e379eb8a8",
-            "label": "Cards",
-            "name": "cards",
+            "key": "field_651d47c2d193a",
+            "label": "Persons",
+            "name": "persons",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -76,7 +56,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
+            "layout": "table",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -85,35 +65,9 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_6491e3e3eb8a9",
-                    "label": "Card Image",
-                    "name": "card_image",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "url",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "preview_size": "medium",
-                    "parent_repeater": "field_6491e379eb8a8"
-                },
-                {
-                    "key": "field_6491e3fceb8aa",
-                    "label": "Card Title",
-                    "name": "card_title",
+                    "key": "field_651d47e0d193b",
+                    "label": "Name",
+                    "name": "name",
                     "aria-label": "",
                     "type": "text",
                     "instructions": "",
@@ -129,35 +83,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_6491e379eb8a8"
+                    "parent_repeater": "field_651d47c2d193a"
                 },
                 {
-                    "key": "field_650d9b512b724",
-                    "label": "Content",
-                    "name": "content",
+                    "key": "field_651d47f9d193c",
+                    "label": "Image",
+                    "name": "image",
                     "aria-label": "",
-                    "type": "wysiwyg",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "tabs": "all",
-                    "toolbar": "full",
-                    "media_upload": 1,
-                    "delay": 0,
-                    "parent_repeater": "field_6491e379eb8a8"
-                },
-                {
-                    "key": "field_65155bdc1c77b",
-                    "label": "Link",
-                    "name": "link",
-                    "aria-label": "",
-                    "type": "link",
+                    "type": "image",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -167,7 +100,62 @@
                         "id": ""
                     },
                     "return_format": "array",
-                    "parent_repeater": "field_6491e379eb8a8"
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_651d47c2d193a"
+                },
+                {
+                    "key": "field_651d5976e0eb6",
+                    "label": "Responsibilities",
+                    "name": "responsibilities",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "table",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Add Row",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_651d5988e0eb7",
+                            "label": "Responsibility",
+                            "name": "responsibility",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_651d5976e0eb6"
+                        }
+                    ],
+                    "parent_repeater": "field_651d47c2d193a"
                 }
             ]
         }
@@ -177,7 +165,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/cardgrid"
+                "value": "acf\/featured-persons"
             }
         ]
     ],
@@ -190,5 +178,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1695898721
+    "modified": 1696422293
 }

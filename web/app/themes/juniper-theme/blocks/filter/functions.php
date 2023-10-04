@@ -28,29 +28,13 @@ add_action(
 add_filter(
     'timber/acf-gutenberg-blocks-data/filter',
     function ( $context ) {
-        $data_arr = array();
-        $initial_posts = get_posts(
-            array(
-                'post_type' => $context['fields']['post_type']
-            )
-        );
-
-        foreach ($initial_posts as $post) {
-            $post->fields = get_fields($post);
-            $post->excerpt = get_the_excerpt($post);
-            $post->terms = get_the_terms($post, 'project-category') ? get_the_terms($post, 'project-category') : [];
-        }
-
-        $data_arr['posts'] = $initial_posts;
-
+        $post_type = $context['fields']['post_type'];
+        $taxonomy = $context['fields']['taxonomy'];
+        $data_arr = wps_get_filter_posts( $post_type, $taxonomy, [], 1);
+        
+        $data_arr['postType'] = $context['fields']['post_type'];
         $data_arr['style'] = $context['fields']['style'];
-
-        $data_arr['terms'] = get_terms( 
-            array(
-                'taxonomy'   => 'project-category',
-                'hide_empty' => false,
-            )
-        );
+        $data_arr['restUrl'] = get_rest_url();
 
         $context['data'] = json_encode($data_arr);
         return $context;
@@ -64,5 +48,89 @@ function acf_load_post_type_field_choices( $field ) {
     return $field;
     
 }
-
 add_filter('acf/load_field/name=post_type', 'acf_load_post_type_field_choices');
+
+
+function acf_load_taxonomy_field_choices( $field ) {
+    // Reset choices
+    $field['choices'] = get_taxonomies();
+    
+    return $field;
+}
+add_filter('acf/load_field/name=taxonomy', 'acf_load_taxonomy_field_choices');
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'wps/v1', '/data', array(
+        'methods' => 'GET',
+        'callback' => 'wps_filter_callback',
+        'permission_callback' => '__return_true',
+    ) );
+  } 
+);
+
+function wps_filter_callback() {
+    $terms = !empty($_GET['terms']) ? explode(',', $_GET['terms']) : [];
+    $taxonomy = !empty($_GET['taxonomy']) ? $_GET['taxonomy'] : '';
+    $page = !empty($_GET['page']) ? intval($_GET['page']) : 1;
+
+    return wps_get_filter_posts( 'projects', $taxonomy, $terms, $page );
+}
+
+function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
+    $data_arr = array();
+    $tax_query = array();
+    if($taxonomy && count($terms)) {
+        $tax_query[] = array(
+            'taxonomy'  => $taxonomy,
+            'field'     => 'term_id',
+            'terms'     => array_map(function ($val) { return intval($val); }, $terms),
+            'operator'  => 'IN'
+        );
+    }
+
+    $args =  array(
+        'post_type' => $post_type,
+        'paged' => $page
+    );
+
+    if(count($tax_query)) {
+        $args['tax_query'] = $tax_query;
+    }
+    
+    $initial_posts = new WP_Query($args);
+
+    $post_arr = array();
+    foreach ($initial_posts->posts as $post) {
+        $post_obj = new stdClass();
+        $post_obj->fields = get_fields($post);
+        $post_obj->excerpt = wp_trim_excerpt('', $post);
+        $post_obj->terms = get_the_terms($post, $taxonomy) ? get_the_terms($post, $taxonomy) : [];
+        $post_obj->post_title = $post->post_title;
+        $post_obj->post_name = $post->post_name;
+        $post_obj->post_author = get_the_author_meta('display_name', $post->post_author);
+        $post_obj->post_date = get_the_date('d.m.Y', $post);
+        $post_obj->featured_image = get_the_post_thumbnail_url($post);
+        $post_obj->link = get_the_permalink($post);
+
+        $post_arr[] = $post_obj;
+    }
+
+    $data_arr['posts'] = $post_arr;
+
+    $terms = get_terms( 
+        array(
+            'taxonomy'   => $taxonomy,
+            'hide_empty' => false,
+        )
+    );
+
+    foreach ($terms as $term) {
+        $term->fields = get_fields($term);
+    }
+
+    $data_arr['terms'] = $terms;
+
+    return $data_arr;
+}
+
+
