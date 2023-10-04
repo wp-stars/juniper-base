@@ -11,9 +11,7 @@ add_action(
             wp_enqueue_style('slider-swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css', array(), $time, 'all');
 
             
-            wp_enqueue_script('slider-js', $theme_path . '/blocks/slider/script.js', array(), $time, true);
-            wp_enqueue_script('slider-simple', $theme_path . '/blocks/slider/simple-script.js', array(), $time, true);
-            
+            wp_enqueue_script('slider-js', $theme_path . '/blocks/slider/script.js', array(), $time, true);            
         }
     }
 );
