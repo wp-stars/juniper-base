@@ -603,6 +603,29 @@ video {
   top: 20px;
 }
 
+.right-\[0\] {
+  right: 0;
+}
+
+.top-\[0\] {
+  top: 0;
+}
+
+.right-\[-10\%\] {
+  right: -10%;
+}
+
+.right-\[10\%\] {
+  right: 10%;
+}
+
+.right-\[9\%\] {
+  right: 9%;
+}
+
+.right-\[5\%\] {
+  right: 5%;
+}
 .top-2 {
   top: 0.5rem;
 }
@@ -647,6 +670,34 @@ video {
   grid-column: span 2 / span 2;
 }
 
+.col-span-5 {
+  grid-column: span 5 / span 5;
+}
+
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.col-span-9 {
+  grid-column: span 9 / span 9;
+}
+
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
+.col-span-8 {
+  grid-column: span 8 / span 8;
+}
+
+.col-span-10 {
+  grid-column: span 10 / span 10;
+}
+
+.col-span-12 {
+  grid-column: span 12 / span 12;
+}
+
 .m-auto {
   margin: auto;
 }
@@ -684,6 +735,16 @@ video {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.my-20 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.mx-\[1\.25rem\] {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
 }
 
 .-mb-4 {
@@ -832,6 +893,18 @@ video {
 
 .mt-\[6rem\] {
   margin-top: 6rem;
+}
+
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
+.mt-\[2\.5rem\] {
+  margin-top: 2.5rem;
 }
 
 .block {
@@ -1012,6 +1085,26 @@ video {
   width: 60vw;
 }
 
+.w-auto {
+  width: auto;
+}
+
+.w-\[80\%\] {
+  width: 80%;
+}
+
+.w-\[90\%\] {
+  width: 90%;
+}
+
+.w-\[95\%\] {
+  width: 95%;
+}
+
+.w-\[100\%\] {
+  width: 100%;
+}
+
 .min-w-\[100\%\] {
   min-width: 100%;
 }
@@ -1128,8 +1221,24 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-cols-7 {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
 .grid-rows-3 {
   grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-6 {
+  grid-template-rows: repeat(6, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -1202,6 +1311,10 @@ video {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-\[5rem\] {
+  gap: 5rem;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -1669,6 +1782,18 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:mb-12 {
+    margin-bottom: 3rem;
+  }
+
+  .sm\:mt-12 {
+    margin-top: 3rem;
+  }
+
+  .sm\:mt-\[2\.5rem\] {
+    margin-top: 2.5rem;
+  }
+
   .sm\:leading-3 {
     line-height: .75rem;
   }
@@ -1681,6 +1806,14 @@ video {
 
   .md\:order-2 {
     order: 2;
+  }
+
+  .md\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .md\:col-span-8 {
+    grid-column: span 8 / span 8;
   }
 
   .md\:mb-0 {
@@ -1713,6 +1846,10 @@ video {
 
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:w-\[95\%\] {
+    width: 95%;
   }
 
   .md\:grid-cols-2 {

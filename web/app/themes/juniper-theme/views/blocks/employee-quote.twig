@@ -1,0 +1,46 @@
+{#
+ 	Title: Employee-quote
+ 	Description: Quote of a employee about the project
+ 	Category: formatting
+ 	Icon: admin-comments
+ 	Keywords: quote employee project
+ 	Mode: edit
+ 	Align: full
+ 	PostTypes: page post
+ 	SupportsAlign: left right full
+ 	SupportsMode: true
+ 	SupportsMultiple: true
+#}
+
+<section class="employee-quote my-20">
+	<div class="container mx-auto ">
+		<div class="mb-16 mx-[1.25rem] md-mx-[0rem]">
+			<h5 class="text-xl uppercase">{{fields.subheadline}}</h5>
+			<h2>{{fields.headline}}</h2>
+		</div>
+
+		<div class=" grid grid-flow-row-dense grid-cols-12 grid-rows-12 mx-[1.25rem] md-mx-[0rem]">
+			<div class=" relative col-span-12 md:col-span-4  ">
+
+				<img class=" w-[100%] md:w-[95%] h-auto object-cover " src={{ fields.image.sizes.large }}>
+				
+				
+				<div class="absolute  top-0 right-[5%]">
+					<svg xmlns="http://www.w3.org/2000/svg" width="92" height="100" viewbox="0 0 92 100" fill="none">
+						<rect width="92.0471" height="100" fill="#B4D43D"/>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M42.7907 23H15.4766V53H31.2647C31.2647 55.1459 30.8798 57.2707 30.1322 59.2533C29.3845 61.2358 28.2886 63.0372 26.9071 64.5545C25.5256 66.0719 23.8855 67.2755 22.0805 68.0967C20.2754 68.9179 18.3408 69.3406 16.3871 69.3406L16.3871 82C19.8544 82 23.2879 81.2499 26.4913 79.7925C29.6947 78.3351 32.6055 76.199 35.0573 73.5061C37.5091 70.8132 39.4539 67.6163 40.7809 64.0978C42.1078 60.5794 42.7907 56.8083 42.7907 53H42.7907V23Z" fill="#093642"/>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M75.568 23H48.2539V53H64.042C64.042 55.1459 63.6572 57.2707 62.9096 59.2533C62.1619 61.2358 61.066 63.0372 59.6845 64.5545C58.303 66.0719 56.6629 67.2755 54.8579 68.0967C53.0528 68.9179 51.1182 69.3406 49.1644 69.3406L49.1644 82C52.6318 82 56.0652 81.2499 59.2687 79.7925C62.4721 78.3351 65.3828 76.199 67.8346 73.5061C70.2864 70.8132 72.2313 67.6163 73.5582 64.0978C74.8851 60.5794 75.5681 56.8083 75.5681 53H75.568V23Z" fill="#093642"/>
+					</svg>
+					</div>
+				</div>
+
+
+			<div class="col-span-12 md:col-span-8 flex flex-col justify-end">
+				<p class="mb-12 text-lg font-medium mt-[2.5rem] md:mt-0">{{ fields.quote }}</p>
+				<p class="text-lg font-medium"> {{ fields.name }}
+					//
+					{{ fields.position }}</p>
+			</div>
+		</div>
+	</div>
+</section>
