@@ -3,10 +3,10 @@ name: PHP Composer
 on:
   push:
     branches:
-      - '**'
+      - 'codesniffer'
   pull_request:
     branches:
-      - '**'
+      - 'codesniffer'
 
 permissions:
   contents: read
