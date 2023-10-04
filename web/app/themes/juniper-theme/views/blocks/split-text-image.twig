@@ -11,26 +11,65 @@
  	SupportsMode: true
  	SupportsMultiple: true
 #}
-<div class="w-full relative py-28 {{ fields.orientation }} {% if fields.style == 'dark' %} text-white dark-style {% endif %}">
-	<div class="bg-dark absolute split-text-background background">
-	</div>
+
+
+{############# add new field styles here to variable if the text should be left !! ###############}
+{% set textdirection = (fields.style == 'darktriangle') or (fields.style == 'imgbottomright') or (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') ? 'textleft' : 'textright' %}
+
+
+<div class="split-text-img w-full relative py-28 {{textdirection}} {% if fields.style == 'dark' %} text-white dark-style {% endif %} {% if fields.style == 'imgtopright' %} pt-[3rem] {% endif %}">
+	<div class="bg-dark absolute background {% if fields.style == 'dark' %} fullscreen-background {% endif %} "></div>
+
+		{# dark triangle SVG on right side #}
+		{% if fields.style == 'darktriangle' %}
+			<svg class="dark-triangle-right" xmlns="http://www.w3.org/2000/svg" width="502" height="1014" viewbox="0 0 502 1014" fill="none">
+				<path d="M0 544L502 0V1014L0 544Z" fill="#093642"/>
+			</svg>
+		{% endif %}
+
+		{# small green triangle SVG on left side #}
+		{% if fields.style == 'imgtoprighttriangle' %}
+			<svg class="triangle-left" xmlns="http://www.w3.org/2000/svg" width="103" height="1066" viewbox="0 0 103 1066" fill="none">
+				<path d="M-164.609 1065.82L102.403 274.698L-170.661 0.20949L-164.609 1065.82Z" fill="#B4D43D" fill-opacity="0.6"/>
+			</svg>
+		{% endif %}
+	
 	<div class="container mx-auto relative">
-		<div class="inline-flex {{ fields.orientation }} {% if fields.orientation == 'textleft' %} flex-row-reverse {% endif %}">
+		<div class="flex {% if textdirection == 'textleft' %} flex-row-reverse {% endif %} ">
 			<div class="img-wrapper w-1/2">
-				<div class="img-content">
-					{% if fields.orientation == 'textright' %}<div class="img-decoration"></div>{% endif %}
-					<div class="content-image" style="background-image: url('{{ fields.image }}');"></div>
+				<div class="img-content flex justify-center">
+					{% if fields.style == 'dark' %}
+						<div class="img-decoration"></div>
+					{% endif %}
+					<div class=" {% if fields.style == 'dark' %} content-image-dark {% endif %}
+								 {% if fields.style == 'darktriangle' %} img-dark-triangle {% endif %} 
+								 {% if fields.style == 'imgbottomright' %} img-bottom-right {% endif %} 
+								 {% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} img-top-right {% endif %}  
+								 {% if fields.style == 'imgleft' %} img-left {% endif %}"
+								style="background-image: url('{{ fields.image }}');"></div>
 				</div>
 			</div>
 			<div class="text-content w-1/2 h-100 flex flex-col justify-center">
-				<div class="text-inner">
-					<h5 class="text-xl font-bold">{{ fields.intro_title }}</h5>
-					<h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">{{ fields.title }}</h1>
-					<h3 class="text-xl font-bold text-primary font-bold">{{ fields.subtitle }}</h3>
-					<p class="mb-3 text-gray-500 dark:text-gray-400">{{ fields.content }}</p>
-					<a class="btn {% if fields.style == 'dark' %} btn-transparent {% else %} btn-primary {% endif %} w-fit flex items-center" href="{{ fields.link_value }}">{{ fields.link_text }}</a>
+				<div class="text-inner 
+							{% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} mt-[13rem] mb-12 ml-12 {% endif %} 
+							{% if fields.style == 'imgleft' %} ml-[-10vw] {% endif %}
+							">
+					<h5 class="text-xl font-bold uppercase">{{ fields.intro_title }}</h5>
+					<h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">{{ fields.title }}</h2>
+					<h3 class="text-xl font-bold mb-8 {% if fields.style == 'dark' %} text-primary {% else %} text-cyan-950 md:text-4xl {% endif %}">{{ fields.subtitle }}</h3>
+					<p class="mb-12 text-gray-500 dark:text-gray-400 {% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} w-[60vw] {% endif %}">{{ fields.content }}</p>
+
+					{# only show button if link text is set #}
+					{% if fields.link_text %}
+						<div class="flex">
+							<a class="btn {% if fields.style == 'dark' %} btn-transparent border-b-4 border-stone-50 text-stone-50 text-lg{% else %} btn-primary {% endif %} w-fit flex items-center" href="{{ fields.link_value }}">{{ fields.link_text }}</a>
+							<span class="{% if fields.style == 'dark' %} btn-arw pl-5 {% endif %}"></span>
+						</div>
+					{% endif %}
+
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
