@@ -1,0 +1,60 @@
+
+.featured-persons-background {
+    min-height: 600px;
+    top: 0;
+    width: 200%;
+    left: -600px;
+    transform: rotate(3.702deg);
+    border-bottom: 12px solid var(--primary-green, #B4D43D);
+}
+
+.featured-persons-card.swiper-slide {
+    width: 300px;
+}
+
+.featured-persons-card {
+    position: relative;
+}
+
+.featured-persons-card:hover {
+    cursor: pointer;
+}
+
+.featured-persons-card .overlay {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+
+.featured-persons-card:hover .overlay {
+    opacity: 1;
+    display: flex;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.featured-persons-card .top-decoration {
+    background-color: rgba(180, 212, 61, 0.60);
+    height: 11rem;
+    width: 100%;
+    clip-path: polygon(100% 0, 0 0, 0 53%);
+}
+
+.featured-persons-card .name {
+    position: absolute;
+    transform: rotate(-90deg);
+    color: #fff;
+    top: 10rem;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.featured-persons-card .skill-list {
+    clip-path: polygon(0 25%, 100% 0, 100% 100%, 0% 100%);
+    background-color: var(--primary-petrol-dark, #093642);
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    height: fit-content;
+    width: 100%;
+    padding: 4rem 2rem 2rem 2rem;
+}

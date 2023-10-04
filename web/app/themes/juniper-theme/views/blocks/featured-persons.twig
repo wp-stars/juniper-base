@@ -1,0 +1,65 @@
+{#
+ 	Title: Featured Persons
+ 	Description: Shows a list of people involved in something
+ 	Category: formatting
+ 	Icon: admin-comments
+ 	Keywords: featured persons
+ 	Mode: edit
+ 	Align: full
+ 	PostTypes: page post jobs projects
+ 	SupportsAlign: left right full
+ 	SupportsMode: true
+ 	SupportsMultiple: true
+#}
+<div class="w-full relative mt-20">
+	<div class="bg-dark absolute featured-persons-background background h-full">
+	</div>
+	<div class="container min-h-[600px] py-20 mx-auto px-4 slider relative">
+		<div class="swiper featured-persons-swiper-{{ instance }}">
+			<div class="swiper-wrapper">
+				{% for person in fields.persons %}
+					<div class="swiper-slide max-w-sm bg-white rounded-none h-full flex items-center justify-center flex-col featured-persons-card">
+						<img src="{{ person.image.url }}" alt="{{ person.name }}" />
+						<div class="overlay absolute">
+							<div class="top-decoration"></div>
+							<span class="name">{{ person.name }}</span>
+							<div class="skill-list">
+								<ul>
+									{% for responsibility in person.responsibilities %}
+										<li>*{{ responsibility.responsibility }}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="controls-wrapper inline-flex w-full justify-end">
+			<div class="swiper-button-prev bg-primary w-fit p-3">
+				<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
+					<path d="M12.5061 1.9876L1.99991 12.4938L12.5061 23" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<rect x="31.4939" y="14.2446" width="15.7593" height="3.50207" rx="1.75103" transform="rotate(-180 31.4939 14.2446)" fill="#093642"/>
+					<rect x="42" y="14.2446" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 42 14.2446)" fill="#093642"/>
+				</svg>
+			</div>
+			<div class="swiper-button-next bg-primary w-fit p-3">
+				<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
+					<path d="M29.4939 23.0124L40.0001 12.5062L29.4939 2" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<rect x="10.5061" y="10.7554" width="15.7593" height="3.50207" rx="1.75103" fill="#093642"/>
+					<rect y="10.7554" width="7.00413" height="3.50207" rx="1.75103" fill="#093642"/>
+				</svg>	
+			</div>
+		</div>
+	</div>
+	<script>
+		var swiper = new Swiper(".featured-persons-swiper-{{ instance }}", {
+			slidesPerView: "auto",
+			spaceBetween: 30,
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+		});
+	</script>
+</div>
