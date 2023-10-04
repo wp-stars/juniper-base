@@ -1,6 +1,5 @@
 
 const toggleNavbar = (event) => {
-    console.log(event)
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
         document.querySelector(".navbar").classList.add("bg-dark", "bg-opacity-80")
     } else {

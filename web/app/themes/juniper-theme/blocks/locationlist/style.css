@@ -15,27 +15,19 @@
 }
 
 .location-list-background-dark h2,
-h3,
-a,
-p {
-    color: #f9f9f9;
-}
-
-.location-list-background-dark h3 {
-    color: #f9f9f9;
-}
-
+.location-list-background-dark h3,
+.location-list-background-dark a,
 .location-list-background-dark p {
     color: #f9f9f9;
 }
 
 .location-list-background-dark .btn,
-.tagline {
+.location-list-background-dark .tagline {
     color: #f9f9f9 !important;
 }
 
 .location-list-background-dark svg path,
-a svg path {
+.location-list-background-dark a svg path {
     stroke: #f9f9f9 !important;
 }
 
