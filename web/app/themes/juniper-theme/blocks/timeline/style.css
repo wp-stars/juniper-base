@@ -37,18 +37,24 @@
 .timeline .side-image {
     display: block;
     position: absolute;
-    right: -150px;
-    top: 0;
-    height: 600px;
-    width: 600px; 
+    right: -250px;
+    top: 250px;
+    height: 700px;
+    width: 700px; 
 }
 
 .timeline .side-image-inner {
     overflow: hidden;
-    height: 600px;
-    width: 600px; 
-    clip-path: polygon(18% 1%, 100% 33%, 100% 100%, 0 63%);
+    height: 700px;
+    width: 700px; 
+    clip-path: polygon(45% 0, 100% 45%, 55% 100%, 0 55%);
     position: relative;
+}
+
+.timeline .side-image-inner img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .timeline .side-image::before {
@@ -61,5 +67,5 @@
     z-index: -1;
     top: -15px;
     left: 15px;
-    clip-path: polygon(18% 1%, 100% 33%, 100% 100%, 0 63%);
+    clip-path: polygon(45% 0, 100% 45%, 55% 100%, 0 55%);
 }

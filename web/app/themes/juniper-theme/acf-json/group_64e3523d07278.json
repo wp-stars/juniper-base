@@ -132,7 +132,7 @@
                 },
                 {
                     "key": "field_64e353c4d5e7c",
-                    "label": "Name",
+                    "label": "City",
                     "name": "name",
                     "aria-label": "",
                     "type": "text",
@@ -214,11 +214,11 @@
                     "parent_repeater": "field_64e353a8d5e7a"
                 },
                 {
-                    "key": "field_64e353edd5e7f",
-                    "label": "Address",
-                    "name": "address",
+                    "key": "field_651aabc8d2fa4",
+                    "label": "Adress Maps",
+                    "name": "map",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "google_map",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -227,14 +227,39 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "center_lat": "",
+                    "center_lng": "",
+                    "zoom": "",
+                    "height": "",
                     "parent_repeater": "field_64e353a8d5e7a"
                 }
             ]
+        },
+        {
+            "key": "field_651a96fac3580",
+            "label": "Background Color",
+            "name": "style",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "dark": "dark",
+                "white": "white"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -254,6 +279,8 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
+    "show_in_rest": 1,
+    "modified": 1696250857
     "show_in_rest": 0,
-    "modified": 1692631456
+    "modified": 1695898755
 }

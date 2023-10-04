@@ -32,6 +32,7 @@ function LoadApp() {
 }
 
 if (document.readyState === 'loading') {
+	console.log('app loading')
 	document.addEventListener('DOMContentLoaded', LoadApp);
 } else {
 	LoadApp();

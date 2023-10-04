@@ -153,11 +153,11 @@
                     "parent_repeater": "field_6491e379eb8a8"
                 },
                 {
-                    "key": "field_6491e404eb8ab",
-                    "label": "Button Text",
-                    "name": "button_text",
+                    "key": "field_65155bdc1c77b",
+                    "label": "Link",
+                    "name": "link",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "link",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -166,32 +166,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_6491e379eb8a8"
-                },
-                {
-                    "key": "field_6491e410eb8ac",
-                    "label": "Button Location",
-                    "name": "button_location",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "return_format": "array",
                     "parent_repeater": "field_6491e379eb8a8"
                 }
             ]
@@ -215,5 +190,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1695390975
+    "modified": 1695898721
 }

@@ -27,6 +27,21 @@ add_filter(
             }
         }
 
+        if($context['fields']['style'] === 'blog') {
+            foreach ($context['fields']['blog_slider_items'] as $key => $item) {
+                $context['fields']['blog_slider_items'][$key]->slide_image = get_the_post_thumbnail($item, 'medium');
+
+                $context['fields']['blog_slider_items'][$key]->link = get_the_permalink($item);
+
+                $context['fields']['blog_slider_items'][$key]->author = get_the_author_meta('display_name', $item->post_author);
+
+                $context['fields']['blog_slider_items'][$key]->date = get_the_date('d.m.Y', $item);
+
+                $context['fields']['blog_slider_items'][$key]->excerpt = get_the_excerpt($item);
+
+            }
+        }
+
         $context['instance'] = uniqid();
         return $context;
     }

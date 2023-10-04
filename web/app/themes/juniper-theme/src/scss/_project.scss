@@ -3,6 +3,10 @@
 $primary: #B4D43D;
 $text: #093642;
 
+.text {
+    color: $text;
+}
+
 /* General styles */
 body {
     font-family: 'Red Hat Mono';
@@ -26,7 +30,7 @@ h1 {
 }
 
 h2 {
-    color: var(--greyscale-black, #1E1E1E);
+    color: var(--primary-petrol-dark, #093642);
     /* Desktop/Headline2 */
     font-family: "Red Hat Display Bold";
     font-size: 3.125rem;
@@ -45,6 +49,27 @@ h3 {
     line-height: 3rem; /* 133.333% */
 }
 
+h6 {
+    color: var(--primary-petrol-dark, #093642);
+    /* Desktop/Headline6 */
+    font-family: "Red Hat Mono";
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.0625rem; /* 165% */
+}
+
+
+.description {
+    color: var(--primary-petrol-dark, #093642);
+    /* Desktop/Description */
+    font-family: "Red Hat Mono";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.125rem; /* 128.571% */
+}
+
 .tagline {
     color: var(--greyscale-black, #1E1E1E);
     /* Desktop/SubHeadline */
@@ -60,6 +85,9 @@ h3 {
     top: 32px;
 }
 
+.navbar {
+    transition: background-color 0.5s ease;
+}
 
 /**
 * Custom Utilities

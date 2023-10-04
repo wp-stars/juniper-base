@@ -18,12 +18,17 @@
 			<img src="{{ fields.decoration_image.url }}" alt="" />
 		</div>
 	</div>
+	<div class="absolute right-0 top-1/2">
+		<svg xmlns="http://www.w3.org/2000/svg" width="223" height="716" viewBox="0 0 223 716" fill="none">
+			<path d="M224 3.91654e-05L-9.27608e-05 530.53L224 716L224 3.91654e-05Z" fill="#B4D43D" fill-opacity="0.6"/>
+		</svg>
+	</div>
 	<div class="container mx-auto">
 		<div class="mb-5">
-			<p class="tagline">{{ fields.tagline }}</p>
-			<h2 class="mb-4">{{ fields.title }}</h2>
-			<h3 class="mb-4">{{ fields.subtitle }}</h3>
-			<p class="mb-4">{{ fields.intro_text }}</p>
+			<p class="tagline text">{{ fields.tagline }}</p>
+			<h2 class="mb-8 text">{{ fields.title }}</h2>
+			<h3 class="mb-8">{{ fields.subtitle }}</h3>
+			<div class="mb-20 max-w-[600px]">{{ fields.intro_text }}</div>
 		</div>
 		<div class="timeline-items flex flex-col">
 			{% for timeline_item in fields.timeline_items %}
