@@ -1,6 +1,6 @@
 {#
- 	Title: Apply Now
- 	Description: A block that displays an apply now field
+ 	Title: Direct Contact
+ 	Description: A block that displays a direct contact component
  	Category: formatting
  	Icon: admin-comments
  	Keywords: contact apply
@@ -13,24 +13,50 @@
 #}
 
 <div class="w-full relative min-h-[800px] applynow">
+	{% if fields.style == "contentright" %}
+		<div class="absolute right-0 top-0">
+			<svg xmlns="http://www.w3.org/2000/svg" width="134" height="584" viewBox="0 0 134 584" fill="none">
+				<path d="M0 355L150 0V583.5L0 355Z" fill="#093642"/>
+			</svg>
+		</div>
+		<div class="absolute right-0 top-1/4">
+			<svg xmlns="http://www.w3.org/2000/svg" width="67" height="483" viewBox="0 0 67 483" fill="none">
+				<path d="M0 312.5L69.5 0L78.5 483L0 312.5Z" fill="#B4D43D" fill-opacity="0.6"/>
+			</svg>
+		</div>
+	{% endif %}
 	<div class="container mx-auto relative">
-		<div class="inline-flex">
-			<div class="w-full">
-				<h3 class="mb-4 text-5xl">{{ fields.title }}:</h3>
+		<div class="w-full inline-flex {{ fields.style }}">
+			<div class="w-1/2 max-w-[600px] inner {{ fields.text_align }}">
+				<p class="tagline">{{ fields.tagline }}</p>
+				<h3 class="mb-4 text-5xl">{{ fields.title }}</h3>
 				<div class="inline-flex">
-					<img class="mr-3" src="{{ fields.contact_image }}" />
+					{% if fields.contact_image %}
+						<img class="mr-3" src="{{ fields.contact_image }}" />
+					{% endif %}
 					<div class="flex flex-col justify-end">
-						<h4 class="text-xl font-bold mb-3">{{ fields.contact_name }}</h4>
-						<a href="mailto:{{ fields.contact_email }}" class="mb-3 contact-link">{{ fields.contact_email }}</a>
-						<a href="tel:{{ fields.contact_phone }}" class="mb-3 contact-link">{{ fields.contact_phone }}</p>
+						{% if fields.contact_name %}
+							<h4 class="text-xl font-bold mb-3">{{ fields.contact_name }}</h4>
+						{% endif %}
+						{% if fields.contact_email %}
+							<a href="mailto:{{ fields.contact_email }}" class="mb-3 contact-link">{{ fields.contact_email }}</a>
+						{% endif %}
+						{% if fields.contact_phone %}
+							<a href="tel:{{ fields.contact_phone }}" class="mb-3 contact-link">{{ fields.contact_phone }}</p>
+						{% endif %}
+						{% if fields.contact_phone %}
+							<div class="">
+								{{ fields.content }}
+							</div>
+						{% endif %}
 					</div>
 				</div>
-				<a class="btn btn-primary w-full" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
+				<a class="btn btn-primary {{ fields.button_width }}" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
+			</div>
+			<div class="img-content">
+				<div class="img-decoration"></div>					
+				<div class="content-image" style="background-image: url('{{ fields.image }}');"></div>
 			</div>
 		</div>
-	</div>
-	<div class="img-content">
-		<div class="img-decoration"></div>					
-		<div class="content-image" style="background-image: url('{{ fields.image }}');"></div>
 	</div>
 </div>

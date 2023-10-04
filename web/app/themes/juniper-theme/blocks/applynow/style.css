@@ -6,7 +6,7 @@
     object-fit: cover;
     position: absolute;
     right: -200px;
-    top: 200px;
+    top: 100px;
     height: 600px;
     width: 600px;
 }
@@ -33,4 +33,28 @@
     height: 600px;
     width: 600px;
     background-repeat: no-repeat;
+}
+
+.applynow .contentleft {
+    justify-content: start;
+}
+
+.applynow .contentright {
+    display: flex;
+    align-items: center;
+    height: 800px;
+}
+
+.applynow .contentright .inner {
+    margin-left: calc(50% - 80px);
+}
+
+.applynow .contentright .img-content {
+    left: -150px;
+    top: 100px;
+}
+
+.applynow .contentright .img-content .img-decoration {
+    top: 25px;
+    right: -14px;
 }
