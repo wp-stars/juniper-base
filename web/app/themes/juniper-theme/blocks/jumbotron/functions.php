@@ -17,7 +17,7 @@ add_filter(
     function ( $context ) {
         if(empty($context['fields']['title'])) $context['fields']['title'] = get_the_title();
 
-        $context['fields']['background_image'] = wp_get_attachment_image_url($context['fields']['background_image']);
+        $context['fields']['background_image'] = wp_get_attachment_image_url($context['fields']['background_image'], 'full');
 
         return $context;
     }
