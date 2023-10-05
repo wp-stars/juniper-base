@@ -20,8 +20,8 @@
 	<div class="grid grid-cols-2 gap-8">
 		{% for card in fields.cards %}
 			<div class="min-w-[100%] min-h-[300px] flex flex-col max-w-sm p-8 border border-4 border-dark {% if loop.index is odd %}-mt-4 mb-4 justify-self-end bg-white text-dark {% else %}-mb-4 mt-4 even justify-self-start bg-dark text-white {% endif %}">
-				<img class="w-fit" src="{{ card.card_image}}" alt="{{ card.card_title}}" />
-				<h3 class="mb-2 text-2xl font-bold tracking-tight w-fit">{{ card.card_title }}</h3>
+				<img class="w-fit mb-10" src="{{ card.card_image}}" alt="{{ card.card_title}}" />
+				<h3 class="mb-10 font-bold w-fit">{{ card.card_title }}</h3>
 				<div class="">{{ card.content }}</div>
 				{% if card.link %}
 					<a href="{{ card.link.url }}" class="btn btn-underline w-fit mt-auto">{{ card.link.title}}</a>
