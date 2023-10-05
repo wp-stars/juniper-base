@@ -11,7 +11,7 @@
  	SupportsMode: true
  	SupportsMultiple: true
 #}
-<div class="w-full relative mt-20">
+<div class="w-full relative mt-20 featured-persons">
 	<div class="bg-dark absolute featured-persons-background background h-full">
 	</div>
 	<div class="container min-h-[600px] py-20 mx-auto px-4 slider relative">
@@ -24,7 +24,7 @@
 						<img src="{{ person.image.url }}" alt="{{ person.name }}" />
 						<div class="overlay absolute">
 							<div class="top-decoration"></div>
-							<span class="name">{{ person.name }}</span>
+							<span class="name font-bold">{{ person.name }}</span>
 							<div class="skill-list">
 								<ul>
 									{% for responsibility in person.responsibilities %}
