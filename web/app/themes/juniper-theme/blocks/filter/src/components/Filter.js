@@ -38,7 +38,6 @@ const Filter = ( data ) => {
         const queryString = selectedFilterVals.join(",")
         axios.get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&${data.taxonomy}=${queryString}&page=${page}`)
             .then(res => {
-                console.log(res)
                 setPosts(res.data.posts)
             })
             .catch(err => {
@@ -96,7 +95,6 @@ const Filter = ( data ) => {
                 })}
             </div>
             <div className="w-full flex justify-center">
-                {console.log(data)}
                 <button onClick={() => loadMorePosts()} className="btn btn-primary">mehr {data.postType} zeigen</button>
             </div>
         </div>

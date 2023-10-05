@@ -10,6 +10,13 @@
 
 .featured-persons-card.swiper-slide {
     width: 300px;
+    height: 400px;
+}
+
+.featured-persons-card.swiper-slide img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .featured-persons-card {

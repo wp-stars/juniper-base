@@ -2316,7 +2316,6 @@ const Filter = data => {
     if (!selectedFilterVals.length) return;
     const queryString = selectedFilterVals.join(",");
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&${data.taxonomy}=${queryString}&page=${page}`).then(res => {
-      console.log(res);
       setPosts(res.data.posts);
     }).catch(err => {
       console.error(err);
@@ -2404,7 +2403,7 @@ const Filter = data => {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex justify-center"
-  }, console.log(data), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => loadMorePosts(),
     className: "btn btn-primary"
   }, "mehr ", data.postType, " zeigen")));
@@ -2536,7 +2535,6 @@ __webpack_require__.r(__webpack_exports__);
 const filterDivs = document.querySelectorAll(".filter-update-me");
 filterDivs.forEach(div => {
   let data = JSON.parse(div.dataset.initialData);
-  console.log('filter data', data.posts);
   const root = react_dom__WEBPACK_IMPORTED_MODULE_3___default().createRoot(div);
   root.render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Filter__WEBPACK_IMPORTED_MODULE_2__["default"], data));
   div.classList.remove("filter-update-me");
