@@ -61,8 +61,58 @@
 
 @font-face {
     font-family: 'Red Hat Mono';
-    src: url('fonts/RedHatMono/RedHatMono-Regular.ttf') format('truetype');
-    font-weight: normal;
+    src: url('fonts/RedHatMono/RedHatMono-Bold.ttf') format('truetype');
+    font-weight: 800;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-BoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-SemiBold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
 }
 
