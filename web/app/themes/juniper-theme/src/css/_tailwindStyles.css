@@ -1116,6 +1116,10 @@ input[type="range"]::-ms-fill-lower {
   margin-bottom: 1rem;
 }
 
+.mb-40 {
+  margin-bottom: 10rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -1130,6 +1134,10 @@ input[type="range"]::-ms-fill-lower {
 
 .mb-8 {
   margin-bottom: 2rem;
+}
+
+.mb-9 {
+  margin-bottom: 2.25rem;
 }
 
 .mb-\[0\.6rem\] {
@@ -1452,10 +1460,6 @@ input[type="range"]::-ms-fill-lower {
 
 .max-w-sm {
   max-width: 24rem;
-}
-
-.max-w-\[80\%\] {
-  max-width: 80%;
 }
 
 .shrink {
