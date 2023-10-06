@@ -1,0 +1,57 @@
+{
+    "key": "group_651fe37ada1ea",
+    "title": "Taxonomy Landing Page Links",
+    "fields": [
+        {
+            "key": "field_651fe42d624c5",
+            "label": "Taxonomy",
+            "name": "taxonomy",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "category": "category",
+                "post_tag": "post_tag",
+                "nav_menu": "nav_menu",
+                "link_category": "link_category",
+                "post_format": "post_format",
+                "wp_theme": "wp_theme",
+                "wp_template_part_area": "wp_template_part_area",
+                "project_category": "project_category"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/taxonomy-landing-page-links"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1696588925
+}

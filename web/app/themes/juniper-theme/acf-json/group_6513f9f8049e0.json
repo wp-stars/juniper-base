@@ -28,6 +28,31 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_651fe90b550b2",
+            "label": "Light SVG Icon",
+            "name": "light_svg_icon",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
             "key": "field_651bc2a98c47f",
             "label": "Landing Page",
             "name": "landing_page",
@@ -69,5 +94,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1696318148
+    "modified": 1696590118
 }
