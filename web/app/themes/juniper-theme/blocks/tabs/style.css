@@ -1,0 +1,33 @@
+.tabs .tablist button {
+    color: var(--greyscale-black, #1E1E1E);
+    /* Desktop/Headline5 */
+    font-family: Red Hat Mono;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.75rem; /* 157.143% */
+}
+
+.tabs .tablist li:not(:last-child)::after {
+    content: "";
+    height: 100%;
+    border-right: 1px solid #1e1e1e;
+}
+
+.tabs .tablist li .tab-btn {
+    border-bottom: 4px solid transparent;
+}
+
+.tabs .tablist li .tab-btn.active {
+    border-bottom: 4px solid #1e1e1e;
+}
+
+.tabs .image-wrapper {
+    height: 400px;
+    width: 400px;
+    clip-path: polygon(82% 0, 100% 82%, 18% 100%, 0 18%);
+}
+
+.tabs .image-wrapper img {
+    object-fit: cover;
+}
