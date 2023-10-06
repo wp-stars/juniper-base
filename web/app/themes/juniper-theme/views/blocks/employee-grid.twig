@@ -17,15 +17,15 @@
 			<path d="M0 141.5L110 0V416L0 141.5Z" fill="#B4D43D" fill-opacity="0.6"/>
 		</svg>
 	</div>
-	<div class="mb-5">
+	<div class="mb-20 max-w-[70%]">
 		<p class="tagline">{{ fields.tagline }}</p>
-		<h2 class="mb-4">{{ fields.title }}</h2>
-		<h3 class="mb-4">{{ fields.subtitle }}</h3>
-		<p class="mb-4">{{ fields.intro_text }}</p>
+		<h2 class="mb-4 text-black">{{ fields.title }}</h2>
+		<h3 class="mb-8">{{ fields.subtitle }}</h3>
+		<p class="mb-4 text-black">{{ fields.intro_text }}</p>
 	</div>
-	<div class="grid lg:grid-cols-4 md:grid-cols-3 gap-4">
+	<div class="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
 		<a href="#">
-			<div class="max-w-sm bg-white border-4 border-dark rounded-none h-full flex items-center justify-center flex-col">
+			<div class="w-full bg-white border-4 border-dark rounded-none h-full flex items-center justify-center flex-col">
 				<div class="flex items-center justify-center relative you-bubble">
 					<span class="uppercase -mt-3">You?</span>
 					<svg class="absolute top-0 left-0" xmlns="http://www.w3.org/2000/svg" width="156" height="148" viewBox="0 0 156 148" fill="none">
@@ -39,11 +39,11 @@
 			</div>
 		</a>
 		{% for employee in fields.employees %}
-			<div class="max-w-sm bg-white rounded-none h-full flex items-center justify-center flex-col employee-card">
-				<img src="{{ employee.image.url }}" alt="{{ employee.name }}" />
-				<div class="overlay absolute">
+			<div class="w-full bg-white rounded-none h-full flex items-center justify-center flex-col employee-card">
+				<img class="w-full" src="{{ employee.image.url }}" alt="{{ employee.name }}" />
+				<div class="w-full overlay absolute">
 					<div class="top-decoration"></div>
-					<span class="name">{{ employee.name }}</span>
+					<h4 class="name">{{ employee.name }}</h4>
 					<div class="skill-list">
 						<ul>
 							{% for skills in employee.skills %}

@@ -35,8 +35,7 @@
     transform: rotate(-90deg);
     color: #fff;
     top: 10rem;
-    font-size: 3rem;
-    font-weight: bold;
+    line-height: 2.75rem;
 }
 
 .employee-card .skill-list {

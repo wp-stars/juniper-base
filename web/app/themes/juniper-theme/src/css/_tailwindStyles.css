@@ -1454,6 +1454,10 @@ input[type="range"]::-ms-fill-lower {
   max-width: 24rem;
 }
 
+.max-w-\[80\%\] {
+  max-width: 80%;
+}
+
 .shrink {
   flex-shrink: 1;
 }
@@ -2068,6 +2072,10 @@ input[type="range"]::-ms-fill-lower {
 }
 
 @media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:leading-3 {
     line-height: .75rem;
   }
@@ -2207,10 +2215,6 @@ input[type="range"]::-ms-fill-lower {
 @media (min-width: 1024px) {
   .lg\:w-\[80\%\] {
     width: 80%;
-  }
-
-  .lg\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:text-6xl {
