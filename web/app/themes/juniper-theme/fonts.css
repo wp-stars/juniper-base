@@ -99,6 +99,20 @@
 
 @font-face {
     font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
     src: url('fonts/RedHatMono/RedHatMono-SemiBold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
