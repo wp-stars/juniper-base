@@ -170,6 +170,22 @@
                     "parent_repeater": "field_6491e379eb8a8"
                 }
             ]
+        },
+        {
+            "key": "field_6523fb655c2b6",
+            "label": "Footer Link",
+            "name": "footer_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
         }
     ],
     "location": [
@@ -190,5 +206,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1695898721
+    "modified": 1696856951
 }

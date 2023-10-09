@@ -15,6 +15,10 @@ add_action(
 add_filter(
     'timber/acf-gutenberg-blocks-data/cardgrid',
     function ( $context ) {
+
+        $context['card_grid_height'] = 432 * count($context['fields']['cards']) / 2;
+        $context['half_card_total'] = count($context['fields']['cards']) / 2;
+
         return $context;
     }
 );

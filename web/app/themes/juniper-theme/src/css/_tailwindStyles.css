@@ -1076,20 +1076,12 @@ input[type="range"]::-ms-fill-lower {
   margin-bottom: 8rem;
 }
 
-.-mb-4 {
-  margin-bottom: -1rem;
-}
-
 .-mb-px {
   margin-bottom: -1px;
 }
 
 .-mt-3 {
   margin-top: -0.75rem;
-}
-
-.-mt-4 {
-  margin-top: -1rem;
 }
 
 .mb-10 {
@@ -1321,10 +1313,6 @@ input[type="range"]::-ms-fill-lower {
   min-height: 1000px;
 }
 
-.min-h-\[300px\] {
-  min-height: 300px;
-}
-
 .min-h-\[400px\] {
   min-height: 400px;
 }
@@ -1408,10 +1396,6 @@ input[type="range"]::-ms-fill-lower {
 
 .w-full {
   width: 100%;
-}
-
-.min-w-\[100\%\] {
-  min-width: 100%;
 }
 
 .min-w-\[150px\] {
@@ -1753,10 +1737,6 @@ input[type="range"]::-ms-fill-lower {
 
 .p-5 {
   padding: 1.25rem;
-}
-
-.p-8 {
-  padding: 2rem;
 }
 
 .px-3 {

@@ -1,0 +1,19 @@
+.cards-wrapper {
+    display: flex;
+    flex-flow: column wrap;
+    column-gap: 10px;
+}
+
+.cards-wrapper .card {
+    height: 400px;
+    width: calc(50% - 10px);
+    margin-bottom: 32px;
+    position: relative;
+    padding: 1.875rem 2.75rem;
+    justify-content: space-between;
+}
+
+.cards-wrapper .card img {
+    height: 133px;
+    width: 133px;
+}
