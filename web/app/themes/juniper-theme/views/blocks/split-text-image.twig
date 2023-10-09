@@ -57,7 +57,7 @@
 					<h5 class="text-xl font-bold uppercase">{{ fields.intro_title }}</h5>
 					<h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">{{ fields.title }}</h2>
 					<h3 class="text-xl font-bold mb-8 {% if fields.style == 'dark' %} text-primary {% else %} text-cyan-950 md:text-4xl {% endif %}">{{ fields.subtitle }}</h3>
-					<p class="mb-12 text-gray-500 {% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} w-[60vw] {% endif %}">{{ fields.content }}</p>
+					<p class="mb-12 text-white {% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} w-[60vw] {% endif %}">{{ fields.content }}</p>
 
 					{# only show button if link text is set #}
 					{% if fields.link_text %}

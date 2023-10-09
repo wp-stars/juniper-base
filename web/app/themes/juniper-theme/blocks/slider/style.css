@@ -181,3 +181,29 @@
     width: 100%;
     object-fit: cover;
 }
+
+.timeline-slider .swiper-pagination {
+    position: relative;
+}
+
+.timeline-slider .swiper-button-prev,
+.timeline-slider .swiper-button-next {
+    right: unset;
+    left: unset;
+    top: unset;
+    margin-top: unset;
+    width: 4.375rem;
+    height: 4.375rem;
+}
+
+/* .timeline-slider .swiper-button-prev svg,
+.timeline-slider .swiper-button-next svg {
+    width: 4.375rem;
+    height: 4.375rem;
+} */
+
+
+.timeline-slider .swiper-button-prev::after,
+.timeline-slider .swiper-button-next::after {
+    display: none;
+}

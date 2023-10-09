@@ -2,6 +2,7 @@
 
 $primary: #B4D43D;
 $text: #093642;
+$white: #F9F9F9;
 
 .text {
     color: $text;
@@ -163,9 +164,9 @@ h6 {
     font-weight: 500;
     font-size: 16px;
     line-height: 25px;
-    color: #ffffff;
+    color: $white;
     border-bottom: 4px solid;
-    border-color: #ffffff;
+    border-color: $white;
     display: inline-flex;
     width: fit-content;
     position: relative;
@@ -188,10 +189,6 @@ h6 {
     font-weight: 645;
     font-size: 26px;
     line-height: 26px;
-}
-
-.text-white {
-    color: #fff !important;
 }
 
 .bg-dark-transparent {
@@ -260,8 +257,8 @@ h6 {
     .even {
         margin-top: 20px;
         .btn-underline {
-            color: #fff;
-            border-color: #fff;
+            color: $white;
+            border-color: $white;
             &:after {
                 position: absolute;
                 content: url("data:image/svg+xml,%3Csvg width='48' height='28' viewBox='0 0 48 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M33.6873 26L45.6873 14L33.6873 2' stroke='%23F9F9F9' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='12' y='12' width='18' height='4' rx='2' fill='%23F9F9F9'/%3E%3Crect y='12' width='8' height='4' rx='2' fill='%23F9F9F9'/%3E%3C/svg%3E%0A");
@@ -271,28 +268,36 @@ h6 {
 }
 
 // Timeline styles
-.timeline-wrapper {
+.timeline-slider {
     position: relative;
-    .timeline {
-        position: absolute;
-        transform: rotate(45deg);
+    .swiper-pagination {
+        transform: rotate(-30deg);
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        right: unset;
+        left: 230px;
         top: 250px;
-        .timeline-point {
-            background-color: $text;
+        .swiper-pagination-bullet {
+            background: $text;
             border: 4px solid $text;
             position: relative;
-            &.active {
+            width: 1.75rem;
+            height: 1.75rem;
+            margin-bottom: 200px;
+            opacity: unset;
+            &.swiper-pagination-bullet-active {
                 background-color: $primary;
             }
             &:not(:last-child):after {
                 content: "";
+                transform: rotate(90deg);
                 position: absolute;
                 border: 4px solid #093642;
-                width: 260px;
+                width: 227px;
                 height: 1px;
-                top: 9px;
-                left: 27px;
-               
+                top: 130px;
+                left: -104px;
             }
             @media only screen and (max-width: 1280px) {
                 &:not(:last-child):after {

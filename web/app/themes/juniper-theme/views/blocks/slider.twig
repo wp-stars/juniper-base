@@ -12,7 +12,7 @@
  	SupportsMultiple: true
 #}
 {% if fields.style == "split" %}
-	<div class="w-full relative split-slider">
+	<div class="w-full relative split-slider-wrapper-{{ instance }}">
 		<div class="bg-dark absolute split-slider-background background h-full">
 		</div>
 		<div class="container min-h-[600px] py-32 mx-auto px-4 slider relative">
@@ -67,57 +67,43 @@
 				slidesPerView: "auto",
 				spaceBetween: 30,
 				pagination: {
-					el: ".swiper-pagination",
+					el: ".split-slider-wrapper-{{ instance }} .swiper-pagination",
 					clickable: true,
 				},
 				navigation: {
-					nextEl: ".swiper-button-next",
-					prevEl: ".swiper-button-prev",
+					nextEl: ".split-slider-wrapper-{{ instance }} .swiper-button-next",
+					prevEl: ".split-slider-wrapper-{{ instance }} .swiper-button-prev",
 				},
 			});
 		</script>
 	</div>
 {% endif %}
 {% if fields.style == "timeline" %}
-	<div class="container min-h-[800px] my-12 mx-auto px-4 slider">
-		<div class="grid grid-cols-1 gap-8">
-			<p class="tagline">{{ fields.timeline_tagline }}</p>
-			<h2>{{ fields.timeline_title }}</h2>
-			<p>{{ fields.timeline_intro_text }}</p>
-			<div class="decorator-image absolute right-0 top-0">
-				<img class="" src="{{ fields.timeline_decoration_image }}" />
-			</div>
-		</div>
-		<div class="grid grid-cols-2 gap-8">
-			<div class="timeline-wrapper">
-				<div class="timeline flex inline-flex w-full justify-between">
-					{% for item in fields.timeline_slider_items %}
-						<div data-timeline-num="{{ loop.index }}" class="{% if loop.index == 1 %}active {% endif %}timeline-point rounded-full bg-primary h-8 w-8">
-						</div>
-					{% endfor %}
+	<div class="container h-[800px] my-12 mx-auto px-4 timeline-slider timeline-slider-{{ instance }}">
+		<div class="swiper grid grid-cols-12 swiper">
+			<div class="col-span-4 relative">
+				<div class="swiper-pagination relative">
 				</div>
 			</div>
-			<div class="flex">
-				<div class="h-[600px] w-full">
-					<div class="timeline-slider snap-y snap-mandatory h-full overflow-scroll">
-						{% for item in fields.timeline_slider_items %}
-							<div data-slide-num="{{ loop.index }}" class="timeline-slide snap-start w-full h-screen flex flex-col items-start justify-center">
-								<p class="bold bg-dark text-primary p-4 text-4xl bold">{{ loop.index }}.</p>
-								<h4 class="text-4xl">{{ item.slider_title }}</h4>
-								<p>{{ item.slider_text }}</p>
-							</div>
-						{% endfor %}
+			<div class="swiper-wrapper col-span-7">
+				{% for item in fields.timeline_slider_items %}
+					<div class="timeline-slide w-full flex flex-col items-start justify-center swiper-slide">
+						<p class="bold bg-dark text-primary p-4 text-4xl bold mb-10">{{ loop.index }}.</p>
+						<h3 class="mb-3">{{ item.slider_title }}</h3>
+						<p class="pl-8 text-left text-dark">{{ item.slider_text }}</p>
 					</div>
-				</div>
-				<div class="flex flex-col">
-					<button id="sliderScrollUp" class="bg-accent p-4 h-fit align-self-bottom mt-auto mb-8">
+				{% endfor %}
+			</div>
+			<div class="col-span-1 flex flex-col h-[800px] relative">
+				<div class="relative mt-auto mb-20">
+					<button class="bg-accent p-4 mb-8 swiper-button-prev relative">
 						<svg xmlns="http://www.w3.org/2000/svg" width="26" height="43" viewBox="0 0 26 43" fill="none">
 							<path d="M23.384 13.0273L12.8778 2.52106L2.37158 13.0273" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 							<rect x="11.1267" y="32.0148" width="15.7593" height="3.50207" rx="1.75103" transform="rotate(-90 11.1267 32.0148)" fill="#093642"/>
 							<rect x="11.1267" y="42.5211" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-90 11.1267 42.5211)" fill="#093642"/>
 						</svg>
 					</button>
-					<button id="sliderScrollDown" class="bg-accent p-4 h-fit">
+					<button class="bg-accent p-4 h-fit swiper-button-next relative">
 						<svg xmlns="http://www.w3.org/2000/svg" width="26" height="43" viewBox="0 0 26 43" fill="none">
 							<path d="M2.35919 30.3337L12.8654 40.8399L23.3716 30.3337" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 							<rect x="14.6165" y="11.3459" width="15.7593" height="3.50207" rx="1.75103" transform="rotate(90 14.6165 11.3459)" fill="#093642"/>
@@ -127,6 +113,18 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			var swiper{{ instance }} = new Swiper(".timeline-slider-{{ instance }} .swiper", {
+				direction: "vertical",
+				pagination: {
+					el: ".timeline-slider-{{ instance }} .swiper-pagination",
+				},
+				navigation: {
+					nextEl: ".timeline-slider-{{ instance }} .swiper-button-next",
+					prevEl: ".timeline-slider-{{ instance }} .swiper-button-prev",
+				}
+			});
+		</script>
 	</div>
 {% endif %}
 
@@ -170,7 +168,7 @@
 			</div>
 		</div>
 		<script>
-			var swiper = new Swiper(".simple-swiper-{{ instance }} .swiper", {
+			var swiper{{ instance }} = new Swiper(".simple-swiper-{{ instance }} .swiper", {
 				slidesPerView: 'auto',
 				spaceBetween: 24,
 				navigation: {
@@ -233,7 +231,7 @@
 
 				<!-- Initialize Swiper -->
 				<script>
-					var swiper = new Swiper(".quote-swiper-{{ instance }} .swiper", {
+					var swiper{{ instance }} = new Swiper(".quote-swiper-{{ instance }} .swiper", {
 						pagination: {
 							el: ".quote-swiper-{{ instance }} .swiper-pagination",
 						},
@@ -301,7 +299,7 @@
 
 				<!-- Initialize Swiper -->
 				<script>
-					var swiper = new Swiper(".blog-swiper-{{ instance }} .swiper", {
+					var swiper{{ instance }} = new Swiper(".blog-swiper-{{ instance }} .swiper", {
 						pagination: {
 							el: ".blog-swiper-{{ instance }} .swiper-pagination",
 						},
