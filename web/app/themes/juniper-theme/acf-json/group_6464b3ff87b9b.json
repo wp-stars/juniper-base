@@ -111,6 +111,32 @@
                         "id": ""
                     },
                     "return_format": "array"
+                },
+                {
+                    "key": "field_6523e61c65ab4",
+                    "label": "Slide Style",
+                    "name": "slide_style",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "normal": "Normal",
+                        "overlay": "Overlay"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
                 }
             ]
         },
@@ -704,5 +730,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1695651339
+    "modified": 1696851693
 }
