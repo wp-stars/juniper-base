@@ -15,7 +15,7 @@
 	<div class="w-full relative split-slider-wrapper-{{ instance }}">
 		<div class="bg-dark absolute split-slider-background background h-full">
 		</div>
-		<div class="container min-h-[600px] py-32 mx-auto px-4 slider relative">
+		<div class="container min-h-[600px] py-32 mx-auto slider relative">
 			<div class="grid grid-cols-2 gap-8">
 				<div class="left text-white h-full flex flex-col justify-center">
 					<h2 class="text-white mb-4">{{ fields.split_slider_static_items.title }}</h2>
@@ -79,7 +79,7 @@
 	</div>
 {% endif %}
 {% if fields.style == "timeline" %}
-	<div class="container h-[800px] my-12 mx-auto px-4 timeline-slider timeline-slider-{{ instance }}">
+	<div class="container h-[800px] my-12 mx-auto timeline-slider timeline-slider-{{ instance }}">
 		<div class="swiper grid grid-cols-12 swiper">
 			<div class="col-span-4 relative">
 				<div class="swiper-pagination relative">
@@ -129,7 +129,7 @@
 {% endif %}
 
 {% if fields.style == "simple" %}
-	<div class="container my-12 mx-auto px-4 slider simple-swiper-{{ instance }}">
+	<div class="container my-12 mx-auto slider simple-swiper-{{ instance }}">
 		<div class="simple-slider relative">
 			<p>{{ fields.simple_slider_static_items.tagline }}</p>
 			<h2 class="mb-20">{{ fields.simple_slider_static_items.title }}</h2>

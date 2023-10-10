@@ -15,6 +15,8 @@ add_action(
 add_filter(
     'timber/acf-gutenberg-blocks-data/locationlist',
     function ( $context ) {
+
+        $context['maps_api_key'] = get_field('google_maps_api_key', 'option');
         return $context;
     }
 );

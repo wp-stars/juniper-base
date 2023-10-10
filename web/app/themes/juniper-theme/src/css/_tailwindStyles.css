@@ -1228,6 +1228,10 @@ input[type="range"]::-ms-fill-lower {
   margin-top: auto;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .block {
   display: block;
 }
