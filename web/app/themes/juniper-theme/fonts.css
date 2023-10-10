@@ -93,21 +93,21 @@
 @font-face {
     font-family: 'Red Hat Mono';
     src: url('fonts/RedHatMono/RedHatMono-Regular.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Red Hat Mono';
     src: url('fonts/RedHatMono/RedHatMono-Medium.ttf') format('truetype');
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Red Hat Mono';
     src: url('fonts/RedHatMono/RedHatMono-MediumItalic.ttf') format('truetype');
-    font-weight: 500;
+    font-weight: 600;
     font-style: italic;
 }
 
@@ -122,5 +122,19 @@
     font-family: 'Red Hat Mono';
     src: url('fonts/RedHatMono/RedHatMono-SemiBoldItalic.ttf') format('truetype');
     font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-Bold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Red Hat Mono';
+    src: url('fonts/RedHatMono/RedHatMono-BoldItalic.ttf') format('truetype');
+    font-weight: 800;
     font-style: italic;
 }

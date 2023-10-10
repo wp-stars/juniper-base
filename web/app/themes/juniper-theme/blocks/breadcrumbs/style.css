@@ -22,6 +22,10 @@
     background-color: #1e1e1e;
 }
 
+.breadcrumbs .page.current {
+    font-weight: 700;
+}
+
 .breadcrumbs .page.current::after {
     content: "";
     height: 4px;
