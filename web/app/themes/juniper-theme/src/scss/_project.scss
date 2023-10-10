@@ -3,6 +3,7 @@
 $primary: #B4D43D;
 $text: #093642;
 $white: #F9F9F9;
+$black: #1E1E1E;
 
 .text {
     color: $text;
@@ -252,6 +253,21 @@ h6 {
 
 .cardgrid {
     .cards {
+        .card-title,
+        .card-content,
+        .btn-underline {
+            color: $black;
+        }
+        .btn-underline {
+            border-color: $black;
+        }
+        .card-content {
+            font-family: "Red Hat Mono";
+            font-size: 1.125rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.875rem; 
+        }
         .even {
             top: 2rem;
             position: relative;
