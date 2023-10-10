@@ -19,6 +19,9 @@ add_filter(
         $context['card_grid_height'] = 432 * count($context['fields']['cards']) / 2;
         $context['half_card_total'] = count($context['fields']['cards']) / 2;
 
+
+        $context['card_grid_rows'] = floor(count($context['fields']['cards']) / 2);
+
         return $context;
     }
 );

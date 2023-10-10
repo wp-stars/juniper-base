@@ -11,24 +11,21 @@
  	SupportsMode: true
  	SupportsMultiple: true
 #}
-
 <div class="container my-12 mx-auto px-4 cardgrid">
-	<div class="max-w-[70%] mb-20">
+	<div class="max-w-[70%]">
 		<p class="uppercase bold">{{ fields.subtitle }}</p>
 		<h2>{{ fields.title }}</h2>
 		<p class="my-10">{{ fields.intro }}</p>
 	</div>
-	<div class="cards-wrapper">
+	<div class="grid grid-cols-2 gap-6 cards">
 		{% for card in fields.cards %}
-			<div class="flex flex-col border border-4 border-dark {% if loop.index is odd %}odd justify-self-end bg-white text-dark {% else %} even justify-self-start bg-dark text-white {% endif %} card">
-				<img class="w-fit mb-12" src="{{ card.card_image}}" alt="{{ card.card_title}}" />
-				<div class="flex flex-col">
-					<h3 class="mb-8 font-bold w-fit  {% if loop.index is even %} text-white {% endif %}">{{ card.card_title }}</h3>
-					<div class="{% if loop.index is even %} text-white {% endif %}">{{ card.content }}</div>
-					{% if card.link %}
-						<a href="{{ card.link.url }}" class="btn btn-underline w-fit mt-auto">{{ card.link.title}}</a>
-					{% endif %}
-				</div>
+			<div class="min-w-[100%] flex flex-col max-w-sm p-8 border border-4 border-dark card {% if loop.index is odd %}odd {% else %}even {% endif %}">
+				<img class="w-fit mb-10" src="{{ card.card_image}}" alt="{{ card.card_title}}" />
+				<h3 class="mb-10 font-bold w-fit card-title">{{ card.card_title }}</h3>
+				<div class="card-content">{{ card.content }}</div>
+				{% if card.link %}
+					<a href="{{ card.link.url }}" class="btn btn-underline w-fit mt-auto">{{ card.link.title}}</a>
+				{% endif %}
 			</div>
 		{% endfor %}
 	</div>
@@ -36,13 +33,3 @@
 		<a href="{{ fields.footer_link.url }}" class="btn btn-primary w-fit mt-10">{{ fields.footer_link.title }}</a>
 	{% endif %}
 </div>
-
-<style>
-	.cards-wrapper .card:not(:nth-child(-n + {{ half_card_total }})) {
-		top: 2rem;
-	}
-
-	.cards-wrapper {
-		height: {{ card_grid_height }}px;
-	}
-</style>

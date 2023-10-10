@@ -249,15 +249,38 @@ h6 {
     background-color: rgba(180, 212, 61, 0.6);
 }
 
-// card grid styles
+
 .cardgrid {
-    .even {
-        .btn-underline {
+    .cards {
+        .even {
+            top: 2rem;
+            position: relative;
+        }
+        .card:nth-child(2),
+        .card:nth-child(3),
+        .card:nth-child(6),
+        .card:nth-child(7),
+        .card:nth-child(10), 
+        .card:nth-child(11),
+        .card:nth-child(14),
+        .card:nth-child(15),
+        .card:nth-child(18),
+        .card:nth-child(19),
+        .card:nth-child(22),
+        .card:nth-child(23) {
+            background-color: $text;
             color: $white;
-            border-color: $white;
-            &:after {
-                position: absolute;
-                content: url("data:image/svg+xml,%3Csvg width='48' height='28' viewBox='0 0 48 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M33.6873 26L45.6873 14L33.6873 2' stroke='%23F9F9F9' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='12' y='12' width='18' height='4' rx='2' fill='%23F9F9F9'/%3E%3Crect y='12' width='8' height='4' rx='2' fill='%23F9F9F9'/%3E%3C/svg%3E%0A");
+            .card-title,
+            .card-content,
+            .btn-underline {
+                color: $white;
+            }
+
+            .btn-underline {
+                border-color: $white;
+                &:after {
+                    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none"><path d="M33.6873 26L45.6873 14L33.6873 2" stroke="%23F9F9F9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="12" width="18" height="4" rx="2" fill="%23F9F9F9"/><rect y="12" width="8" height="4" rx="2" fill="%23F9F9F9"/></svg>');
+                }
             }
         }
     }
