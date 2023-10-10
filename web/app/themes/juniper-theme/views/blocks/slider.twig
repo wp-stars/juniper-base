@@ -12,23 +12,29 @@
  	SupportsMultiple: true
 #}
 {% if fields.style == "split" %}
-	<div class="w-full relative split-slider-wrapper-{{ instance }}">
+	<div class="w-full relative split-slider split-slider-wrapper-{{ instance }} {{ fields.split_slider_static_items.background_style }}">
 		<div class="bg-dark absolute split-slider-background background h-full">
 		</div>
 		<div class="container min-h-[600px] py-32 mx-auto slider relative">
 			<div class="grid grid-cols-2 gap-8">
 				<div class="left text-white h-full flex flex-col justify-center">
-					<h2 class="text-white mb-4">{{ fields.split_slider_static_items.title }}</h2>
-					<div class="mb-4">{{ fields.split_slider_static_items.text }}</div>
+					<h2 class="text-white mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
+					<div class="mb-12 intro-text">{{ fields.split_slider_static_items.text }}</div>
 					<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
 				</div>
 				<div class="right">
 					<div class="swiper split-swiper-{{ instance }}">
 						<div class="swiper-wrapper">
 							{% for slide in fields.split_slider_items %}
-								<div class="swiper-slide h-[400px]" style="background-image: url('{{ slide.slider_image.url }}');">
+								<div class="swiper-slide h-[400px] {{ fields.split_slider_static_items.slide_style }}" style="background-image: url('{{ slide.slider_image.url }}');">
 									<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4">
-										<h5 class="mb-3">{{ slide.slider_title }}</h5>
+									 	{% if fields.split_slider_static_items.slide_style == "overlay" %}
+											<div class="title-wrapper">
+												<h5>{{ slide.slider_title }}</h5>
+											</div>
+										{% else %}
+											<h5 class="mb-3">{{ slide.slider_title }}</h5>
+										{% endif %}
 										<a class="w-full" href="{{ slide.link.url }}">
 											<span>{{ slide.link.title }}</span>
 											<svg xmlns="http://www.w3.org/2000/svg" width="48" height="28" viewBox="0 0 48 28" fill="none">

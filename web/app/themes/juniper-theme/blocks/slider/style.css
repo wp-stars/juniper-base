@@ -175,6 +175,33 @@
     line-height: 1.875rem; /* 166.667% */
 }
 
+.split-slider .slide-inner {
+    position: relative;
+}
+
+.split-slider .overlay .title-wrapper {
+    position: absolute;
+    padding-right: 1.25rem;
+    padding-top: 1.13rem;
+    bottom: 0;
+    left: 180px;
+    height: 180px;
+    width: 400px;
+    background: var(--primary-green, #B4D43D);
+    clip-path: polygon(0 0, 100% 100%, 100% 0);
+    transform: rotate(-90deg);
+    transform-origin: bottom left;
+}
+
+.split-slider.light .split-slider-background {
+    display: none;
+}
+
+.split-slider.light .title,
+.split-slider.light .intro-text {
+    color: var(--greyscale-black, #1E1E1E);
+}
+
 
 .blog-slider .image-wrapper img {
     height: 100%;
