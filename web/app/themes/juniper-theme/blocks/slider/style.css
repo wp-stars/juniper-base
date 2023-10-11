@@ -123,6 +123,16 @@
     width: 100%;
 }
 
+.split-slider .swiper {
+    height: 450px;
+}
+
+.split-slider .intro-text {
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.875rem; /* 166.667% */
+}
 
 .split-slider .swiper-slide {
     width: 80%;

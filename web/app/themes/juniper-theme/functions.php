@@ -142,6 +142,15 @@ $site = new StarterSite();
 
 add_theme_support( 'custom-logo' );
 
+function wps_juniper_register_nav_menu(){
+    register_nav_menus( array(
+        'primary_menu' => __( 'Primary Menu', 'wps_juniper' ),
+        'secondary_menu' => __( 'Secondary Menu', 'wps_juniper' ),
+        'footer_menu'  => __( 'Footer Menu', 'wps_juniper' ),
+    ) );
+}
+add_action( 'after_setup_theme', 'wps_juniper_register_nav_menu', 0 );
+
 add_filter( 'timber/context', 'wps_add_to_context' );
 function wps_add_to_context( $context ) {
 
@@ -154,7 +163,9 @@ function wps_add_to_context( $context ) {
 
     $context['theme_dir'] = get_stylesheet_directory_uri();
 
-    //$context['menu'] = new \Timber\Menu( 'primary-menu' );
+    $context['primary_menu'] = new \Timber\Menu( 'primary-menu' );
+    $context['secondary_menu'] = new \Timber\Menu( 'secondary-menu' );
+    $context['footer_menu'] = new \Timber\Menu( 'footer-menu' );
 
     return $context;
 }

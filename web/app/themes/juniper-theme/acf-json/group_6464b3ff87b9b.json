@@ -57,6 +57,46 @@
             "layout": "block",
             "sub_fields": [
                 {
+                    "key": "field_6526699776ce5",
+                    "label": "Tagline Over Slider",
+                    "name": "tagline_over_slider",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_652669a576ce6",
+                    "label": "Title Over Slider",
+                    "name": "title_over_slider",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
                     "key": "field_64f5e7b7c1d7b",
                     "label": "Title",
                     "name": "title",
@@ -155,6 +195,32 @@
                     "choices": {
                         "normal": "Normal",
                         "overlay": "Overlay"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_652560218dfdb",
+                    "label": "Slider Orientation",
+                    "name": "slider_side",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "right": "Slider on Right",
+                        "left": "Slider on Left"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -757,5 +823,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1696940563
+    "modified": 1697016255
 }

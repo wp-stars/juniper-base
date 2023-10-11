@@ -18,7 +18,10 @@
 							</a>
 							<div class="flex items-end md:order-2">
 								<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-									{% include "menu.twig" with {'items': menu.get_items} %}
+									{% include "menu.twig" with {'items': secondary_menu.get_items} %}
+								</div>
+								<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-2">
+									{% include "menu.twig" with {'items': primary_menu.get_items} %}
 								</div>
 							</div>
 						</div>

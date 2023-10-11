@@ -1013,8 +1013,16 @@ input[type="range"]::-ms-fill-lower {
   grid-column: span 5 / span 5;
 }
 
+.col-span-6 {
+  grid-column: span 6 / span 6;
+}
+
 .col-span-7 {
   grid-column: span 7 / span 7;
+}
+
+.col-span-8 {
+  grid-column: span 8 / span 8;
 }
 
 .m-auto {
@@ -1386,6 +1394,10 @@ input[type="range"]::-ms-fill-lower {
   width: 100%;
 }
 
+.w-44 {
+  width: 11rem;
+}
+
 .min-w-\[100\%\] {
   min-width: 100%;
 }
@@ -1563,6 +1575,17 @@ input[type="range"]::-ms-fill-lower {
   margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+.divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-divide-opacity));
+}
+
 .self-end {
   align-self: flex-end;
 }
@@ -1577,6 +1600,10 @@ input[type="range"]::-ms-fill-lower {
 
 .rounded-none {
   border-radius: 0px;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
 }
 
 .rounded-l-lg {
@@ -1980,6 +2007,11 @@ input[type="range"]::-ms-fill-lower {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+:is(.dark .dark\:bg-gray-700) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
 :is(.dark .dark\:text-gray-400) {
