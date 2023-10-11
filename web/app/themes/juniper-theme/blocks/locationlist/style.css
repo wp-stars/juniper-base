@@ -59,3 +59,8 @@
 .location-list-background-white p {
     color: #093642;
 }
+
+.location-grid p {
+    font-size: 1.125rem;
+    line-height: 1.875rem;
+}
