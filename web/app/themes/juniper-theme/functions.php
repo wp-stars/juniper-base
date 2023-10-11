@@ -170,24 +170,23 @@ function wps_add_to_context( $context ) {
     return $context;
 }
 
+add_filter( 'render_block', 'wps_juniper_add_class_to_list_block', 10, 2 );
+function wps_juniper_add_class_to_list_block( $block_content, $block ) {
 
-/**
- * Mime Type SVG enablen zum Upload
- */
-add_filter('upload_mimes', 'wps_mime_type');
+    if ( 'core/group' === $block['blockName'] ) {
+        $block_content = new WP_HTML_Tag_Processor( $block_content );
+        $block_content->add_class( 'container' );
+        $block_content->get_updated_html();
+    }
 
-function wps_mime_type($mimes) {
-    
-    $mimes['svg'] = 'image/svg+xml';
-	$mimes['ico'] = 'image/x-icon';
-    return $mimes;
+    return $block_content;
 }
 
-function my_acf_init() {
+function wps_juniper_acf_init() {
     
     acf_update_setting('google_api_key', 'AIzaSyA2nwpgRNcXh27RBL41e47d6pFcJda9qiY');
 }
 
-add_action('acf/init', 'my_acf_init');
+add_action('acf/init', 'wps_juniper_acf_init');
 
 
