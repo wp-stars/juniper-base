@@ -885,35 +885,37 @@ input[type="range"]::-ms-fill-lower {
 
 .container {
   width: 100%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .container {
-    max-width: 640px;
+    max-width: 600px;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 728px) {
   .container {
-    max-width: 768px;
+    max-width: 728px;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 984px) {
   .container {
-    max-width: 1024px;
+    max-width: 984px;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1000px) {
   .container {
-    max-width: 1280px;
+    max-width: 1000px;
   }
 }
 
-@media (min-width: 1536px) {
+@media (min-width: 1200px) {
   .container {
-    max-width: 1536px;
+    max-width: 1200px;
   }
 }
 
@@ -927,6 +929,10 @@ input[type="range"]::-ms-fill-lower {
 
 .relative {
   position: relative;
+}
+
+.-top-2 {
+  top: -0.5rem;
 }
 
 .left-0 {
@@ -985,8 +991,8 @@ input[type="range"]::-ms-fill-lower {
   z-index: 10;
 }
 
-.z-50 {
-  z-index: 50;
+.z-20 {
+  z-index: 20;
 }
 
 .z-\[-2\] {
@@ -1394,10 +1400,6 @@ input[type="range"]::-ms-fill-lower {
   width: 100%;
 }
 
-.w-44 {
-  width: 11rem;
-}
-
 .min-w-\[100\%\] {
   min-width: 100%;
 }
@@ -1569,21 +1571,18 @@ input[type="range"]::-ms-fill-lower {
   gap: 2rem;
 }
 
+.gap-9 {
+  gap: 2.25rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.25rem * var(--tw-space-x-reverse));
   margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.divide-y > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-y-reverse: 0;
-  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
-}
-
-.divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-divide-opacity));
 }
 
 .self-end {
@@ -1600,10 +1599,6 @@ input[type="range"]::-ms-fill-lower {
 
 .rounded-none {
   border-radius: 0px;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
 }
 
 .rounded-l-lg {
@@ -2009,9 +2004,8 @@ input[type="range"]::-ms-fill-lower {
   outline-offset: 2px;
 }
 
-:is(.dark .dark\:bg-gray-700) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+.group:hover .group-hover\:block {
+  display: block;
 }
 
 :is(.dark .dark\:text-gray-400) {

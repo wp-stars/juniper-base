@@ -1,0 +1,7 @@
+<ul class="flex flex-wrap justify-around text-white text-sm font-medium w-full {{ name }}">
+    {% for item in items %}
+        <li>
+            <a href="{{ item.link }}" class="mr-4 hover:underline md:mr-6 ">{{ item.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

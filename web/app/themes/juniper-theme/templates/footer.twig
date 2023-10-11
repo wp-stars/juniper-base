@@ -12,21 +12,7 @@
         <p class="self-end mx-20 text-lg">“Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.”</p>
     </div>
     <hr class="my-4 border-solid border-white w-full" />
-    {% include "menu.twig" with {'items': footer_menu.get_items} %}
+    {% include "footer-menu.twig" with {'items': footer_menu.get_items, 'name': 'footer-menu' } %}
 
-    <ul class="flex flex-wrap justify-around text-white text-sm font-medium w-full">
-        <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
-        </li>
-        <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-        </li>
-        <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
-        </li>
-        <li>
-            <a href="#" class="hover:underline">Contact</a>
-        </li>
-    </ul>
 </div>
 

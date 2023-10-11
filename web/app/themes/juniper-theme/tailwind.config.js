@@ -11,6 +11,16 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        sm: '600px',
+        md: '728px',
+        lg: '984px',
+        xl: '1000px',
+        '2xl': '1200px',
+      },
+    },
     extend: {
       colors: {
         primary: '#B4D43D',
@@ -21,6 +31,9 @@ module.exports = {
         white: '#F9F9F9'
       },
     },
+  },
+  variants: {
+    display:['group-hover']
   },
   plugins: [
     require('flowbite/plugin')

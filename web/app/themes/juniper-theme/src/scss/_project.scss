@@ -99,6 +99,26 @@ h6 {
     transition: background-color 0.5s ease;
 }
 
+.navbar .primary-menu li a {
+    color: $white;
+    font-family: "Red Hat Mono";
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.875rem; /* 150% */
+    text-transform: uppercase;
+} 
+
+.navbar .secondary-menu li a {
+    color: $white;
+    font-family: "Red Hat Mono";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.875rem; /* 214.286% */
+    text-transform: none;
+}
+
 .intro-text ul li {
     font-size: 1.125rem;
     font-style: normal;
