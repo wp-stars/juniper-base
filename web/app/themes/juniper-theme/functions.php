@@ -172,9 +172,9 @@ function wps_add_to_context( $context ) {
 
 add_filter( 'render_block', 'wps_juniper_add_class_to_list_block', 10, 2 );
 function wps_juniper_add_class_to_list_block( $block_content, $block ) {
-
     if ( 'core/group' === $block['blockName'] ) {
         $block_content = new WP_HTML_Tag_Processor( $block_content );
+        $block_content->next_tag( 'div' );
         $block_content->add_class( 'container' );
         $block_content->get_updated_html();
     }
