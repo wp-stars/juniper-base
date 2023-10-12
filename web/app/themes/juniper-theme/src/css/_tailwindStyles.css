@@ -1741,6 +1741,11 @@ input[type="range"]::-ms-fill-lower {
   padding-right: 1rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1779,16 +1784,6 @@ input[type="range"]::-ms-fill-lower {
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
-}
-
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .pl-3 {

@@ -13,7 +13,12 @@
 }
 
 .filter-btn .btn-inner {
-    padding: 0.5rem 0.25rem;
+    padding: 0.62rem 0.5rem;
+    font-family: "Red Hat Mono";
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.875rem; 
 }
 
 .filter-btn.active {
