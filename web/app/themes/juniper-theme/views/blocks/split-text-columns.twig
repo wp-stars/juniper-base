@@ -19,13 +19,13 @@
 				{{ item.image }}
 				<div class="mt-20">
 					<p class="tagline">{{ item.tagline }}</p>
-					<h3>{{ item.title }}</h3>
+					<h3 class="mb-8">{{ item.title }}</h3>
 					<p>{{ item.text }}</p>
 				</div>
 			</div>
 		{% endfor %}
 	</div>
-	<div class="w-full flex justify-center mt-20">
+	<div class="w-full flex justify-center my-20">
 		<a class="btn btn-primary w-fit" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
 	</div>
 </div>
