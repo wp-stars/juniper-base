@@ -127,35 +127,37 @@ h6 {
 * Custom Utilities
  */
 
-.btn-primary {
-    background-color: $primary;
-    box-sizing: border-box;
+.btn-primary,
+.gform_button[type="submit"] {
+    background-color: $primary !important;
+    box-sizing: border-box !important;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 24px;
-    gap: 10px;
-    isolation: isolate;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 10px 24px !important;
+    gap: 10px !important;
 
-    font-family: 'Red Hat Mono';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 33px;
-    color: $text;
-    border: 2px solid $primary;
-    position: relative;
+    font-family: 'Red Hat Mono' !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 33px !important;
+    color: $text !important;
+    border: 2px solid $primary !important;
+    position: relative !important;
+    border-radius: 0 !important;
+    border: 0 !important;
     &:before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 60px;
-        width: 60px;
-        background-color: $text;
-        clip-path: polygon(0 50%, 0% 100%, 50% 100%);
+        content: "" !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        height: 60px !important;
+        width: 60px !important;
+        background-color: $text !important;
+        clip-path: polygon(0 50%, 0% 100%, 50% 100%) !important;
     }
 }
 
@@ -388,3 +390,23 @@ footer {
         top: -200px;
     }
 }
+
+.gform_wrapper {        
+    margin-top: 5rem;
+    input[type="text"],
+    input[type="email"] {
+        border-radius: 0;
+        border: 2px solid var(--greyscale-60, #767676);
+        &::placeholder {
+            color: var(--greyscale-60, #767676);
+            font-family: "Red Hat Mono";
+            font-size: 1.125rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.875rem;
+        }
+    }
+    .gform_heading {
+        display: none !important;
+    }
+} 
