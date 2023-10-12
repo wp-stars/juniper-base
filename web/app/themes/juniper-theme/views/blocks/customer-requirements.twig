@@ -12,51 +12,49 @@
  	SupportsMultiple: true
 #}
 
-
 <section class="customer-requirements relative my-[8rem]">
-<div class="container mx-auto">
-		<div class=" flex justify-center">
-		<img class="h-auto w-[95%] lg:w-[80%] mb-[8rem] object-cover" src={{ fields.mockup_macbook.sizes.large }}>
-		</div>
-
-		<div>
-		<h5 class="font-medium text-lg uppercase">{{fields.subheadline}}</h5>
-		<h2>{{fields.headline}}</h2>
-		
-		<div class="grid md:gap-4 grid-cols-1 md:grid-cols-2 mt-8">
-    <div>
-        {% for req in fields.requirement_list %}
-            {% if loop.index is odd %}
-                <ul class="col-span-2 md:col-span-1 mb-4 font-bold text-lg leading-7 pr-4">
-                    <li>{{ req.requirement }}</li>
-                </ul>
-            {% endif %}
-        {% endfor %}
+    <div class="container mx-auto">
+        <div class=" flex justify-center">
+            <img class="h-auto w-[95%] lg:w-[80%] mb-[8rem] object-cover" src={{ fields.mockup_macbook.sizes.large }}>
+        </div>
+        <div>
+            <h5 class="tagline">{{ fields.subheadline }}</h5>
+            <h2>{{fields.headline}}</h2>
+        
+            <div class="grid md:gap-4 grid-cols-1 md:grid-cols-2 mt-8">
+                <div>
+                    {% for req in fields.requirement_list %}
+                        {% if loop.index is odd %}
+                            <ul class="col-span-2 md:col-span-1 mb-4 leading-7 pr-4">
+                                <li>{{ req.requirement }}</li>
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {% for req in fields.requirement_list %}
+                        {% if loop.index is even %}
+                            <ul>
+                                <li class="col-span-2 md:col-span-1 mb-4 leading-7 pr-4">{{ req.requirement }}</li>
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        {% for req in fields.requirement_list %}
-            {% if loop.index is even %}
-                <ul>
-                    <li class="col-span-2 md:col-span-1  mb-4 font-bold text-lg leading-7 pr-4">{{ req.requirement }}</li>
-                </ul>
-            {% endif %}
-        {% endfor %}
+
+    <div class="absolute right-0 top-[10%] z-[-2]">
+        <svg class="svg-1" xmlns="http://www.w3.org/2000/svg" width="72" height="1690" viewBox="0 0 72 1690" fill="none">
+            <path d="M0.268745 -5.05447e-05L101.593 1689.2L484.974 176.965L0.268745 -5.05447e-05Z" fill="#093642"/>
+        </svg>
     </div>
-</div>
-		</div>
-</div>
 
-<div class="absolute right-0 top-[10%] z-[-2]">
-<svg class="svg-1" xmlns="http://www.w3.org/2000/svg" width="72" height="1690" viewBox="0 0 72 1690" fill="none">
-<path d="M0.268745 -5.05447e-05L101.593 1689.2L484.974 176.965L0.268745 -5.05447e-05Z" fill="#093642"/>
-</svg>
-</div>
-
-<div class="absolute right-0 top-[40%] z-[-2]">
-<svg class="svg-2" xmlns="http://www.w3.org/2000/svg" width="86" height="1067" viewBox="0 0 86 1067" fill="none">
-  <path d="M290.713 0.917432L0.342468 783.763L265.14 1066.23L290.713 0.917432Z" fill="#B4D43D" fill-opacity="0.6"/>
-</svg>
-</div>
+    <div class="absolute right-0 top-[40%] z-[-2]">
+        <svg class="svg-2" xmlns="http://www.w3.org/2000/svg" width="86" height="1067" viewBox="0 0 86 1067" fill="none">
+        <path d="M290.713 0.917432L0.342468 783.763L265.14 1066.23L290.713 0.917432Z" fill="#B4D43D" fill-opacity="0.6"/>
+        </svg>
+    </div>
 
 
 </section>
