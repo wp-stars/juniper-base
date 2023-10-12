@@ -25,7 +25,7 @@
                 <div>
                     {% for req in fields.requirement_list %}
                         {% if loop.index is odd %}
-                            <ul class="col-span-2 md:col-span-1 mb-4 leading-7 pr-4">
+                            <ul class="col-span-2 md:col-span-1 mb-4 pr-4">
                                 <li>{{ req.requirement }}</li>
                             </ul>
                         {% endif %}
@@ -35,7 +35,7 @@
                     {% for req in fields.requirement_list %}
                         {% if loop.index is even %}
                             <ul>
-                                <li class="col-span-2 md:col-span-1 mb-4 leading-7 pr-4">{{ req.requirement }}</li>
+                                <li class="col-span-2 md:col-span-1 mb-4 pr-4">{{ req.requirement }}</li>
                             </ul>
                         {% endif %}
                     {% endfor %}

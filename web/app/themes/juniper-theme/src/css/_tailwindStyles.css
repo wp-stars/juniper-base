@@ -1887,10 +1887,6 @@ input[type="range"]::-ms-fill-lower {
   line-height: 1.5rem;
 }
 
-.leading-7 {
-  line-height: 1.75rem;
-}
-
 .leading-9 {
   line-height: 2.25rem;
 }
