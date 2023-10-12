@@ -1,21 +1,21 @@
 {#
- 	Title: location-gender-hours
+ 	Title: Job Location/Gender/Hours
  	Description: Location, gender and hours of the job description
  	Category: formatting
  	Icon: admin-comments
  	Keywords: location gender hours job
  	Mode: edit
  	Align: full
- 	PostTypes: page post
+ 	PostTypes: jobs
  	SupportsAlign: left right full
  	SupportsMode: true
  	SupportsMultiple: true
 #}
 
 <section class="location-gender-hours mx-[1.25rem] md:mx-[0rem]"> 
-<div class="container mx-auto">
-<p class="location text-sm md:text-lg font-medium mb-[0.6rem] uppercase flex">{{fields.location}}</p>
-<p class="gender text-sm md:text-lg font-medium mb-[0.6rem] uppercase flex">M  /  W  /  D</p>
-<p class="hours text-sm md:text-lg font-medium mb-[0.6rem] uppercase flex">{{fields.hours}} Wochenstunden</p>
-</div>
+	<div class="container mx-auto">
+		<p class="location text-sm md:text-lg mb-[0.6rem] uppercase flex">{{ fields.location }}</p>
+		<p class="gender text-sm md:text-lg mb-[0.6rem] uppercase flex">M  /  W  /  D</p>
+		<p class="hours text-sm md:text-lg mb-[0.6rem] uppercase flex">{{ fields.hours }} Wochenstunden</p>
+	</div>
 </section>
