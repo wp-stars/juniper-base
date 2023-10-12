@@ -32,6 +32,6 @@
 .job-facts-outer .salary-value {
     font-size: 60px;
     line-height: 66px; 
-    font: 'Red Hat Display';
+    font-family: 'Red Hat Display';
     font-weight: 700;
 }
