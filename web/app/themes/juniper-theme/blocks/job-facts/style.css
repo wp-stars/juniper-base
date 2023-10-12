@@ -23,3 +23,15 @@
     padding-left: 35px;
     padding-bottom: 0.75rem;
 }
+
+.job-facts-outer .salary-label {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.job-facts-outer .salary-value {
+    font-size: 60px;
+    line-height: 66px; 
+    font: 'Red Hat Display';
+    font-weight: 700;
+}

@@ -11,12 +11,12 @@ $black: #1E1E1E;
 
 /* General styles */
 body {
-    font-family: 'Red Hat Mono';
+    color: #1e1e1e;
+    font-family: "Red Hat Mono";
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    color: rgba(9, 54, 66, 1);
+    line-height: 1.875rem;
 }
 
 .content-wrapper {
@@ -33,61 +33,55 @@ h1 {
 
 h2 {
     color: var(--primary-petrol-dark, #093642);
-    /* Desktop/Headline2 */
     font-family: "Red Hat Display";
     font-size: 3.125rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 4.125rem; /* 132% */
+    line-height: 4.125rem;
 }
 
 h3 {
     color: var(--primary-petrol-dark, #093642);
-    /* Desktop/Headline3 */
     font-family: "Red Hat Mono";
     font-size: 2.25rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 3rem; /* 133.333% */
+    line-height: 3rem;
 }
 
 h4 {
-    /* Desktop/Headline4 */
     font-family: "Red Hat Mono";
     font-size: 1.75rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 2.75rem; /* 157.143% */
+    line-height: 2.75rem;
 }
 
 h6 {
     color: var(--primary-petrol-dark, #093642);
-    /* Desktop/Headline6 */
     font-family: "Red Hat Mono";
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 2.0625rem; /* 165% */
+    line-height: 2.0625rem;
 }
 
 
 .description {
     color: var(--primary-petrol-dark, #093642);
-    /* Desktop/Description */
     font-family: "Red Hat Mono";
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 1.125rem; /* 128.571% */
+    line-height: 1.125rem;
 }
 
 .tagline {
-    /* Desktop/SubHeadline */
     font-family: "Red Hat Mono";
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 1.875rem; /* 150% */
+    line-height: 1.875rem;
     text-transform: uppercase;
 }
 
@@ -105,7 +99,7 @@ h6 {
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 1.875rem; /* 150% */
+    line-height: 1.875rem;
     text-transform: uppercase;
 } 
 
@@ -115,7 +109,7 @@ h6 {
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 1.875rem; /* 214.286% */
+    line-height: 1.875rem;
     text-transform: none;
 }
 
