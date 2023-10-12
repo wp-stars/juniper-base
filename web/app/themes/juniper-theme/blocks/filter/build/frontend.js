@@ -2339,7 +2339,7 @@ const Filter = data => {
       type: "button",
       onClick: e => updateFilterVals(e, term.term_id)
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${isActive ? 'bg-accent' : 'bg-light'} h-full`
+      className: `${isActive ? 'bg-accent' : 'bg-light'} h-full p-[0.375rem] flex`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: term.fields.svg_icon,
       alt: "Term Icon"

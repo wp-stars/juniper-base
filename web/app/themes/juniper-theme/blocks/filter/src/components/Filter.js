@@ -55,7 +55,7 @@ const Filter = ( data ) => {
                             let isActive = selectedFilterVals.includes(term.term_id)
                             return (
                                 <button key={index} className={`filter-btn w-fit inline-flex ${isActive ? 'active' : ''}`} type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>
-                                    <span className={`${isActive ? 'bg-accent' : 'bg-light'} h-full`}><img src={term.fields.svg_icon} alt="Term Icon" /></span>
+                                    <span className={`${isActive ? 'bg-accent' : 'bg-light'} h-full p-[0.375rem] flex`}><img src={term.fields.svg_icon} alt="Term Icon" /></span>
                                     <span className="btn-inner">{term.name}</span>
                                     {isActive ? 
                                         <span className="remove-term" onClick={(event) => removeTerm(event, term.term_id)}>
