@@ -11,12 +11,12 @@ $black: #1E1E1E;
 
 /* General styles */
 body {
-    color: #1e1e1e;
     font-family: "Red Hat Mono";
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 1.875rem;
+    color: #1e1e1e; 
+    line-height: 30px;
 }
 
 .content-wrapper {
@@ -29,10 +29,11 @@ h1 {
     font-weight: 700;
     font-size: 90px;
     line-height: 110px;
+    color: $black;
 }
 
 h2 {
-    color: var(--primary-petrol-dark, #093642);
+    color: $black;
     font-family: "Red Hat Display";
     font-size: 3.125rem;
     font-style: normal;
@@ -41,7 +42,7 @@ h2 {
 }
 
 h3 {
-    color: var(--primary-petrol-dark, #093642);
+    color: $text;
     font-family: "Red Hat Mono";
     font-size: 2.25rem;
     font-style: normal;
@@ -78,11 +79,13 @@ h6 {
 
 .tagline {
     font-family: "Red Hat Mono";
-    font-size: 1.25rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 1.875rem;
     text-transform: uppercase;
+    color: #1e1e1e;
+    font-weight: 600;
+    font-size: 20px; 
+    line-height: 30px;
 }
 
 .admin-bar header {
