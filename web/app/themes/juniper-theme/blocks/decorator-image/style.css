@@ -1,0 +1,26 @@
+.decorator-image .img-content {
+    object-fit: cover;
+    position: absolute;
+    right: -250px;
+    top: -50px;
+    height: 600px;
+    width: 600px;
+}
+
+.decorator-image .img-content .img-triangle {
+    right: 100px;
+    top: 250px;
+}
+
+.decorator-image .img-content .content-image {
+    clip-path: polygon(20% 0, 100% 20%, 80% 100%, 0 80%);
+    position: relative;
+    z-index: 3;
+    background-size: cover;
+}
+
+.decorator-image .img-content .content-image {
+    height: 600px;
+    width: 600px;
+    background-repeat: no-repeat;
+}

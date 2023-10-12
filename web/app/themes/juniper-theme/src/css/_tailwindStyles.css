@@ -979,6 +979,10 @@ input[type="range"]::-ms-fill-lower {
   top: 40%;
 }
 
+.top-40 {
+  top: 10rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -989,6 +993,10 @@ input[type="range"]::-ms-fill-lower {
 
 .z-\[-2\] {
   z-index: -2;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .col-span-1 {
