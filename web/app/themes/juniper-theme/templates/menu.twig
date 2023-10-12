@@ -1,5 +1,5 @@
 {% if menu %}
-	<ul class="flex flex-col gap-10 font-medium p-4 md:p-0 mt-4 md:flex-row md:mt-0 md:border-0 {{ name }}">
+	<ul class="flex flex-col {% if name == 'primary-menu' %}gap-10{% else %}gap-5{% endif %} font-medium p-4 md:p-0 mt-4 md:flex-row md:mt-0 md:border-0 {{ name }}">
 		{% for item in items %}
 			<li class="group relative dropdown {{ item.classes | join(' ') }}">
 				<a class="block p-4 bg-transparent" target="{{ item.target }}" href="{{ item.link }}">
