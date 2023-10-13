@@ -16,14 +16,24 @@
 							<a href="{{site.url}}" class="flex items-center">
 								<img src="{{ logo }}" class="min-w-[150px] mr-3" alt="{{site.name}}" />
 							</a>
-							<div class="flex flex-col items-end md:order-2">
-								<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+							<button id="navbarToggler" data-collapse-toggle="menu-wrapper" type="button" class="inline-flex items-center p-2 lg:hidden" aria-controls="menu-wrapper" aria-expanded="false">
+								<span class="sr-only">Open main menu</span>
+								<svg class="w-[2.625rem] h-[1.4375rem]" xmlns="http://www.w3.org/2000/svg" width="42" height="23" viewBox="0 0 42 23" fill="none">
+									<rect width="42" height="5" fill="#B4D43D"/>
+									<rect x="13" y="9" width="29" height="5" fill="#B4D43D"/>
+									<rect x="5" y="18" width="37" height="5" fill="#B4D43D"/>
+								</svg>
+							</button>
+							<div id="menu-wrapper" class="flex flex-col items-end md:order-2 hidden w-full md:w-fit">
+								<div class="items-center justify-between w-full flex-col order-3 md:flex-row md:flex md:w-auto md:order-1">
 									{% include "menu.twig" with {'items': secondary_menu.get_items, 'name': 'secondary-menu' } %}
 								</div>
-								<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-2">
+								<hr class="border-top-white border-2 flex w-full md:hidden order-2" />
+								<div class="items-center justify-between w-full flex-col order-1 md:flex-row md:flex md:w-auto md:order-2">
 									{% include "menu.twig" with {'items': primary_menu.get_items, 'name': 'primary-menu'} %}
 								</div>
 							</div>
+							
 						</div>
 					</nav>
 				</div>

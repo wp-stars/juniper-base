@@ -8,3 +8,14 @@ const toggleNavbar = (event) => {
 } 
 
 document.addEventListener("scroll", toggleNavbar)
+
+
+const toggleMenu = () => {
+    document.querySelector(".navbar").classList.toggle("bg-dark")
+    document.querySelector(".navbar").classList.toggle("bg-opacity-80")
+}
+
+let navbarToggler = document.querySelector('#navbarToggler')
+navbarToggler.addEventListener('click', () => {
+    toggleMenu()
+}) 

@@ -397,7 +397,8 @@ footer {
     margin-top: 5rem !important;
     width: 100% !important;
     input[type="text"],
-    input[type="email"] {
+    input[type="email"],
+    textarea {
         border-radius: 0 !important;
         border: 2px solid var(--greyscale-60, #767676)  !important;
         &::placeholder {
@@ -411,6 +412,10 @@ footer {
     }
     .gform_heading {
         display: none !important;
+    }
+
+    .gform_button.button {
+        width: 100%;
     }
 } 
 
