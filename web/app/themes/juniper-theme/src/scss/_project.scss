@@ -150,7 +150,7 @@ h6 {
     border: 2px solid $primary !important;
     position: relative !important;
     border-radius: 0 !important;
-    border: 0 !important;
+    border: 2px solid $primary !important;
     &:before {
         content: "" !important;
         position: absolute !important;
@@ -412,3 +412,11 @@ footer {
         display: none !important;
     }
 } 
+
+.page-404 {
+    .header-bg {
+        height: 200px;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 56%, 0 70%);
+        clip-path: polygon(0 0, 100% 0, 100% 96%, 0 70%);
+    }
+}
