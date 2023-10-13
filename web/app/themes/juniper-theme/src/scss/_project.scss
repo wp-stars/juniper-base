@@ -394,18 +394,19 @@ footer {
 }
 
 .gform_wrapper {        
-    margin-top: 5rem;
+    margin-top: 5rem !important;
+    width: 100% !important;
     input[type="text"],
     input[type="email"] {
-        border-radius: 0;
-        border: 2px solid var(--greyscale-60, #767676);
+        border-radius: 0 !important;
+        border: 2px solid var(--greyscale-60, #767676)  !important;
         &::placeholder {
-            color: var(--greyscale-60, #767676);
-            font-family: "Red Hat Mono";
-            font-size: 1.125rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 1.875rem;
+            color: var(--greyscale-60, #767676) !important;
+            font-family: "Red Hat Mono" !important;
+            font-size: 1.125rem !important;
+            font-style: normal !important;
+            font-weight: 500 !important;
+            line-height: 1.875rem !important;
         }
     }
     .gform_heading {

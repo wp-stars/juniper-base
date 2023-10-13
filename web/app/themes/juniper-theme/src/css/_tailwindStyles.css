@@ -1369,10 +1369,6 @@ input[type="range"]::-ms-fill-lower {
   width: 100vw;
 }
 
-.w-\[500px\] {
-  width: 500px;
-}
-
 .w-\[60vw\] {
   width: 60vw;
 }
@@ -1408,6 +1404,10 @@ input[type="range"]::-ms-fill-lower {
 
 .min-w-\[300px\] {
   min-width: 300px;
+}
+
+.min-w-\[500px\] {
+  min-width: 500px;
 }
 
 .max-w-\[300px\] {
