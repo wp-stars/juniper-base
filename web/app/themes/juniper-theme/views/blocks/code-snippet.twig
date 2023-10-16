@@ -11,9 +11,8 @@
  	SupportsMode: true
  	SupportsMultiple: true
 #}
-<section class="code-snippet ">
-	<div class="code-snippet-background"></div>
-	<div class="container mx-auto pt-[10rem]">
+<section class="code-snippet">
+	<div class="container mx-auto py-[10rem]">
 		<h2 class="mb-6 text-white">{{fields.title}}</h2>
 		<div class="w-[65vw] text-white">{{fields.description}}</div>
 		<div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 mt-[6rem]">
@@ -22,7 +21,7 @@
 					<img class="w-96 h-auto object-cover" src={{ fields.image.sizes.large }}></div>
 			</div>
 			<div class="col-span-2 mt-20">
-				<p class="text-white">{{ fields.code_snippet }}</p>
+				<div class="text-white">{{ fields.code_snippet }}</div>
 			</div>
 		</div>
 	</div>
