@@ -444,12 +444,12 @@ footer {
     height: 505px;
     background: $text;
     .asterisk {
-        height: 800px;
-        width: 600px;
+        height: 400px;
+        width: 400px;
         background-size: cover;
         background-repeat: no-repeat;
-        opacity: 0.2;
-        top: -200px;
+        top: 180px;
+        right: 0;    
     }
 }
 
@@ -477,6 +477,15 @@ footer {
     .gform_button.button {
         width: 100% !important;
     }
+
+    .gfield_consent_label {
+        font-family: "Red Hat Mono";
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.125rem;
+    }
+  
 } 
 
 .page-404 {
