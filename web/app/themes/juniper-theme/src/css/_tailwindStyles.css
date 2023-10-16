@@ -1854,6 +1854,10 @@ input[type="range"]::-ms-fill-lower {
   padding-bottom: 10rem;
 }
 
+.pb-\[3rem\] {
+  padding-bottom: 3rem;
+}
+
 .pl-3 {
   padding-left: 0.75rem;
 }

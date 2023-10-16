@@ -17,7 +17,7 @@
 {% set textdirection = (fields.style == 'darktriangle') or (fields.style == 'imgbottomright') or (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') ? 'textleft' : 'textright' %}
 
 
-<div class="split-text-img w-full relative py-28 {{textdirection}} {% if fields.style == 'dark' %} text-white dark-style {% endif %} {% if fields.style == 'imgtopright' %} pt-[3rem] {% endif %}">
+<div class="split-text-img w-full relative py-28 {{textdirection}} {% if fields.style == 'dark' %} text-white dark-style {% endif %} {% if fields.style == 'imgtopright' %} pt-[3rem] pb-[3rem] {% endif %}">
 	<div class="bg-dark absolute background {% if fields.style == 'dark' %} fullscreen-background {% endif %} "></div>
 
 		{# dark triangle SVG on right side #}
