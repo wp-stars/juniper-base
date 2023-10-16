@@ -483,11 +483,11 @@ footer {
     }
 
     .gfield_consent_label {
-        font-family: "Red Hat Mono";
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 1.125rem;
+        font-family: "Red Hat Mono" !important;
+        font-size: 0.875rem !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        line-height: 1.125rem !important;
     }
   
 } 
