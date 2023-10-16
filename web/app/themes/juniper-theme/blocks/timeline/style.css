@@ -26,12 +26,11 @@
 
 .timeline-item .timeline-text {
     color: var(--primary-green, #B4D43D);
-    /* Desktop/Headline3 */
     font-family: "Red Hat Mono";
     font-size: 2.25rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 3rem; /* 133.333% */
+    line-height: 3rem;
 }
 
 .timeline .side-image {
