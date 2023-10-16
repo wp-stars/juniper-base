@@ -1553,10 +1553,6 @@ input[type="range"]::-ms-fill-lower {
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
-.grid-rows-3 {
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-}
-
 .flex-row {
   flex-direction: row;
 }
@@ -1885,10 +1881,6 @@ input[type="range"]::-ms-fill-lower {
 
 .pr-4 {
   padding-right: 1rem;
-}
-
-.pt-\[10rem\] {
-  padding-top: 10rem;
 }
 
 .pt-\[3rem\] {
