@@ -11,6 +11,10 @@ $small: 640px;
     color: $text;
 }
 
+.text-white {
+    color: $white !important;
+}
+
 /* General styles */
 body {
     font-family: "Red Hat Mono";
@@ -95,7 +99,7 @@ h6 {
     line-height: 1.125rem;
 }
 
-.tagline:not(.text-white) {
+.tagline {
     font-family: "Red Hat Mono";
     font-style: normal;
     font-weight: 600;

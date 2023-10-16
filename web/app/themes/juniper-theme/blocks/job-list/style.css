@@ -6,14 +6,14 @@
     background: var(--primary-petrol-dark, #093642);
 }
 
-/* .job:not(:last-child) {
-    border-bottom: 3px solid #fff;
-} */
-
 .job-list .separator {
     border-top-width: 6px;
 }
 
 .job-list .btn {
     left: -60px;
+}
+
+.job-list .location {
+    font-size: 1.25rem;
 }
