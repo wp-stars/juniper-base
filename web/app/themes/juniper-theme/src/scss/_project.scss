@@ -97,6 +97,7 @@ h6 {
     font-style: normal;
     font-weight: 500;
     line-height: 1.125rem;
+    color: $text;
 }
 
 .tagline {
@@ -152,12 +153,12 @@ h6 {
 * Custom Utilities
  */
 
-.btn-primary:not(.hidden),
+.btn-primary,
 .gform_button[type="submit"] {
     background-color: $primary !important;
     box-sizing: border-box !important;
 
-    display: flex !important;
+    display: flex;
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;

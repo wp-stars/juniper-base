@@ -35,7 +35,7 @@
 		{% endif %}
 	
 	<div class="container mx-auto relative">
-		<div class="flex flex-col sm:flex-row {% if textdirection == 'textleft' %} flex-row-reverse {% endif %} ">
+		<div class="flex flex-col {% if textdirection == 'textleft' %} sm:flex-row-reverse {% else %} sm:flex-row {% endif %} ">
 			<div class="img-wrapper sm:w-1/2">
 				<div class="img-content flex justify-center">
 					{% if fields.style == 'dark' %}

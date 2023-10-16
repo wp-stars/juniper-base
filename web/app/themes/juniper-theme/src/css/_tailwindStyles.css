@@ -1280,10 +1280,6 @@ input[type="range"]::-ms-fill-lower {
   display: inline;
 }
 
-.\!flex {
-  display: flex !important;
-}
-
 .flex {
   display: flex;
 }
@@ -2166,6 +2162,10 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:flex-row {
     flex-direction: row;
+  }
+
+  .sm\:flex-row-reverse {
+    flex-direction: row-reverse;
   }
 
   .sm\:p-0 {
