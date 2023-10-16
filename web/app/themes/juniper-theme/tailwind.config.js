@@ -14,12 +14,16 @@ module.exports = {
     container: {
       center: true,
       screens: {
-        sm: '600px',
+        sm: '540px',
         md: '728px',
         lg: '984px',
         xl: '1000px',
         '2xl': '1200px',
       },
+      padding: {
+        DEFAULT: '1.25rem',
+        sm: '0'
+      }
     },
     extend: {
       colors: {

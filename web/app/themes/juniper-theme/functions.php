@@ -153,19 +153,17 @@ add_action( 'after_setup_theme', 'wps_juniper_register_nav_menu', 0 );
 
 add_filter( 'timber/context', 'wps_add_to_context' );
 function wps_add_to_context( $context ) {
-
-    $custom_logo_id = get_theme_mod( 'custom_logo' );
-    $logo = wp_get_attachment_image_url( $custom_logo_id , 'full' );
-    $context['logo'] = $logo;
-
-    $upload_dir = wp_upload_dir();
-    $context['uploads'] = $upload_dir;
-
-    $context['theme_dir'] = get_stylesheet_directory_uri();
-
-    $context['primary_menu'] = new \Timber\Menu( 'primary-menu' );
-    $context['secondary_menu'] = new \Timber\Menu( 'secondary-menu' );
-    $context['footer_menu'] = new \Timber\Menu( 'footer-menu' );
+    $custom_logo_id              = get_theme_mod( 'custom_logo' );
+    $logo                        = wp_get_attachment_image_url( $custom_logo_id , 'full' );
+    $context['logo']             = $logo;
+    $upload_dir                  = wp_upload_dir();
+    $context['uploads']          = $upload_dir;
+    $context['theme_dir']        = get_stylesheet_directory_uri();
+    $context['primary_menu']     = new \Timber\Menu( 'primary-menu' );
+    $context['secondary_menu']   = new \Timber\Menu( 'secondary-menu' );
+    $context['footer_menu']      = new \Timber\Menu( 'footer-menu' );
+    $context['title']            = get_the_title();
+    $context['default_bg_image'] = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
 
     return $context;
 }

@@ -12,12 +12,12 @@
  	SupportsMultiple: true
 #}
 <div class="container my-12 mx-auto cardgrid">
-	<div class="max-w-[70%]">
+	<div class="w-full sm:max-w-[70%]">
 		<p class="uppercase bold">{{ fields.subtitle }}</p>
 		<h2>{{ fields.title }}</h2>
 		<p class="my-10">{{ fields.intro }}</p>
 	</div>
-	<div class="grid grid-cols-2 gap-6 cards">
+	<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 cards">
 		{% for card in fields.cards %}
 			<div class="min-w-[100%] flex flex-col max-w-sm p-8 border border-4 border-dark card {% if loop.index is odd %}odd {% else %}even {% endif %}">
 				<img class="w-fit mb-10" src="{{ card.card_image}}" alt="{{ card.card_title}}" />
