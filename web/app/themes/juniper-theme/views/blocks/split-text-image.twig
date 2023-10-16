@@ -54,16 +54,15 @@
 							{% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} mt-[13rem] mb-12 ml-12 {% endif %} 
 							{% if fields.style == 'imgleft' %} ml-[-10vw] {% endif %}
 							">
-					<h5 class="tagline text-white">{{ fields.intro_title }}</h5>
+					<p class="tagline {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.intro_title }}</p>
 					<h2 class="mb-4">{{ fields.title }}</h2>
 					<h3 class="mb-8 {% if fields.style == 'dark' %} text-primary {% endif %}">{{ fields.subtitle }}</h3>
 					<p class="mb-12 {% if fields.style == 'dark' %}text-white{% endif %} {% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} w-[60vw] {% endif %}">{{ fields.content }}</p>
 
 					{# only show button if link text is set #}
-					{% if fields.link_text %}
+					{% if fields.link %}
 						<div class="flex">
-							<a class="btn {% if fields.style == 'dark' %} btn-transparent border-b-4 border-stone-50 text-stone-50 text-lg{% else %} btn-primary {% endif %} w-fit flex items-center" href="{{ fields.link_value }}">{{ fields.link_text }}</a>
-							<span class="{% if fields.style == 'dark' %} btn-arw pl-5 {% endif %}"></span>
+							<a class="btn {% if fields.link_style == 'primary' %} btn-primary {% elseif fields.link_style == 'arrowdark' %} btn-underline {% else %} btn-underline-white {% endif %} w-fit" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
 						</div>
 					{% endif %}
 

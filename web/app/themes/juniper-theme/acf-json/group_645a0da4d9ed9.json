@@ -138,11 +138,11 @@
             "placeholder": ""
         },
         {
-            "key": "field_646caed07a8c3",
-            "label": "Link Text",
-            "name": "link_text",
+            "key": "field_652d4ae7febd3",
+            "label": "Link",
+            "name": "link",
             "aria-label": "",
-            "type": "text",
+            "type": "link",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -151,18 +151,14 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "return_format": "array"
         },
         {
-            "key": "field_646caedd7a8c4",
-            "label": "Link Value",
-            "name": "link_value",
+            "key": "field_652d4b2ab11fb",
+            "label": "Link Style",
+            "name": "link_style",
             "aria-label": "",
-            "type": "text",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -171,11 +167,18 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "choices": {
+                "primary": "Primary",
+                "arrowlight": "Arrow Light",
+                "arrowdark": "Arrow Dark"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -196,5 +199,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1696335368
+    "modified": 1697467232
 }
