@@ -1260,6 +1260,10 @@ input[type="range"]::-ms-fill-lower {
   margin-top: auto;
 }
 
+.mb-\[6\.25rem\] {
+  margin-bottom: 6.25rem;
+}
+
 .block {
   display: block;
 }
