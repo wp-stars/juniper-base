@@ -54,9 +54,9 @@
 							{% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} mt-[13rem] mb-12 ml-12 {% endif %} 
 							{% if fields.style == 'imgleft' %} ml-[-10vw] {% endif %}
 							">
-					<h5 class="text-xl font-bold uppercase">{{ fields.intro_title }}</h5>
-					<h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">{{ fields.title }}</h2>
-					<h3 class="text-xl font-bold mb-8 {% if fields.style == 'dark' %} text-primary {% else %} text-cyan-950 md:text-4xl {% endif %}">{{ fields.subtitle }}</h3>
+					<h5 class="tagline text-white">{{ fields.intro_title }}</h5>
+					<h2 class="mb-4">{{ fields.title }}</h2>
+					<h3 class="mb-8 {% if fields.style == 'dark' %} text-primary {% endif %}">{{ fields.subtitle }}</h3>
 					<p class="mb-12 {% if fields.style == 'dark' %}text-white{% endif %} {% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} w-[60vw] {% endif %}">{{ fields.content }}</p>
 
 					{# only show button if link text is set #}

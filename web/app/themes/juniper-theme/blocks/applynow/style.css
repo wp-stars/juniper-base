@@ -2,6 +2,10 @@
     position: relative;
 }
 
+.applynow img {
+    object-fit: cover;
+}
+
 .applynow .img-content {
     object-fit: cover;
     position: absolute;
