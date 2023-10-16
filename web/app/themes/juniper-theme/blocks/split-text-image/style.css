@@ -82,13 +82,13 @@
 
 .img-top-right {
     position: absolute;
-    right: -25rem;
-    top: -25rem;
-    width: 55rem;
+    right: -15rem;
+    top: -15rem;
+    width: 40rem;
     height: 40rem;
     background-size: cover;
     transform: rotate(-7deg);
-    box-shadow: -10px 15px 0px 0px #B4D43D;
+    box-shadow: -25px 25px 0px 0px #B4D43D;
     z-index: -2;
 }
 

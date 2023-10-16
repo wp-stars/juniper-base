@@ -1425,10 +1425,6 @@ input[type="range"]::-ms-fill-lower {
   width: 2.625rem;
 }
 
-.w-\[60vw\] {
-  width: 60vw;
-}
-
 .w-\[65vw\] {
   width: 65vw;
 }

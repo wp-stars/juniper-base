@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_646caeb27a8c2",
-            "label": "Intro Title",
+            "label": "Tagline",
             "name": "intro_title",
             "aria-label": "",
             "type": "text",
@@ -199,5 +199,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1697467232
+    "modified": 1697467742
 }
