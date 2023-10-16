@@ -27,12 +27,12 @@
 	{% endif %}
 	<div class="container mx-auto relative">
 		<div class="w-full inline-flex {{ fields.style }}">
-			<div class="w-1/2 max-w-[600px] inner {{ fields.text_align }}">
+			<div class="w-full sm:w-1/2 max-w-[600px] inner {{ fields.text_align }}">
 				<p class="tagline">{{ fields.tagline }}</p>
 				<h3 class="mb-4 text-5xl">{{ fields.title }}</h3>
 				<div class="inline-flex">
 					{% if fields.contact_image %}
-						<img class="mr-3" src="{{ fields.contact_image }}" />
+						<img class="w-[142px] h-[142px] sm:w-[282px] sm:h-[338px] mr-3" src="{{ fields.contact_image }}" />
 					{% endif %}
 					<div class="flex flex-col justify-end">
 						{% if fields.contact_name %}
@@ -53,7 +53,7 @@
 				</div>
 				<a class="btn btn-primary {{ fields.button_width }}" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
 			</div>
-			<div class="img-content">
+			<div class="hidden sm:flex img-content">
 				<div class="img-decoration"></div>					
 				<div class="content-image" style="background-image: url('{{ fields.image }}');"></div>
 			</div>

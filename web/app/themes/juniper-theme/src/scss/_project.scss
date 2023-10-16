@@ -76,6 +76,13 @@ h6 {
         font-weight: 700;
         line-height: 3.375rem;
     }
+
+    h3 {
+        font-size: 1.375rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 2rem; 
+    }
     
 }
 
@@ -141,7 +148,7 @@ h6 {
 * Custom Utilities
  */
 
-.btn-primary,
+.btn-primary:not(.hidden),
 .gform_button[type="submit"] {
     background-color: $primary !important;
     box-sizing: border-box !important;
@@ -393,6 +400,39 @@ h6 {
                 }
             }
 
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .swiper-pagination {
+            transform: rotate(-15deg);
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            right: unset;
+            left: 36px;
+            top: 60px;
+            height: 100px;
+            .swiper-pagination-bullet {
+                background: $text;
+                border: 4px solid $text;
+                position: relative;
+                width: 1.75rem;
+                height: 1.75rem;
+                margin-bottom: 200px;
+                opacity: unset;
+                &:not(:last-child):after {
+                    content: "";
+                    transform: rotate(0);
+                    position: absolute;
+                    border: 4px solid #093642;
+                    width: 120px;
+                    height: 1px;
+                    top: 6px;
+                    left: 20px;
+                }
+            }
         }
     }
 }

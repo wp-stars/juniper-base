@@ -57,10 +57,10 @@
 }
 
 .blog-slider-background {
-    height: 1000px;
+    height: 100%;
     width: 200%;
     transform: rotate(-5deg);
-    top: 100px;
+    top: 50px;
     left: -50%;
     min-height: 500px;
     border-top: 12px solid var(--primary-green, #B4D43D);

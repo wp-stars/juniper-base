@@ -18,12 +18,12 @@
 		<div class="container min-h-[600px] py-32 mx-auto slider relative">
 			<div class="grid grid-cols-1 sm:grid-cols-12 gap-8">
 				{% if fields.split_slider_static_items.slider_side == "right" %}
-					<div class="left col-span-6 text-white h-full flex flex-col justify-center">
+					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col justify-center">
 						<h2 class="text-white mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
 						<div class="mb-12 intro-text">{{ fields.split_slider_static_items.text }}</div>
 						<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
 					</div>
-					<div class="right col-span-6">
+					<div class="right col-span-12 sm:col-span-6">
 						{% if fields.split_slider_static_items.tagline_over_slider %}
 							<p class="tagline text-white">{{ fields.split_slider_static_items.tagline_over_slider }}</p>
 						{% endif %}
@@ -74,7 +74,7 @@
 						</div>
 					</div>
 				{% else %}
-					<div class="left col-span-4">
+					<div class="left col-span-12 sm:col-span-4">
 						<div class="swiper split-swiper-{{ instance }}">
 							<div class="swiper-wrapper">
 								{% for slide in fields.split_slider_items %}
@@ -118,7 +118,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="right text-white h-full flex flex-col justify-center col-span-8">
+					<div class="right text-white h-full flex flex-col justify-center col-span-12 sm:col-span-8">
 						<h2 class="text-white mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
 						<div class="mb-12 intro-text">{{ fields.split_slider_static_items.text }}</div>
 						{% if fields.split_slider_static_items.link %}
@@ -162,13 +162,13 @@
 	</div>
 {% endif %}
 {% if fields.style == "timeline" %}
-	<div class="container h-[800px] my-12 mx-auto timeline-slider timeline-slider-{{ instance }}">
+	<div class="container h-[1000px] sm:h-[800px] my-20 mx-auto timeline-slider timeline-slider-{{ instance }}">
 		<div class="swiper grid grid-cols-1 sm:grid-cols-12 swiper">
-			<div class="col-span-4 relative">
+			<div class="col-span-12 sm:col-span-4 relative">
 				<div class="swiper-pagination relative">
 				</div>
 			</div>
-			<div class="swiper-wrapper col-span-7">
+			<div class="swiper-wrapper col-span-11 sm:col-span-7">
 				{% for item in fields.timeline_slider_items %}
 					<div class="timeline-slide w-full flex flex-col items-start justify-center swiper-slide">
 						<p class="bold bg-dark text-primary p-4 text-4xl bold mb-10">{{ loop.index }}.</p>
@@ -212,7 +212,7 @@
 {% endif %}
 
 {% if fields.style == "simple" %}
-	<div class="container my-12 mx-auto slider simple-swiper-{{ instance }}">
+	<div class="container my-20 mx-auto slider simple-swiper-{{ instance }}">
 		<div class="simple-slider relative">
 			<p>{{ fields.simple_slider_static_items.tagline }}</p>
 			<h2 class="mb-20">{{ fields.simple_slider_static_items.title }}</h2>
@@ -332,21 +332,24 @@
 {% if fields.style == "blog" %}
 	<div class="relative w-100 blog-slider blog-swiper-outer blog-swiper-{{ instance }}">
 		<div class="absolute blog-slider-background background"></div>
-		<div class="container mx-auto min-h-[500px] py-40">
+		<div class="container mx-auto min-h-[1000px] sm:min-h-[500px] py-20 sm:py-40">
 			<div class="w-full text-center mb-20">
 				<h2 class="text-white">{{ fields.blog_slider_static_items.title }}</h2>
 				<div class="text-white">{{ fields.blog_slider_static_items.intro }}</div>
 			</div>
+			<a class="!flex sm:hidden btn btn-primary w-fit mx-auto mb-12" href="{{ fields.blog_slider_static_items.link.url }}">
+				{{ fields.blog_slider_static_items.link.title }}
+			</a>
 			<div class="grid grid-cols-1 mx-auto">
 				<div class="swiper min-h-[500px] relative">
 					<div class="swiper-wrapper">
 						{% for blog_item in fields.blog_slider_items %}
 							<div class="swiper-slide h-full">
-								<div class="blog-slider-inner w-full mx-auto h-100 inline-flex h-full">
-									<div class="w-5/12 image-wrapper">
+								<div class="blog-slider-inner w-full mx-auto h-100 flex flex-col sm:inline-flex sm:flex-row h-full">
+									<div class="w-full sm:w-5/12 image-wrapper">
 										{{ blog_item.slide_image }}
 									</div>
-									<div class="bg-light w-7/12 flex flex-col justify-center text-left px-3 text-primary">
+									<div class="bg-light w-full sm:w-7/12 flex flex-col justify-center text-left p-10 sm:p-0 sm:px-3 text-primary">
 										<h3 class="mb-8">{{ blog_item.post_title }}</h3>
 										<p class="description mb-4">{{ blog_item.author }} // {{ blog_item.date }}</p>
 										<div class="text mb-12">{{ blog_item.excerpt }}</div>
@@ -374,9 +377,9 @@
 					</div>
 					<div class="swiper-pagination"></div>
 				</div>
-				<div class="btn btn-primary w-fit mx-auto">
-					Alle Blogartikel ansehen
-				</div>
+				<a class="hidden sm:flex btn btn-primary w-fit mx-auto" href="{{ fields.blog_slider_static_items.link.url }}">
+					{{ fields.blog_slider_static_items.link.title }}
+				</a>
 
 				<!-- Initialize Swiper -->
 				<script>

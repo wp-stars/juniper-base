@@ -766,6 +766,22 @@
                     "toolbar": "full",
                     "media_upload": 1,
                     "delay": 0
+                },
+                {
+                    "key": "field_652d063ad2da2",
+                    "label": "Blog Link",
+                    "name": "blog_link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
                 }
             ]
         },
@@ -823,5 +839,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1697016255
+    "modified": 1697449543
 }

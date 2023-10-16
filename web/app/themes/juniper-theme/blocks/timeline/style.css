@@ -47,8 +47,7 @@
     overflow: hidden;
     height: 800px;
     width: 800px; 
-    /* clip-path: polygon(45% 0, 100% 45%, 55% 100%, 0 55%); */
-    clip-path: polygon(46% 0, 100% 38%, 100% 100%, 46% 100%, 0 61%);
+    clip-path: polygon(20% 0, 100% 20%, 80% 100%, 0 80%);
     position: relative;
 }
 
@@ -61,12 +60,12 @@
 .timeline .side-image::before {
     content: "";
     display: block;
-    transform: rotate(35deg);
-    height: 655px;
-    width: 887px;
-    background-color: #093642;
+    clip-path: polygon(20% 0, 100% 20%, 80% 100%, 0 80%);
+    height: 800px;
+    width: 800px;
+    background-color: var(--primary-green, #B4D43D);
     position: absolute;
     z-index: -1;
-    top: 184px;
-    left: 150px;
+    top: -20px;
+    left: -15px;
 }
