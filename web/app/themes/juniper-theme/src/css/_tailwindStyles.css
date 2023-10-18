@@ -1823,6 +1823,11 @@ input[type="range"]::-ms-fill-lower {
   padding-bottom: 2.5rem;
 }
 
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -1856,11 +1861,6 @@ input[type="range"]::-ms-fill-lower {
 .py-\[10rem\] {
   padding-top: 10rem;
   padding-bottom: 10rem;
-}
-
-.py-12 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
 }
 
 .pb-\[3rem\] {
@@ -2067,14 +2067,6 @@ input[type="range"]::-ms-fill-lower {
     position: absolute;
   }
 
-  .sm\:order-1 {
-    order: 1;
-  }
-
-  .sm\:order-2 {
-    order: 2;
-  }
-
   .sm\:order-first {
     order: -9999;
   }
@@ -2139,12 +2131,12 @@ input[type="range"]::-ms-fill-lower {
     width: 58.333333%;
   }
 
-  .sm\:w-\[282px\] {
-    width: 282px;
-  }
-
   .sm\:w-96 {
     width: 24rem;
+  }
+
+  .sm\:w-\[282px\] {
+    width: 282px;
   }
 
   .sm\:max-w-\[600px\] {
@@ -2180,14 +2172,14 @@ input[type="range"]::-ms-fill-lower {
     padding-right: 0.75rem;
   }
 
-  .sm\:py-40 {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
-
   .sm\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+
+  .sm\:py-40 {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
   }
 
   .sm\:leading-3 {

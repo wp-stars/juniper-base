@@ -128,6 +128,9 @@
 @media screen and (max-width: 640px) {
     .textright .img-content,
     .img-content .content-image-dark,
+    .img-content .img-dark-triangle,
+    .img-content .img-bottom-right,
+    .img-content .img-left,
     .textright .img-content .img-decoration {
         height: 520px;
         width: 520px;
