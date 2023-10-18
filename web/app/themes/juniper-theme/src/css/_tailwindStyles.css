@@ -2066,6 +2066,10 @@ input[type="range"]::-ms-fill-lower {
     grid-column: span 8 / span 8;
   }
 
+  .sm\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+
   .sm\:flex {
     display: flex;
   }

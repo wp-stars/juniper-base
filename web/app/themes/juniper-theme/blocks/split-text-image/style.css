@@ -124,3 +124,12 @@
     right: 0;
     top: -5rem;
 }
+
+@media screen and (max-width: 640px) {
+    .textright .img-content,
+    .img-content .content-image-dark,
+    .textright .img-content .img-decoration {
+        height: 520px;
+        width: 520px;
+    }
+}
