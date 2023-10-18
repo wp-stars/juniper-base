@@ -1256,10 +1256,6 @@ input[type="range"]::-ms-fill-lower {
   margin-top: 2rem;
 }
 
-.mt-\[13rem\] {
-  margin-top: 13rem;
-}
-
 .mt-\[2\.5rem\] {
   margin-top: 2.5rem;
 }
@@ -1359,10 +1355,6 @@ input[type="range"]::-ms-fill-lower {
 
 .h-full {
   height: 100%;
-}
-
-.h-\[100vh\] {
-  height: 100vh;
 }
 
 .min-h-\[1000px\] {
