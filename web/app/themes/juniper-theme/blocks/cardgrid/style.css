@@ -17,3 +17,11 @@
     height: 133px;
     width: 133px;
 }
+
+
+@media screen and (max-width: 640px) {
+    .card .btn-underline {
+        max-width: calc(100% - (50px + 0.5rem));
+    }
+    
+}

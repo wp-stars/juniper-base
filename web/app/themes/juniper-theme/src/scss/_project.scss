@@ -19,10 +19,10 @@ $small: 640px;
 body {
     font-family: "Red Hat Mono";
     font-size: 1.125rem;
+    line-height: 1.875rem;
     font-style: normal;
     font-weight: 500;
-    color: #1e1e1e; 
-    line-height: 30px;
+    color: #1e1e1e;
 }
 
 .content-wrapper {
@@ -93,6 +93,13 @@ h6 {
         font-style: normal;
         font-weight: 700;
         line-height: 2rem; 
+    }
+
+    body {
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.75rem;
     }
     
 }
@@ -210,8 +217,6 @@ h6 {
     font-family: 'Red Hat Mono';
     font-style: normal;
     font-weight: 500;
-    font-size: 1.125rem;
-    line-height: 1.875rem;
     color: $text;
     border-bottom: 4px solid;
     border-color: $text;
@@ -233,8 +238,6 @@ h6 {
     font-family: 'Red Hat Mono';
     font-style: normal;
     font-weight: 500;
-    font-size: 1.125rem;
-    line-height: 1.875rem;
     color: $white;
     border-bottom: 4px solid;
     border-color: $white;
