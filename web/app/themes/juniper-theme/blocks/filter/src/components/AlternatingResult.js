@@ -2,17 +2,19 @@ import React, {useState} from "react"
 
 const AlternatingResult = ({ index, post }) => {
     return (
-        <div className={`container mx-auto min-h-[600px] mb-52 inline-flex ${index % 2 === 0 ? 'even flex-row' : 'odd flex-row-reverse'}`}>
-            <div className="w-1/2">
-                <div className="teaser-image absolute z-0">
-                    <div className="absolute decoration"></div>
-                    <img className="absolute" src={post.fields.teaser_image} />
-                </div>
-                <div className="showcase-image z-10 relative">
-                    <img className="max-w-[300px]" alt="Showcase Image" src={post.fields.showcase_image} />
+        <div className={`container mx-auto min-h-[600px] mb-52 grid grid-cols-1 sm:grid-cols-2 ${index % 2 === 0 ? 'even' : 'odd'}`}>
+            <div className={`order-1 ${index % 2 === 0 ? 'sm:order-1' : 'sm:order-2'}`}>
+                <div class="min-h-[800px] sm:min-h-[unset]">
+                    <div className="teaser-image absolute z-0">
+                        <div className="absolute decoration"></div>
+                        <img className="absolute" src={post.fields.teaser_image} />
+                    </div>
+                    <div className="showcase-image z-10 relative">
+                        <img className="max-w-[300px]" alt="Showcase Image" src={post.fields.showcase_image} />
+                    </div>
                 </div>
             </div>
-            <div className="w-1/2 flex flex-col justify-center text-left">
+            <div className={`order-2 ${index % 2 === 0 ? 'sm:order-2' : 'sm:order-1'} flex flex-col justify-center text-left`}>
                 <h3>{post.post_title} // {post.fields.year}</h3>
                 <p className="mb-10">{post.terms.map(term => term.name).join(" // ")}</p>
                 <div className="mb-20">

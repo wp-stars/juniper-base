@@ -47,15 +47,31 @@ const Filter = ( data ) => {
 
     return (
         <div className="w-full">
-            <div className="filter-choices min-h-[400px] relative text-center text-white py-20">
+            <div className="filter-choices min-h-[400px] relative text-center text-white py-20 flex items-center">
                 <div className="container mx-auto">
-                    <h3 className="text-white">Filter</h3>
-                    <div className="inline-flex flex-wrap justify-center">
+                    <div class="w-full flex justify-center">
+                        <h3 className="text-white">Filter</h3>
+                        <button data-collapse-toggle="filter-items" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm  md:hidden" aria-controls="filter-items" aria-expanded="false">
+                            <span class="sr-only">Open filter</span>
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                                <path d="M6.66669 35.5929V23.9263" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6.66669 17.2594V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 35.5928V20.5928" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 13.9261V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M33.3333 35.5926V27.2593" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M33.3333 20.5928V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1.66669 23.9263H11.6667" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 13.9263H25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M28.3333 27.2593H38.3333" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="filter-items" className="hidden sm:inline-flex flex-wrap justify-center">
                         {data.terms.map((term, index) => {
                             let isActive = selectedFilterVals.includes(term.term_id)
                             return (
-                                <button key={index} className={`filter-btn w-fit inline-flex ${isActive ? 'active' : ''}`} type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>
-                                    <span className={`${isActive ? 'bg-accent' : 'bg-light'} h-full p-[0.375rem] flex`}><img src={term.fields.svg_icon} alt="Term Icon" /></span>
+                                <button key={index} className={`filter-btn w-fit inline-flex items-center ${isActive ? 'active' : ''}`} type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>
+                                    <span className={`${isActive ? 'bg-accent' : 'bg-light'} self-stretch p-[0.375rem]`}><img class="object-contain" src={term.fields.svg_icon} alt="Term Icon" /></span>
                                     <span className="btn-inner">{term.name}</span>
                                     {isActive ? 
                                         <span className="remove-term" onClick={(event) => removeTerm(event, term.term_id)}>

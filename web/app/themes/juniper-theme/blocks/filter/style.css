@@ -91,3 +91,11 @@
     width: 500px;
     object-fit: cover;
 }
+
+@media screen and (max-width: 640px) {
+    .teaser-image img,
+    .teaser-image .decoration {
+        height: 500px;
+        width: 500px;
+    }
+}

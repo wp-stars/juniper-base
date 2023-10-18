@@ -2186,9 +2186,11 @@ const AlternatingResult = _ref => {
     post
   } = _ref;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `container mx-auto min-h-[600px] mb-52 inline-flex ${index % 2 === 0 ? 'even flex-row' : 'odd flex-row-reverse'}`
+    className: `container mx-auto min-h-[600px] mb-52 grid grid-cols-1 sm:grid-cols-2 ${index % 2 === 0 ? 'even' : 'odd'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-1/2"
+    className: `order-1 ${index % 2 === 0 ? 'sm:order-1' : 'sm:order-2'}`
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "min-h-[800px] sm:min-h-[unset]"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "teaser-image absolute z-0"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2202,8 +2204,8 @@ const AlternatingResult = _ref => {
     className: "max-w-[300px]",
     alt: "Showcase Image",
     src: post.fields.showcase_image
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-1/2 flex flex-col justify-center text-left"
+  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `order-2 ${index % 2 === 0 ? 'sm:order-2' : 'sm:order-1'} flex flex-col justify-center text-left`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title, " // ", post.fields.year), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "mb-10"
   }, post.terms.map(term => term.name).join(" // ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2324,23 +2326,96 @@ const Filter = data => {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "filter-choices min-h-[400px] relative text-center text-white py-20"
+    className: "filter-choices min-h-[400px] relative text-center text-white py-20 flex items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "w-full flex justify-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "text-white"
-  }, "Filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "inline-flex flex-wrap justify-center"
+  }, "Filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    "data-collapse-toggle": "filter-items",
+    type: "button",
+    class: "inline-flex items-center p-2 w-10 h-10 justify-center text-sm  md:hidden",
+    "aria-controls": "filter-items",
+    "aria-expanded": "false"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    class: "sr-only"
+  }, "Open filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    class: "w-5 h-5",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "40",
+    height: "41",
+    viewBox: "0 0 40 41",
+    fill: "none"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M6.66669 35.5929V23.9263",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M6.66669 17.2594V5.59277",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M20 35.5928V20.5928",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M20 13.9261V5.59277",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M33.3333 35.5926V27.2593",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M33.3333 20.5928V5.59277",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M1.66669 23.9263H11.6667",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M15 13.9263H25",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M28.3333 27.2593H38.3333",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: "filter-items",
+    className: "hidden sm:inline-flex flex-wrap justify-center"
   }, data.terms.map((term, index) => {
     let isActive = selectedFilterVals.includes(term.term_id);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       key: index,
-      className: `filter-btn w-fit inline-flex ${isActive ? 'active' : ''}`,
+      className: `filter-btn w-fit inline-flex items-center ${isActive ? 'active' : ''}`,
       type: "button",
       onClick: e => updateFilterVals(e, term.term_id)
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${isActive ? 'bg-accent' : 'bg-light'} h-full p-[0.375rem] flex`
+      className: `${isActive ? 'bg-accent' : 'bg-light'} self-stretch p-[0.375rem]`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      class: "object-contain",
       src: term.fields.svg_icon,
       alt: "Term Icon"
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
