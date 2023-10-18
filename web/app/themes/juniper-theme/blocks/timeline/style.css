@@ -68,3 +68,18 @@
     top: -20px;
     left: -15px;
 }
+
+@media screen and (max-width: 640px) {
+    .timeline .side-image,
+    .timeline .side-image-inner,
+    .timeline .side-image::before {
+        height: 500px;
+        width: 500px;
+    }
+
+    .timeline .side-image {
+        top: 0;
+        right: -150px;
+    }
+    
+}
