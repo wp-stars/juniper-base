@@ -386,6 +386,12 @@ h6 {
 // Timeline styles
 .timeline-slider {
     position: relative;
+
+    @media only screen and (min-width: 1280px){
+        .swiper{
+            margin-left: -5vw;
+        }
+    }
     .swiper-pagination {
         transform: rotate(80deg);
         width: 150%;
@@ -396,12 +402,13 @@ h6 {
         left: -100px;
         top: 400px;
         height: 100px;
+
         .swiper-pagination-bullet {
             background: $text;
             border: 4px solid $text;
             position: relative;
-            width: 1.75rem;
-            height: 1.75rem;
+            width: 2.375rem;
+            height: 2.375rem;
             margin-bottom: 200px;
             opacity: unset;
             &.swiper-pagination-bullet-active {
@@ -410,15 +417,16 @@ h6 {
             &:not(:last-child):after {
                 content: "";
                 position: absolute;
-                border: 4px solid #093642;
+                border: 2px solid #093642;
                 width: 265px;
                 height: 1px;
-                top: 6px;
-                left: 20px;
+                top: 13px;
+                left: 32px;
+                background-color: #093642;
             }
             @media only screen and (max-width: 1280px) {
                 &:not(:last-child):after {
-                    width: 210px;
+                    width: 250px;
                 }
             }
 
