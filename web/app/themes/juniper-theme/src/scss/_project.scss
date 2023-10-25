@@ -471,6 +471,9 @@ footer {
     overflow: hidden;
     height: 505px;
     background: $text;
+    .footer-container{
+        height: 500px;
+    }
     .asterisk {
         height: 400px;
         width: 400px;
