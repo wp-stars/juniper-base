@@ -15,8 +15,8 @@
 <div class="job-facts-outer w-full">
 	<div class="job-facts-inner">
 		<div class="container mx-auto text-white py-40">
-			<div class="mb-9">
-				<h2 class="text-white mb-[6.25rem]">Deine Aufgaben:</h2>
+			<div class="mb-[6.25rem]">
+				<h2 class="text-white mb-10">Deine Aufgaben:</h2>
 				<ul>
 					{% for item in fields.facts %}
 						<li>{{ item.fact }}</li>
@@ -24,7 +24,7 @@
 				</ul>
 			</div>
 			<div class="mb-40">
-				<h2 class="text-white mb-9">Dein Profil:</h2>
+				<h2 class="text-white mb-10">Dein Profil:</h2>
 				<ul>
 					{% for item in fields.requirements %}
 						<li>{{ item.requirement }}</li>
