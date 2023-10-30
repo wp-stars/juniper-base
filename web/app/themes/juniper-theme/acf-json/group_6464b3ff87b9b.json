@@ -770,7 +770,7 @@
                 {
                     "key": "field_652d063ad2da2",
                     "label": "Blog Link",
-                    "name": "blog_link",
+                    "name": "link",
                     "aria-label": "",
                     "type": "link",
                     "instructions": "",
@@ -839,5 +839,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1697449543
+    "modified": 1698661555
 }

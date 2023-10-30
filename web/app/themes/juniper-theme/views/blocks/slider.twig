@@ -337,9 +337,11 @@
 				<h2 class="text-white">{{ fields.blog_slider_static_items.title }}</h2>
 				<div class="text-white">{{ fields.blog_slider_static_items.intro }}</div>
 			</div>
-			<a class="flex sm:hidden btn btn-primary w-fit mx-auto mb-12" href="{{ fields.blog_slider_static_items.link.url }}">
-				{{ fields.blog_slider_static_items.link.title }}
-			</a>
+			{% if fields.blog_slider_static_items.link %}
+				<a class="btn btn-primary w-fit mx-auto mb-12 blog-slider-button-mobile" href="{{ fields.blog_slider_static_items.link.url }}">
+					{{ fields.blog_slider_static_items.link.title }}
+				</a>
+			{% endif %}
 			<div class="grid grid-cols-1 mx-auto">
 				<div class="swiper min-h-[500px] relative">
 					<div class="swiper-wrapper">
@@ -377,9 +379,11 @@
 					</div>
 					<div class="swiper-pagination"></div>
 				</div>
-				<a class="hidden sm:flex btn btn-primary w-fit mx-auto" href="{{ fields.blog_slider_static_items.link.url }}">
-					{{ fields.blog_slider_static_items.link.title }}
-				</a>
+				{% if fields.blog_slider_static_items.link %}
+					<a class="btn btn-primary w-fit mx-auto blog-slider-button-desktop" href="{{ fields.blog_slider_static_items.link.url }}">
+						{{ fields.blog_slider_static_items.link.title }}
+					</a>
+				{% endif %}
 
 				<!-- Initialize Swiper -->
 				<script>
