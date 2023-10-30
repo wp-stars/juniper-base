@@ -143,6 +143,18 @@ $site = new StarterSite();
 
 add_theme_support( 'custom-logo' );
 
+function juniper_customizer_setting($wp_customize) {
+    $wp_customize->add_setting('footer_logo');
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'footer_logo', array(
+        'label' => 'Upload Footer Logo',
+        'section' => 'title_tagline', //this is the section where the custom-logo from WordPress is
+        'settings' => 'footer_logo',
+        'priority' => 8 // show it just below the custom-logo
+    )));
+}
+
+add_action('customize_register', 'juniper_customizer_setting');
+
 function wps_juniper_register_nav_menu(){
     register_nav_menus( array(
         'primary_menu' => __( 'Primary Menu', 'wps_juniper' ),
@@ -157,6 +169,8 @@ function wps_add_to_context( $context ) {
     $custom_logo_id              = get_theme_mod( 'custom_logo' );
     $logo                        = wp_get_attachment_image_url( $custom_logo_id , 'full' );
     $context['logo']             = $logo;
+    $footer_logo                 = get_theme_mod( 'footer_logo' );
+    $context['footer_logo']      = $footer_logo;
     $upload_dir                  = wp_upload_dir();
     $context['uploads']          = $upload_dir;
     $context['theme_dir']        = get_stylesheet_directory_uri();

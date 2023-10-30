@@ -67,6 +67,10 @@
     background: var(--primary-petrol-dark, #093642);
 }
 
+.blog-slider .controls-wrapper {
+    
+}
+
 .quote-swiper-outer .swiper-button-next,
 .quote-swiper-outer .swiper-button-prev {
     bottom: 4rem;
