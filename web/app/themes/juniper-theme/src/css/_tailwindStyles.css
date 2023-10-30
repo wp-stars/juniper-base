@@ -1305,10 +1305,6 @@ input[type="range"]::-ms-fill-lower {
   height: 2.5rem;
 }
 
-.h-20 {
-  height: 5rem;
-}
-
 .h-4 {
   height: 1rem;
 }
@@ -1351,6 +1347,10 @@ input[type="range"]::-ms-fill-lower {
 
 .h-\[800px\] {
   height: 800px;
+}
+
+.h-\[95px\] {
+  height: 95px;
 }
 
 .h-auto {
@@ -1436,6 +1436,10 @@ input[type="range"]::-ms-fill-lower {
 
 .w-\[2\.625rem\] {
   width: 2.625rem;
+}
+
+.w-\[6\.25rem\] {
+  width: 6.25rem;
 }
 
 .w-\[65vw\] {

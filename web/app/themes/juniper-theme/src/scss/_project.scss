@@ -201,7 +201,7 @@ h6 {
     position: relative !important;
     border-radius: 0 !important;
     border: 2px solid $primary !important;
-    &:before {
+    &::after {
         content: "" !important;
         position: absolute !important;
         bottom: 0 !important;
@@ -211,6 +211,15 @@ h6 {
         background-color: $text !important;
         clip-path: polygon(0 50%, 0% 100%, 50% 100%) !important;
     }
+}
+
+
+.gform_button[type="submit"] {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none"><path d="M0 0V29H29L0 0Z" fill="%23093642"/></svg>');
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    padding-left: 2px;
+    padding-bottom: 2px;
 }
 
 .btn-underline {
