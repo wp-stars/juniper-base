@@ -1430,10 +1430,6 @@ input[type="range"]::-ms-fill-lower {
   width: 100%;
 }
 
-.w-\[100vw\] {
-  width: 100vw;
-}
-
 .w-\[142px\] {
   width: 142px;
 }
@@ -1872,6 +1868,10 @@ input[type="range"]::-ms-fill-lower {
   padding-bottom: 8rem;
 }
 
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
 .pb-\[3rem\] {
   padding-bottom: 3rem;
 }
@@ -1898,10 +1898,6 @@ input[type="range"]::-ms-fill-lower {
 
 .pt-\[5rem\] {
   padding-top: 5rem;
-}
-
-.pb-8 {
-  padding-bottom: 2rem;
 }
 
 .text-left {

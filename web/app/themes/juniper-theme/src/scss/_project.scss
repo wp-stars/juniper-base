@@ -492,40 +492,44 @@ footer {
     }
 }
 
-.gform_wrapper {        
-    margin-top: 5rem !important;
-    width: 100% !important;
-    input[type="text"],
-    input[type="email"],
-    textarea {
-        border-radius: 0 !important;
-        border: 2px solid var(--greyscale-60, #767676)  !important;
-        &::placeholder {
-            color: var(--greyscale-60, #767676) !important;
+#content {
+    .gform-theme--foundation .gform_fields {
+        grid-row-gap: 20px !important;
+    }
+    .gform_wrapper {        
+        margin-top: 2.4rem !important;
+        width: 100% !important;
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            border-radius: 0 !important;
+            border: 2px solid var(--greyscale-60, #767676)  !important;
+            &::placeholder {
+                color: var(--greyscale-60, #767676) !important;
+                font-family: "Red Hat Mono" !important;
+                font-size: 1.125rem !important;
+                font-style: normal !important;
+                font-weight: 500 !important;
+                line-height: 1.875rem !important;
+            }
+        }
+        .gform_heading {
+            display: none !important;
+        }
+
+        .gform_button.button {
+            width: 100% !important;
+        }
+
+        .gfield_consent_label {
             font-family: "Red Hat Mono" !important;
-            font-size: 1.125rem !important;
+            font-size: 0.875rem !important;
             font-style: normal !important;
             font-weight: 500 !important;
-            line-height: 1.875rem !important;
+            line-height: 1.125rem !important;
         }
-    }
-    .gform_heading {
-        display: none !important;
-    }
-
-    .gform_button.button {
-        width: 100% !important;
-    }
-
-    .gfield_consent_label {
-        font-family: "Red Hat Mono" !important;
-        font-size: 0.875rem !important;
-        font-style: normal !important;
-        font-weight: 500 !important;
-        line-height: 1.125rem !important;
-    }
-  
-} 
+    } 
+}
 
 .page-404 {
     .header-bg {
