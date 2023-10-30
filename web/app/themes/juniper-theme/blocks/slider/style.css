@@ -166,7 +166,8 @@
 }
 
 .split-slider .swiper-slide {
-    width: 80%;
+    width: 588px;
+    height: 568px;
     color: var(--greyscale-black, #1E1E1E);
     text-align: right;
     font-family: "Red Hat Mono";
@@ -180,6 +181,24 @@
     color: var(--greyscale-black, #1E1E1E);
 }
 
+.split-slider.right .swiper {
+    height: 568px;
+}
+
+.split-slider.right .controls-wrapper {
+    margin-top: calc(568px + 1.5rem);
+    width: 588px;
+}
+
+.split-slider.right .controls-wrapper .swiper-button-prev,
+.split-slider.right .controls-wrapper .swiper-button-next {
+    width: 4.375rem;
+    height: 4.375rem;
+    top: unset;
+    bottom: unset;
+    margin-top: unset;
+    margin-bottom: unset;
+}
 
 .split-slider .controls-wrapper .swiper-button-prev,
 .split-slider .controls-wrapper .swiper-button-next {

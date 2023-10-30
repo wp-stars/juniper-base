@@ -2108,16 +2108,8 @@ input[type="range"]::-ms-fill-lower {
     display: block;
   }
 
-  .sm\:flex {
-    display: flex;
-  }
-
   .sm\:inline-flex {
     display: inline-flex;
-  }
-
-  .sm\:hidden {
-    display: none;
   }
 
   .sm\:h-\[338px\] {
