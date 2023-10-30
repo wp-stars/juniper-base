@@ -15,7 +15,7 @@
 	<div class="w-full relative split-slider split-slider-wrapper-{{ instance }} {{ fields.split_slider_static_items.slider_side }} {{ fields.split_slider_static_items.background_style }}">
 		<div class="bg-dark absolute split-slider-background background h-full">
 		</div>
-		<div class="container min-h-[600px] py-32 mx-auto slider relative">
+		<div class="container min-h-[600px] pt-64 pb-32 mx-auto slider relative">
 			<div class="grid grid-cols-1 sm:grid-cols-12 gap-8">
 				{% if fields.split_slider_static_items.slider_side == "right" %}
 					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col justify-center">
@@ -215,14 +215,14 @@
 {% endif %}
 
 {% if fields.style == "simple" %}
-	<div class="container my-20 mx-auto slider simple-swiper-{{ instance }}">
+	<div class="container my-40 mx-auto slider simple-swiper-{{ instance }}">
 		<div class="simple-slider relative">
-			<p>{{ fields.simple_slider_static_items.tagline }}</p>
+			<p class="tagline">{{ fields.simple_slider_static_items.tagline }}</p>
 			<h2 class="mb-20">{{ fields.simple_slider_static_items.title }}</h2>
 			<div class="swiper">
 				<div class="swiper-wrapper">
 					{% for item in fields.simple_slider_items %}
-						<div class="swiper-slide">
+						<div class="swiper-slide p-2">
 							{% if item.slide_link %}
 								<a href="{{ item.slide_link }}">
 							{% endif %}
