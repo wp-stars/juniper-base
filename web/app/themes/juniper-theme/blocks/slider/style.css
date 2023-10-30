@@ -48,11 +48,11 @@
 }
 
 .quote-slider-background {
-    height: 800px;
-    width: 100%;
-    top: 100px;
-    left: 0;
-    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);    
+    height: 100%;
+    width: 200vw;
+    left: -50%;
+    top: 150px;
+    transform: rotate(3deg);
     min-height: 500px;
     border-bottom: 12px solid var(--primary-green, #B4D43D);
     background: var(--primary-petrol-dark, #093642);
@@ -99,17 +99,37 @@
     }
 }
 
+.quote-swiper-outer {
+    margin-bottom: 16rem;
+}
+
 
 .quote-swiper-outer .swiper-button-next,
 .quote-swiper-outer .swiper-button-prev {
-    bottom: 4rem;
+    width: 4.375rem;
+    height: 4.375rem;
+}
+
+.quote-swiper-outer .controls-wrapper .swiper-button-prev,
+.quote-swiper-outer .controls-wrapper .swiper-button-next {
+    position: relative;
+    left: unset;
+    right: unset;
+    top: unset;
+    bottom: unset;
 }
 
 .quote-swiper-outer .swiper-button-next::after,
 .quote-swiper-outer .swiper-button-prev::after {
-    padding: 1rem;    
-    --tw-bg-opacity: 1;
-    background-color: rgb(180 212 61 / var(--tw-bg-opacity));
+    display: none;
+}
+
+.quote-swiper-outer .controls-wrapper .swiper-pagination {
+    width: calc(100% - (4.375rem * 2));
+    left: 4.375rem;
+    right: 4.375rem;
+    top: unset;
+    bottom: unset;
 }
 
 .quote-swiper-outer .swiper-button-next {
@@ -117,7 +137,7 @@
 }
 
 .quote-swiper-outer .swiper-button-next::after {
-    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="43" height="25" viewBox="0 0 43 25" fill="none"><path d="M30.4409 23.0124L40.9471 12.5062L30.4409 2" stroke="%23093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="11.4531" y="10.7549" width="15.7593" height="3.50207" rx="1.75103" fill="%23093642"/><rect x="0.947021" y="10.7549" width="7.00413" height="3.50207" rx="1.75103" fill="%23093642"/></svg>');
+    content: '';
 }
 
 .quote-swiper-outer .swiper-button-prev {
@@ -125,7 +145,7 @@
 }
 
 .quote-swiper-outer .swiper-button-prev::after {
-    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none"><path d="M12.4531 1.9876L1.94693 12.4938L12.4531 23" stroke="%23093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="31.4409" y="14.2451" width="15.7593" height="3.50207" rx="1.75103" transform="rotate(-180 31.4409 14.2451)" fill="%23093642"/><rect x="41.947" y="14.2451" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 41.947 14.2451)" fill="%23093642"/></svg>');
+    content: '';
 }
 
 .blog-slider .swiper-pagination {
@@ -284,12 +304,6 @@
     width: 4.375rem;
     height: 4.375rem;
 }
-
-/* .timeline-slider .swiper-button-prev svg,
-.timeline-slider .swiper-button-next svg {
-    width: 4.375rem;
-    height: 4.375rem;
-} */
 
 
 .timeline-slider .swiper-button-prev::after,

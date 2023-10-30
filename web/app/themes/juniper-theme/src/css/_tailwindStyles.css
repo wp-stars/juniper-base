@@ -1111,14 +1111,14 @@ input[type="range"]::-ms-fill-lower {
   margin-bottom: 5rem;
 }
 
-.my-\[8rem\] {
-  margin-top: 8rem;
-  margin-bottom: 8rem;
-}
-
 .my-40 {
   margin-top: 10rem;
   margin-bottom: 10rem;
+}
+
+.my-\[8rem\] {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
 }
 
 .-mb-px {
@@ -1863,14 +1863,13 @@ input[type="range"]::-ms-fill-lower {
   padding-bottom: 10rem;
 }
 
-.py-64 {
-  padding-top: 16rem;
-  padding-bottom: 16rem;
-}
-
 .py-\[10rem\] {
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
 }
 
 .pb-\[3rem\] {
@@ -1889,6 +1888,10 @@ input[type="range"]::-ms-fill-lower {
   padding-right: 1rem;
 }
 
+.pt-64 {
+  padding-top: 16rem;
+}
+
 .pt-\[3rem\] {
   padding-top: 3rem;
 }
@@ -1897,12 +1900,8 @@ input[type="range"]::-ms-fill-lower {
   padding-top: 5rem;
 }
 
-.pb-32 {
-  padding-bottom: 8rem;
-}
-
-.pt-64 {
-  padding-top: 16rem;
+.pb-8 {
+  padding-bottom: 2rem;
 }
 
 .text-left {
