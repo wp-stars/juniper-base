@@ -2120,6 +2120,10 @@ input[type="range"]::-ms-fill-lower {
     grid-column: span 8 / span 8;
   }
 
+  .sm\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+
   .sm\:my-20 {
     margin-top: 5rem;
     margin-bottom: 5rem;

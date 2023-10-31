@@ -2244,13 +2244,13 @@ const ArticleResult = _ref => {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto mb-5"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `w-full article-row flex flex-row ${index % 2 === 0 ? 'even' : 'odd'}`
+    className: `w-full article-row grid grid-cols-12 ${index % 2 === 0 ? 'even' : 'odd'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "img-content w-5/12"
+    className: "img-content col-span-12 sm:col-span-5"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: post.featured_image
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "article-text flex flex-col items-start text-left justify-center w-7/12"
+    className: "article-text flex flex-col items-start text-left justify-center col-span-12 sm:col-span-7"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "mb-5"
   }, post.post_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
