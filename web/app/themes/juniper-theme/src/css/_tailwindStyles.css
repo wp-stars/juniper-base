@@ -1606,10 +1606,6 @@ input[type="range"]::-ms-fill-lower {
   justify-content: space-between;
 }
 
-.justify-around {
-  justify-content: space-around;
-}
-
 .gap-12 {
   gap: 3rem;
 }
@@ -1646,6 +1642,10 @@ input[type="range"]::-ms-fill-lower {
 
 .gap-y-24 {
   row-gap: 6rem;
+}
+
+.gap-y-8 {
+  row-gap: 2rem;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -2176,6 +2176,10 @@ input[type="range"]::-ms-fill-lower {
     width: 282px;
   }
 
+  .sm\:w-full {
+    width: 100%;
+  }
+
   .sm\:max-w-\[600px\] {
     max-width: 600px;
   }
@@ -2206,6 +2210,11 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:justify-around {
     justify-content: space-around;
+  }
+
+  .sm\:gap-x-8 {
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
   }
 
   .sm\:p-0 {

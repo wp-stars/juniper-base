@@ -136,5 +136,14 @@
     .textright .img-content .img-decoration {
         height: 520px;
         width: 520px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        margin-left: 0;
+    }
+
+    .dark-triangle-right {
+        height: 507px;
+        width: 251px;
     }
 }

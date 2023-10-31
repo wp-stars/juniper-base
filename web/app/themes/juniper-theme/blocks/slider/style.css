@@ -284,6 +284,15 @@
     color: var(--greyscale-black, #1E1E1E);
 }
 
+@media screen and (max-width: 640px) {
+    .split-slider .swiper-slide {
+        width: 100%;
+    }
+    .split-slider.right .controls-wrapper {
+        margin-top: 1.5rem;
+        width: 100%;
+    }
+}
 
 .blog-slider .image-wrapper img {
     height: 100%;
