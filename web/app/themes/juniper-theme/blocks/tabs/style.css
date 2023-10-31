@@ -1,7 +1,7 @@
 .tabs .tablist button {
     color: var(--greyscale-black, #1E1E1E);
     /* Desktop/Headline5 */
-    font-family: Red Hat Mono;
+    font-family: "Red Hat Mono";
     font-size: 1.75rem;
     font-style: normal;
     font-weight: 700;
@@ -30,4 +30,13 @@
 
 .tabs .image-wrapper img {
     object-fit: cover;
+}
+
+@media screen and (max-width: 640px) {
+    .tabs .tablist button {
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 2.5rem; 
+    }
 }
