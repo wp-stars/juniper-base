@@ -1848,14 +1848,14 @@ input[type="range"]::-ms-fill-lower {
   padding-bottom: 5rem;
 }
 
-.py-28 {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
 .py-40 {
@@ -1866,15 +1866,6 @@ input[type="range"]::-ms-fill-lower {
 .py-\[10rem\] {
   padding-top: 10rem;
   padding-bottom: 10rem;
-}
-
-.py-32 {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
-}
-
-.pb-32 {
-  padding-bottom: 8rem;
 }
 
 .pb-8 {
@@ -1895,10 +1886,6 @@ input[type="range"]::-ms-fill-lower {
 
 .pr-4 {
   padding-right: 1rem;
-}
-
-.pt-64 {
-  padding-top: 16rem;
 }
 
 .pt-\[3rem\] {
