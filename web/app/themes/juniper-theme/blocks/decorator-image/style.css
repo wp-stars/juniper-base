@@ -24,3 +24,10 @@
     width: 600px;
     background-repeat: no-repeat;
 }
+
+@media screen and (max-width: 640px) {
+    .decorator-image .img-content {
+        right: 0;
+        top: 50px;
+    }
+}
