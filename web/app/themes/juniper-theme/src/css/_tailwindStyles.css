@@ -1868,6 +1868,11 @@ input[type="range"]::-ms-fill-lower {
   padding-bottom: 10rem;
 }
 
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
 .pb-32 {
   padding-bottom: 8rem;
 }
