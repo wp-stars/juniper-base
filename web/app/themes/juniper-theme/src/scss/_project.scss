@@ -586,7 +586,8 @@ footer {
     }
 }
 
-
-#contact-content {
-    flex-wrap: wrap;
+@media screen and (max-width: $small) {
+    #contact-content {
+        flex-wrap: wrap;
+    } 
 }
