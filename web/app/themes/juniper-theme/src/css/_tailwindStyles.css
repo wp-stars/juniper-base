@@ -999,6 +999,14 @@ input[type="range"]::-ms-fill-lower {
   top: 40%;
 }
 
+.top-28 {
+  top: 7rem;
+}
+
+.-top-12 {
+  top: -3rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1896,6 +1904,10 @@ input[type="range"]::-ms-fill-lower {
   padding-top: 5rem;
 }
 
+.pt-40 {
+  padding-top: 10rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2076,6 +2088,10 @@ input[type="range"]::-ms-fill-lower {
     position: absolute;
   }
 
+  .sm\:top-12 {
+    top: 3rem;
+  }
+
   .sm\:order-1 {
     order: 1;
   }
@@ -2118,6 +2134,10 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:mb-6 {
     margin-bottom: 1.5rem;
+  }
+
+  .sm\:mb-0 {
+    margin-bottom: 0px;
   }
 
   .sm\:block {
@@ -2226,6 +2246,15 @@ input[type="range"]::-ms-fill-lower {
   .sm\:py-40 {
     padding-top: 10rem;
     padding-bottom: 10rem;
+  }
+
+  .sm\:py-10 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .sm\:pt-0 {
+    padding-top: 0px;
   }
 
   .sm\:text-left {

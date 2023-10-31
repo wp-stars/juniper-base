@@ -51,11 +51,16 @@
     height: 100%;
     width: 200vw;
     left: -50%;
-    top: 150px;
     transform: rotate(3deg);
     min-height: 500px;
     border-bottom: 12px solid var(--primary-green, #B4D43D);
     background: var(--primary-petrol-dark, #093642);
+}
+
+@media screen and (min-width: 640px) {
+    .quote-slider-background {
+        top: 150px;
+    }
 }
 
 .blog-slider-background {

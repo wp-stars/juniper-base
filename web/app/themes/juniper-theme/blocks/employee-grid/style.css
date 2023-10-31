@@ -1,6 +1,7 @@
 .employee-grid .right-decoration {
     position: absolute;
     right: 0;
+    z-index: -1;
 }
 
 .employee-card {
