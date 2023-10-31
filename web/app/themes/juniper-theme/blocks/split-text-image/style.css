@@ -81,6 +81,18 @@
     z-index: -2;
 }
 
+@media screen and (max-width: 640px) {
+    .img-bottom-right {
+        right: 0;
+        top: 0;
+        height: 400px;
+        width: 400px;
+        transform: rotate(20deg);
+        box-shadow: none;
+        background-size: cover;
+    }
+}
+
 
 .img-top-right {
     position: absolute;

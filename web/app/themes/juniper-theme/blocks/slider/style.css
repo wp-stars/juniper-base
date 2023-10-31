@@ -109,6 +109,12 @@
 }
 
 
+@media screen and (max-width: 640px) {
+    .quote-swiper-outer {
+        margin-bottom: 8rem;
+    }
+}
+
 .quote-swiper-outer .swiper-button-next,
 .quote-swiper-outer .swiper-button-prev {
     width: 4.375rem;

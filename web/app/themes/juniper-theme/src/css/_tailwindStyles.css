@@ -947,6 +947,10 @@ input[type="range"]::-ms-fill-lower {
   position: relative;
 }
 
+.-top-12 {
+  top: -3rem;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -997,14 +1001,6 @@ input[type="range"]::-ms-fill-lower {
 
 .top-\[40\%\] {
   top: 40%;
-}
-
-.top-28 {
-  top: 7rem;
-}
-
-.-top-12 {
-  top: -3rem;
 }
 
 .z-0 {
@@ -1904,10 +1900,6 @@ input[type="range"]::-ms-fill-lower {
   padding-top: 5rem;
 }
 
-.pt-40 {
-  padding-top: 10rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -2124,6 +2116,15 @@ input[type="range"]::-ms-fill-lower {
     grid-column: span 8 / span 8;
   }
 
+  .sm\:my-20 {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+
+  .sm\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .sm\:mb-12 {
     margin-bottom: 3rem;
   }
@@ -2134,10 +2135,6 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:mb-6 {
     margin-bottom: 1.5rem;
-  }
-
-  .sm\:mb-0 {
-    margin-bottom: 0px;
   }
 
   .sm\:block {
@@ -2243,18 +2240,14 @@ input[type="range"]::-ms-fill-lower {
     padding-bottom: 0px;
   }
 
-  .sm\:py-40 {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
-
   .sm\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
   }
 
-  .sm\:pt-0 {
-    padding-top: 0px;
+  .sm\:py-40 {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
   }
 
   .sm\:text-left {
