@@ -1900,6 +1900,10 @@ input[type="range"]::-ms-fill-lower {
   padding-top: 5rem;
 }
 
+.pt-20 {
+  padding-top: 5rem;
+}
+
 .text-left {
   text-align: left;
 }
