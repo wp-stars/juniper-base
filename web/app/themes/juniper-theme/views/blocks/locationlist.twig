@@ -23,8 +23,10 @@
 </style>
 
 
-<section class="location-grid {% if fields.style == "dark" %}location-list-background-dark {% elseif fields.style == "white" %}location-list-background-white{% endif %}">
-
+<section class="location-grid relative mt-20 {% if fields.style == "dark" %}location-list-background-dark {% elseif fields.style == "white" %}location-list-background-white{% endif %}">
+	{% if fields.style == "dark" %}
+		<div class="location-list-bg"></div>
+	{% endif %}
 	<div class="container mx-auto mt-8">
 		<div class="mb-20 pt-[3rem]">
 			<p class="tagline">{{ fields.tagline }}</p>

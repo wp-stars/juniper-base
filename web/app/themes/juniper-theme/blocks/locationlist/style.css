@@ -3,15 +3,17 @@
 }
 
 .location-list-background-dark {
-    /* min-height: 800px; */
-    height: 100%;
-    left: 0;
-    /* top: 0; */
-    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
     padding: 2rem 0rem 8rem 0rem;
-    width: 100%;
-    z-index: -1;
+}
+
+.location-list-bg {
+    position: absolute;
+    height: 100%;
+    width: 200%;
+    left: -50%;
+    transform: rotate(3deg);
     background-color: #093642;
+    z-index: -1;
 }
 
 .location-list-background-dark h2,
