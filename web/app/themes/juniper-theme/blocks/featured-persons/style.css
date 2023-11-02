@@ -3,7 +3,7 @@
     min-height: 600px;
     top: 0;
     width: 200%;
-    left: -600px;
+    left: -50%;
     transform: rotate(3.702deg);
     border-bottom: 12px solid var(--primary-green, #B4D43D);
 }
