@@ -37,20 +37,13 @@
 	<div class="container mx-auto relative">
 		<div class="flex flex-col mb-40 {% if textdirection == 'textleft' %} sm:flex-row-reverse {% else %} sm:flex-row {% endif %} ">
 			<div class="img-wrapper min-h-[500px] sm:w-1/2">
-				<div class="img-content flex justify-center">
-					{% if fields.style == 'dark' %}
-						<div class="img-decoration"></div>
-					{% endif %}
-					<div class=" {% if fields.style == 'dark' %} content-image-dark {% endif %}
-								 {% if fields.style == 'darktriangle' %} img-dark-triangle {% endif %} 
-								 {% if fields.style == 'imgbottomright' %} img-bottom-right {% endif %} 
-								 {% if (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') %} img-top-right {% endif %}  
-								 {% if fields.style == 'imgleft' %} img-left {% endif %}"
-								style="background-image: url('{{ fields.image }}');"></div>
+				<div class="img-content flex justify-center relative">
+					<div class="img-decoration decoration-{{fields.style}}"></div>
+					<div class="{{fields.style}}" style="background-image: url('{{ fields.image }}');"></div>
 				</div>
 			</div>
 			<div class="text-content sm:w-1/2 h-100 flex flex-col justify-center">
-				<div class="text-inner {% if fields.style == 'imgleft' %} ml-[-10vw] {% endif %}">
+				<div class="text-inner">
 					<p class="tagline {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.intro_title }}</p>
 					<h2 class="mb-4">{{ fields.title }}</h2>
 					<h3 class="mb-8 {% if fields.style == 'dark' %} text-primary {% endif %}">{{ fields.subtitle }}</h3>

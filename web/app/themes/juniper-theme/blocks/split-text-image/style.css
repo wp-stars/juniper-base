@@ -45,31 +45,26 @@
     z-index: 1;
 }
 
-.textright .img-content .content-image-dark {
+.textright .img-content .dark {
     clip-path: polygon(20% 0, 100% 20%, 80% 100%, 0 80%);
     position: relative;
     z-index: 3;
     background-size: cover;
 }
 
-.img-content .content-image-dark {
+.img-content .dark {
     height: 700px;
     width: 700px;
     background-repeat: no-repeat;
 }
 
-.textleft .img-content .content-image-dark {
+.textleft .img-content .dark {
     background-size: contain;
     background-position: right top;
 }
 
-.split-text-img p {
-    font-size: 1.125rem;
-    line-height: 1.875rem;
-    /* text-align: justify; */
-}
 
-.img-bottom-right {
+.imgbottomright {
     position: absolute;
     right: -25rem;
     bottom: -25rem;
@@ -82,7 +77,7 @@
 }
 
 @media screen and (max-width: 640px) {
-    .img-bottom-right {
+    .imgbottomright {
         right: 0;
         top: 0;
         height: 400px;
@@ -94,15 +89,27 @@
 }
 
 
-.img-top-right {
+.imgtopright,
+.imgtoprighttriangle {
     position: absolute;
-    right: -15rem;
-    top: -15rem;
-    width: 40rem;
-    height: 40rem;
+    width: 700px;
+    height: 700px;
     background-size: cover;
-    transform: rotate(-7deg);
-    box-shadow: -25px 25px 0px 0px #B4D43D;
+    clip-path: polygon(80% 0, 100% 80%, 20% 100%, 0 20%);
+    top: -175px;
+    right: -175px;
+    z-index: -2;
+}
+
+.decoration-imgtopright.img-decoration,
+.decoration-imgtoprighttriangle.img-decoration {
+    width: 700px;
+    height: 700px;
+    position: absolute;
+    clip-path: polygon(80% 0, 100% 80%, 20% 100%, 0 20%);
+    top: -150px;
+    right: -160px;
+    background-color:  #B4D43D;
     z-index: -2;
 }
 
@@ -112,7 +119,7 @@
     top: 12rem;
 }
 
-.img-left {
+.imgleft {
     width: 47.24594rem;
     height: 31.49731rem;
     transform: rotate(-12.556deg);
@@ -124,7 +131,7 @@
     position: absolute;
 }
 
-.img-dark-triangle {
+.darktriangle {
     position: relative;
     width: 24rem;
     height: 43.25rem;
@@ -141,11 +148,11 @@
 
 @media screen and (max-width: 640px) {
     .textright .img-content,
-    .img-content .content-image-dark,
-    .img-content .img-dark-triangle,
-    .img-content .img-bottom-right,
-    .img-content .img-left,
-    .img-content .img-top-right,
+    .img-content .dark,
+    .img-content .darktriangle,
+    .img-content .imgbottomright,
+    .img-content .imgleft,
+    .img-content .imgtopright,
     .textright .img-content .img-decoration {
         height: 520px;
         width: 520px;
