@@ -135,11 +135,6 @@
 				var swiper = new Swiper(".split-swiper-{{ instance }}", {
 					slidesPerView: 1,
 					spaceBetween: 30,
-					on: {
-						reachEnd: function() {
-							this.snapGrid = [...this.slidesGrid];
-						},
-					},
 					pagination: {
 						el: ".split-slider-wrapper-{{ instance }} .swiper-pagination",
 						clickable: true,
@@ -152,6 +147,15 @@
 						640: {
 							slidesPerView: "auto"
 						}
+					},
+					on: {
+						reachEnd: function() {
+							this.snapGrid = [...this.slidesGrid];
+							setTimeout(() => {
+								document.querySelector('.split-slider-wrapper-{{ instance }} .swiper-button-next').click()
+								clearTimeout()
+							}, 1);
+						},
 					}
 				});
 			</script>
