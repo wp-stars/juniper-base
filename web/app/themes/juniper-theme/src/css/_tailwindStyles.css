@@ -1197,10 +1197,6 @@ input[type="range"]::-ms-fill-lower {
   margin-left: 0.25rem;
 }
 
-.ml-\[-10vw\] {
-  margin-left: -10vw;
-}
-
 .ml-auto {
   margin-left: auto;
 }

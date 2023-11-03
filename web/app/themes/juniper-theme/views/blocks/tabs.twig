@@ -45,7 +45,6 @@
 	let tabBtns{{ instance }} = document.querySelectorAll("#tab-{{ instance }} .tab-btn")
 
 	tabBtns{{ instance }}.forEach(tab => {
-		console.log(tab)
 		tab.addEventListener("click", (event) => {
 			let list = event.currentTarget.closest('.tablist')
 			list.querySelectorAll('.tab-btn').forEach(item => {
