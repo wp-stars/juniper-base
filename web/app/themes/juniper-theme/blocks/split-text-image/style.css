@@ -120,15 +120,25 @@
 }
 
 .imgleft {
-    width: 47.24594rem;
-    height: 31.49731rem;
-    transform: rotate(-12.556deg);
-    flex-shrink: 0;
-    box-shadow: -60px -20px 0px 0px #093642;
+    width: 700px;
+    height: 700px;
+    clip-path: polygon(0 20%, 80% 0, 100% 80%, 20% 100%);
     background-size: cover;
-    left: -10rem;
-    top: 2.5rem;
+    left: -100px;
+    top: -10px;
     position: absolute;
+    z-index: 2;
+    background-position: center;
+}
+
+.textright .img-content .decoration-imgleft {
+    width: 700px;
+    height: 700px;
+    left: -130px;
+    top: -35px;
+    background-color: #093642;
+    clip-path: polygon(0 20%, 80% 0, 100% 80%, 20% 100%);
+    z-index: 1;
 }
 
 .darktriangle {
