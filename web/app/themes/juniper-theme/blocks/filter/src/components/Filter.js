@@ -47,7 +47,7 @@ const Filter = ( data ) => {
 
     return (
         <div className="w-full">
-            <div className="filter-choices min-h-[400px] relative text-center text-white py-20 flex items-center">
+            <div className="filter-choices min-h-[400px] mb-20 relative text-center text-white py-20 flex items-center">
                 <div className="container mx-auto">
                     <div className="w-full flex justify-center">
                         <h3 className="text-white">Filter</h3>

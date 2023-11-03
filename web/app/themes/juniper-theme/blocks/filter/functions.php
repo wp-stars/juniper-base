@@ -41,6 +41,11 @@ add_filter(
     }
 );
 
+function juniper_excerpt_length( $length ) {
+    return 20;
+}
+add_filter( 'excerpt_length', 'juniper_excerpt_length', 999 );
+
 function acf_load_post_type_field_choices( $field ) {
     // Reset choices
     $field['choices'] = get_post_types();
