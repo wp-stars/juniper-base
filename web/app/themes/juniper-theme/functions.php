@@ -183,6 +183,15 @@ function wps_add_to_context( $context ) {
     return $context;
 }
 
+// custom wps functionality from classes
+
+require_once __DIR__.'/classes/MailPoetGF.php';
+use wps\MailPoetGF;
+
+// define in init so plugin functions are available in this class
+add_action('init', array(MailPoetGF::get_instance(), 'init'));
+
+
 add_filter( 'render_block', 'wps_juniper_add_class_to_list_block', 10, 2 );
 function wps_juniper_add_class_to_list_block( $block_content, $block ) {
     if ( 'core/group' === $block['blockName'] ) {
@@ -201,5 +210,6 @@ function wps_juniper_acf_init() {
 }
 
 add_action('acf/init', 'wps_juniper_acf_init');
+
 
 
