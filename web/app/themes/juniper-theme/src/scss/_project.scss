@@ -229,6 +229,15 @@ h6 {
     padding-bottom: 2px;
 }
 
+@media screen and (max-width: 640px) {
+    .btn-primary,
+    .gform_button[type="submit"] {
+        font-size: 1rem;
+        line-height: 1.875rem;
+    }
+
+}
+
 .btn-underline {
     font-family: 'Red Hat Mono';
     font-style: normal;

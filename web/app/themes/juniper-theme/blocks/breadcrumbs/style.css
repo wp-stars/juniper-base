@@ -5,10 +5,11 @@
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 1.875rem; /* 166.667% */
+    line-height: 1.875rem;
     text-transform: uppercase;
     position: relative;
 }
+
 
 .breadcrumbs .page svg {
     max-height: 100%;
@@ -34,4 +35,11 @@
     border-bottom: 4px solid var(--primary-petrol-dark, #093642);
     left: 0;
     bottom: 0;
+}
+
+@media screen and (max-width: 640px) {
+    .breadcrumbs .page {
+        font-size: 1rem;
+        line-height: 1.75rem;
+    }
 }

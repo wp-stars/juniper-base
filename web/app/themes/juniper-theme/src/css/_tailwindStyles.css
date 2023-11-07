@@ -935,6 +935,10 @@ input[type="range"]::-ms-fill-lower {
   border-width: 0;
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
