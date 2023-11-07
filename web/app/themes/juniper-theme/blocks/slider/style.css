@@ -331,3 +331,12 @@
 .timeline-slider .swiper-button-next::after {
     display: none;
 }
+
+@media screen and (max-width: 640px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 2.875rem !important;
+        height: 2.875rem !important;
+    }
+    
+}

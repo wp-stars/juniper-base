@@ -1459,6 +1459,10 @@ input[type="range"]::-ms-fill-lower {
   min-width: 500px;
 }
 
+.min-w-\[6\.25rem\] {
+  min-width: 6.25rem;
+}
+
 .max-w-\[300px\] {
   max-width: 300px;
 }
@@ -2201,6 +2205,14 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:w-full {
     width: 100%;
+  }
+
+  .sm\:w-\[150px\] {
+    width: 150px;
+  }
+
+  .sm\:min-w-\[150px\] {
+    min-width: 150px;
   }
 
   .sm\:max-w-\[600px\] {
