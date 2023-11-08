@@ -1261,6 +1261,10 @@ input[type="range"]::-ms-fill-lower {
   margin-top: auto;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .block {
   display: block;
 }
@@ -1354,6 +1358,10 @@ input[type="range"]::-ms-fill-lower {
   height: 100%;
 }
 
+.h-\[2\.5rem\] {
+  height: 2.5rem;
+}
+
 .max-h-\[800px\] {
   max-height: 800px;
 }
@@ -1445,6 +1453,10 @@ input[type="range"]::-ms-fill-lower {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[2\.5rem\] {
+  width: 2.5rem;
 }
 
 .min-w-\[100\%\] {
@@ -2205,6 +2217,10 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:max-h-\[auto\] {
     max-height: auto;
+  }
+
+  .sm\:min-h-\[400px\] {
+    min-height: 400px;
   }
 
   .sm\:min-h-\[500px\] {

@@ -47,13 +47,13 @@ const Filter = ( data ) => {
 
     return (
         <div className="w-full">
-            <div className="filter-choices min-h-[400px] mb-20 relative text-center text-white py-20 flex items-center">
+            <div className="filter-choices sm:min-h-[400px] mb-20 relative text-center text-white py-20 flex items-center">
                 <div className="container mx-auto">
-                    <div className="w-full flex justify-center">
+                    <div className="w-full flex justify-center items-center">
                         <h3 className="text-white">Filter</h3>
-                        <button data-collapse-toggle="filter-items" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm  md:hidden" aria-controls="filter-items" aria-expanded="false">
+                        <button data-collapse-toggle="filter-items" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm ml-4 md:hidden" aria-controls="filter-items" aria-expanded="false">
                             <span className="sr-only">Open filter</span>
-                            <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                            <svg className="w-[2.5rem] h-[2.5rem]" xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
                                 <path d="M6.66669 35.5929V23.9263" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 <path d="M6.66669 17.2594V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 <path d="M20 35.5928V20.5928" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

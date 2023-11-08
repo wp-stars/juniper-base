@@ -2326,23 +2326,23 @@ const Filter = data => {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "filter-choices min-h-[400px] mb-20 relative text-center text-white py-20 flex items-center"
+    className: "filter-choices sm:min-h-[400px] mb-20 relative text-center text-white py-20 flex items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full flex justify-center"
+    className: "w-full flex justify-center items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "text-white"
   }, "Filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     "data-collapse-toggle": "filter-items",
     type: "button",
-    className: "inline-flex items-center p-2 w-10 h-10 justify-center text-sm  md:hidden",
+    className: "inline-flex items-center p-2 w-10 h-10 justify-center text-sm ml-4 md:hidden",
     "aria-controls": "filter-items",
     "aria-expanded": "false"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "sr-only"
   }, "Open filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    className: "w-5 h-5",
+    className: "w-[2.5rem] h-[2.5rem]",
     xmlns: "http://www.w3.org/2000/svg",
     width: "40",
     height: "41",
