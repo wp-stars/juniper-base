@@ -35,7 +35,7 @@
 		{% endif %}
 	
 	<div class="container mx-auto relative">
-		<div class="flex flex-col mb-40 {% if fields.style == 'darktriangle' %} flex-col-reverse {% endif %} {% if textdirection == 'textleft' %} sm:flex-row-reverse {% else %} sm:flex-row {% endif %} ">
+		<div class="flex flex-col sm:mb-40 {% if fields.style == 'darktriangle' %} flex-col-reverse {% endif %} {% if textdirection == 'textleft' %} sm:flex-row-reverse {% else %} sm:flex-row {% endif %} ">
 			<div class="img-wrapper min-h-[500px] sm:w-1/2">
 				<div class="img-content flex justify-center relative">
 					<div class="img-decoration decoration-{{fields.style}}"></div>
