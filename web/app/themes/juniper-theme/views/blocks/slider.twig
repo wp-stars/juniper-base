@@ -193,8 +193,8 @@
 					</div>
 				{% endfor %}
 			</div>
-			<div class="col-span-12 sm:col-span-1 sm:h-[800px] relative">
-				<div class="relative mt-auto flex flex-row justify-end sm:flex-col sm:mb-20">
+			<div class="col-span-12 sm:col-span-1 sm:h-[800px] relative flex">
+				<div class="relative sm:mt-auto flex flex-row justify-between w-full sm:w-fit sm:justify-end sm:flex-col sm:mb-20 timeline-slider-controls">
 					<button class="bg-accent p-4 sm:mb-8 swiper-button-prev relative">
 						<svg xmlns="http://www.w3.org/2000/svg" width="26" height="43" viewBox="0 0 26 43" fill="none">
 							<path d="M23.384 13.0273L12.8778 2.52106L2.37158 13.0273" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -214,7 +214,7 @@
 		</div>
 		<script>
 			var swiper{{ instance }} = new Swiper(".timeline-slider-{{ instance }} .swiper", {
-				direction: "vertical",
+				direction: "horizontal",
 				pagination: {
 					el: ".timeline-slider-{{ instance }} .swiper-pagination",
 				},
@@ -225,7 +225,7 @@
 				allowTouchMove: false,
 				breakpoints: {
 					640: {
-						direction: 'horizontal'
+						direction: 'vertical'
 					}
 				}
 			});

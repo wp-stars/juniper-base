@@ -357,5 +357,10 @@
         object-fit: cover;
         object-position: center;
     }
+
+    .timeline-slider-controls .swiper-button-prev,
+    .timeline-slider-controls .swiper-button-next {
+        transform: rotate(-90deg);
+    }
     
 }
