@@ -1655,6 +1655,10 @@ input[type="range"]::-ms-fill-lower {
   align-self: stretch;
 }
 
+.break-all {
+  word-break: break-all;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -1810,11 +1814,6 @@ input[type="range"]::-ms-fill-lower {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-
-.px-\[3\.3rem\] {
-  padding-left: 3.3rem;
-  padding-right: 3.3rem;
 }
 
 .py-1 {
@@ -2303,6 +2302,11 @@ input[type="range"]::-ms-fill-lower {
     padding-right: 1rem;
   }
 
+  .sm\:px-\[3\.3rem\] {
+    padding-left: 3.3rem;
+    padding-right: 3.3rem;
+  }
+
   .sm\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -2311,11 +2315,6 @@ input[type="range"]::-ms-fill-lower {
   .sm\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-  }
-
-  .sm\:py-40 {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
   }
 
   .sm\:text-left {

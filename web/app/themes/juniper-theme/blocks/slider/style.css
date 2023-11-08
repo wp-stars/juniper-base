@@ -220,6 +220,12 @@
     height: 568px;
 }
 
+@media screen and (max-width: 640px) {
+    .split-slider.right .swiper {
+        height: 450px;
+    }
+}
+
 .split-slider.right .controls-wrapper {
     margin-top: calc(568px + 1.5rem);
     width: 588px;
