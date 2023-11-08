@@ -161,6 +161,11 @@
         top: 36rem;
     }
 
+    .img-decoration .decoration-imgtopright {
+        height: 520px;
+        width: 520px;
+    }
+
     .textright .img-content,
     .img-content .dark,
     .img-content .darktriangle,
@@ -174,6 +179,10 @@
         background-size: contain;
         background-position: center;
         margin-left: 0;
+    }
+
+    .img-content .imgtopright {
+        background-size: cover;
     }
 
     .dark-triangle-right {
