@@ -45,4 +45,9 @@
     .job-facts-inner ul {
         margin-left: 0;
     }
+
+    .salary-value {
+        font-size: 2.25rem;
+        line-height: 2.625rem;
+    }
 }

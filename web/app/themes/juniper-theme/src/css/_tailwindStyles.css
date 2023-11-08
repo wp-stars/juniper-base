@@ -1261,14 +1261,6 @@ input[type="range"]::-ms-fill-lower {
   margin-top: auto;
 }
 
-.mt-40 {
-  margin-top: 10rem;
-}
-
-.mt-32 {
-  margin-top: 8rem;
-}
-
 .block {
   display: block;
 }
@@ -2177,6 +2169,10 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:ml-auto {
     margin-left: auto;
+  }
+
+  .sm\:mt-0 {
+    margin-top: 0px;
   }
 
   .sm\:block {
