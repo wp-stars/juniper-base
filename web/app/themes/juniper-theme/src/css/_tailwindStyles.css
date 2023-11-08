@@ -1249,6 +1249,10 @@ input[type="range"]::-ms-fill-lower {
   margin-top: 2.5rem;
 }
 
+.mt-\[6\.5rem\] {
+  margin-top: 6.5rem;
+}
+
 .mt-\[6rem\] {
   margin-top: 6rem;
 }
@@ -1773,10 +1777,6 @@ input[type="range"]::-ms-fill-lower {
 
 .p-5 {
   padding: 1.25rem;
-}
-
-.p-8 {
-  padding: 2rem;
 }
 
 .p-\[0\.375rem\] {
