@@ -183,6 +183,14 @@ function wps_add_to_context( $context ) {
     return $context;
 }
 
+add_action( 'wp_enqueue_scripts', 'wpse_enqueues' );
+function wpse_enqueues() {
+    // Only enqueue on specified single CPTs
+    if( is_singular() ) {
+        wp_enqueue_style( 'wps-jumbotron-css', get_stylesheet_directory_uri() . '/blocks/jumbotron/style.css' );
+    }
+}
+
 // custom wps functionality from classes
 
 require_once __DIR__.'/classes/MailPoetGF.php';
