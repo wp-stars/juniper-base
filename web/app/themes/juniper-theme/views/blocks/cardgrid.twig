@@ -19,7 +19,7 @@
 	</div>
 	<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 cards">
 		{% for card in fields.cards %}
-			<div class="min-w-[100%] flex flex-col max-w-sm p-8 border border-4 border-dark card {% if loop.index is odd %}odd {% else %}even {% endif %}">
+			<div class="min-w-[100%] flex flex-col max-w-sm p-5 sm:p-8 border border-4 border-dark card {% if loop.index is odd %}odd {% else %}even {% endif %}">
 				<img class="w-fit mb-10" src="{{ card.card_image}}" alt="{{ card.card_title}}" />
 				<h3 class="mb-10 font-bold w-fit card-title">{{ card.card_title }}</h3>
 				<div class="card-content">{{ card.content }}</div>

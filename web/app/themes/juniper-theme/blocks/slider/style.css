@@ -332,6 +332,10 @@
     display: none;
 }
 
+.timeline-slider .timeline-slide {
+    max-height: 100%;
+}
+
 @media screen and (max-width: 640px) {
     .swiper-button-prev,
     .swiper-button-next {
