@@ -157,6 +157,10 @@
 }
 
 @media screen and (max-width: 640px) {
+    .dark-triangle-right {
+        top: 36rem;
+    }
+
     .textright .img-content,
     .img-content .dark,
     .img-content .darktriangle,
