@@ -351,22 +351,6 @@ h6 {
     width: fit-content;
 }
 
-// Jumbotron styles
-.jumbotron-shape-left {
-    position: absolute;
-}
-
-.jumbotron-shape-bottom {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 600px;
-    width: 800px;
-    clip-path: polygon(0 85%, 100% 100%, 100% 74%);
-    background-color: rgba(180, 212, 61, 0.6);
-}
-
-
 .cardgrid {
     .cards {
         .card-title,
