@@ -38,7 +38,8 @@
     color: #fff;
     left: 0;
     top: 9rem;
-    line-height: 2.75rem;
+    line-height: 2.625rem;
+    font-size: 2rem ;
 }
 
 .employee-card .skill-list {
