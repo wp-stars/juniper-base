@@ -345,5 +345,11 @@
         width: 2.875rem !important;
         height: 2.875rem !important;
     }
+
+    .blog-slider .image-wrapper img {
+        height: 300px;
+        object-fit: cover;
+        object-position: center;
+    }
     
 }

@@ -366,9 +366,9 @@
 {% if fields.style == "blog" %}
 	<div class="relative w-100 blog-slider blog-swiper-outer blog-swiper-{{ instance }} mb-48">
 		<div class="absolute blog-slider-background background"></div>
-		<div class="container mx-auto min-h-[1000px] sm:min-h-[500px] py-20 sm:py-40">
+		<div class="container mx-auto min-h-[1000px] sm:min-h-[500px] py-40">
 			<div class="w-full text-center mb-20">
-				<h2 class="text-white">{{ fields.blog_slider_static_items.title }}</h2>
+				<h2 class="text-white mb-8">{{ fields.blog_slider_static_items.title }}</h2>
 				<div class="text-white">{{ fields.blog_slider_static_items.intro }}</div>
 			</div>
 			{% if fields.blog_slider_static_items.link %}
