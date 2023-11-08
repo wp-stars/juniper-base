@@ -1,15 +1,9 @@
 .job-facts-outer {
-    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);    
     min-height: 500px;
-    background: var(--primary-green, #B4D43D);
-    padding-top: 12px;
 }
 
 .job-facts-inner {
-    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);    
     min-height: 500px;
-    background: var(--primary-petrol-dark, #093642);
-    padding-top: 8rem;
     padding-bottom: 8rem;
 }
 
@@ -35,4 +29,20 @@
     line-height: 66px; 
     font-family: 'Red Hat Display';
     font-weight: 700;
+}
+
+.job-facts-outer .background {
+    position: absolute; 
+    height: 100%;
+    width: 200%;
+    left: -50%;
+    border-top: 12px solid #B4D43D;
+    background-color: #093642;
+    transform: rotate(-6deg);
+}
+
+@media screen and (max-width: 640px) {
+    .job-facts-inner ul {
+        margin-left: 0;
+    }
 }
