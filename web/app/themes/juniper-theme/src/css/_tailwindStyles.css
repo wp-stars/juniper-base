@@ -1620,12 +1620,21 @@ input[type="range"]::-ms-fill-lower {
        column-gap: 1rem;
 }
 
+.gap-x-8 {
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+}
+
 .gap-y-12 {
   row-gap: 3rem;
 }
 
 .gap-y-24 {
   row-gap: 6rem;
+}
+
+.gap-y-32 {
+  row-gap: 8rem;
 }
 
 .gap-y-8 {
@@ -2270,6 +2279,10 @@ input[type="range"]::-ms-fill-lower {
   .sm\:gap-x-8 {
     -moz-column-gap: 2rem;
          column-gap: 2rem;
+  }
+
+  .sm\:gap-y-8 {
+    row-gap: 2rem;
   }
 
   .sm\:p-0 {
