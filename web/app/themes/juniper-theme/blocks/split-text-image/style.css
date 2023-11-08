@@ -161,7 +161,7 @@
         top: 36rem;
     }
 
-    .img-decoration .decoration-imgtopright {
+    .decoration-imgtopright.img-decoration {
         height: 520px;
         width: 520px;
     }
