@@ -51,9 +51,9 @@ const Filter = ( data ) => {
                 <div className="container mx-auto">
                     <div className="w-full flex justify-center items-center">
                         <h3 className="text-white">Filter</h3>
-                        <button data-collapse-toggle="filter-items" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm ml-4 md:hidden" aria-controls="filter-items" aria-expanded="false">
+                        <button data-collapse-toggle="filter-items" type="button" className="filter-toggle inline-flex items-center p-2 justify-center text-sm ml-4 md:hidden" aria-controls="filter-items" aria-expanded="false">
                             <span className="sr-only">Open filter</span>
-                            <svg className="w-[2.5rem] h-[2.5rem]" xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
+                            <svg className="w-[2.5rem] h-[2.5rem] open-toggle" xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
                                 <path d="M6.66669 35.5929V23.9263" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 <path d="M6.66669 17.2594V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 <path d="M20 35.5928V20.5928" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -64,9 +64,13 @@ const Filter = ( data ) => {
                                 <path d="M15 13.9263H25" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 <path d="M28.3333 27.2593H38.3333" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
+                            <svg className="w-[2.5rem] h-[2.5rem] close-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" fill="none">
+                                <path d="M26.25 8.75L8.75 26.25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8.75 8.75L26.25 26.25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </button>
                     </div>
-                    <div id="filter-items" className="hidden sm:inline-flex flex-wrap justify-center py-20">
+                    <div id="filter-items" className="hidden inline-flex flex-wrap justify-start sm:justify-center py-20">
                         {data.terms.map((term, index) => {
                             let isActive = selectedFilterVals.includes(term.term_id)
                             return (

@@ -2336,13 +2336,13 @@ const Filter = data => {
   }, "Filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     "data-collapse-toggle": "filter-items",
     type: "button",
-    className: "inline-flex items-center p-2 w-10 h-10 justify-center text-sm ml-4 md:hidden",
+    className: "filter-toggle inline-flex items-center p-2 justify-center text-sm ml-4 md:hidden",
     "aria-controls": "filter-items",
     "aria-expanded": "false"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "sr-only"
   }, "Open filter"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    className: "w-[2.5rem] h-[2.5rem]",
+    className: "w-[2.5rem] h-[2.5rem] open-toggle",
     xmlns: "http://www.w3.org/2000/svg",
     width: "40",
     height: "41",
@@ -2402,9 +2402,26 @@ const Filter = data => {
     strokeWidth: "2",
     strokeLinecap: "round",
     strokeLinejoin: "round"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    className: "w-[2.5rem] h-[2.5rem] close-toggle",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 35 35",
+    fill: "none"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M26.25 8.75L8.75 26.25",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M8.75 8.75L26.25 26.25",
+    stroke: "#F9F9F9",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "filter-items",
-    className: "hidden sm:inline-flex flex-wrap justify-center py-20"
+    className: "hidden inline-flex flex-wrap justify-start sm:justify-center py-20"
   }, data.terms.map((term, index) => {
     let isActive = selectedFilterVals.includes(term.term_id);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {

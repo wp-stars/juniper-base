@@ -1,10 +1,14 @@
 .filter-choices .background {
     position: absolute;
-    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
-    width: 100%;
-    min-width: 800px;
+    width: 200%;
+    left: -50%;
+    transform: rotate(-6deg);
     height: 100%;
     top: 0;
+}
+
+.filter-choices .decoration {
+    z-index: -1;
 }
 
 .filter-btn {
@@ -118,4 +122,23 @@
         height: 500px;
         width: 500px;
     }
+
+    .filter-btn .btn-inner {
+        font-size: 1rem;
+        line-height: 1.75rem;
+    }
+
+    .filter-btn {
+        margin: 0 1rem 0.25rem 0;
+    }
+}
+
+.filter-toggle[aria-expanded="false"] .open-toggle,
+.filter-toggle[aria-expanded="true"] .close-toggle {
+    display: block;
+}
+
+.filter-toggle[aria-expanded="false"] .close-toggle,
+.filter-toggle[aria-expanded="true"] .open-toggle {
+    display: none;
 }
