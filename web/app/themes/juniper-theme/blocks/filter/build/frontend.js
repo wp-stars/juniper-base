@@ -2494,7 +2494,7 @@ const Filter = data => {
       key: index
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full flex justify-center"
+    className: "container flex justify-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => loadMorePosts(),
     className: "btn btn-primary w-full"

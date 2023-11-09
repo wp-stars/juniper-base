@@ -114,7 +114,7 @@ const Filter = ( data ) => {
                     )
                 })}
             </div>
-            <div className="w-full flex justify-center">
+            <div className="container flex justify-center">
                 <button onClick={() => loadMorePosts()} className="btn btn-primary w-full">mehr {data.postType} zeigen</button>
             </div>
         </div>
