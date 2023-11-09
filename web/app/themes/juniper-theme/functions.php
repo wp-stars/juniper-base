@@ -151,6 +151,19 @@ function juniper_customizer_setting($wp_customize) {
         'settings' => 'footer_logo',
         'priority' => 8 // show it just below the custom-logo
     )));
+
+    $wp_customize->add_setting( 'juniper_footer_textarea', array(
+        'capability' => 'edit_theme_options',
+        'default' => 'Lorem Ipsum Dolor Sit amet',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+      
+    $wp_customize->add_control( 'juniper_footer_textarea', array(
+        'type' => 'textarea',
+        'section' => 'title_tagline', // // Add a default or your own section
+        'label' => __( 'Footer Quote' ),
+        'description' => __( 'Enter footer quote.' ),
+    ) );
 }
 
 add_action('customize_register', 'juniper_customizer_setting');
@@ -171,6 +184,8 @@ function wps_add_to_context( $context ) {
     $context['logo']             = $logo;
     $footer_logo                 = get_theme_mod( 'footer_logo' );
     $context['footer_logo']      = $footer_logo;
+    $footer_quote                = get_theme_mod( 'footer_quote' );
+    $context['footer_quote']      = $footer_quote;
     $upload_dir                  = wp_upload_dir();
     $context['uploads']          = $upload_dir;
     $context['theme_dir']        = get_stylesheet_directory_uri();

@@ -86,6 +86,10 @@
         box-shadow: none;
         background-size: cover;
     }
+
+    .textright .img-wrapper {
+        min-height: 600px;
+    }
 }
 
 

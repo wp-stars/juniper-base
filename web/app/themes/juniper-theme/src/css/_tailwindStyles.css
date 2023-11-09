@@ -2313,6 +2313,10 @@ input[type="range"]::-ms-fill-lower {
     justify-content: space-around;
   }
 
+  .sm\:gap-8 {
+    gap: 2rem;
+  }
+
   .sm\:gap-x-8 {
     -moz-column-gap: 2rem;
          column-gap: 2rem;
