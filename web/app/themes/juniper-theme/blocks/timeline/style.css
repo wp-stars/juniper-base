@@ -81,5 +81,15 @@
         top: 0;
         right: -150px;
     }
+
+    .timeline-item .timeline-text {
+        font-size: 1.375rem; 
+        line-height: 2rem;
+    }
+
+    .timeline-item .timeline-tagline {
+        font-size: 0.875rem;
+        line-height: 1.875rem;
+    }    
     
 }
