@@ -46,7 +46,8 @@
         margin-left: 0;
     }
 
-    .job-facts-outer .salary-value {
+    .job-facts-outer .salary-value,
+    .job-facts-outer .salary-label {
         font-size: 2.25rem;
         line-height: 2.625rem;
     }
