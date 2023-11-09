@@ -180,11 +180,13 @@
     background: var(--primary-green, #B4D43D);
 }
 
-.split-slider.light .title {
+.split-slider.light .title,
+.split-slider.light .tagline {
     color: #093642;
 }
 
-.split-slider.dark .title {
+.split-slider.dark .title,
+.split-slider.dark .tagline {
     color: #F9F9F9;
 }
 
@@ -241,6 +243,20 @@
     margin-right: unset;
     margin-bottom: unset;
     margin-left: unset;
+}
+
+.split-slider .controls-wrapper .swiper-pagination-bullets.swiper-pagination-horizontal {
+    width: calc(100% - (4.375rem * 2));
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    margin-top: unset;
+    margin-right: unset;
+    margin-bottom: unset;
+    margin-left: unset;
+    margin: auto;
+    position: relative
 }
 
 @media screen and (max-width: 640px) {

@@ -1265,6 +1265,10 @@ input[type="range"]::-ms-fill-lower {
   margin-top: auto;
 }
 
+.mt-\[1\.5rem\] {
+  margin-top: 1.5rem;
+}
+
 .line-clamp-4 {
   overflow: hidden;
   display: -webkit-box;

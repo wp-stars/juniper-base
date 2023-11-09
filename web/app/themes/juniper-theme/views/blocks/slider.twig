@@ -77,6 +77,12 @@
 					</div>
 				{% else %}
 					<div class="left col-span-12 sm:col-span-4">
+						{% if fields.split_slider_static_items.tagline_over_slider %}
+							<p class="tagline">{{ fields.split_slider_static_items.tagline_over_slider }}</p>
+						{% endif %}
+						{% if fields.split_slider_static_items.title_over_slider %}
+							<h3 class="mb-20 title">{{ fields.split_slider_static_items.title_over_slider }}</h3>
+						{% endif %}
 						<div class="swiper split-swiper-{{ instance }}">
 							<div class="swiper-wrapper">
 								{% for slide in fields.split_slider_items %}
@@ -101,9 +107,8 @@
 									</div>
 								{% endfor %}
 							</div>
-							<div class="swiper-pagination"></div>
 						</div>
-						<div class="controls-wrapper inline-flex w-full justify-between relative">
+						<div class="controls-wrapper mt-[1.5rem] inline-flex w-full justify-between relative">
 							<div class="swiper-button-prev bg-primary w-fit p-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
 									<path d="M12.5061 1.9876L1.99991 12.4938L12.5061 23" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -111,6 +116,7 @@
 									<rect x="42" y="14.2446" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 42 14.2446)" fill="#093642"/>
 								</svg>
 							</div>
+							<div class="swiper-pagination"></div>
 							<div class="swiper-button-next bg-primary w-fit p-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
 									<path d="M29.4939 23.0124L40.0001 12.5062L29.4939 2" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
