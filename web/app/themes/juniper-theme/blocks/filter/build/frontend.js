@@ -2254,9 +2254,9 @@ const ArticleResult = _ref => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "mb-5"
   }, post.post_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "mb-5 description"
+    className: "mb-10 sm:mb-5 description"
   }, post.post_author, " // ", post.post_date, " // ", post.terms.map(term => term.name).join(' // ')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "mb-10"
+    className: "mb-10 line-clamp-4"
   }, post.excerpt), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: post.link,
     className: "btn-underline"
