@@ -1253,6 +1253,10 @@ input[type="range"]::-ms-fill-lower {
   margin-top: 2.5rem;
 }
 
+.mt-\[2\.6rem\] {
+  margin-top: 2.6rem;
+}
+
 .mt-\[6\.5rem\] {
   margin-top: 6.5rem;
 }
@@ -1645,6 +1649,10 @@ input[type="range"]::-ms-fill-lower {
 
 .self-stretch {
   align-self: stretch;
+}
+
+.break-words {
+  overflow-wrap: break-word;
 }
 
 .break-all {
