@@ -119,8 +119,8 @@
 @media screen and (max-width: 640px) {
     .teaser-image img,
     .teaser-image .decoration {
-        height: 500px;
-        width: 500px;
+        height: 400px;
+        width: 400px;
     }
 
     .filter-btn .btn-inner {
@@ -130,6 +130,16 @@
 
     .filter-btn {
         margin: 0 1rem 0.25rem 0;
+    }
+
+    .even .showcase-image img {
+        right: 0rem;
+        top: 80px;
+    }
+    
+    .odd .showcase-image img {
+        left: 0rem;
+        top: 80px;
     }
 }
 

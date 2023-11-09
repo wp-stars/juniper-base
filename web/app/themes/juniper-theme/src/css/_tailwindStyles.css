@@ -1378,6 +1378,10 @@ input[type="range"]::-ms-fill-lower {
   min-height: 970px;
 }
 
+.min-h-\[450px\] {
+  min-height: 450px;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -1481,6 +1485,14 @@ input[type="range"]::-ms-fill-lower {
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.max-w-\[250px\] {
+  max-width: 250px;
+}
+
+.max-w-\[200px\] {
+  max-width: 200px;
 }
 
 .shrink {
@@ -1647,6 +1659,10 @@ input[type="range"]::-ms-fill-lower {
   align-self: stretch;
 }
 
+.break-words {
+  overflow-wrap: break-word;
+}
+
 .break-all {
   word-break: break-all;
 }
@@ -1803,11 +1819,6 @@ input[type="range"]::-ms-fill-lower {
   padding-right: 1rem;
 }
 
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1851,6 +1862,11 @@ input[type="range"]::-ms-fill-lower {
 .py-\[10rem\] {
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .pb-8 {
@@ -2397,6 +2413,10 @@ input[type="range"]::-ms-fill-lower {
     display: none;
   }
 
+  .md\:min-h-\[800px\] {
+    min-height: 800px;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -2416,6 +2436,10 @@ input[type="range"]::-ms-fill-lower {
   .md\:w-fit {
     width: -moz-fit-content;
     width: fit-content;
+  }
+
+  .md\:max-w-\[300px\] {
+    max-width: 300px;
   }
 
   .md\:grid-cols-2 {
@@ -2458,6 +2482,11 @@ input[type="range"]::-ms-fill-lower {
 
   .md\:p-0 {
     padding: 0px;
+  }
+
+  .md\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .md\:text-5xl {
