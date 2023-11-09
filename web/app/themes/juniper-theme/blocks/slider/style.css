@@ -180,6 +180,14 @@
     background: var(--primary-green, #B4D43D);
 }
 
+.split-slider.light .title {
+    color: #093642;
+}
+
+.split-slider.dark .title {
+    color: #F9F9F9;
+}
+
 .split-slider-background {
     min-height: 600px;
     top: 0;
@@ -218,6 +226,21 @@
 
 .split-slider.right .swiper {
     height: 568px;
+}
+
+
+.split-slider .swiper-button-next,
+.split-slider .swiper-button-prev {
+    width: 4.375rem;
+    height: 4.375rem;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    margin-top: unset;
+    margin-right: unset;
+    margin-bottom: unset;
+    margin-left: unset;
 }
 
 @media screen and (max-width: 640px) {
