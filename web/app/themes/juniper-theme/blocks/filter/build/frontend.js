@@ -2497,7 +2497,7 @@ const Filter = data => {
     className: "w-full flex justify-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => loadMorePosts(),
-    className: "btn btn-primary"
+    className: "btn btn-primary w-full"
   }, "mehr ", data.postType, " zeigen")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Filter);
