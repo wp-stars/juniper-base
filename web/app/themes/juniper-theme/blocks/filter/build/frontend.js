@@ -2190,7 +2190,7 @@ const AlternatingResult = _ref => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `order-1 ${index % 2 === 0 ? 'sm:order-1' : 'sm:order-2'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "min-h-[800px] sm:min-h-[unset]"
+    class: "min-h-[450px] md:min-h-[800px] sm:min-h-[unset]"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "teaser-image absolute z-0"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2201,7 +2201,7 @@ const AlternatingResult = _ref => {
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "showcase-image z-10 relative"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    className: "max-w-[300px]",
+    className: "max-w-[200px] md:max-w-[300px]",
     alt: "Showcase Image",
     src: post.fields.showcase_image
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
