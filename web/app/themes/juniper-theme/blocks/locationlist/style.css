@@ -1,5 +1,7 @@
 .location-info svg {
     margin-right: 1rem;
+    min-height: 24px;
+    min-width: 24px;
 }
 
 .location-list-background-dark {
@@ -65,4 +67,8 @@
 .location-grid p {
     font-size: 1.125rem;
     line-height: 1.875rem;
+}
+
+.location-info p{
+    word-break: break-word;
 }
