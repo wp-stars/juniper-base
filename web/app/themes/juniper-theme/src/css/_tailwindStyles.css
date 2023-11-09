@@ -2368,11 +2368,6 @@ input[type="range"]::-ms-fill-lower {
     grid-column: span 8 / span 8;
   }
 
-  .md\:mx-\[0rem\] {
-    margin-left: 0rem;
-    margin-right: 0rem;
-  }
-
   .md\:mb-0 {
     margin-bottom: 0px;
   }

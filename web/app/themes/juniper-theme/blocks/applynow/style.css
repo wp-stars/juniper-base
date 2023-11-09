@@ -74,4 +74,8 @@
     .applynow .contentright .img-content {
         left: -50px;
     }
+
+    .applynow .img-content {
+        right: -100px;
+    }
 }
