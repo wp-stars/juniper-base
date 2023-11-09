@@ -184,7 +184,7 @@ function wps_add_to_context( $context ) {
     $context['logo']             = $logo;
     $footer_logo                 = get_theme_mod( 'footer_logo' );
     $context['footer_logo']      = $footer_logo;
-    $footer_quote                = get_theme_mod( 'footer_quote' );
+    $footer_quote                = get_theme_mod( 'juniper_footer_textarea' );
     $context['footer_quote']      = $footer_quote;
     $upload_dir                  = wp_upload_dir();
     $context['uploads']          = $upload_dir;
