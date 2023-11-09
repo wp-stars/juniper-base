@@ -194,7 +194,7 @@
 				{% for item in fields.timeline_slider_items %}
 					<div class="timeline-slide w-full flex flex-col items-start justify-center swiper-slide">
 						<p class="bold bg-dark text-primary p-4 text-4xl bold mb-10">{{ loop.index }}.</p>
-						<h3 class="mb-3">{{ item.slider_title }}</h3>
+						<h3 class="mb-3 text-left">{{ item.slider_title }}</h3>
 						<p class="pl-8 text-left text-dark">{{ item.slider_text }}</p>
 					</div>
 				{% endfor %}
