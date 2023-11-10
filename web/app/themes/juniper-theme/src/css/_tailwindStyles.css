@@ -2206,6 +2206,10 @@ input[type="range"]::-ms-fill-lower {
     margin-bottom: 2rem;
   }
 
+  .sm\:mb-\[4rem\] {
+    margin-bottom: 4rem;
+  }
+
   .sm\:ml-auto {
     margin-left: auto;
   }
