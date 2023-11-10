@@ -295,25 +295,6 @@ h6 {
     }
 }
 
-@media screen and (max-width: 640px) {
-    .btn-underline {
-        &:after {
-            width: 1.7rem;
-            right: -40px;
-            content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18" fill="none"><path d="M19.6509 16L26.6509 9L19.6509 2" stroke="%231E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="7.83325" width="10.5" height="2.33333" rx="1.16667" fill="%231E1E1E"/><rect y="7.83325" width="4.66667" height="2.33333" rx="1.16667" fill="%231E1E1E"/></svg>');
-        }
-    }
-    .btn-underline-white {
-        &:after {
-            content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18" fill="none"><path d="M19.6509 16L26.6509 9L19.6509 2" stroke="%23F9F9F9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="7.83325" width="10.5" height="2.33333" rx="1.16667" fill="%23F9F9F9"/><rect y="7.83325" width="4.66667" height="2.33333" rx="1.16667" fill="%23F9F9F9"/></svg>');
-            width: 1.7rem;
-            right: -40px;
-        }
-    }
-
-}
-
-
 .red-hat-var-medium {
 
     font-family: 'Red Hat Display';
@@ -461,6 +442,26 @@ h6 {
         }
     }
 }
+
+
+@media screen and (max-width: 640px) {
+    .btn-underline {
+        &:after {
+            width: 1.7rem;
+            right: -40px;
+            content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18" fill="none"><path d="M19.6509 16L26.6509 9L19.6509 2" stroke="%231E1E1E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="7.83325" width="10.5" height="2.33333" rx="1.16667" fill="%231E1E1E"/><rect y="7.83325" width="4.66667" height="2.33333" rx="1.16667" fill="%231E1E1E"/></svg>');
+        }
+    }
+    .btn-underline-white {
+        &:after {
+            content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18" fill="none"><path d="M19.6509 16L26.6509 9L19.6509 2" stroke="%23F9F9F9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="7.83325" width="10.5" height="2.33333" rx="1.16667" fill="%23F9F9F9"/><rect y="7.83325" width="4.66667" height="2.33333" rx="1.16667" fill="%23F9F9F9"/></svg>');
+            width: 1.7rem;
+            right: -40px;
+        }
+    }
+
+}
+
 
 // Timeline styles
 .timeline-slider {
