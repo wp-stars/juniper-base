@@ -35,13 +35,13 @@
 								<div class="swiper-wrapper">
 									{% for slide in fields.split_slider_items %}
 										<div class="swiper-slide {{ fields.split_slider_static_items.slide_style }}" style="background-image: url('{{ slide.slider_image.url }}');">
-											<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4">
+											<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4 {{ fields.split_slider_static_items.slide_style }}">
 												{% if fields.split_slider_static_items.slide_style == "overlay" %}
 													<div class="title-wrapper">
 														<h5>{{ slide.slider_title }}</h5>
 													</div>
 												{% else %}
-													<h5 class="mb-3">{{ slide.slider_title }}</h5>
+													{% if slide.slider_title %}<h5 class="mb-3">{{ slide.slider_title }}</h5>{% endif %}
 												{% endif %}
 												<a class="w-full" href="{{ slide.link.url }}">
 													<span>{{ slide.link.title }}</span>
