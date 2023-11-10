@@ -320,6 +320,12 @@ h6 {
     clip-path: polygon(0 0, 100% 23%, 100% 100%, 0 100%);
 }
 
+@media screen and (max-width: 640px) {
+    .angled-top {
+        clip-path: polygon(0 0, 100% 17%, 100% 100%, 0 100%);
+    }
+}
+
 #content {
     min-height: calc(100vh - ( 68px + 151px ));
 }
@@ -535,7 +541,6 @@ h6 {
 
 footer {
     overflow: hidden;
-    height: 505px;
     background: $text;
     .asterisk {
         height: 400px;

@@ -10,10 +10,6 @@
 }
 
 @media screen and (max-width: 640px) {
-    .jumbotron-shape-bottom {
-        width: 190px;
-        height: 210px;
-    }
 
     .jumbotron-section.angled-bottom {
         clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 88%);

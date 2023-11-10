@@ -1109,6 +1109,16 @@ input[type="range"]::-ms-fill-lower {
   margin-bottom: 8rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .-mb-px {
   margin-bottom: -1px;
 }
@@ -1271,6 +1281,10 @@ input[type="range"]::-ms-fill-lower {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mb-\[3rem\] {
+  margin-bottom: 3rem;
 }
 
 .line-clamp-4 {
@@ -1543,10 +1557,6 @@ input[type="range"]::-ms-fill-lower {
 
 .grid-cols-12 {
   grid-template-columns: repeat(12, minmax(0, 1fr));
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-3 {
@@ -2159,6 +2169,16 @@ input[type="range"]::-ms-fill-lower {
     margin-bottom: 5rem;
   }
 
+  .sm\:mx-8 {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .sm\:mb-0 {
     margin-bottom: 0px;
   }
@@ -2296,6 +2316,10 @@ input[type="range"]::-ms-fill-lower {
     max-width: 70%;
   }
 
+  .sm\:max-w-\[800px\] {
+    max-width: 800px;
+  }
+
   .sm\:grid-cols-12 {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
@@ -2328,8 +2352,8 @@ input[type="range"]::-ms-fill-lower {
     justify-content: center;
   }
 
-  .sm\:justify-around {
-    justify-content: space-around;
+  .sm\:justify-evenly {
+    justify-content: space-evenly;
   }
 
   .sm\:gap-8 {
@@ -2388,6 +2412,10 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:text-left {
     text-align: left;
+  }
+
+  .sm\:text-center {
+    text-align: center;
   }
 
   .sm\:leading-3 {
