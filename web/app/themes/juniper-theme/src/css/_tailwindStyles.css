@@ -1869,6 +1869,11 @@ input[type="range"]::-ms-fill-lower {
   padding-bottom: 8rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
@@ -1877,11 +1882,6 @@ input[type="range"]::-ms-fill-lower {
 .py-\[10rem\] {
   padding-top: 10rem;
   padding-bottom: 10rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .pb-8 {
@@ -2218,10 +2218,6 @@ input[type="range"]::-ms-fill-lower {
     margin-top: auto;
   }
 
-  .sm\:block {
-    display: block;
-  }
-
   .sm\:flex {
     display: flex;
   }
@@ -2358,6 +2354,10 @@ input[type="range"]::-ms-fill-lower {
 
   .sm\:gap-y-8 {
     row-gap: 2rem;
+  }
+
+  .sm\:self-end {
+    align-self: flex-end;
   }
 
   .sm\:p-0 {
