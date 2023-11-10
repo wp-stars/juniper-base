@@ -247,8 +247,8 @@ h6 {
 @media screen and (max-width: 640px) {
     .btn-primary,
     .gform_button[type="submit"] {
-        font-size: 1rem;
-        line-height: 1.875rem;
+        font-size: 1rem !important;
+        line-height: 1.875rem !important;
     }
 
 }
