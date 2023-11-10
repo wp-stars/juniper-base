@@ -6,6 +6,10 @@ $white: #F9F9F9;
 $black: #1E1E1E;
 $small: 640px;
 
+// a {
+//     font-weight: 700;
+//     border-bottom: 6px solid #B4D43D;
+// }
 
 .text {
     color: $text;
@@ -185,6 +189,36 @@ h6 {
     font-weight: 500;
     line-height: 1.875rem;
     text-transform: none;
+    padding: 0;
+}
+
+@media screen and (max-width: 640px) {
+    .navbar .secondary-menu li a {
+        text-transform: uppercase;
+    }
+
+    .navbar .primary-menu li a {
+        text-transform: none;
+    }
+    
+}
+
+#navbarToggler {
+    .open-menu {
+        display: flex;
+    }
+    .close-menu {
+        display: none;
+    }
+    &.navbar-open {
+        .open-menu {
+            display: none;
+        }
+        .close-menu {
+            display: flex;
+        }
+
+    }
 }
 
 .intro-text ul li {
