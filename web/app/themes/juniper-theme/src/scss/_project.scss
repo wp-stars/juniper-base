@@ -6,10 +6,11 @@ $white: #F9F9F9;
 $black: #1E1E1E;
 $small: 640px;
 
-// a {
-//     font-weight: 700;
-//     border-bottom: 6px solid #B4D43D;
-// }
+p a {    
+    font-weight: 700;
+    border-bottom: 6px solid #B4D43D;
+    padding-bottom: 0.31rem;
+}
 
 .text {
     color: $text;
