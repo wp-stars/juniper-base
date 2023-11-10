@@ -185,7 +185,12 @@
         margin-left: 0;
     }
 
-    .img-content .imgtopright {
+    .textright .img-content {
+        left: -20px;
+    }
+
+    .img-content .imgtopright,
+    .img-content .imgleft {
         background-size: cover;
     }
 
