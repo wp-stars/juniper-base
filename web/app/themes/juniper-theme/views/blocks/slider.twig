@@ -18,7 +18,7 @@
 		<div class="container min-h-[600px] py-32 mx-auto slider relative">
 			<div class="grid grid-cols-12 gap-y-8 sm:gap-x-8">
 				{% if fields.split_slider_static_items.slider_side == "right" %}
-					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col justify-center">
+					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col {{ fields.split_slider_static_items.text_alignment }}">
 						<h2 class="mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
 						<div class="mb-12 intro-text">{{ fields.split_slider_static_items.text }}</div>
 						<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
@@ -87,13 +87,13 @@
 							<div class="swiper-wrapper">
 								{% for slide in fields.split_slider_items %}
 									<div class="swiper-slide h-[400px] {{ fields.split_slider_static_items.slide_style }}" style="background-image: url('{{ slide.slider_image.url }}');">
-										<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4">
+										<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4 {{ fields.split_slider_static_items.slide_style }}">
 											{% if fields.split_slider_static_items.slide_style == "overlay" %}
 												<div class="title-wrapper">
 													<h5>{{ slide.slider_title }}</h5>
 												</div>
 											{% else %}
-												<h5 class="mb-3">{{ slide.slider_title }}</h5>
+												{% if slide.slider_title %}<h5 class="mb-3">{{ slide.slider_title }}</h5>{% endif %}
 											{% endif %}
 											<a class="w-full" href="{{ slide.link.url }}">
 												<span>{{ slide.link.title }}</span>
@@ -126,7 +126,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="right text-white h-full flex flex-col justify-center col-span-12 sm:col-span-8">
+					<div class="right text-white h-full flex flex-col {{ fields.split_slider_static_items.text_alignment }} col-span-12 sm:col-span-8">
 						<h2 class="mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
 						<div class="mb-12 intro-text">{{ fields.split_slider_static_items.text }}</div>
 						{% if fields.split_slider_static_items.link %}
