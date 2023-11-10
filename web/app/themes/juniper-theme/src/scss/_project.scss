@@ -173,6 +173,10 @@ h6 {
     text-transform: uppercase;
 } 
 
+.navbar .secondary-menu {
+    margin-top: 0;
+}
+
 .navbar .secondary-menu li a {
     color: $white;
     font-family: "Red Hat Mono";
