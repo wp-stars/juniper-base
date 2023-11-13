@@ -4,7 +4,7 @@ const AlternatingResult = ({ index, post }) => {
     return (
         <div className={`container mx-auto min-h-[600px] mb-52 grid grid-cols-1 sm:grid-cols-2 ${index % 2 === 0 ? 'even' : 'odd'}`}>
             <div className={`order-1 ${index % 2 === 0 ? 'sm:order-1' : 'sm:order-2'}`}>
-                <div class="min-h-[800px] sm:min-h-[unset]">
+                <div className="min-h-[800px] sm:min-h-[unset]">
                     <div className="teaser-image absolute z-0">
                         <div className="absolute decoration"></div>
                         <img className="absolute" src={post.fields.teaser_image} />
