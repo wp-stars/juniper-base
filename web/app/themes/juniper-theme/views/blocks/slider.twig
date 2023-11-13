@@ -18,18 +18,20 @@
 		<div class="container min-h-[600px] py-32 mx-auto slider relative">
 			<div class="grid grid-cols-12 gap-y-8 sm:gap-x-8">
 				{% if fields.split_slider_static_items.slider_side == "right" %}
+					<div class="col-span-12 flex justify-content-end">
+						{% if fields.split_slider_static_items.tagline_over_slider %}
+							<p class="tagline">{{ fields.split_slider_static_items.tagline_over_slider }}</p>
+						{% endif %}
+						{% if fields.split_slider_static_items.title_over_slider %}
+							<h3 class="mb-20 title">{{ fields.split_slider_static_items.title_over_slider }}</h3>
+						{% endif %}
+					</div>
 					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col {{ fields.split_slider_static_items.text_alignment }}">
 						<h2 class="mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
 						<div class="mb-6 intro-text">{{ fields.split_slider_static_items.text }}</div>
 						<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
 					</div>
 					<div class="right col-span-12 sm:col-span-6">
-						{% if fields.split_slider_static_items.tagline_over_slider %}
-							<p class="tagline text-white">{{ fields.split_slider_static_items.tagline_over_slider }}</p>
-						{% endif %}
-						{% if fields.split_slider_static_items.title_over_slider %}
-							<h3 class="mb-20 text-white">{{ fields.split_slider_static_items.title_over_slider }}</h3>
-						{% endif %}
 						<div class="sm:absolute sm:w-full">
 							<div class="swiper split-swiper-{{ instance }}">
 								<div class="swiper-wrapper">
@@ -76,13 +78,15 @@
 						</div>
 					</div>
 				{% else %}
-					<div class="left col-span-12 sm:col-span-4">
+					<div class="col-span-12 flex justify-content-start">
 						{% if fields.split_slider_static_items.tagline_over_slider %}
 							<p class="tagline">{{ fields.split_slider_static_items.tagline_over_slider }}</p>
 						{% endif %}
 						{% if fields.split_slider_static_items.title_over_slider %}
 							<h3 class="mb-20 title">{{ fields.split_slider_static_items.title_over_slider }}</h3>
 						{% endif %}
+					</div>
+					<div class="left col-span-12 sm:col-span-4">
 						<div class="swiper split-swiper-{{ instance }}">
 							<div class="swiper-wrapper">
 								{% for slide in fields.split_slider_items %}
