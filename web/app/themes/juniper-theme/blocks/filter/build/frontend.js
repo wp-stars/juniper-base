@@ -2295,6 +2295,7 @@ const Filter = data => {
   const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(data.posts);
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [maxPages, setMaxPages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(data.maxNumPages);
   const updateFilterVals = (e, term_id) => {
     e.preventDefault();
     let shallowFilterVals = [...selectedFilterVals];
@@ -2326,6 +2327,7 @@ const Filter = data => {
     }
     queryString += `&page=${page}`;
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
+      setMaxPages(res.data.maxNumPages);
       setPosts([...posts, ...res.data.posts]);
       setLoading(false);
     }).catch(err => {
@@ -2502,12 +2504,14 @@ const Filter = data => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: index
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
-  }, loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...") : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "container flex justify-center"
+  }, page < maxPages ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => loadMorePosts(),
     className: "btn btn-primary w-full"
-  }, "Mehr ", data.postName, " zeigen")));
+  }, "Mehr ", data.postName, " zeigen") : null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Filter);
 

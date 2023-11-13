@@ -8,6 +8,7 @@ const Filter = ( data ) => {
     const [posts, setPosts] = useState(data.posts)
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
+    const [maxPages, setMaxPages] = useState(data.maxNumPages)
 
     const updateFilterVals = (e, term_id) => {
         e.preventDefault()
@@ -47,6 +48,7 @@ const Filter = ( data ) => {
         queryString += `&page=${page}`
         axios.get(`${data.restUrl}wps/v1/data${queryString}`)
             .then(res => {
+                setMaxPages(res.data.maxNumPages)
                 setPosts([...posts, ...res.data.posts])
                 setLoading(false)
             })
@@ -124,13 +126,17 @@ const Filter = ( data ) => {
                     )
                 })}
             </div>
-            <div className="container flex justify-center">
                 {loading ? 
-                    <p>Loading...</p>
+                    <div className="container flex justify-center">
+                        <p>Loading...</p>
+                    </div>
                 : 
-                    <button onClick={() => loadMorePosts()} className="btn btn-primary w-full">Mehr {data.postName} zeigen</button>
+                    <div className="container flex justify-center">
+                        {page < maxPages ? 
+                            <button onClick={() => loadMorePosts()} className="btn btn-primary w-full">Mehr {data.postName} zeigen</button>
+                        : null}
+                    </div>
                 }
-            </div>
         </div>
     )
 }

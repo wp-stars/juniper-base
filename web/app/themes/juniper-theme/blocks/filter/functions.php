@@ -126,6 +126,7 @@ function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
     }
 
     $data_arr['posts'] = $post_arr;
+    $data_arr['maxNumPages'] = $initial_posts->max_num_pages;
 
     $terms = get_terms( 
         array(
