@@ -47,7 +47,7 @@
 }
 
 .featured-persons-card .name {
-    position: absolute;position: absolute;
+    position: absolute;
     color: #fff;
     font-size: 1.75rem;
     font-weight: bold;
@@ -58,8 +58,6 @@
     text-align: center;
     color: #fff;
     left: 1rem;
-    font-size: 1.75rem;
-    font-weight: bold;
 }
 
 .featured-persons-card .skill-list {
