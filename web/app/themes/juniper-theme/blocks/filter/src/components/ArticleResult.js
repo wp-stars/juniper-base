@@ -10,6 +10,7 @@ const ArticleResult = ({ index, post }) => {
                 </div>
                 <div className="article-text flex flex-col items-start text-left justify-center col-span-12 sm:col-span-7">
                     <h3 className="mb-5">{post.post_title}</h3>
+                    {console.log(post, post.terms)}
                     <p className="mb-10 sm:mb-5 description">{post.post_author} // {post.post_date} // {post.terms.map(term => term.name).join(' // ')}</p>
                     <div className="mb-10 line-clamp-4">{post.excerpt}</div>
                     <a href={post.link} className="btn-underline">weiter lesen</a>

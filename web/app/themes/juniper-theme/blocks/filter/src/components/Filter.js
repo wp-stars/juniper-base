@@ -7,6 +7,7 @@ const Filter = ( data ) => {
     const [selectedFilterVals, setSelectedFilterVals] = useState([])
     const [posts, setPosts] = useState(data.posts)
     const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(false)
 
     const updateFilterVals = (e, term_id) => {
         e.preventDefault()
@@ -21,6 +22,7 @@ const Filter = ( data ) => {
     }
 
     const loadMorePosts = () => {
+        setLoading(true)
         setPage(page + 1)
     }
 
@@ -33,12 +35,20 @@ const Filter = ( data ) => {
     }
 
     useEffect(() => {
-        if(!selectedFilterVals.length) return
+        if(!selectedFilterVals.length && page === 1) return
+        let queryString = `?post_type=${data.postType}`
+        if(data.taxonomy) {
+            queryString += `&taxonomy=${data.taxonomy}`
 
-        const queryString = selectedFilterVals.join(",")
-        axios.get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&${data.taxonomy}=${queryString}&page=${page}`)
+            let taxQueryString = selectedFilterVals.join(",")
+            queryString += `&terms=${taxQueryString}`
+        }
+
+        queryString += `&page=${page}`
+        axios.get(`${data.restUrl}wps/v1/data${queryString}`)
             .then(res => {
-                setPosts(res.data.posts)
+                setPosts([...posts, ...res.data.posts])
+                setLoading(false)
             })
             .catch(err => {
                 console.error(err)
@@ -54,23 +64,23 @@ const Filter = ( data ) => {
                         <button data-collapse-toggle="filter-items" type="button" className="filter-toggle inline-flex items-center p-2 justify-center text-sm ml-4 md:hidden" aria-controls="filter-items" aria-expanded="false">
                             <span className="sr-only">Open filter</span>
                             <svg className="w-[2.5rem] h-[2.5rem] open-toggle" xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                <path d="M6.66669 35.5929V23.9263" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M6.66669 17.2594V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M20 35.5928V20.5928" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M20 13.9261V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M33.3333 35.5926V27.2593" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M33.3333 20.5928V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M1.66669 23.9263H11.6667" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M15 13.9263H25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M28.3333 27.2593H38.3333" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6.66669 35.5929V23.9263" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M6.66669 17.2594V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M20 35.5928V20.5928" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M20 13.9261V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M33.3333 35.5926V27.2593" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M33.3333 20.5928V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M1.66669 23.9263H11.6667" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M15 13.9263H25" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M28.3333 27.2593H38.3333" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                             <svg className="w-[2.5rem] h-[2.5rem] close-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" fill="none">
-                                <path d="M26.25 8.75L8.75 26.25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M8.75 8.75L26.25 26.25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M26.25 8.75L8.75 26.25" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M8.75 8.75L26.25 26.25" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </button>
                     </div>
-                    <div id="filter-items" className="hidden inline-flex flex-wrap justify-start sm:justify-center py-20">
+                    <div id="filter-items" className="hidden sm:inline-flex flex-wrap justify-start sm:justify-center py-20">
                         {data.terms.map((term, index) => {
                             let isActive = selectedFilterVals.includes(term.term_id)
                             return (
@@ -80,8 +90,8 @@ const Filter = ( data ) => {
                                     {isActive ? 
                                         <span className="remove-term" onClick={(event) => removeTerm(event, term.term_id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
-                                                <path d="M7.89258 3.23987L2.89258 8.23987" stroke="#093642" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M2.89258 3.23987L7.89258 8.23987" stroke="#093642" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M7.89258 3.23987L2.89258 8.23987" stroke="#093642" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                                <path d="M2.89258 3.23987L7.89258 8.23987" stroke="#093642" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                             </svg>
                                         </span>
                                     : null}
@@ -115,7 +125,11 @@ const Filter = ( data ) => {
                 })}
             </div>
             <div className="container flex justify-center">
-                <button onClick={() => loadMorePosts()} className="btn btn-primary w-full">mehr {data.postType} zeigen</button>
+                {loading ? 
+                    <p>Loading...</p>
+                : 
+                    <button onClick={() => loadMorePosts()} className="btn btn-primary w-full">Mehr {data.postName} zeigen</button>
+                }
             </div>
         </div>
     )

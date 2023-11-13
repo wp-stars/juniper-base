@@ -32,7 +32,10 @@ add_filter(
         $taxonomy = $context['fields']['taxonomy'];
         $data_arr = wps_get_filter_posts( $post_type, $taxonomy, [], 1);
         
+        $post_type = get_post_type_object( $context['fields']['post_type'] );
+        $data_arr['postName'] = $post_type->labels->name;
         $data_arr['postType'] = $context['fields']['post_type'];
+        $data_arr['taxonomy'] = $taxonomy;
         $data_arr['style'] = $context['fields']['style'];
         $data_arr['restUrl'] = get_rest_url();
 
@@ -77,8 +80,9 @@ function wps_filter_callback() {
     $terms = !empty($_GET['terms']) ? explode(',', $_GET['terms']) : [];
     $taxonomy = !empty($_GET['taxonomy']) ? $_GET['taxonomy'] : '';
     $page = !empty($_GET['page']) ? intval($_GET['page']) : 1;
+    $post_type = !empty($_GET['post_type']) ? $_GET['post_type'] : '';
 
-    return wps_get_filter_posts( 'projects', $taxonomy, $terms, $page );
+    return wps_get_filter_posts( $post_type, $taxonomy, $terms, $page );
 }
 
 function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
@@ -107,6 +111,7 @@ function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
     $post_arr = array();
     foreach ($initial_posts->posts as $post) {
         $post_obj = new stdClass();
+        $post_obj->ID = $post->ID;
         $post_obj->fields = get_fields($post);
         $post_obj->excerpt = wp_trim_excerpt('', $post);
         $post_obj->terms = get_the_terms($post, $taxonomy) ? get_the_terms($post, $taxonomy) : [];

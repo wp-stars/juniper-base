@@ -2253,7 +2253,7 @@ const ArticleResult = _ref => {
     className: "article-text flex flex-col items-start text-left justify-center col-span-12 sm:col-span-7"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "mb-5"
-  }, post.post_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, post.post_title), console.log(post, post.terms), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "mb-10 sm:mb-5 description"
   }, post.post_author, " // ", post.post_date, " // ", post.terms.map(term => term.name).join(' // ')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mb-10 line-clamp-4"
@@ -2294,6 +2294,7 @@ const Filter = data => {
   const [selectedFilterVals, setSelectedFilterVals] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(data.posts);
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1);
+  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const updateFilterVals = (e, term_id) => {
     e.preventDefault();
     let shallowFilterVals = [...selectedFilterVals];
@@ -2305,6 +2306,7 @@ const Filter = data => {
     setSelectedFilterVals(shallowFilterVals);
   };
   const loadMorePosts = () => {
+    setLoading(true);
     setPage(page + 1);
   };
   const removeTerm = (event, termId) => {
@@ -2315,10 +2317,17 @@ const Filter = data => {
     setSelectedFilterVals(newSelectedFilterVals);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!selectedFilterVals.length) return;
-    const queryString = selectedFilterVals.join(",");
-    axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&${data.taxonomy}=${queryString}&page=${page}`).then(res => {
-      setPosts(res.data.posts);
+    if (!selectedFilterVals.length && page === 1) return;
+    let queryString = `?post_type=${data.postType}`;
+    if (data.taxonomy) {
+      queryString += `&taxonomy=${data.taxonomy}`;
+      let taxQueryString = selectedFilterVals.join(",");
+      queryString += `&terms=${taxQueryString}`;
+    }
+    queryString += `&page=${page}`;
+    axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
+      setPosts([...posts, ...res.data.posts]);
+      setLoading(false);
     }).catch(err => {
       console.error(err);
     });
@@ -2351,57 +2360,57 @@ const Filter = data => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M6.66669 35.5929V23.9263",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M6.66669 17.2594V5.59277",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M20 35.5928V20.5928",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M20 13.9261V5.59277",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M33.3333 35.5926V27.2593",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M33.3333 20.5928V5.59277",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M1.66669 23.9263H11.6667",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M15 13.9263H25",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M28.3333 27.2593H38.3333",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     className: "w-[2.5rem] h-[2.5rem] close-toggle",
     xmlns: "http://www.w3.org/2000/svg",
@@ -2410,18 +2419,18 @@ const Filter = data => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M26.25 8.75L8.75 26.25",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M8.75 8.75L26.25 26.25",
     stroke: "#F9F9F9",
-    "stroke-width": "2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "filter-items",
-    className: "hidden inline-flex flex-wrap justify-start sm:justify-center py-20"
+    className: "hidden sm:inline-flex flex-wrap justify-start sm:justify-center py-20"
   }, data.terms.map((term, index) => {
     let isActive = selectedFilterVals.includes(term.term_id);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
@@ -2449,15 +2458,15 @@ const Filter = data => {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M7.89258 3.23987L2.89258 8.23987",
       stroke: "#093642",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M2.89258 3.23987L7.89258 8.23987",
       stroke: "#093642",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
     }))) : null);
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "background bg-dark"
@@ -2495,10 +2504,10 @@ const Filter = data => {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...") : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => loadMorePosts(),
     className: "btn btn-primary w-full"
-  }, "mehr ", data.postType, " zeigen")));
+  }, "Mehr ", data.postName, " zeigen")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Filter);
 
