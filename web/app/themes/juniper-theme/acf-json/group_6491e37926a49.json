@@ -43,6 +43,26 @@
             "append": ""
         },
         {
+            "key": "field_654df802dd1e3",
+            "label": "h3 Title",
+            "name": "h3_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6492a35860d4c",
             "label": "Intro",
             "name": "intro",
@@ -206,5 +226,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1696856951
+    "modified": 1699608604
 }

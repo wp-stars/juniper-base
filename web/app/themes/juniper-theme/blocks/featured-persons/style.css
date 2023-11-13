@@ -51,10 +51,13 @@
     color: #fff;
     font-size: 1.75rem;
     font-weight: bold;
-    transform-origin: top left;
-    left:1rem;
-    top:40%;
-    transform: rotate(-90deg) translateX(-50%);
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    writing-mode: vertical-lr;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    left: 1rem;
 }
 
 .featured-persons-card .skill-list {
@@ -65,7 +68,7 @@
     bottom: 0;
     height: fit-content;
     width: 100%;
-    padding: 3rem 2rem 1.5rem 2rem;
+    padding: 2rem;
 }
 
 

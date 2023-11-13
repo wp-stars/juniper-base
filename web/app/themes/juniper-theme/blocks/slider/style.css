@@ -190,6 +190,10 @@
     color: #F9F9F9;
 }
 
+.split-slider.light {
+    
+}
+
 .split-slider-background {
     min-height: 600px;
     top: 0;
@@ -293,8 +297,7 @@
     display: none;
 }
 
-.split-slider .slide-inner {
-    background: rgb(255,255,255);
+.split-slider .slide-inner.overlay {
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 5%, rgba(0,212,255,0) 100%);
 }
 

@@ -1,7 +1,7 @@
-<ul class="grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:justify-around text-white text-sm font-medium w-full {{ name }}">
+<ul class="grid grid-cols-1 sm:flex sm:flex-wrap justify-start sm:justify-center text-white text-sm font-medium w-full {{ name }}">
     {% for item in items %}
-        <li class="text-center sm:text-left">
-            <a href="{{ item.link }}" class="hover:underline md:mr-6 uppercase">{{ item.title }}</a>
+        <li class="mb-2 sm:mb-0 sm:text-center text-left sm:mx-8">
+            <a href="{{ item.link }}" class="hover:underline uppercase">{{ item.title }}</a>
         </li>
     {% endfor %}
 </ul>
