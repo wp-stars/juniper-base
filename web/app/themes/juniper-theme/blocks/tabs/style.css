@@ -39,4 +39,11 @@
         font-weight: 700;
         line-height: 2.5rem; 
     }
+
+    .tabs .image-wrapper {
+        height: auto;
+        width: 100%;
+        aspect-ratio: 1/1;
+    }
+    
 }

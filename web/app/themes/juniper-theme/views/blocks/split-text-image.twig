@@ -17,7 +17,7 @@
 {% set textdirection = (fields.style == 'darktriangle') or (fields.style == 'imgbottomright') or (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') ? 'textleft' : 'textright' %}
 
 
-<div class="split-text-img w-full relative mt-20 {{textdirection}} {% if fields.style == 'dark' %} text-white dark-style {% endif %} {% if fields.style == 'imgtopright' %} pt-[3rem] pb-[3rem] {% endif %} container-{{fields.style}}">
+<div class="split-text-img w-full relative mt-20 py-12 {{textdirection}} {% if fields.style == 'dark' %} text-white dark-style {% endif %} {% if fields.style == 'imgtopright' %} pt-[3rem] pb-[3rem] {% endif %} container-{{fields.style}}">
 	<div class="bg-dark absolute background {% if fields.style == 'dark' %} fullscreen-background {% endif %} "></div>
 
 		{# dark triangle SVG on right side #}
@@ -35,9 +35,9 @@
 		{% endif %}
 	
 	<div class="container mx-auto relative">
-		<div class="flex flex-col sm:mb-40 {% if fields.style == 'darktriangle' %} flex-col-reverse {% endif %} {% if textdirection == 'textleft' %} sm:flex-row-reverse {% else %} sm:flex-row {% endif %} ">
-			<div class="img-wrapper min-h-[450px] sm:w-1/2">
-				<div class="img-content flex justify-center relative ">
+		<div class="flex flex-col {% if fields.style == 'darktriangle' %} flex-col-reverse {% endif %} {% if textdirection == 'textleft' %} sm:flex-row-reverse {% else %} sm:flex-row {% endif %} ">
+			<div class="img-wrapper min-h-[500px] sm:w-1/2">
+				<div class="img-content flex justify-center relative">
 					<div class="img-decoration decoration-{{fields.style}}"></div>
 					<div class="{{fields.style}}" style="background-image: url('{{ fields.image }}');"></div>
 				</div>
@@ -47,7 +47,7 @@
 					<p class="tagline {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.intro_title }}</p>
 					<h2 class="mb-4">{{ fields.title }}</h2>
 					<h3 class="mb-8 {% if fields.style == 'dark' %} text-primary {% endif %}">{{ fields.subtitle }}</h3>
-					<p class="mb-12 {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.content }}</p>
+					<p class="sm:mb-12 {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.content }}</p>
 
 					{# only show button if link text is set #}
 					{% if fields.link %}

@@ -1,8 +1,8 @@
 {% if menu %}
-	<ul class="flex flex-col {% if name == 'primary-menu' %}md:gap-10{% else %}md:gap-5{% endif %} font-medium p-4 md:p-0 mt-4 md:flex-row md:mt-0 border-0 w-full md:w-fit {{ name }}">
+	<ul class="flex flex-col {% if name == 'primary-menu' %}md:gap-10{% else %}md:gap-5{% endif %} font-medium py-4 md:p-0 mt-4 md:flex-row md:mt-0 border-0 w-full md:w-fit {{ name }}">
 		{% for item in items %}
 			<li class="group relative dropdown {{ item.classes | join(' ') }}">
-				<a class="block px-4 py-2 bg-transparent" target="{{ item.target }}" href="{{ item.link }}">
+				<a class="block py-2 bg-transparent" target="{{ item.target }}" href="{{ item.link }}">
 					{{ item.title }}
 					{% if item.children %}
 						<span class="h-6 w-6">

@@ -117,6 +117,33 @@
                     "append": ""
                 },
                 {
+                    "key": "field_654e4226036e4",
+                    "label": "Text Alignment",
+                    "name": "text_alignment",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "justify-center": "Center",
+                        "justify-end": "Bottom",
+                        "justify-start": "Beginning"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
                     "key": "field_64f5e7c4c1d7c",
                     "label": "Text",
                     "name": "text",
@@ -839,5 +866,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1698661555
+    "modified": 1699627612
 }

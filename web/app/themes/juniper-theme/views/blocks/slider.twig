@@ -12,15 +12,15 @@
  	SupportsMultiple: true
 #}
 {% if fields.style == "split" %}
-	<div class="w-full relative mt-[6.5rem] split-slider split-slider-wrapper-{{ instance }} {{ fields.split_slider_static_items.slider_side }} {{ fields.split_slider_static_items.background_style }}">
+	<div class="w-full relative mt-[6.5rem] mb-[3rem] sm:mb-[4rem] split-slider split-slider-wrapper-{{ instance }} {{ fields.split_slider_static_items.slider_side }} {{ fields.split_slider_static_items.background_style }}">
 		<div class="bg-dark absolute split-slider-background background h-full">
 		</div>
 		<div class="container min-h-[600px] py-32 mx-auto slider relative">
 			<div class="grid grid-cols-12 gap-y-8 sm:gap-x-8">
 				{% if fields.split_slider_static_items.slider_side == "right" %}
-					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col justify-center">
-						<h2 class="text-white mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
-						<div class="mb-12 intro-text">{{ fields.split_slider_static_items.text }}</div>
+					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col {{ fields.split_slider_static_items.text_alignment }}">
+						<h2 class="mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
+						<div class="mb-6 intro-text">{{ fields.split_slider_static_items.text }}</div>
 						<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
 					</div>
 					<div class="right col-span-12 sm:col-span-6">
@@ -35,13 +35,13 @@
 								<div class="swiper-wrapper">
 									{% for slide in fields.split_slider_items %}
 										<div class="swiper-slide {{ fields.split_slider_static_items.slide_style }}" style="background-image: url('{{ slide.slider_image.url }}');">
-											<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4">
+											<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4 {{ fields.split_slider_static_items.slide_style }}">
 												{% if fields.split_slider_static_items.slide_style == "overlay" %}
 													<div class="title-wrapper">
 														<h5>{{ slide.slider_title }}</h5>
 													</div>
 												{% else %}
-													<h5 class="mb-3">{{ slide.slider_title }}</h5>
+													{% if slide.slider_title %}<h5 class="mb-3">{{ slide.slider_title }}</h5>{% endif %}
 												{% endif %}
 												<a class="w-full" href="{{ slide.link.url }}">
 													<span>{{ slide.link.title }}</span>
@@ -58,7 +58,6 @@
 							</div>
 						</div>
 						<div class="controls-wrapper inline-flex w-full justify-between relative">
-							<div class="swiper-pagination"></div>
 							<div class="swiper-button-prev bg-primary w-fit p-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
 									<path d="M12.5061 1.9876L1.99991 12.4938L12.5061 23" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -66,6 +65,7 @@
 									<rect x="42" y="14.2446" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 42 14.2446)" fill="#093642"/>
 								</svg>
 							</div>
+							<div class="swiper-pagination"></div>
 							<div class="swiper-button-next bg-primary w-fit p-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
 									<path d="M29.4939 23.0124L40.0001 12.5062L29.4939 2" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -77,17 +77,23 @@
 					</div>
 				{% else %}
 					<div class="left col-span-12 sm:col-span-4">
+						{% if fields.split_slider_static_items.tagline_over_slider %}
+							<p class="tagline">{{ fields.split_slider_static_items.tagline_over_slider }}</p>
+						{% endif %}
+						{% if fields.split_slider_static_items.title_over_slider %}
+							<h3 class="mb-20 title">{{ fields.split_slider_static_items.title_over_slider }}</h3>
+						{% endif %}
 						<div class="swiper split-swiper-{{ instance }}">
 							<div class="swiper-wrapper">
 								{% for slide in fields.split_slider_items %}
 									<div class="swiper-slide h-[400px] {{ fields.split_slider_static_items.slide_style }}" style="background-image: url('{{ slide.slider_image.url }}');">
-										<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4">
+										<div class="slide-inner h-full w-full flex flex-col items-end justify-end p-4 {{ fields.split_slider_static_items.slide_style }}">
 											{% if fields.split_slider_static_items.slide_style == "overlay" %}
 												<div class="title-wrapper">
 													<h5>{{ slide.slider_title }}</h5>
 												</div>
 											{% else %}
-												<h5 class="mb-3">{{ slide.slider_title }}</h5>
+												{% if slide.slider_title %}<h5 class="mb-3">{{ slide.slider_title }}</h5>{% endif %}
 											{% endif %}
 											<a class="w-full" href="{{ slide.link.url }}">
 												<span>{{ slide.link.title }}</span>
@@ -101,9 +107,8 @@
 									</div>
 								{% endfor %}
 							</div>
-							<div class="swiper-pagination"></div>
 						</div>
-						<div class="controls-wrapper inline-flex w-full justify-between relative">
+						<div class="controls-wrapper mt-[1.5rem] inline-flex w-full justify-between relative">
 							<div class="swiper-button-prev bg-primary w-fit p-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
 									<path d="M12.5061 1.9876L1.99991 12.4938L12.5061 23" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -111,6 +116,7 @@
 									<rect x="42" y="14.2446" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 42 14.2446)" fill="#093642"/>
 								</svg>
 							</div>
+							<div class="swiper-pagination"></div>
 							<div class="swiper-button-next bg-primary w-fit p-3">
 								<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
 									<path d="M29.4939 23.0124L40.0001 12.5062L29.4939 2" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -120,9 +126,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="right text-white h-full flex flex-col justify-center col-span-12 sm:col-span-8">
-						<h2 class="text-white mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
-						<div class="mb-12 intro-text">{{ fields.split_slider_static_items.text }}</div>
+					<div class="right text-white h-full flex flex-col {{ fields.split_slider_static_items.text_alignment }} col-span-12 sm:col-span-8">
+						<h2 class="mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
+						<div class="mb-6 intro-text">{{ fields.split_slider_static_items.text }}</div>
 						{% if fields.split_slider_static_items.link %}
 							<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
 						{% endif %}
@@ -178,23 +184,23 @@
 	</div>
 {% endif %}
 {% if fields.style == "timeline" %}
-	<div class="container h-[1000px] sm:h-[800px] mb-20 sm:my-20 mx-auto timeline-slider timeline-slider-{{ instance }}">
+	<div class="container sm:h-[800px] mb-20 sm:my-20 mx-auto timeline-slider timeline-slider-{{ instance }}">
 		<div class="swiper grid grid-cols-1 sm:grid-cols-12 swiper">
 			<div class="col-span-12 sm:col-span-4 relative">
 				<div class="swiper-pagination relative">
 				</div>
 			</div>
-			<div class="swiper-wrapper max-h-[800px] sm:max-h-[auto] col-span-12 sm:col-span-7">
+			<div class="swiper-wrapper mb-8 sm:max-h-[800px] sm:max-h-[auto] col-span-12 sm:col-span-7">
 				{% for item in fields.timeline_slider_items %}
-					<div class="timeline-slide w-full flex flex-col items-start justify-center swiper-slide">
+					<div class="timeline-slide w-full flex flex-col items-start justify-start swiper-slide">
 						<p class="bold bg-dark text-primary p-4 text-4xl bold mb-10">{{ loop.index }}.</p>
-						<h3 class="mb-3">{{ item.slider_title }}</h3>
+						<h3 class="mb-3 text-left">{{ item.slider_title }}</h3>
 						<p class="pl-8 text-left text-dark">{{ item.slider_text }}</p>
 					</div>
 				{% endfor %}
 			</div>
-			<div class="col-span-12 sm:col-span-1 sm:h-[800px] relative">
-				<div class="relative mt-auto flex flex-row justify-end sm:flex-col sm:mb-20">
+			<div class="col-span-12 sm:col-span-1 sm:h-[800px] relative flex">
+				<div class="relative sm:mt-auto flex flex-row justify-between w-full sm:w-fit sm:justify-end sm:flex-col sm:mb-20 timeline-slider-controls">
 					<button class="bg-accent p-4 sm:mb-8 swiper-button-prev relative">
 						<svg xmlns="http://www.w3.org/2000/svg" width="26" height="43" viewBox="0 0 26 43" fill="none">
 							<path d="M23.384 13.0273L12.8778 2.52106L2.37158 13.0273" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -214,7 +220,7 @@
 		</div>
 		<script>
 			var swiper{{ instance }} = new Swiper(".timeline-slider-{{ instance }} .swiper", {
-				direction: "vertical",
+				direction: "horizontal",
 				pagination: {
 					el: ".timeline-slider-{{ instance }} .swiper-pagination",
 				},
@@ -225,7 +231,7 @@
 				allowTouchMove: false,
 				breakpoints: {
 					640: {
-						direction: 'horizontal'
+						direction: 'vertical'
 					}
 				}
 			});
@@ -306,42 +312,44 @@
 				<p class="tagline">{{ fields.quote_static_items.quotes_tagline }}</p>
 				<h2>{{ fields.quote_static_items.quotes_title }}</h2>
 			</div>
-			<div class="grid grid-cols-1 gap-8 max-w-[800px] mx-auto py-40 sm:py-10 relative">
+			<div class="grid grid-cols-1 gap-8 py-40 sm:py-10 relative">
 				<div class="absolute quote-slider-background background"></div>
-				<div class="quote-decoration bg-primary p-5 absolute -top-12 sm:top-12 left-10">
-					<svg xmlns="http://www.w3.org/2000/svg" width="61" height="59" viewBox="0 0 61 59" fill="none">
-						<path fill-rule="evenodd" clip-rule="evenodd" d="M27.7355 0H0.421387V30H16.2095C16.2095 32.1459 15.8247 34.2707 15.077 36.2533C14.3293 38.2358 13.2335 40.0372 11.8519 41.5545C10.4704 43.0719 8.83033 44.2755 7.0253 45.0967C5.22027 45.9179 3.28564 46.3406 1.33189 46.3406L1.33189 59C4.79927 59 8.23269 58.2499 11.4361 56.7925C14.6396 55.3351 17.5503 53.199 20.0021 50.5061C22.4539 47.8132 24.3988 44.6163 25.7257 41.0978C27.0526 37.5794 27.7355 33.8083 27.7355 30H27.7355V0Z" fill="#093642"/>
-						<path fill-rule="evenodd" clip-rule="evenodd" d="M60.5126 0H33.1985V30H48.9866C48.9866 32.1459 48.6018 34.2707 47.8541 36.2533C47.1065 38.2358 46.0106 40.0372 44.6291 41.5545C43.2476 43.0719 41.6075 44.2755 39.8024 45.0967C37.9974 45.9179 36.0628 46.3406 34.109 46.3406L34.109 59C37.5764 59 41.0098 58.2499 44.2133 56.7925C47.4167 55.3351 50.3274 53.199 52.7792 50.5061C55.231 47.8132 57.1759 44.6163 58.5028 41.0978C59.8297 37.5794 60.5127 33.8083 60.5127 30H60.5126V0Z" fill="#093642"/>
-					</svg>
-				</div>
-				<div class="swiper min-h-[500px] relative">
-					<div class="swiper-wrapper">
-						{% for quote_item in fields.quotes_slider_items %}
-							<div class="swiper-slide text-white flex flex-col items-center justify-end pb-8">
-								<div class="quote-slider-inner max-w-[800px] mx-auto h-100">
-									<p>{{ quote_item.quote }}</p>
-									<p class="uppercase mt-6">{{ quote_item.person }}</p>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-				</div>
-				<div class="relative w-full controls-wrapper inline-flex justify-between">
-					<div class="swiper-button-prev bg-primary w-fit p-3">
-						<svg xmlns="http://www.w3.org/2000/svg" width="43" height="25" viewBox="0 0 43 25" fill="none">
-							<path d="M12.9091 1.9876L2.40286 12.4938L12.9091 23" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<rect x="31.8966" y="14.2451" width="15.7593" height="3.50207" rx="1.75103" transform="rotate(-180 31.8966 14.2451)" fill="#093642"/>
-							<rect x="42.4028" y="14.2451" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 42.4028 14.2451)" fill="#093642"/>
+				<div class="sm:max-w-[800px] sm:mx-auto">
+					<div class="quote-decoration bg-primary p-5 absolute -top-12 sm:top-12 left-10">
+						<svg xmlns="http://www.w3.org/2000/svg" width="61" height="59" viewBox="0 0 61 59" fill="none">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M27.7355 0H0.421387V30H16.2095C16.2095 32.1459 15.8247 34.2707 15.077 36.2533C14.3293 38.2358 13.2335 40.0372 11.8519 41.5545C10.4704 43.0719 8.83033 44.2755 7.0253 45.0967C5.22027 45.9179 3.28564 46.3406 1.33189 46.3406L1.33189 59C4.79927 59 8.23269 58.2499 11.4361 56.7925C14.6396 55.3351 17.5503 53.199 20.0021 50.5061C22.4539 47.8132 24.3988 44.6163 25.7257 41.0978C27.0526 37.5794 27.7355 33.8083 27.7355 30H27.7355V0Z" fill="#093642"/>
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M60.5126 0H33.1985V30H48.9866C48.9866 32.1459 48.6018 34.2707 47.8541 36.2533C47.1065 38.2358 46.0106 40.0372 44.6291 41.5545C43.2476 43.0719 41.6075 44.2755 39.8024 45.0967C37.9974 45.9179 36.0628 46.3406 34.109 46.3406L34.109 59C37.5764 59 41.0098 58.2499 44.2133 56.7925C47.4167 55.3351 50.3274 53.199 52.7792 50.5061C55.231 47.8132 57.1759 44.6163 58.5028 41.0978C59.8297 37.5794 60.5127 33.8083 60.5127 30H60.5126V0Z" fill="#093642"/>
 						</svg>
 					</div>
-					<div class="swiper-button-next bg-primary w-fit p-3">
-						<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
-							<path d="M29.4939 23.0124L40.0001 12.5062L29.4939 2" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<rect x="10.5061" y="10.7554" width="15.7593" height="3.50207" rx="1.75103" fill="#093642"/>
-							<rect y="10.7554" width="7.00413" height="3.50207" rx="1.75103" fill="#093642"/>
-						</svg>	
+					<div class="swiper min-h-[500px] relative">
+						<div class="swiper-wrapper">
+							{% for quote_item in fields.quotes_slider_items %}
+								<div class="swiper-slide text-white flex flex-col items-center justify-end pb-8">
+									<div class="quote-slider-inner max-w-[800px] mx-auto h-100">
+										<p>{{ quote_item.quote }}</p>
+										<p class="uppercase mt-6">{{ quote_item.person }}</p>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
 					</div>
-					<div class="swiper-pagination"></div>
+					<div class="relative w-full controls-wrapper inline-flex justify-between">
+						<div class="swiper-button-prev bg-primary w-fit p-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="43" height="25" viewBox="0 0 43 25" fill="none">
+								<path d="M12.9091 1.9876L2.40286 12.4938L12.9091 23" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<rect x="31.8966" y="14.2451" width="15.7593" height="3.50207" rx="1.75103" transform="rotate(-180 31.8966 14.2451)" fill="#093642"/>
+								<rect x="42.4028" y="14.2451" width="7.00413" height="3.50207" rx="1.75103" transform="rotate(-180 42.4028 14.2451)" fill="#093642"/>
+							</svg>
+						</div>
+						<div class="swiper-button-next bg-primary w-fit p-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="42" height="25" viewBox="0 0 42 25" fill="none">
+								<path d="M29.4939 23.0124L40.0001 12.5062L29.4939 2" stroke="#093642" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<rect x="10.5061" y="10.7554" width="15.7593" height="3.50207" rx="1.75103" fill="#093642"/>
+								<rect y="10.7554" width="7.00413" height="3.50207" rx="1.75103" fill="#093642"/>
+							</svg>	
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
 				</div>
 				<!-- Swiper JS -->
 				<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -366,9 +374,9 @@
 {% if fields.style == "blog" %}
 	<div class="relative w-100 blog-slider blog-swiper-outer blog-swiper-{{ instance }} mb-48">
 		<div class="absolute blog-slider-background background"></div>
-		<div class="container mx-auto min-h-[1000px] sm:min-h-[500px] py-20 sm:py-40">
+		<div class="container mx-auto min-h-[1000px] sm:min-h-[500px] py-40">
 			<div class="w-full text-center mb-20">
-				<h2 class="text-white">{{ fields.blog_slider_static_items.title }}</h2>
+				<h2 class="text-white mb-8">{{ fields.blog_slider_static_items.title }}</h2>
 				<div class="text-white">{{ fields.blog_slider_static_items.intro }}</div>
 			</div>
 			{% if fields.blog_slider_static_items.link %}

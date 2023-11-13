@@ -18,3 +18,10 @@
 .job-list .location {
     font-size: 1.25rem;
 }
+
+@media screen and (max-width: 640px) {
+    .job-list .location {
+        font-size: 1rem;
+    }
+    
+}

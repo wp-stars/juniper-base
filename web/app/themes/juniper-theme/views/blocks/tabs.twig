@@ -13,7 +13,7 @@
 #}
 
 <div class="container mx-auto tabs">
-	<div class="mb-20">
+	<div class="mb-10 sm:mb-20">
 		<ul class="tablist flex flex-wrap justify-center -mb-px text-sm font-medium text-center" id="tab-{{ instance }}" data-tabs-toggle="#tab-{{ instance }}-content" role="tablist">
 			{% for tab in fields.tabs %}
 				<li class="flex mr-2" role="presentation">
@@ -27,7 +27,7 @@
 	<div id="tab-{{ instance }}-content">
 		{% for tab in fields.tabs %}
 			<div class="hidden p-4" id="content-{{ loop.index }}-{{ instance }}" role="tabpanel" aria-labelledby="{{ loop.index }}-{{ instance }}-tab">
-				<div class="grid grid-cols-12 gap-8">
+				<div class="grid grid-cols-12 gap-y-10 sm:gap-8">
 					<div class="col-span-12 sm:col-span-5">
 						<div class="image-wrapper ml-auto">
 							<img class="w-full h-full" src="{{ tab.image.url }}" alt="{{ tab.image.alt }}" />

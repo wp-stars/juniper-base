@@ -23,7 +23,7 @@
 .textright .img-wrapper {
     position: relative;
     min-width: 600px;
-    min-height: 600px;
+    min-height: 800px;
 }
 
 .textright .img-content {
@@ -86,6 +86,22 @@
     background-color: #093642;
     clip-path: polygon(45% 0, 100% 45%, 55% 100%, 0 55%);
     z-index: -3;
+}
+
+@media screen and (max-width: 640px) {
+    .imgbottomright {
+        right: 0;
+        top: 0;
+        height: 400px;
+        width: 400px;
+        transform: rotate(20deg);
+        box-shadow: none;
+        background-size: cover;
+    }
+
+    .textright .img-wrapper {
+        min-height: 600px;
+    }
 }
 
 
@@ -166,7 +182,7 @@
 
 @media screen and (max-width: 640px) {
     .dark-triangle-right {
-        top: 36rem;
+        top: 60rem;
     }
 
     .decoration-imgtopright.img-decoration {
@@ -192,7 +208,12 @@
         margin-left: 0;
     }
 
-    .img-content .imgtopright {
+    .textright .img-content {
+        left: -20px;
+    }
+
+    .img-content .imgtopright,
+    .img-content .imgleft {
         background-size: cover;
     }
 

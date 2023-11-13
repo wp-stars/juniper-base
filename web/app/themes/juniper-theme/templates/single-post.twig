@@ -1,19 +1,55 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <section class="bg-center bg-no-repeat bg-blend-multiply angled-bottom min-h-[970px] relative" style="background-image: url('{{ default_bg_image }}'); background-size: cover;">
-        <div class="jumbotron-shape-left">
-            <svg xmlns="http://www.w3.org/2000/svg" width="91" height="475" viewBox="0 0 91 475" fill="none">
-                <path d="M91 288.032L0 0V475L91 288.032Z" fill="#B4D43D" fill-opacity="0.6"/>
-            </svg>
-        </div>
-        <div class="mx-0 w-full h-full flex flex-col justify-center bg-dark-transparent min-h-[970px]">
-            <div class="container mx-auto">
-                <h1 class="mb-4 text-white">{{ title }}</h1>
-            </div>
-        </div>
-        <div class="jumbotron-shape-bottom"></div>
-    </section>  
+
+	<section class="jumbotron-section bg-center bg-no-repeat bg-blend-multiply angled-bottom h-[552px] sm:h-auto relative" style="background-image: url('{{ default_bg_image }}'); background-size: cover;">
+		<div class="jumbotron-shape-left">
+			<svg xmlns="http://www.w3.org/2000/svg" width="91" height="475" viewBox="0 0 91 475" fill="none">
+				<path d="M91 288.032L0 0V475L91 288.032Z" fill="#B4D43D" fill-opacity="0.6"/>
+			</svg>
+		</div>
+		<div class="mx-0 w-full h-full flex flex-col justify-center bg-dark-transparent h-[552px] sm:h-auto sm:pt-[15rem] sm:pb-[15rem]">
+			<div class="container mx-auto">
+				<h1 class="mb-4 text-white z-10 relative break-words">{{ title }}</h1>
+			</div>
+		</div>
+		<div class="jumbotron-shape-bottom">
+			<svg xmlns="http://www.w3.org/2000/svg" width="551" height="83" viewBox="0 0 551 83" fill="none">
+				<path d="M551 0L0 30.8199L551 83V0Z" fill="#B4D43D" fill-opacity="0.6"/>
+			</svg>
+		</div>
+	</section>
+	<section class="breadcrumbs container h-10 justify-start items-center flex mx-auto mb-[5rem]">
+		<div class="justify-start items-center flex">
+			<div class="page font-['Red Hat Mono'] uppercase">			
+				<a class="flex items-center" href={{ home_page_url }}>
+					<div class="h-6 w-6 mr-[0.62rem]">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M9 22V12H15V22" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</div>
+					Home
+				</a>
+			</div>
+			{% if parent_page_title %}
+				<div class="divider">
+				</div>
+				<div class="page justify-start items-center flex">
+					<div class="uppercase">
+						<a href={{ parent_page_url}}>{{ parent_page_title }}</a>
+					</div>
+				</div>
+			{% endif %}
+			{% if page_title %}
+				<div class="divider">
+				</div>
+				<div class="page current justify-start items-center flex">
+					<div class="uppercase">{{ page_title }}</div>
+				</div>
+			{% endif %}
+		</div>
+	</section>
 	<div class="content-wrapper">
 		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
 				<div class="article-body">

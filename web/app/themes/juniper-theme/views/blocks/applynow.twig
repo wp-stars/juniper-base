@@ -29,7 +29,7 @@
 		<div class="grid grid-cols-1 sm:grid-cols-2 {{ fields.style }}">
 			<div class="sm:max-w-[600px] order-last sm:order-first inner py-12 sm:py-0 flex flex-col justify-center {{ fields.text_align }}">
 				<p class="tagline">{{ fields.tagline }}</p>
-				<h3 class="mb-4 text-5xl">{{ fields.title }}</h3>
+				<h3 class="mb-4">{{ fields.title }}</h3>
 				<div class="inline-flex">
 					{% if fields.contact_image %}
 						<img class="w-[142px] h-[142px] sm:w-[282px] sm:h-[338px] mr-3" src="{{ fields.contact_image }}" />
@@ -51,7 +51,7 @@
 						{% endif %}
 					</div>
 				</div>
-				<a class="btn btn-primary {{ fields.button_width }}" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
+				<a class="btn btn-primary mt-[2.6rem] sm:mt-0 {{ fields.button_width }}" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
 			</div>
 			<div class="order-first sm:order-last flex min-h-[400px]">
 				<div class="w-full h-full relative">

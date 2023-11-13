@@ -89,6 +89,7 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 function juniper_theme_enqueue() {
 	$refresh_cache_time = time();
 	// wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
+    wp_enqueue_script( 'nav-js', get_template_directory_uri() . '/src/js/nav.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', array(), $refresh_cache_time, true );
     wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', array(), $refresh_cache_time );
 
@@ -151,6 +152,19 @@ function juniper_customizer_setting($wp_customize) {
         'settings' => 'footer_logo',
         'priority' => 8 // show it just below the custom-logo
     )));
+
+    $wp_customize->add_setting( 'juniper_footer_textarea', array(
+        'capability' => 'edit_theme_options',
+        'default' => 'Lorem Ipsum Dolor Sit amet',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+      
+    $wp_customize->add_control( 'juniper_footer_textarea', array(
+        'type' => 'textarea',
+        'section' => 'title_tagline', // // Add a default or your own section
+        'label' => __( 'Footer Quote' ),
+        'description' => __( 'Enter footer quote.' ),
+    ) );
 }
 
 add_action('customize_register', 'juniper_customizer_setting');
@@ -171,6 +185,8 @@ function wps_add_to_context( $context ) {
     $context['logo']             = $logo;
     $footer_logo                 = get_theme_mod( 'footer_logo' );
     $context['footer_logo']      = $footer_logo;
+    $footer_quote                = get_theme_mod( 'juniper_footer_textarea' );
+    $context['footer_quote']      = $footer_quote;
     $upload_dir                  = wp_upload_dir();
     $context['uploads']          = $upload_dir;
     $context['theme_dir']        = get_stylesheet_directory_uri();
@@ -181,6 +197,14 @@ function wps_add_to_context( $context ) {
     $context['default_bg_image'] = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
 
     return $context;
+}
+
+add_action( 'wp_enqueue_scripts', 'wpse_enqueues' );
+function wpse_enqueues() {
+    // Only enqueue on specified single CPTs
+    if( is_singular() ) {
+        wp_enqueue_style( 'wps-jumbotron-css', get_stylesheet_directory_uri() . '/blocks/jumbotron/style.css' );
+    }
 }
 
 // custom wps functionality from classes
