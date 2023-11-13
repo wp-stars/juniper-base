@@ -7,6 +7,19 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    height: 200px;
+    width: 500px;
+
+}
+
+.jumbotron-bottom-inner {
+    height: 100%;
+    width: 100%;
+    transform: rotate(-6deg);
+    background-color: rgba(180, 212, 61, 0.6);
+    top: 138px;
+    position: relative;
+    left: 100px;
 }
 
 @media screen and (max-width: 640px) {
@@ -14,4 +27,18 @@
     .jumbotron-section.angled-bottom {
         clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 88%);
     }
+}
+
+@media screen and (min-width: 800px) {
+    .jumbotron-shape-bottom {
+        height: 400px;
+        width: 1000px;
+    }
+
+    .jumbotron-bottom-inner {
+        top: 270px;
+        position: relative;
+        left: 100px;
+    }
+    
 }

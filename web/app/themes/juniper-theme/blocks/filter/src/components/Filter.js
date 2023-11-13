@@ -54,15 +54,15 @@ const Filter = ( data ) => {
                         <button data-collapse-toggle="filter-items" type="button" className="filter-toggle inline-flex items-center p-2 justify-center text-sm ml-4 md:hidden" aria-controls="filter-items" aria-expanded="false">
                             <span className="sr-only">Open filter</span>
                             <svg className="w-[2.5rem] h-[2.5rem] open-toggle" xmlns="http://www.w3.org/2000/svg" width="40" height="41" viewBox="0 0 40 41" fill="none">
-                                <path d="M6.66669 35.5929V23.9263" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M6.66669 17.2594V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M20 35.5928V20.5928" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M20 13.9261V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M33.3333 35.5926V27.2593" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M33.3333 20.5928V5.59277" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M1.66669 23.9263H11.6667" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M15 13.9263H25" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M28.3333 27.2593H38.3333" stroke="#F9F9F9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M6.66669 35.5929V23.9263" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6.66669 17.2594V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 35.5928V20.5928" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 13.9261V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M33.3333 35.5926V27.2593" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M33.3333 20.5928V5.59277" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1.66669 23.9263H11.6667" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 13.9263H25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M28.3333 27.2593H38.3333" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <svg className="w-[2.5rem] h-[2.5rem] close-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" fill="none">
                                 <path d="M26.25 8.75L8.75 26.25" stroke="#F9F9F9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -80,8 +80,8 @@ const Filter = ( data ) => {
                                     {isActive ? 
                                         <span className="remove-term" onClick={(event) => removeTerm(event, term.term_id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
-                                                <path d="M7.89258 3.23987L2.89258 8.23987" stroke="#093642" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                                <path d="M2.89258 3.23987L7.89258 8.23987" stroke="#093642" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                                <path d="M7.89258 3.23987L2.89258 8.23987" stroke="#093642" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M2.89258 3.23987L7.89258 8.23987" stroke="#093642" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </span>
                                     : null}
