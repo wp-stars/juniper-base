@@ -34,12 +34,14 @@
 
 .employee-card .name {
     position: absolute;
-    transform: rotate(-90deg);
     color: #fff;
     left: 0;
-    top: 9rem;
     line-height: 2.625rem;
     font-size: 2rem ;
+    transform-origin: top left;
+    left: 1rem;
+    top: 40%;
+    transform: rotate(-90deg) translateX(-50%);
 }
 
 .employee-card .skill-list {
@@ -50,7 +52,7 @@
     bottom: 0;
     height: fit-content;
     width: 100%;
-    padding: 4rem 2rem 2rem 2rem;
+    padding: 3.5rem 2rem 1.5rem 2rem;
 }
 
 .employee-card img {
