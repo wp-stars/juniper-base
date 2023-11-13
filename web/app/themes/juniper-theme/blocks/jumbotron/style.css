@@ -40,5 +40,17 @@
         position: relative;
         left: 100px;
     }
-    
+}
+
+@media screen and (min-width: 1700px) {
+    .jumbotron-shape-bottom {
+        height: 600px;
+        width: 2000px;
+    }
+
+    .jumbotron-bottom-inner {
+        top: 300px;
+        position: relative;
+        left: 600px;
+    }
 }

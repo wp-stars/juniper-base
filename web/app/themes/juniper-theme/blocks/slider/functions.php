@@ -27,7 +27,7 @@ add_filter(
 
         if($context['fields']['style'] === 'blog') {
             foreach ($context['fields']['blog_slider_items'] as $key => $item) {
-                $context['fields']['blog_slider_items'][$key]->slide_image = get_the_post_thumbnail($item, 'medium');
+                $context['fields']['blog_slider_items'][$key]->slide_image = get_the_post_thumbnail($item, 'large');
 
                 $context['fields']['blog_slider_items'][$key]->link = get_the_permalink($item);
 
