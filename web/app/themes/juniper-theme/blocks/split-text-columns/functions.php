@@ -16,7 +16,9 @@ add_filter(
     'timber/acf-gutenberg-blocks-data/split-text-columns',
     function ( $context ) {
         foreach ($context['fields']['items'] as $key => $item) {
-            $context['fields']['items'][$key]['image'] = wp_get_attachment_image( $context['fields']['items'][$key]['image'], 'medium', array('height' => 100, 'width' => 100));
+            if($context['fields']['items'][$key]['image']) {
+                $context['fields']['items'][$key]['image'] = wp_get_attachment_image( $context['fields']['items'][$key]['image'], 'medium', array('height' => 100, 'width' => 100));
+            }
         }
         return $context;
     }
