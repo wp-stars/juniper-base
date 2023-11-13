@@ -89,15 +89,6 @@
 }
 
 @media screen and (max-width: 640px) {
-    .imgbottomright {
-        right: 0;
-        top: 0;
-        height: 400px;
-        width: 400px;
-        transform: rotate(20deg);
-        box-shadow: none;
-        background-size: cover;
-    }
 
     .textright .img-wrapper {
         min-height: 600px;
@@ -239,6 +230,10 @@
       
     }
     .container-imgbottomright .img-content{
-        margin-top: 0px;
+        margin-top: 3rem;
+    }
+
+    .container-imgbottomright .text-content .text-inner .btn{
+        margin-top: 3rem;
     }
 }
