@@ -2253,7 +2253,7 @@ const ArticleResult = _ref => {
     className: "article-text flex flex-col items-start text-left justify-center col-span-12 sm:col-span-7"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "mb-5"
-  }, post.post_title), console.log(post, post.terms), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, post.post_title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "mb-10 sm:mb-5 description"
   }, post.post_author, " // ", post.post_date, " // ", post.terms.map(term => term.name).join(' // ')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mb-10 line-clamp-4"
