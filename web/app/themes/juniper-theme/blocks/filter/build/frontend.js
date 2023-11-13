@@ -2351,57 +2351,57 @@ const Filter = data => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M6.66669 35.5929V23.9263",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M6.66669 17.2594V5.59277",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M20 35.5928V20.5928",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M20 13.9261V5.59277",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M33.3333 35.5926V27.2593",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M33.3333 20.5928V5.59277",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M1.66669 23.9263H11.6667",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M15 13.9263H25",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M28.3333 27.2593H38.3333",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     className: "w-[2.5rem] h-[2.5rem] close-toggle",
     xmlns: "http://www.w3.org/2000/svg",
@@ -2410,15 +2410,15 @@ const Filter = data => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M26.25 8.75L8.75 26.25",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M8.75 8.75L26.25 26.25",
     stroke: "#F9F9F9",
-    stroke-width: "2",
-    stroke-linecap: "round",
-    stroke-linejoin: "round"
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "filter-items",
     className: "hidden inline-flex flex-wrap justify-start sm:justify-center py-20"
@@ -2449,15 +2449,15 @@ const Filter = data => {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M7.89258 3.23987L2.89258 8.23987",
       stroke: "#093642",
-      stroke-width: "1.5",
-      stroke-linecap: "round",
-      stroke-linejoin: "round"
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M2.89258 3.23987L7.89258 8.23987",
       stroke: "#093642",
-      stroke-width: "1.5",
-      stroke-linecap: "round",
-      stroke-linejoin: "round"
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
     }))) : null);
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "background bg-dark"

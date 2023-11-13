@@ -16,17 +16,27 @@
 	<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-32 sm:gap-y-8 gap-x-8 py-12">
 		{% for item in fields.items %}
 			<div class="split-text-item flex flex-col text-center items-center">
-				{{ item.image }}
+				{% if item.image %}
+					{{ item.image }}
+				{% endif %}
 				<div class="mt-20">
-					<p class="tagline">{{ item.tagline }}</p>
-					<h3 class="mb-8">{{ item.title }}</h3>
-					<p>{{ item.text }}</p>
+					{% if item.tagline %}
+						<p class="tagline">{{ item.tagline }}</p>
+					{% endif %}
+					{% if item.title %}
+						<h3 class="mb-8">{{ item.title }}</h3>
+					{% endif %}
+					{% if item.text %}
+						<p>{{ item.text }}</p>
+					{% endif %}
 				</div>
 			</div>
 		{% endfor %}
 	</div>
-	<div class="w-full flex justify-center my-20">
-		<a class="btn btn-primary w-fit" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
-	</div>
+	{% if fields.link %}
+		<div class="w-full flex justify-center my-20">
+			<a class="btn btn-primary w-fit" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
+		</div>
+	{% endif %}
 </div>
 
