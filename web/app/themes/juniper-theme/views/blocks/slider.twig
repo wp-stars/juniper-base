@@ -188,13 +188,13 @@
 	</div>
 {% endif %}
 {% if fields.style == "timeline" %}
-	<div class="container sm:h-[800px] mb-20 sm:my-20 mx-auto timeline-slider timeline-slider-{{ instance }}">
+	<div class="container sm:h-[800px] mb-20 sm:my-8 mx-auto timeline-slider timeline-slider-{{ instance }}">
 		<div class="swiper grid grid-cols-1 sm:grid-cols-12 swiper">
 			<div class="col-span-12 sm:col-span-4 relative">
 				<div class="swiper-pagination relative">
 				</div>
 			</div>
-			<div class="swiper-wrapper mb-8 sm:max-h-[800px] sm:max-h-[auto] col-span-12 sm:col-span-7">
+			<div class="swiper-wrapper mb-8 sm:py-24 sm:max-h-[800px] sm:max-h-[auto] col-span-12 sm:col-span-7">
 				{% for item in fields.timeline_slider_items %}
 					<div class="timeline-slide w-full flex flex-col items-start justify-start swiper-slide">
 						<p class="bold bg-dark text-primary p-4 text-4xl bold mb-10">{{ loop.index }}.</p>

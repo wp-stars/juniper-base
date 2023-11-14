@@ -532,13 +532,13 @@ article ul li {
     }
     .swiper-pagination {
         transform: rotate(80deg);
-        width: 150%;
+        width: 170%;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         right: unset;
         left: -100px;
-        top: 400px;
+        top: 350px;
         height: 100px;
 
         .swiper-pagination-bullet {
@@ -556,7 +556,7 @@ article ul li {
                 content: "";
                 position: absolute;
                 border: 2px solid #093642;
-                width: 265px;
+                width: 285px;
                 height: 1px;
                 top: 13px;
                 left: 32px;
