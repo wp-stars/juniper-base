@@ -322,19 +322,6 @@
     position: relative;
 }
 
-.split-slider .overlay .title-wrapper {
-    position: absolute;
-    padding-right: 1.25rem;
-    padding-top: 1.13rem;
-    bottom: 0;
-    left: 180px;
-    height: 180px;
-    width: 400px;
-    background: var(--primary-green, #B4D43D);
-    clip-path: polygon(0 0, 100% 100%, 100% 0);
-    transform: rotate(-90deg);
-    transform-origin: bottom left;
-}
 
 .split-slider.light .split-slider-background {
     display: none;
