@@ -2434,6 +2434,7 @@ const Filter = data => {
     id: "filter-items",
     className: "hidden sm:inline-flex flex-wrap justify-start sm:justify-center py-20"
   }, data.terms.map((term, index) => {
+    if (term.slug === "uncategorized") return null;
     let isActive = selectedFilterVals.includes(term.term_id);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       key: index,

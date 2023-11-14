@@ -84,6 +84,8 @@ const Filter = ( data ) => {
                     </div>
                     <div id="filter-items" className="hidden sm:inline-flex flex-wrap justify-start sm:justify-center py-20">
                         {data.terms.map((term, index) => {
+                            if(term.slug === "uncategorized") return null
+                            
                             let isActive = selectedFilterVals.includes(term.term_id)
                             return (
                                 <button key={index} className={`filter-btn w-fit inline-flex items-center ${isActive ? 'active' : ''}`} type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>
