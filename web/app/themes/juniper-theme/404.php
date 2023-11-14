@@ -10,4 +10,10 @@
  */
 
 $context = Timber::context();
+
+
+$context['home_url'] = home_url();
+$context['contact'] = home_url( '/kontakt/' );
+$context['projects'] = home_url( '/projekte/' );
+
 Timber::render( '404.twig', $context );
