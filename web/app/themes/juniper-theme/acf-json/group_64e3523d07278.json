@@ -240,27 +240,6 @@
                     "parent_repeater": "field_64e353a8d5e7a"
                 },
                 {
-                    "key": "field_64e353edd5e7f",
-                    "label": "Address",
-                    "name": "address",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_64e353a8d5e7a"
-                },
-                {
                     "key": "field_65241c9e49aa9",
                     "label": "Location",
                     "name": "location",
@@ -278,6 +257,49 @@
                     "center_lng": "",
                     "zoom": "",
                     "height": "",
+                    "parent_repeater": "field_64e353a8d5e7a"
+                },
+                {
+                    "key": "field_655337211327d",
+                    "label": "Show Button",
+                    "name": "show_button",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "parent_repeater": "field_64e353a8d5e7a"
+                },
+                {
+                    "key": "field_6553383e44843",
+                    "label": "Location Link",
+                    "name": "location_link",
+                    "aria-label": "",
+                    "type": "page_link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": "",
+                    "post_status": "",
+                    "taxonomy": "",
+                    "allow_archives": 1,
+                    "multiple": 0,
+                    "allow_null": 0,
                     "parent_repeater": "field_64e353a8d5e7a"
                 }
             ]
@@ -301,5 +323,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1697108878
+    "modified": 1699953064
 }
