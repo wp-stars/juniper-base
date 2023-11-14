@@ -26,7 +26,20 @@ add_filter(
         }
 
         if($context['fields']['style'] === 'blog') {
-            foreach ($context['fields']['blog_slider_items'] as $key => $item) {
+            $blog_items;
+            if(!$context['fields']['blog_slider_items']) {
+                $blog_query = new WP_Query( array(
+                    'post_type' => 'post',
+                    'posts_per_page' => 3,
+                )); 
+
+                $blog_items = $blog_query->posts;
+            } else {
+                $blog_items = $context['fields']['blog_slider_items'];
+            }
+            foreach ($blog_items as $key => $item) {
+                $context['fields']['blog_slider_items'][$key]->post_title = get_the_title($item);
+
                 $context['fields']['blog_slider_items'][$key]->slide_image = get_the_post_thumbnail($item, 'large');
 
                 $context['fields']['blog_slider_items'][$key]->link = get_the_permalink($item);
