@@ -78,6 +78,21 @@ h6 {
     line-height: 2.0625rem;
 }
 
+.wps-content {
+    h2 {
+        margin-bottom: 1rem;
+    }
+    h3 {
+        margin-bottom: 2rem;
+    }
+    h4 {
+        margin-bottom: 1rem;
+    }
+    h5 {
+        margin-bottom: 0.75rem;
+    }
+}
+
 @media screen and (max-width: 600px) {
     h1 {
         font-size: 2.75rem;
