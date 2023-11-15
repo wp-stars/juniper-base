@@ -5,9 +5,9 @@ import axios from 'axios'
 
 const Filter = ( data ) => {
     const [selectedFilterVals, setSelectedFilterVals] = useState([])
-    const [posts, setPosts] = useState(data.posts)
+    const [posts, setPosts] = useState([])
     const [page, setPage] = useState(1)
-    const [loading, setLoading] = useState(false)
+    const [loadingMore, setLoadingMore] = useState(false)
     const [maxPages, setMaxPages] = useState(data.maxNumPages)
 
     const updateFilterVals = (e, term_id) => {
@@ -23,7 +23,7 @@ const Filter = ( data ) => {
     }
 
     const loadMorePosts = () => {
-        setLoading(true)
+        setLoadingMore(true)
         setPage(page + 1)
     }
 
@@ -36,9 +36,6 @@ const Filter = ( data ) => {
     }
 
     useEffect(() => {
-        console.log('triggered use effect', selectedFilterVals.length, page, )
-        if(!selectedFilterVals.length && page === 1) return
-        console.log('getting new data')
         let queryString = `?post_type=${data.postType}`
         if(data.taxonomy) {
             queryString += `&taxonomy=${data.taxonomy}`
@@ -140,9 +137,8 @@ const Filter = ( data ) => {
                         keine Ergebnisse.
                     </div>
                 }
-                
             </div>
-                {loading ? 
+                {loadingMore ? 
                     <div className="container flex justify-center">
                         <p>Loading...</p>
                     </div>

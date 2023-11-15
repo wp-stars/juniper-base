@@ -2292,9 +2292,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const Filter = data => {
   const [selectedFilterVals, setSelectedFilterVals] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-  const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(data.posts);
+  const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1);
-  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [loadingMore, setLoadingMore] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [maxPages, setMaxPages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(data.maxNumPages);
   const updateFilterVals = (e, term_id) => {
     e.preventDefault();
@@ -2307,7 +2307,7 @@ const Filter = data => {
     setSelectedFilterVals(shallowFilterVals);
   };
   const loadMorePosts = () => {
-    setLoading(true);
+    setLoadingMore(true);
     setPage(page + 1);
   };
   const removeTerm = (event, termId) => {
@@ -2318,9 +2318,6 @@ const Filter = data => {
     setSelectedFilterVals(newSelectedFilterVals);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log('triggered use effect', selectedFilterVals.length, page);
-    if (!selectedFilterVals.length && page === 1) return;
-    console.log('getting new data');
     let queryString = `?post_type=${data.postType}`;
     if (data.taxonomy) {
       queryString += `&taxonomy=${data.taxonomy}`;
@@ -2513,7 +2510,7 @@ const Filter = data => {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
   })) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full text-center"
-  }, "keine Ergebnisse.")), loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "keine Ergebnisse.")), loadingMore ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
