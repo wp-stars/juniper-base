@@ -28,7 +28,7 @@ class Projects {
 				'public'      => true,
 				'has_archive' => false,
 				'show_in_rest' => true,
-				'rewrite'     => array( 'slug' => $this->cpt_slug ),
+				'rewrite'     => array( 'slug' => 'projekte' ),
 			)
 		);
 	}
