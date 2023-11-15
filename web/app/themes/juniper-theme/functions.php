@@ -201,7 +201,7 @@ function wps_add_to_context( $context ) {
     $post_type = get_post_type();
     if( $post_type ) {
         $post_type_data = get_post_type_object( $post_type );
-        if( $post_type_data ) { 
+        if( $post_type_data->rewrite ) {
             $context['parent_page_title'] = $post_type_data->rewrite['slug'];
             $context['parent_page_url']   = get_post_type_archive_link($post_type);
         }
