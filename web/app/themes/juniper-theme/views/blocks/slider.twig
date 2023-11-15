@@ -29,7 +29,9 @@
 					<div class="left col-span-12 sm:col-span-6 text-white h-full flex flex-col {{ fields.split_slider_static_items.text_alignment }}">
 						<h2 class="mb-8 title">{{ fields.split_slider_static_items.title }}</h2>
 						<div class="mb-6 intro-text">{{ fields.split_slider_static_items.text }}</div>
-						<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
+						{% if fields.split_slider_static_items.link %}
+							<a class="btn btn-primary w-fit" href="{{ fields.split_slider_static_items.link.url }}">{{ fields.split_slider_static_items.link.title }}</a>
+						{% endif %}
 					</div>
 					<div class="right col-span-12 sm:col-span-6">
 						<div class="sm:absolute sm:w-full">

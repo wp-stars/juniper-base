@@ -173,6 +173,10 @@
     opacity: 1;
 }
 
+.light.split-slider .swiper-pagination-bullet {
+    background: #093642;
+}
+
 .quote-swiper-outer .swiper-pagination-bullet.swiper-pagination-bullet-active,
 .split-slider .swiper-pagination-bullet.swiper-pagination-bullet-active,
 .blog-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
