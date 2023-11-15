@@ -248,5 +248,13 @@ function wps_juniper_acf_init() {
 
 add_action('acf/init', 'wps_juniper_acf_init');
 
+/**
+ * Change the excerpt more string
+ */
+function wps_juniper_excerpt_more( $more ) {
+    return ' [...]';
+}
+add_filter( 'excerpt_more', 'wps_juniper_excerpt_more' );
+
 
 
