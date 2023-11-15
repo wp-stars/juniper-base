@@ -198,12 +198,14 @@ function wps_add_to_context( $context ) {
     $context['home_page_url']    = home_url();
     $context['page_title']       = get_the_title();
 
-        $post_type = get_post_type();
-        if ( $post_type ){
-            $post_type_data = get_post_type_object( $post_type );
+    $post_type = get_post_type();
+    if( $post_type ) {
+        $post_type_data = get_post_type_object( $post_type );
+        if( $post_type_data ) { 
             $context['parent_page_title'] = $post_type_data->rewrite['slug'];
             $context['parent_page_url']   = get_post_type_archive_link($post_type);
         }
+    }
 
     return $context;
 }
