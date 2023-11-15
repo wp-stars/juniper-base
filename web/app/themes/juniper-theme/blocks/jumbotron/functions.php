@@ -15,9 +15,10 @@ add_action(
 add_filter(
     'timber/acf-gutenberg-blocks-data/jumbotron',
     function ( $context ) {
-        if(empty($context['fields']['title'])) $context['fields']['title'] = get_the_title();
 
-        $context['fields']['background_image'] = wp_get_attachment_image_url($context['fields']['background_image'], 'full');
+        if(!empty($context['fields']['title'])) $context['title'] = $context['fields']['title'];
+
+        if(!empty($context['fields']['background_image'])) $context['jumbotron_bg_image'] = wp_get_attachment_image_url($context['fields']['background_image'], 'full');
 
         return $context;
     }

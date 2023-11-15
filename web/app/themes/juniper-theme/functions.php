@@ -194,7 +194,7 @@ function wps_add_to_context( $context ) {
     $context['secondary_menu']   = new \Timber\Menu( 'secondary-menu' );
     $context['footer_menu']      = new \Timber\Menu( 'footer-menu' );
     $context['title']            = get_the_title();
-    $context['default_bg_image'] = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
+    $context['jumbotron_bg_image'] = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
     $context['home_page_url']    = home_url();
     $context['page_title']       = get_the_title();
 
