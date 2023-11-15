@@ -36,7 +36,9 @@ const Filter = ( data ) => {
     }
 
     useEffect(() => {
+        console.log('triggered use effect', selectedFilterVals.length, page, )
         if(!selectedFilterVals.length && page === 1) return
+        console.log('getting new data')
         let queryString = `?post_type=${data.postType}`
         if(data.taxonomy) {
             queryString += `&taxonomy=${data.taxonomy}`
@@ -48,8 +50,12 @@ const Filter = ( data ) => {
         queryString += `&page=${page}`
         axios.get(`${data.restUrl}wps/v1/data${queryString}`)
             .then(res => {
+                if(page > 1) {
+                    setPosts([...posts, ...res.data.posts])
+                } else {
+                    setPosts(res.data.posts)
+                }
                 setMaxPages(res.data.maxNumPages)
-                setPosts([...posts, ...res.data.posts])
                 setLoading(false)
             })
             .catch(err => {
@@ -112,21 +118,29 @@ const Filter = ( data ) => {
                 </div>
             </div>
             <div className="w-full relative text-center mb-10">
-                {posts.map((post, index) => {
+                {posts.length ? 
+                    <>
+                        {posts.map((post, index) => {
+                            if(data.style === "alternating") {
+                                return <AlternatingResult key={index} index={index} post={post} />
+                            } 
 
-                    if(data.style === "alternating") {
-                        return <AlternatingResult key={index} index={index} post={post} />
-                    } 
-
-                    if(data.style === "article") {
-                        return <ArticleResult key={index} index={index} post={post} />
-                    }
-                    return (
-                        <div key={index}>
-                            <h3>{post.post_title}</h3>
-                        </div>
-                    )
-                })}
+                            if(data.style === "article") {
+                                return <ArticleResult key={index} index={index} post={post} />
+                            }
+                            return (
+                                <div key={index}>
+                                    <h3>{post.post_title}</h3>
+                                </div>
+                            )
+                        })}
+                    </>
+                : 
+                    <div className="w-full text-center">
+                        keine Ergebnisse.
+                    </div>
+                }
+                
             </div>
                 {loading ? 
                     <div className="container flex justify-center">

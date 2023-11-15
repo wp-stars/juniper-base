@@ -89,6 +89,7 @@ function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
     $data_arr = array();
     $tax_query = array();
     if($taxonomy && count($terms)) {
+        
         $tax_query[] = array(
             'taxonomy'  => $taxonomy,
             'field'     => 'term_id',
@@ -107,6 +108,10 @@ function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
     }
     
     $initial_posts = new WP_Query($args);
+
+    // var_dump($initial_posts->request);
+    // var_dump(count($initial_posts->posts));
+    // die();
 
     $post_arr = array();
     foreach ($initial_posts->posts as $post) {

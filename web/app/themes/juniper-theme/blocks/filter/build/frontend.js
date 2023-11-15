@@ -2318,7 +2318,9 @@ const Filter = data => {
     setSelectedFilterVals(newSelectedFilterVals);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log('triggered use effect', selectedFilterVals.length, page);
     if (!selectedFilterVals.length && page === 1) return;
+    console.log('getting new data');
     let queryString = `?post_type=${data.postType}`;
     if (data.taxonomy) {
       queryString += `&taxonomy=${data.taxonomy}`;
@@ -2327,8 +2329,12 @@ const Filter = data => {
     }
     queryString += `&page=${page}`;
     axios__WEBPACK_IMPORTED_MODULE_4___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
+      if (page > 1) {
+        setPosts([...posts, ...res.data.posts]);
+      } else {
+        setPosts(res.data.posts);
+      }
       setMaxPages(res.data.maxNumPages);
-      setPosts([...posts, ...res.data.posts]);
       setLoading(false);
     }).catch(err => {
       console.error(err);
@@ -2487,7 +2493,7 @@ const Filter = data => {
     fillOpacity: "0.6"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full relative text-center mb-10"
-  }, posts.map((post, index) => {
+  }, posts.length ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((post, index) => {
     if (data.style === "alternating") {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AlternatingResult__WEBPACK_IMPORTED_MODULE_2__["default"], {
         key: index,
@@ -2505,7 +2511,9 @@ const Filter = data => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: index
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
-  })), loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "w-full text-center"
+  }, "keine Ergebnisse.")), loading ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
