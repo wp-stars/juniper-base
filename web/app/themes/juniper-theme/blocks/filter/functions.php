@@ -31,7 +31,7 @@ add_filter(
         $post_type = $context['fields']['post_type'];
         $taxonomy = $context['fields']['taxonomy'];
         $data_arr = wps_get_filter_posts( $post_type, $taxonomy, [], 1);
-        
+
         $post_type = get_post_type_object( $context['fields']['post_type'] );
         $data_arr['postName'] = $post_type->labels->name;
         $data_arr['postType'] = $context['fields']['post_type'];
@@ -125,7 +125,7 @@ function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
         $post_obj->post_author = get_the_author_meta('display_name', $post->post_author);
         $post_obj->post_date = get_the_date('d.m.Y', $post);
         $post_obj->featured_image = get_the_post_thumbnail_url($post);
-        $post_obj->link = get_the_permalink($post);
+        $post_obj->link = get_permalink($post);
 
         $post_arr[] = $post_obj;
     }

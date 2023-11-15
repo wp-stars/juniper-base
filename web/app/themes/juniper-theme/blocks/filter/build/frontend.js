@@ -2212,7 +2212,7 @@ const AlternatingResult = _ref => {
     className: "mb-20"
   }, post.excerpt), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     className: "btn-underline",
-    href: `/${post.post_type}/${post.post_name}`
+    href: post.link
   }, "Mehr \xFCber ", post.post_title)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AlternatingResult);
