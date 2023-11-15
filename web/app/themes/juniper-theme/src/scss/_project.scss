@@ -740,3 +740,37 @@ footer {
             line-height: 1.75rem;
         }
     }
+
+
+    .post-type-post .article-body .wp-block-group .wp-block-group__inner-container{
+        p{
+            margin-bottom: 1rem;
+        }
+        .wp-block-video{
+            margin-bottom: 3rem;
+        }
+        .wp-block-image{
+            margin-bottom: 3rem;
+        }
+        h3{
+            margin: 7rem 0rem 1.5rem 0rem;
+        }
+        h4{
+            margin: 3rem 0rem 1rem 0rem;
+        }
+
+        @media screen and (max-width: 640px) {
+            p{
+                margin-bottom: 1.25rem;
+            }
+            .wp-block-video{
+                margin-bottom: 2rem;
+            }
+            h3{
+                margin: 4rem 0rem 1.5rem 0rem;
+            }
+            h4{
+                margin: 2rem 0rem 1rem 0rem;
+            }
+        }
+    }
