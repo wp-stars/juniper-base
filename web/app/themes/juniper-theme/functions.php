@@ -195,6 +195,15 @@ function wps_add_to_context( $context ) {
     $context['footer_menu']      = new \Timber\Menu( 'footer-menu' );
     $context['title']            = get_the_title();
     $context['default_bg_image'] = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
+    $context['home_page_url']    = home_url();
+    $context['page_title']       = get_the_title();
+
+        $post_type = get_post_type();
+        if ( $post_type ){
+            $post_type_data = get_post_type_object( $post_type );
+            $context['parent_page_title'] = $post_type_data->rewrite['slug'];
+            $context['parent_page_url']   = get_post_type_archive_link($post_type);
+        }
 
     return $context;
 }

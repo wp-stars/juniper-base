@@ -18,7 +18,9 @@
 			</svg>
 		</div>
 	</section>
-
+{% block breadcrumbs %}
+    		{% include "blocks/breadcrumbs.twig" with {'home_page_url': home_page_url, 'parent_page_title': parent_page_title, 'parent_page_url': parent_page_url, 'page_title': page_title, 'page_url': page_url} %}
+		{% endblock %}
 	<div class="content-wrapper">
 		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
 				<div class="article-body">
