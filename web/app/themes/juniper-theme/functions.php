@@ -203,7 +203,8 @@ add_action( 'wp_enqueue_scripts', 'wpse_enqueues' );
 function wpse_enqueues() {
     // Only enqueue on specified single CPTs
     if( is_singular() ) {
-        wp_enqueue_style( 'wps-jumbotron-css', get_stylesheet_directory_uri() . '/blocks/jumbotron/style.css' );
+        $refresh_cache_time = time();
+        wp_enqueue_style( 'wps-jumbotron-css', get_stylesheet_directory_uri() . '/blocks/jumbotron/style.css', array(), $refresh_cache_time );
     }
 }
 
