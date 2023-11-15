@@ -2,7 +2,7 @@
    just a small part. See `search.twig` for an example of another approach #}
 
 {% extends "index.twig" %}
-
+{% block base %}
 <nav class="flex mb-4" aria-label="Breadcrumb">
   <ol class="inline-flex items-center space-x-1 md:space-x-3">
     <li class="inline-flex items-center">
@@ -29,4 +29,5 @@
 {% block content %}
   <h3>This is my archive</h3>
   {{ parent() }}
+{% endblock %}
 {% endblock %}

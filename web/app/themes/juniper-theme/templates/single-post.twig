@@ -1,5 +1,7 @@
 {% extends "base.twig" %}
 
+
+
 {% block content %}
 
 	<section class="jumbotron-section bg-center bg-no-repeat bg-blend-multiply angled-bottom h-[552px] sm:h-auto relative" style="background-image: url('{{ default_bg_image }}'); background-size: cover;">
@@ -19,37 +21,11 @@
 			</svg>
 		</div>
 	</section>
-	<section class="breadcrumbs container h-10 justify-start items-center flex mx-auto mb-[5rem]">
-		<div class="justify-start items-center flex">
-			<div class="page font-['Red Hat Mono'] uppercase">			
-				<a class="flex items-center" href={{ home_page_url }}>
-					<div class="h-6 w-6 mr-[0.62rem]">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-							<path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M9 22V12H15V22" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					</div>
-					Home
-				</a>
-			</div>
-			{% if parent_page_title %}
-				<div class="divider">
-				</div>
-				<div class="page justify-start items-center flex">
-					<div class="uppercase">
-						<a href={{ parent_page_url}}>{{ parent_page_title }}</a>
-					</div>
-				</div>
-			{% endif %}
-			{% if page_title %}
-				<div class="divider">
-				</div>
-				<div class="page current justify-start items-center flex">
-					<div class="uppercase">{{ page_title }}</div>
-				</div>
-			{% endif %}
-		</div>
-	</section>
+	
+	{% block breadcrumbs %}
+    	{% include "blocks/breadcrumbs.twig" with {'home_page_url': home_page_url, 'parent_page_title': parent_page_title, 'parent_page_url': parent_page_url, 'page_title': page_title, 'page_url': page_url} %}
+	{% endblock %}
+
 	<div class="content-wrapper">
 		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
 				<div class="article-body">
