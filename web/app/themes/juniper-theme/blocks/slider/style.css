@@ -313,13 +313,25 @@
     display: inline;
 }
 
-.split-slider .swiper-slide a span {
+.split-slider .swiper-slide a.btn {
     padding: 0.25rem;
     border-bottom: 3px solid var(--greyscale-black, #1E1E1E);
+    color: var(--greyscale-black, #1E1E1E);
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 1.875rem; /* 166.667% */
+    line-height: 1.875rem;
+    right: calc(50px + 0.5rem);
+}
+
+@media screen and (max-width: 640px) {
+    .split-slider .swiper-slide a.btn {
+        right: calc(1.7rem + 0.5rem);
+    }
+
+    .split-slider .swiper-slide .btn-underline:after {
+        right: -34px;
+    }
 }
 
 .split-slider .slide-inner {
