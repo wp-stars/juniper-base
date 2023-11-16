@@ -53,7 +53,7 @@ const Filter = ( data ) => {
                     setPosts(res.data.posts)
                 }
                 setMaxPages(res.data.maxNumPages)
-                setLoading(false)
+                setLoadingMore(false)
             })
             .catch(err => {
                 console.error(err)
