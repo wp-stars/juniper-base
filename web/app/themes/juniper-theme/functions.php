@@ -180,32 +180,45 @@ add_action( 'after_setup_theme', 'wps_juniper_register_nav_menu', 0 );
 
 add_filter( 'timber/context', 'wps_add_to_context' );
 function wps_add_to_context( $context ) {
-    $custom_logo_id              = get_theme_mod( 'custom_logo' );
-    $logo                        = wp_get_attachment_image_url( $custom_logo_id , 'full' );
-    $context['logo']             = $logo;
-    $footer_logo                 = get_theme_mod( 'footer_logo' );
-    $context['footer_logo']      = $footer_logo;
-    $footer_quote                = get_theme_mod( 'juniper_footer_textarea' );
-    $context['footer_quote']      = $footer_quote;
-    $upload_dir                  = wp_upload_dir();
-    $context['uploads']          = $upload_dir;
-    $context['theme_dir']        = get_stylesheet_directory_uri();
-    $context['primary_menu']     = new \Timber\Menu( 'primary-menu' );
-    $context['secondary_menu']   = new \Timber\Menu( 'secondary-menu' );
-    $context['footer_menu']      = new \Timber\Menu( 'footer-menu' );
-    $context['title']            = get_the_title();
-    $context['jumbotron_bg_image'] = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
-    $context['home_page_url']    = home_url();
-    $context['page_title']       = get_the_title();
-
-    $post_type = get_post_type();
-    if( $post_type ) {
-        $post_type_data = get_post_type_object( $post_type );
-        if( $post_type_data->rewrite ) {
-            $context['parent_page_title'] = $post_type_data->rewrite['slug'];
-            $context['parent_page_url']   = get_post_type_archive_link($post_type);
+    $custom_logo_id                 = get_theme_mod( 'custom_logo' );
+    $logo                           = wp_get_attachment_image_url( $custom_logo_id , 'full' );
+    $context['logo']                = $logo;
+    $footer_logo                    = get_theme_mod( 'footer_logo' );
+    $context['footer_logo']         = $footer_logo;
+    $footer_quote                   = get_theme_mod( 'juniper_footer_textarea' );
+    $context['footer_quote']        = $footer_quote;
+    $upload_dir                     = wp_upload_dir();
+    $context['uploads']             = $upload_dir;
+    $context['theme_dir']           = get_stylesheet_directory_uri();
+    $context['primary_menu']        = new \Timber\Menu( 'primary-menu' );
+    $context['secondary_menu']      = new \Timber\Menu( 'secondary-menu' );
+    $context['footer_menu']         = new \Timber\Menu( 'footer-menu' );
+    $context['title']               = get_the_title();
+    $context['jumbotron_bg_image']  = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
+    $context['home_page_url']       = home_url();
+    $context['page_title']          = get_the_title();
+    $home_page_url                  = home_url();
+    $context['home_page_url']       = $home_page_url;
+    $context['parent_page_title']   = '';
+    $context['parent_page_url']     = '';
+    
+    if( is_single() ) {
+        $post_type = get_post_type();
+        $page = get_field($post_type . '_archive_page', 'option');
+        if($page) {
+            $context['parent_page_title'] = $page->post_title;
+            $context['parent_page_url']   = get_permalink($page);
         }
     }
+
+    // $post_type = get_post_type();
+    // if( $post_type ) {
+    //     $post_type_data = get_post_type_object( $post_type );
+    //     if( $post_type_data->rewrite ) {
+    //         $context['parent_page_title'] = $post_type_data->rewrite['slug'];
+    //         $context['parent_page_url']   = get_post_type_archive_link($post_type);
+    //     }
+    // }
 
     return $context;
 }
