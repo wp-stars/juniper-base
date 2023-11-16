@@ -91,3 +91,9 @@
 .featured-persons .swiper-button-next::after {
     display: none;
 }
+
+.featured-persons ul li {
+    list-style-image: none;
+    padding-bottom: 0;
+    text-align: left;
+}
