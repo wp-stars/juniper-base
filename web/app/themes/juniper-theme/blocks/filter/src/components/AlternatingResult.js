@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import { decodeEntity } from 'html-entities'
 
 const AlternatingResult = ({ index, post }) => {
     return (
@@ -16,7 +17,15 @@ const AlternatingResult = ({ index, post }) => {
             </div>
             <div className={`order-2 ${index % 2 === 0 ? 'sm:order-2' : 'sm:order-1'} flex flex-col justify-center text-left`}>
                 <h3>{post.post_title} // {post.fields.year}</h3>
-                <p className="mb-10">{post.terms.map(term => term.name).join(" // ")}</p>
+                <p className="mb-10">
+                    {post.terms.map((term, index) => (
+                            <React.Fragment key={index}>
+                                {index < post.terms.length && index > 0 && ' // '}
+                                <span dangerouslySetInnerHTML={{ __html: `${term.name}` }}></span>
+                            </React.Fragment>
+                        )
+                    )}
+                </p>
                 <div className="mb-20">
                     {post.excerpt}
                 </div>
