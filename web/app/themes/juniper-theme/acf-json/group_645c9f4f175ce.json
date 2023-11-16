@@ -198,6 +198,31 @@
                     "parent_repeater": "field_646b1d568d0dc"
                 }
             ]
+        },
+        {
+            "key": "field_65564f0afdc46",
+            "label": "Career Link",
+            "name": "career_link",
+            "aria-label": "",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "allow_archives": 1,
+            "multiple": 0,
+            "allow_null": 0
         }
     ],
     "location": [
@@ -218,5 +243,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1692610913
+    "modified": 1700155169
 }
