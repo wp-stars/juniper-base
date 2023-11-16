@@ -25,7 +25,10 @@ class Jobs {
 				'has_archive' => true,
 				'show_in_rest' => true,
 				'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
-				'rewrite'     => array( 'slug' => $this->cpt_slug ),
+				'rewrite'     => array( 
+					'slug' => 'karriere', 
+					'with_front' => false
+			 	),
 			)
 		);
 	}

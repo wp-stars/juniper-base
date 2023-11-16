@@ -25,7 +25,10 @@ class Services {
 				'has_archive' => true,
 				'show_in_rest' => true,
 				'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
-				'rewrite'     => array( 'slug' => $this->cpt_slug ),
+				'rewrite'     => array( 
+					'slug' => 'leistungen', 
+					'with_front' => false
+				),
 			)
 		);
 	}

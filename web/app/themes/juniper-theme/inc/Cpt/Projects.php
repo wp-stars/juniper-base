@@ -28,7 +28,10 @@ class Projects {
 				'public'      => true,
 				'has_archive' => false,
 				'show_in_rest' => true,
-				'rewrite'     => array( 'slug' => 'projekte' ),
+				'rewrite'     => array( 
+					'slug' => 'projekte', 
+					'with_front' => false 
+				),
 			)
 		);
 	}
