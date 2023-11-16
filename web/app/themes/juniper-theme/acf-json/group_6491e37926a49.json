@@ -63,6 +63,29 @@
             "append": ""
         },
         {
+            "key": "field_65564d31abc7b",
+            "label": "Career Link",
+            "name": "career_link",
+            "aria-label": "",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "allow_archives": 1,
+            "multiple": 0,
+            "allow_null": 0
+        },
+        {
             "key": "field_6492a35860d4c",
             "label": "Intro",
             "name": "intro",
@@ -226,5 +249,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1699608604
+    "modified": 1700154706
 }
