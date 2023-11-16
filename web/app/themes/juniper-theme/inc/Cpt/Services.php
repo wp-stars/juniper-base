@@ -22,7 +22,7 @@ class Services {
 					'singular_name' => $this->cpt_name,
 				),
 				'public'      => true,
-				'has_archive' => true,
+				'has_archive' => false,
 				'show_in_rest' => true,
 				'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
 				'rewrite'     => array( 
