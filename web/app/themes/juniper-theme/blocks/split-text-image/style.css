@@ -167,6 +167,10 @@
     min-height: 800px;
 }
 
+.container-dark .text-inner a {
+    border-color: #F9F9F9;
+}
+
 .container-imgbottomright .img-content{
     margin-top: 350px;
 }
