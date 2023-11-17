@@ -25,6 +25,14 @@
     background-color: rgba(0,0,0,0.4);
 }
 
+@media screen and (max-width: 640px) {
+    .employee-card .overlay {
+        opacity: 1;
+        display: flex;
+        background-color: rgba(0,0,0,0.4);
+    }
+}
+
 .employee-card .top-decoration {
     background-color: rgba(180, 212, 61, 0.60);
     height: 11rem;
