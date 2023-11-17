@@ -209,16 +209,14 @@ function wps_add_to_context( $context ) {
             $context['parent_page_title'] = $page->post_title;
             $context['parent_page_url']   = get_permalink($page);
         }
-    }
 
-    // $post_type = get_post_type();
-    // if( $post_type ) {
-    //     $post_type_data = get_post_type_object( $post_type );
-    //     if( $post_type_data->rewrite ) {
-    //         $context['parent_page_title'] = $post_type_data->rewrite['slug'];
-    //         $context['parent_page_url']   = get_post_type_archive_link($post_type);
-    //     }
-    // }
+        if($post_type === "post") {
+            $post = get_post();
+            if($post_thumbnail = get_the_post_thumbnail_url( $post, 'full' )) {
+                $context['jumbotron_bg_image'] = $post_thumbnail;  
+            }
+        }
+    }
 
     return $context;
 }
