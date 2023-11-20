@@ -41,7 +41,6 @@ class MailPoetGF
             $subscriber['last_name'] = "";
             $subscriber['email'] = $gfbody["email"];
 
-
             // Check if subscriber exists. If subscriber doesn't exist an exception is thrown
             $get_subscriber = $mailpoet_api->getSubscriber($subscriber['email']);
 
