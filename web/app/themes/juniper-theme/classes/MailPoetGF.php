@@ -50,21 +50,28 @@ class MailPoetGF
             $get_subscriber = false;
             try {
                 $get_subscriber = $mailpoet_api->getSubscriber($subscriber['email']);
-            } catch (\Exception $e) {}
+                // In case subscriber exists just add them to new lists
+                $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
 
-            try {
-                if (!$get_subscriber) {
-                    // Subscriber doesn't exist let's create one
-                    $mailpoet_api->addSubscriber($subscriber, $list_ids);
-                    $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
-                } else {
-                    // In case subscriber exists just add them to new lists
-                    $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
-                }
             } catch (\Exception $e) {
-                $error_message = $e->getMessage();
-                die($error_message);
+                // Subscriber doesn't exist let's create one
+                $mailpoet_api->addSubscriber($subscriber, $list_ids);
+                $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
             }
+
+            // try {
+            //     if (!$get_subscriber) {
+            //         // Subscriber doesn't exist let's create one
+            //         $mailpoet_api->addSubscriber($subscriber, $list_ids);
+            //         $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
+            //     } else {
+            //         // In case subscriber exists just add them to new lists
+            //         $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
+            //     }
+            // } catch (\Exception $e) {
+            //     $error_message = $e->getMessage();
+            //     die($error_message);
+            // }
         }   
     }
 }
