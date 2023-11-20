@@ -1389,6 +1389,10 @@ input[type="range"]::-ms-fill-lower {
   min-height: 600px;
 }
 
+.min-h-\[650px\] {
+  min-height: 650px;
+}
+
 .min-h-\[800px\] {
   min-height: 800px;
 }

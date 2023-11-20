@@ -1,5 +1,4 @@
 import React, {useState} from "react"
-import { decodeEntity } from 'html-entities'
 
 const ArticleResult = ({ index, post }) => {
 
