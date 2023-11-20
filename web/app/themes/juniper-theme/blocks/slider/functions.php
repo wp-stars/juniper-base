@@ -38,6 +38,8 @@ add_filter(
                 $blog_items = $context['fields']['blog_slider_items'];
             }
             foreach ($blog_items as $key => $item) {
+                if(!isset($context['fields']['blog_slider_items'][$key])) $context['fields']['blog_slider_items'][$key] = new stdClass();
+
                 $context['fields']['blog_slider_items'][$key]->post_title = get_the_title($item);
 
                 $context['fields']['blog_slider_items'][$key]->slide_image = get_the_post_thumbnail($item, 'large');

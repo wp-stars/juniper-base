@@ -17,9 +17,11 @@
 		{% for item in fields.items %}
 			<div class="split-text-item flex flex-col text-center items-center">
 				{% if item.image %}
-					{{ item.image }}
+					<div class="mb-20">
+						{{ item.image }}
+					</div>
 				{% endif %}
-				<div class="mt-20">
+				<div class="">
 					{% if item.tagline %}
 						<p class="tagline">{{ item.tagline }}</p>
 					{% endif %}
