@@ -3,6 +3,9 @@
 namespace wps;
 
 
+use MailPoet\API\API;
+use MailPoet\API\MP\v1\APIException;
+
 class MailPoetGF
 {
 
@@ -21,7 +24,11 @@ class MailPoetGF
         add_action( 'gform_after_submission', [$this, 'post_to_mailpoet'], 10, 2 );
     }
 
-    public function post_to_mailpoet( $entry, $form ): bool {
+    /**
+     * @throws APIException
+     * @throws \Exception
+     */
+    public function post_to_mailpoet($entry, $form ): bool {
       
         if($form['title'] != "Newsletter") return false;
 
@@ -31,9 +38,9 @@ class MailPoetGF
             'list_id' => rgar( $entry, '7' ),
         );
 
-        if (class_exists(\MailPoet\API\API::class)) {
+        if (class_exists(API::class)) {
             // Get MailPoet API instance
-            $mailpoet_api = \MailPoet\API\API::MP('v1');
+            $mailpoet_api = API::MP('v1');
             $list_ids = array($gfbody["list_id"]);
 
             $subscriber = [];

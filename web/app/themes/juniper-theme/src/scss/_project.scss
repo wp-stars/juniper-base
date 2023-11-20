@@ -275,7 +275,8 @@ article ul li {
  */
 
 .btn-primary,
-.gform_button[type="submit"] {
+.gform_button[type="submit"],
+.mailpoet_submit {
     background-color: $primary !important;
     box-sizing: border-box !important;
 
@@ -642,6 +643,34 @@ footer {
 }
 
 #content {
+
+    form.mailpoet_form {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .mailpoet_checkbox_label {
+        font-family: "Red Hat Mono" !important;
+        font-size: 0.875rem !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        line-height: 1.125rem !important;
+    }
+    
+
+    .mailpoet_form .mailpoet_text {
+        border-radius: 0 !important;
+        border: 2px solid var(--greyscale-60, #767676)  !important;
+        &::placeholder {
+            color: var(--greyscale-60, #767676) !important;
+            font-family: "Red Hat Mono" !important;
+            font-size: 1.125rem !important;
+            font-style: normal !important;
+            font-weight: 500 !important;
+            line-height: 1.875rem !important;
+        }
+    }
+
     .gform-theme--foundation .gform_fields {
         grid-row-gap: 20px !important;
     }
