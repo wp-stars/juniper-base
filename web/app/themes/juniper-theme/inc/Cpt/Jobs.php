@@ -29,6 +29,7 @@ class Jobs {
 					'slug' => 'karriere', 
 					'with_front' => false
 			 	),
+				'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'author', 'comments', 'trackbacks', 'page-attributes', 'post-formats', 'custom-fields'),
 			)
 		);
 	}

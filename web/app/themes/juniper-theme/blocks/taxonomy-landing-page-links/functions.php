@@ -16,12 +16,13 @@ add_filter(
     'timber/acf-gutenberg-blocks-data/taxonomy-landing-page-links',
     function ( $context ) {
         global $post;
+        $terms = [];
 
-        $terms = get_the_terms($post->ID, $context['fields']['taxonomy']);
-
-        foreach ($terms as $term) {
-            $term->fields = get_fields($term);
-            $term->link = get_term_link($term);
+        if($terms = get_the_terms($post->ID, $context['fields']['taxonomy'])) {
+            foreach ($terms as $term) {
+                $term->fields = get_fields($term);
+                $term->link = get_term_link($term);
+            }
         }
 
         $context['terms'] = $terms;
