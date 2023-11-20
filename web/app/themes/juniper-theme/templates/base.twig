@@ -45,7 +45,6 @@
 		</header>
 
 		<section id="content" role="main" class="content-wrapper">
-			{# {% if title %}<h1>{{title}}</h1>{% endif %} #}
 			<div class="wrapper {{sidebar_class}}">
 				{% block content %}
 					Sorry, no content
@@ -57,9 +56,6 @@
 				</aside>
 			{% endif %}
 		</section>
-
-		<h1 data-aoe="popIn">
-		</h1>
 
 		{% block footer %}
 			<footer class="relative angled-top pt-20">
