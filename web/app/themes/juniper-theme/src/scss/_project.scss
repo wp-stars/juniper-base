@@ -310,7 +310,8 @@ article ul li {
 }
 
 
-.gform_button[type="submit"] {
+.gform_button[type="submit"],
+.mailpoet_submit {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none"><path d="M0 0V29H29L0 0Z" fill="%23093642"/></svg>');
     background-repeat: no-repeat;
     background-position: left bottom;
@@ -645,8 +646,8 @@ footer {
 #content {
 
     form.mailpoet_form {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
     .mailpoet_checkbox_label {
