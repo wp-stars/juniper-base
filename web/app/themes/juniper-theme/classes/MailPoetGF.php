@@ -21,9 +21,9 @@ class MailPoetGF
         add_action( 'gform_after_submission', [$this, 'post_to_mailpoet'], 10, 2 );
     }
 
-    public function post_to_mailpoet( $entry, $form ) {
+    public function post_to_mailpoet( $entry, $form ): bool {
       
-        if($form['title'] != "Newsletter") return;
+        if($form['title'] != "Newsletter") return false;
 
         $gfbody = array(                        
             'name' => rgar( $entry, '4' ),
@@ -51,6 +51,10 @@ class MailPoetGF
                 // Subscriber doesn't exist let's create one
                 $mailpoet_api->addSubscriber($subscriber, $list_ids, []);
             }
-        }   
+
+            return true;
+        }
+
+        return false;
     }
 }
