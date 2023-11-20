@@ -16,12 +16,14 @@
 		<h2 class="mb-6 text-white">{{fields.title}}</h2>
 		<div class="w-[65vw] text-white">{{fields.description}}</div>
 		<div class="grid grid-cols-3 mt-[6rem]">
-			<div class="col-span-1">
+			<div class="col-span-3 md:col-span-1 max-h-[80%]">
 				<div class="flex justify-center">
 					<img class="w-96 h-auto object-cover" src={{ fields.image.sizes.large }}></div>
 			</div>
-			<div class="col-span-2 mt-20">
-				<div class="text-white">{{ fields.code_snippet }}</div>
+			<div class="col-span-3 md:col-span-2 mt-5 md:mt-20">
+				<pre class="language-{{fields.language}} code-container" >
+				<code>{{ fields.code_snippet }}</code>
+				</pre>
 			</div>
 		</div>
 	</div>
