@@ -23,7 +23,19 @@ if ( file_exists( $composer_autoload ) ) {
 
 require_once 'inc/include.php';
 
+/**
+ * @param callable $endpoints AUTHOR-API-EXPOSING deaktivieren
+ */
+add_filter( 'rest_endpoints', function ( $endpoints ) {
+    if ( isset( $endpoints['/wp/v2/users'] ) ) {
+        unset( $endpoints['/wp/v2/users'] );
+    }
+    if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+        unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+    }
 
+    return $endpoints;
+} );
 
 /**
  * @param string $scssFile the File we want to watch
