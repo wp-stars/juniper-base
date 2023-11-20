@@ -50,8 +50,7 @@ class MailPoetGF
                 $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
             } else {
                 // Subscriber doesn't exist let's create one
-                $mailpoet_api->addSubscriber($subscriber, $list_ids);
-                $mailpoet_api->subscribeToLists($subscriber['email'], $list_ids);
+                $mailpoet_api->addSubscriber($subscriber, $list_ids, []);
             }
         }   
     }
