@@ -51,7 +51,7 @@
 
 					{# only show button if link text is set #}
 					{% if fields.link %}
-						<div class="flex">
+						<div class="flex mt-8">
 							<a class="btn {% if fields.link_style == 'primary' %} btn-primary {% elseif fields.link_style == 'arrowdark' %} btn-underline {% else %} btn-underline-white {% endif %} w-fit" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
 						</div>
 					{% endif %}
