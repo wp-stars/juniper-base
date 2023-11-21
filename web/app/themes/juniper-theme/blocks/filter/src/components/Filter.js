@@ -75,8 +75,8 @@ const Filter = ( data ) => {
 
     const toggleFilterOpen = (e) => {
         e.preventDefault()
+        console.log('toggling filter')
         setShowFilterItems(!showFilterItems)
-
     }
     
     // create an event listener
