@@ -19,7 +19,7 @@ add_action(
 				'wp-i18n',
 				'wp-polyfill',
 				'wp-api-fetch'
-			), rand( 0, 9999 ), true );
+			), $time, true );
 			wp_localize_script( 'dashboardBlockFrontendScript', 'filterData', $attributes );
         }
     }
@@ -108,10 +108,6 @@ function wps_get_filter_posts( $post_type, $taxonomy, $terms, $page ) {
     }
     
     $initial_posts = new WP_Query($args);
-
-    // var_dump($initial_posts->request);
-    // var_dump(count($initial_posts->posts));
-    // die();
 
     $post_arr = array();
     foreach ($initial_posts->posts as $post) {
