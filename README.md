@@ -62,12 +62,12 @@ Put this .htaccess in the public_html folder
 ```
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteCond %{HTTP_HOST} ^(www.)staging.wp-stars.com$
+RewriteCond %{HTTP_HOST} ^(www.)wp-stars.com$
 RewriteCond %{REQUEST_URI} !^/juniper/web/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /juniper/web/$1
-RewriteCond %{HTTP_HOST} ^(www.)staging.wp-stars.com$
+RewriteCond %{HTTP_HOST} ^(www.)wp-stars.com$
 RewriteRule ^(/)?$ juniper/web/index.php [L]
 
 RewriteEngine On
@@ -80,7 +80,7 @@ RewriteRule ^(.*)$ /juniper/web/$1
 
 # This does not expose the internal URL.
 RewriteCond %{SCRIPT_FILENAME} -d
-RewriteRule ^juniper/web/(.*[^/])$ http://staging.wp-stars.com/$1/ [R=301]
+RewriteRule ^juniper/web/(.*[^/])$ http://wp-stars.com/$1/ [R=301]
 
 </IfModule>
 ```
