@@ -152,12 +152,12 @@
     }
 }
 
-.filter-toggle[aria-expanded="false"] .open-toggle,
-.filter-toggle[aria-expanded="true"] .close-toggle {
+.filter-toggle.open .open-toggle,
+.filter-toggle.closed .close-toggle {
     display: block;
 }
 
-.filter-toggle[aria-expanded="false"] .close-toggle,
-.filter-toggle[aria-expanded="true"] .open-toggle {
+.filter-toggle.closed .close-toggle,
+.filter-toggle.open .open-toggle {
     display: none;
 }
