@@ -14,7 +14,7 @@
 .filter-btn {
     border: 2px solid #F9F9F9;
     position: relative;
-    margin: 1rem 2rem;
+    margin: 1rem 0.5rem;
 }
 
 .filter-btn .btn-inner {
