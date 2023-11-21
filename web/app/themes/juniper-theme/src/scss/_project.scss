@@ -470,6 +470,15 @@ article ul li {
             position: relative;
         }
 
+        .card {
+            .dark-image {
+                display: block;
+            }
+            .light-image {
+                display: none;
+            }
+        }
+
         .card:nth-child(2),
         .card:nth-child(3),
         .card:nth-child(6),
@@ -484,6 +493,12 @@ article ul li {
         .card:nth-child(23) {
             background-color: $text;
             color: $white;
+            .dark-image {
+                display: none;
+            }
+            .light-image {
+                display: block;
+            }
             .card-title,
             .card-content,
             .btn-underline {
@@ -503,6 +518,14 @@ article ul li {
                 top: 0;
                 background-color: $text;
                 color: $white;
+
+                .dark-image {
+                    display: none;
+                }
+                .light-image {
+                    display: block;
+                }
+
                 .card-title,
                 .card-content,
                 .btn-underline {
@@ -520,6 +543,12 @@ article ul li {
             .card.odd {
                 background-color: $white;
                 color: $text;
+                .dark-image {
+                    display: block;
+                }
+                .light-image {
+                    display: none;
+                }
                 .card-title,
                 .card-content,
                 .btn-underline {
