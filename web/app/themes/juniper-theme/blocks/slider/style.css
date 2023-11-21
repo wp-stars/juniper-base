@@ -218,7 +218,7 @@
 }
 
 .split-slider .swiper-slide {
-    width: 588px;
+    max-width: 588px;
     height: 568px;
     color: var(--greyscale-black, #1E1E1E);
     text-align: right;
@@ -275,7 +275,7 @@
 
 .split-slider.right .controls-wrapper {
     margin-top: calc(568px + 1.5rem);
-    width: 588px;
+    max-width: 588px;
 }
 
 .split-slider.right .controls-wrapper .swiper-button-prev,

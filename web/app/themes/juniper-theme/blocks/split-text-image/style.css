@@ -88,7 +88,7 @@
     z-index: -3;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 984px) {
 
     .textright .img-wrapper {
         min-height: 600px;
@@ -175,7 +175,7 @@
     margin-top: 350px;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 984px) {
     .dark-triangle-right {
         top: 60rem;
     }

@@ -14,25 +14,25 @@
 
 <div class="w-full relative min-h-[800px] applynow">
 	{% if fields.style == "contentright" %}
-		<div class="hidden sm:absolute right-0 top-0">
+		<div class="hidden lg:absolute right-0 top-0">
 			<svg xmlns="http://www.w3.org/2000/svg" width="134" height="584" viewBox="0 0 134 584" fill="none">
 				<path d="M0 355L150 0V583.5L0 355Z" fill="#093642"/>
 			</svg>
 		</div>
-		<div class="hidden sm:absolute right-0 top-1/4">
+		<div class="hidden lg:absolute right-0 top-1/4">
 			<svg xmlns="http://www.w3.org/2000/svg" width="67" height="483" viewBox="0 0 67 483" fill="none">
 				<path d="M0 312.5L69.5 0L78.5 483L0 312.5Z" fill="#B4D43D" fill-opacity="0.6"/>
 			</svg>
 		</div>
 	{% endif %}
 	<div class="container mx-auto relative">
-		<div class="grid grid-cols-1 sm:grid-cols-2 {{ fields.style }}">
-			<div class="sm:max-w-[600px] order-last sm:order-first inner py-12 sm:py-0 flex flex-col justify-center {{ fields.text_align }}">
+		<div class="grid grid-cols-1 lg:grid-cols-2 {{ fields.style }}">
+			<div class="lg:max-w-[600px] order-last lg:order-first inner py-12 lg:py-0 flex flex-col justify-center {{ fields.text_align }}">
 				<p class="tagline">{{ fields.tagline }}</p>
 				<h3 class="mb-4">{{ fields.title }}</h3>
 				<div class="inline-flex">
 					{% if fields.contact_image %}
-						<img class="w-[142px] h-[142px] sm:w-[282px] sm:h-[338px] mr-3" src="{{ fields.contact_image }}" />
+						<img class="w-[142px] h-[142px] lg:w-[282px] lg:h-[338px] mr-3" src="{{ fields.contact_image }}" />
 					{% endif %}
 					<div class="flex flex-col justify-end">
 						{% if fields.contact_name %}
@@ -51,9 +51,9 @@
 						{% endif %}
 					</div>
 				</div>
-				<a class="btn btn-primary mt-[2.6rem] sm:mt-0 {{ fields.button_width }}" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
+				<a class="btn btn-primary mt-[2.6rem] lg:mt-0 {{ fields.button_width }}" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
 			</div>
-			<div class="order-first sm:order-last flex min-h-[400px]">
+			<div class="order-first lg:order-last flex min-h-[400px]">
 				<div class="w-full h-full relative">
 					<div class="img-content">
 						<div class="img-decoration"></div>					
