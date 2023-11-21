@@ -63,28 +63,15 @@ const Filter = ( data ) => {
                 console.error(err)
             })
     }, [selectedFilterVals, page])
-
-   //choose the screen size 
-    const handleResize = () => {
-        if (window.innerWidth < 640) {
-            setShowFilterItems(false)
-        } else {
-            setShowFilterItems(true)
-        }
-    }
-
+    
     const toggleFilterOpen = (e) => {
         e.preventDefault()
         console.log('toggling filter')
         setShowFilterItems(!showFilterItems)
     }
-    
-    // create an event listener
-    useEffect(() => {
-        window.addEventListener("resize", handleResize)
-    })
 
     useEffect(() => {
+        // window.addEventListener("resize", handleResize)
         if(!isMobile) setShowFilterItems(true)
     }, [isMobile])
   

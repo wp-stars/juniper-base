@@ -2348,26 +2348,13 @@ const Filter = data => {
       console.error(err);
     });
   }, [selectedFilterVals, page]);
-
-  //choose the screen size 
-  const handleResize = () => {
-    if (window.innerWidth < 640) {
-      setShowFilterItems(false);
-    } else {
-      setShowFilterItems(true);
-    }
-  };
   const toggleFilterOpen = e => {
     e.preventDefault();
     console.log('toggling filter');
     setShowFilterItems(!showFilterItems);
   };
-
-  // create an event listener
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    window.addEventListener("resize", handleResize);
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    // window.addEventListener("resize", handleResize)
     if (!isMobile) setShowFilterItems(true);
   }, [isMobile]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
