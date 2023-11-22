@@ -69,7 +69,7 @@
     left: -15px;
 }
 
-@media screen and (max-width: 984px) {
+@media screen and (max-width: 1200px) {
     .timeline .side-image,
     .timeline .side-image-inner,
     .timeline .side-image::before {
