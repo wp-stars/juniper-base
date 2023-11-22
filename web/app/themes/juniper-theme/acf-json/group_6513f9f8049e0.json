@@ -66,9 +66,7 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": [
-                "page"
-            ],
+            "post_type": "",
             "post_status": "",
             "taxonomy": "",
             "allow_archives": 1,
@@ -94,5 +92,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1696590118
+    "modified": 1700641650
 }
