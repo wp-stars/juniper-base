@@ -672,6 +672,14 @@ footer {
     }
 }
 
+@media screen and (max-width: 640px) {
+    footer .asterisk {
+        top: auto;
+        bottom: 0;  
+    }
+
+}
+
 #content {
 
     form.mailpoet_form {
