@@ -282,3 +282,13 @@ add_filter( 'excerpt_more', 'wps_juniper_excerpt_more' );
 
 
 
+add_filter('locale', 'change_gravity_forms_language');
+function change_gravity_forms_language($locale) {
+
+    if (class_exists('RGForms')) {
+        $gravity_forms_language = 'de_DE';
+        return $gravity_forms_language;
+    }
+
+    return $locale;
+}
