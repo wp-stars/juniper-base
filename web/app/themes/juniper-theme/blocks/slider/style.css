@@ -228,6 +228,7 @@
     font-weight: 700;
     line-height: 3rem;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .split-slider .swiper-slide h3 {
