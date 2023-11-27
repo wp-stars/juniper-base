@@ -7,6 +7,8 @@ add_action('wp_enqueue_scripts', function() {
 
 		wp_enqueue_style('code-snippet-css', $theme_path . '/blocks/code-snippet/style.css', array(), $time, 'all');
 		wp_enqueue_script('code-snippet-js', $theme_path . '/blocks/code-snippet/script.js', array(), $time, true);
+		wp_enqueue_style('code-snippet-css-prism', $theme_path . '/blocks/code-snippet/style-prism.css', array(), $time, 'all');
+		wp_enqueue_script('code-snippet-js-prism', $theme_path . '/blocks/code-snippet/script-prism.js', array(), $time, true);
 	}
 });
 
