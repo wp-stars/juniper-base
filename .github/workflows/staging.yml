@@ -1,0 +1,23 @@
+name: Deploy to Remote Server for Staging environment
+on:
+  push:
+    branches: [ 'staging' ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Configure SSH Key
+        run: |
+          echo "${{ secrets.DEPLOY_KEY }}" > deploy_key
+          chmod 600 ./deploy_key
+
+      - name: Deploy to Remote Server
+        run: |
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no -p 18765 ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} 'cd ~/www/staging.wp-stars.com/public_html/juniper && git reset --hard && git clean -fd && git pull'
+
+      #TODO: update to replace all urls with the live url
