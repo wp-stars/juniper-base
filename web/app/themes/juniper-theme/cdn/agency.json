@@ -1,0 +1,23 @@
+{
+    "de":{ 
+        "name":"WP-Stars*",
+        "email":"office@wp-stars.com",
+        "phone":"+43-1-256 3096-0",
+        "address":"Schenkendorfgasse 83/4",
+        "zip":"1210",
+        "city":"Wien",
+        "country":"Österreich",
+        "logo_alt_text":"Das Logo von wp-stars - Ihrer Wordpress Agentur in Wien"
+    },
+    "en":{
+        "name":"WP-Stars*",
+        "email":"office@wp-stars.com",
+        "phone":"+43-1-256 3096-0",
+        "address":"Schenkendorfgasse 83/4",
+        "zip":"1210",
+        "city":"Vienna",
+        "country":"Austria",
+        "logo_alt_text":"The Logo of wp-stars - your Wordpress agency in vienna"
+    },
+    "logo_src":"https://wp-stars.com/cdn/wp-stars-logo-200.png.webp"
+}
