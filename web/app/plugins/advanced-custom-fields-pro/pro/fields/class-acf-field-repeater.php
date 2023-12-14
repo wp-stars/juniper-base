@@ -63,7 +63,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 		public function input_admin_enqueue_scripts() {
 			acf_localize_text(
 				array(
-					'Minimum rows not reached ({min} rows)' => __( 'Minimum rows not reached ({min} rows)', 'acf' ),
+					'Minimum rows reached ({min} rows)' => __( 'Minimum rows reached ({min} rows)', 'acf' ),
 					'Maximum rows reached ({max} rows)' => __( 'Maximum rows reached ({max} rows)', 'acf' ),
 					'Error loading page'                => __( 'Error loading page', 'acf' ),
 					'Order will be assigned upon save'  => __( 'Order will be assigned upon save', 'acf' ),
@@ -87,7 +87,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 
 			if ( $sub_fields ) {
 				$field['sub_fields'] = array_map(
-					function ( $sub_field ) use ( $field ) {
+					function( $sub_field ) use ( $field ) {
 						$sub_field['parent_repeater'] = $field['key'];
 						return $sub_field;
 					},
@@ -460,7 +460,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 			if ( empty( $field['pagination'] ) && $min && $count < $min ) {
 
 				// create error
-				$error = __( 'Minimum rows not reached ({min} rows)', 'acf' );
+				$error = __( 'Minimum rows reached ({min} rows)', 'acf' );
 				$error = str_replace( '{min}', $min, $error );
 
 				// return
@@ -703,7 +703,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 					}
 
 					$this->update_row( $row, $new_row_num, $field, $post_id );
-					++$new_row_num;
+					$new_row_num++;
 				}
 
 				// Calculate the total number of rows that will be saved after this update.
@@ -712,7 +712,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 				$i = -1;
 
 				foreach ( $value as $row ) {
-					++$i;
+					$i++;
 
 					// Bail early if no row.
 					if ( ! is_array( $row ) ) {
@@ -720,7 +720,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 					}
 
 					$this->update_row( $row, $i, $field, $post_id );
-					++$new_value;
+					$new_value++;
 				}
 			}
 
@@ -1099,6 +1099,7 @@ if ( ! class_exists( 'acf_field_repeater' ) ) :
 
 			wp_send_json_success( $response );
 		}
+
 	}
 
 	// initialize

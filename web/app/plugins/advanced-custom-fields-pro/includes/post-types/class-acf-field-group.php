@@ -436,13 +436,16 @@ if ( ! class_exists( 'ACF_Field_Group' ) ) {
 				return $return;
 			}
 
-			$code = var_export( $post, true ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions -- Used for PHP export.
+			$code = var_export( $post, true );
 			if ( ! $code ) {
 				return $return;
 			}
 
-			$code    = $this->format_code_for_export( $code );
-			$return .= "acf_add_local_field_group( {$code} );\r\n";
+			$code = $this->format_code_for_export( $code );
+
+			$return .= "if ( function_exists('acf_add_local_field_group') ):\r\n\r\n";
+			$return .= "acf_add_local_field_group({$code});\r\n\r\n";
+			$return .= "endif;\r\n\r\n";
 
 			return esc_textarea( $return );
 		}
@@ -539,6 +542,7 @@ if ( ! class_exists( 'ACF_Field_Group' ) ) {
 
 			return $post;
 		}
+
 	}
 
 }

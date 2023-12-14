@@ -3,26 +3,6 @@
     "title": "Split Text Image Fields",
     "fields": [
         {
-            "key": "field_646caeb27a8c2",
-            "label": "Tagline",
-            "name": "intro_title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_645a0da569ec3",
             "label": "Title",
             "name": "title",
@@ -108,11 +88,11 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_645a0dec69ec7",
-            "label": "Style",
-            "name": "style",
+            "key": "field_6579c7922f332",
+            "label": "Reverse order",
+            "name": "reverse_order",
             "aria-label": "",
-            "type": "select",
+            "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -121,64 +101,11 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "dark": "Dark with image left",
-                "darktriangle": "Dark triangle on the right with image - no background-border",
-                "imgbottomright": "Light - Image bottom right",
-                "imgtopright": "Light - Image top right",
-                "imgtoprighttriangle": "Light - Image top right and green triangle on left side",
-                "imgleft": "Light - Image left with blue background-border"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
+            "message": "",
+            "default_value": 0,
             "ui": 0,
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_652d4ae7febd3",
-            "label": "Link",
-            "name": "link",
-            "aria-label": "",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array"
-        },
-        {
-            "key": "field_652d4b2ab11fb",
-            "label": "Link Style",
-            "name": "link_style",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "primary": "Primary",
-                "arrowlight": "Arrow Light",
-                "arrowdark": "Arrow Dark"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": ""
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -199,5 +126,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1700216855
+    "modified": 1702480433
 }

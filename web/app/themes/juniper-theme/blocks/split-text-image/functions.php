@@ -16,6 +16,10 @@ add_action(
 add_filter(
     'timber/acf-gutenberg-blocks-data/split-text-image',
     function ( $context ) {
+
+      $context["fields"]["reverse_order"] == true ?
+            $context["reverse"] = "reverse" : $context["reverse"] = "";
+        
         return $context;
     }
 );

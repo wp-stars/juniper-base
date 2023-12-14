@@ -136,6 +136,7 @@ if ( ! class_exists( 'acf_fields' ) ) :
 
 	// initialize
 	acf()->fields = new acf_fields();
+
 endif; // class_exists check
 
 
@@ -408,7 +409,6 @@ function acf_get_combined_field_type_settings_tabs() {
 		'validation'        => __( 'Validation', 'acf' ),
 		'presentation'      => __( 'Presentation', 'acf' ),
 		'conditional_logic' => __( 'Conditional Logic', 'acf' ),
-		'advanced'          => __( 'Advanced', 'acf' ),
 	);
 
 	$field_type_settings_tabs = (array) apply_filters( 'acf/field_group/additional_field_settings_tabs', array() );
@@ -442,7 +442,6 @@ function acf_get_pro_field_types() {
 			'doc_url'       => acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/clone/', 'docs', 'field-type-selection' ),
 			'preview_image' => acf_get_url() . '/assets/images/field-type-previews/field-preview-clone.png',
 			'description'   => __( 'This allows you to select and display existing fields. It does not duplicate any fields in the database, but loads and displays the selected fields at run-time. The Clone field can either replace itself with the selected fields or display the selected fields as a group of subfields.', 'acf' ),
-			'tutorial_url'  => acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/how-to-use-the-clone-field/', 'docs', 'field-type-selection' ),
 			'category'      => 'layout',
 			'pro'           => true,
 		),
@@ -462,7 +461,6 @@ function acf_get_pro_field_types() {
 			'doc_url'       => acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/gallery/', 'docs', 'field-type-selection' ),
 			'preview_image' => acf_get_url() . '/assets/images/field-type-previews/field-preview-gallery.png',
 			'description'   => __( 'This provides an interactive interface for managing a collection of attachments. Most settings are similar to the Image field type. Additional settings allow you to specify where new attachments are added in the gallery and the minimum/maximum number of attachments allowed.', 'acf' ),
-			'tutorial_url'  => acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/how-to-use-the-gallery-field/', 'docs', 'field-type-selection' ),
 			'category'      => 'content',
 			'pro'           => true,
 		),

@@ -14,20 +14,20 @@
 
 
 {############# add new field styles here to variable if the text should be left !! ###############}
-{% set textdirection = (fields.style == 'darktriangle') or (fields.style == 'imgbottomright') or (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') ? 'textleft' : 'textright' %}
+{# {% set textdirection = (fields.style == 'darktriangle') or (fields.style == 'imgbottomright') or (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') ? 'textleft' : 'textright' %}
 
 
 <div class="split-text-img w-full relative my-20 py-12 {{textdirection}} {% if fields.style == 'dark' %} text-white dark-style {% endif %} {% if fields.style == 'imgtopright' %} pt-[3rem] pb-[3rem] {% endif %} container-{{fields.style}}">
 	<div class="bg-dark absolute background {% if fields.style == 'dark' %} fullscreen-background {% endif %} "></div>
 
-		{# dark triangle SVG on right side #}
+
 		{% if fields.style == 'darktriangle' %}
 			<svg class="dark-triangle-right" xmlns="http://www.w3.org/2000/svg" width="502" height="1014" viewbox="0 0 502 1014" fill="none">
 				<path d="M0 544L502 0V1014L0 544Z" fill="#093642"/>
 			</svg>
 		{% endif %}
 
-		{# small green triangle SVG on left side #}
+
 		{% if fields.style == 'imgtoprighttriangle' %}
 			<svg class="triangle-left" xmlns="http://www.w3.org/2000/svg" width="103" height="1066" viewbox="0 0 103 1066" fill="none">
 				<path d="M-164.609 1065.82L102.403 274.698L-170.661 0.20949L-164.609 1065.82Z" fill="#B4D43D" fill-opacity="0.6"/>
@@ -49,7 +49,7 @@
 					<h3 class="mb-8 {% if fields.style == 'dark' %} text-primary {% endif %}">{{ fields.subtitle }}</h3>
 					<p class="lg:mb-12 {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.content }}</p>
 
-					{# only show button if link text is set #}
+				
 					{% if fields.link %}
 						<div class="flex mt-8">
 							<a class="btn {% if fields.link_style == 'primary' %} btn-primary {% elseif fields.link_style == 'arrowdark' %} btn-underline {% else %} btn-underline-white {% endif %} w-fit" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
@@ -60,5 +60,14 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> #}
 
+<div class=" container grid grid-cols-12 gap-[2rem] {{ reverse }}">
+    <div class="text col-span-6 ">
+		<h2>{{ fields.title }}</h2>
+       	<p class="text-2xl">{{ fields.content }}</p>
+    </div>
+    <div class="image col-span-6">
+        <img src="{{ fields.image }}" alt="{{ image1.alt }}" />
+    </div>
+</div>
