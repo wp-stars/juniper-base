@@ -12,8 +12,8 @@
  	SupportsMultiple: true
 #}
 
-
-<div class=" container my-[5.5rem] grid grid-cols-12 gap-[2rem] {{ dark_mode }}">
+<section class="faq py-[5.5rem] my-[5.5rem] {{ dark_mode }}">
+<div class="container grid grid-cols-12 gap-[2rem]">
     <div class="text col-span-6 flex flex-col items-start justify-{{ fields.text_alignment}} order-{{ reverse }}">
 		<p class="tagline"> {{ fields.tagline }} </p>
 		<h2 class="mb-8">{{ fields.title }}</h2>
@@ -33,3 +33,4 @@
         <img src="{{ fields.image }}" alt="{{ image1.alt }}" />
     </div>
 </div>
+</section>

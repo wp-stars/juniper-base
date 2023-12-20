@@ -1,0 +1,4 @@
+.faq button:is(.dark .dark\:bg-gray-800) {
+    --tw-bg-opacity: 0 !important;
+    background-color: none !important;
+}

@@ -13,7 +13,7 @@
 #}
 
 
-<div class="jumbotron my-[5.5rem] grid grid-cols-12 gap-[2rem] {{ dark_mode }}">
+<section class="jumbotron my-[5.5rem] py-[5.5rem] grid grid-cols-12 gap-[2rem] {{ dark_mode }}">
 
 {# Fullwidth Layouts #}
     {% if (textbox is defined or overlay is defined)%}
@@ -59,6 +59,6 @@
             <img class="h-[100%] object-cover" src="{{ fields.background_image }}" alt="{{ fields.background_image.alt }}" />
         </div>
     {% endif %}
-</div>
+</section>
 
 

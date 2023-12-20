@@ -46,6 +46,8 @@ add_action('wp_enqueue_scripts', function() {
 	
 		$context["posts"] = $posts_data;
 
+		$context["fields"]["dark_mode"] == true ?
+        $context["dark_mode"] = "dark" : $context["dark_mode"] = "";
 		
  	return $context;
  });
