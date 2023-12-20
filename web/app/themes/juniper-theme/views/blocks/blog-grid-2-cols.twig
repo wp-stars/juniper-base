@@ -13,8 +13,8 @@
 #}
 
 
-
-<section class="blog-grid container my-[5.5rem] {% if fields.dark_mode %}{{ "dark" }}{% endif %}">
+<section class="py-[5.5rem] my-[5.5rem] {{ dark_mode }}">
+<div class="blog-grid container">
 	<p class="tagline">{{ fields.tagline }}</p>
     <h2 class="mb-8">{{fields.headline}}</h2>
     <p>{{ fields.text }}</p>
@@ -42,6 +42,7 @@
 </div>
 
 <a class="btn btn-primary " href="{{fields.button_link.link}}"> {{fields.button_text}} </a>
+  </div>
   </section>
 
   

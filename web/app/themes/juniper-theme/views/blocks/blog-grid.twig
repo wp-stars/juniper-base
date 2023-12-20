@@ -12,8 +12,8 @@
  	SupportsMultiple: true
 #}
 
-
-<section class="blog-grid container my-[5.5rem] {% if fields.dark_mode %}{{ "dark" }}{% endif %}">
+<section class="py-[5.5rem] my-[5.5rem] {{ dark_mode }}">
+<div class="blog-grid container">
   <div class="flex justify-between row">
     <h2 class="left-div">{{fields.title}}</h2>
     <div class="right-div">
@@ -43,6 +43,7 @@
 {% endif %}
 
 
+</div>
 </div>
   </section>
 
