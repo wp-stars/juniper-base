@@ -1,0 +1,47 @@
+{#
+ 	Title: blog-grid-2-cols
+ 	Description: 
+ 	Category: formatting
+ 	Icon: admin-comments
+ 	Keywords: blog grid colums
+ 	Mode: edit
+ 	Align: full
+ 	PostTypes: page post
+ 	SupportsAlign: left right full
+ 	SupportsMode: true
+ 	SupportsMultiple: true
+#}
+
+
+
+<section class="blog-grid container my-[5.5rem] {% if fields.dark_mode %}{{ "dark" }}{% endif %}">
+	<p class="tagline">{{ fields.tagline }}</p>
+    <h2 class="mb-8">{{fields.headline}}</h2>
+    <p>{{ fields.text }}</p>
+
+<div class="row my-[5.5rem]">
+{% if posts is not empty %}
+    <div class="grid grid-cols-2 gap-x-6 gap-y-20">
+        {% for post in posts %}
+            <div class="col-span-1 ">
+                <div class="post">
+				   {% if post.featured_image is not empty %}
+                        <img src="{{ post.featured_image }}" alt="{{ post.title }}" class="my-2 w-[100%] h-[22rem] object-cover">
+                    {% endif %}
+					 <p class="mt-2 text-xl">ARTICLE / {{ post.date }}</p>
+                    <h3 class="mb-4"><a href="{{ post.permalink }}">{{ post.title }}</a></h3>
+					<p class="mb-8"> {{ post.excerpt }}</p>
+					<a class="btn btn-text btn-text-arrow" href={{post.permalink}}> Read more </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No posts found.</p>
+{% endif %}
+</div>
+
+<a class="btn btn-primary " href="{{fields.button_link.link}}"> {{fields.button_text}} </a>
+  </section>
+
+  

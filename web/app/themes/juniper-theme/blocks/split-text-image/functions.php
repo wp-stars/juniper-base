@@ -18,8 +18,10 @@ add_filter(
     function ( $context ) {
 
       $context["fields"]["reverse_order"] == true ?
-            $context["reverse"] = "reverse" : $context["reverse"] = "";
-        
+            $context["reverse"] = "first" : $context["reverse"] = "last";
+    
+      $context["fields"]["dark_mode"] == true ?
+            $context["dark_mode"] = "dark" : $context["dark_mode"] = "";
         return $context;
     }
 );
