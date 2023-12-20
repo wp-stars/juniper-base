@@ -33,6 +33,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 				'return_format' => 'value',
 				'layout'        => 'horizontal',
 			);
+
 		}
 
 
@@ -77,6 +78,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 					'label'   => $_label,
 					'checked' => $checked,
 				);
+
 			}
 
 			// maybe select initial value
@@ -112,6 +114,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 
 				// append
 				$html .= acf_get_radio_input( $button );
+
 			}
 
 			// close
@@ -119,6 +122,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 
 			// return
 			echo $html;
+
 		}
 
 
@@ -172,6 +176,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 					),
 				)
 			);
+
 		}
 
 		/**
@@ -186,7 +191,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 			acf_render_field_setting(
 				$field,
 				array(
-					'label'        => __( 'Allow Null', 'acf' ),
+					'label'        => __( 'Allow Null?', 'acf' ),
 					'instructions' => '',
 					'name'         => 'allow_null',
 					'type'         => 'true_false',
@@ -255,6 +260,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 		function load_value( $value, $post_id, $field ) {
 
 			return acf_get_field_type( 'radio' )->load_value( $value, $post_id, $field );
+
 		}
 
 
@@ -273,6 +279,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 		function translate_field( $field ) {
 
 			return acf_get_field_type( 'radio' )->translate_field( $field );
+
 		}
 
 
@@ -293,6 +300,7 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 		function format_value( $value, $post_id, $field ) {
 
 			return acf_get_field_type( 'radio' )->format_value( $value, $post_id, $field );
+
 		}
 
 		/**
@@ -308,7 +316,17 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 				$schema['default'] = $field['default_value'];
 			}
 
-			$schema['enum']   = acf_get_field_type( 'select' )->format_rest_choices( $field['choices'] );
+			/**
+			 * If a user has defined keys for the buttons,
+			 * we should use the keys for the available options to POST to,
+			 * since they are what is displayed in GET requests.
+			 */
+			$button_keys = array_diff(
+				array_keys( $field['choices'] ),
+				array_values( $field['choices'] )
+			);
+
+			$schema['enum']   = empty( $button_keys ) ? $field['choices'] : $button_keys;
 			$schema['enum'][] = null;
 
 			// Allow null via UI will value to empty string.
@@ -318,9 +336,13 @@ if ( ! class_exists( 'acf_field_button_group' ) ) :
 
 			return $schema;
 		}
+
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_button_group' );
+
 endif; // class_exists check
+
+

@@ -27,9 +27,4 @@ $tool  = $active ? ' tool-' . $active : '';
 		<?php do_meta_boxes( $screen_id, 'normal', '' ); ?>
 	</div>
 
-	<?php
-	if ( ! acf_is_pro() ) {
-		acf_get_view( 'acf-field-group/pro-features' );
-	}
-	?>
 </div>

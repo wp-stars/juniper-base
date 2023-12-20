@@ -1,0 +1,49 @@
+{#
+ 	Title: Blog Grid
+ 	Description: 
+ 	Category: formatting
+ 	Icon: admin-comments
+ 	Keywords: blog grid news
+ 	Mode: edit
+ 	Align: full
+ 	PostTypes: page post
+ 	SupportsAlign: left right full
+ 	SupportsMode: true
+ 	SupportsMultiple: true
+#}
+
+
+<section class="container my-10">
+  <div class="flex justify-between row">
+    <h2 class="left-div">{{fields.title}}</h2>
+    <div class="right-div">
+	<a class="btn btn-primary btn-primary-arrow" href="{{fields.button_link.link}}"> {{fields.button_text}} </a>
+	</div>
+	</div>
+<div class="row mt-4">
+{% if posts is not empty %}
+    <div class="grid grid-cols-3 gap-4">
+        {% for post in posts %}
+            <div class="col-span-1 ">
+                <div class="post">
+				<div class="border-solid border-2 border-slate-400 p-4">
+                    <h3><a href="{{ post.permalink }}">{{ post.title }}</a></h3>
+
+                    {% if post.featured_image is not empty %}
+                        <img src="{{ post.featured_image }}" alt="{{ post.title }}" class="my-2 w-[100%] h-[20rem] object-cover">
+                    {% endif %}
+				</div>
+                    <p class="mt-2">ARTICLE / {{ post.date }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No posts found.</p>
+{% endif %}
+
+
+</div>
+  </section>
+
+  
