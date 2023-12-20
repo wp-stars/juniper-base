@@ -16,10 +16,26 @@ add_filter(
     'timber/acf-gutenberg-blocks-data/jumbotron',
     function ( $context ) {
 
-        if(!empty($context['fields']['title'])) $context['title'] = $context['fields']['title'];
 
-        if(!empty($context['fields']['background_image'])) $context['jumbotron_bg_image'] = wp_get_attachment_image_url($context['fields']['background_image'], 'full');
+        $context["fields"]["dark_mode"] == true ?
+        $context["dark_mode"] = "dark" : $context["dark_mode"] = "";
 
+        if($context["fields"]["layout"] == "Text-Left"){
+            $context["reverse"] = "order-first ml-[auto]";
+        }
+        else if($context["fields"]["layout"] == "Text-Right"){
+            $context["reverse"] = "order-last mr-[auto] ";
+        }
+
+        if($context["fields"]["layout"] == "Fullwidth-Overlay"){
+            $context["overlay"] = "overlay";
+        }
+        else if($context["fields"]["layout"] == "Fullwidth-Textbox"){
+            $context["textbox"] = "textbox";
+        }
+        
+      
+    
         return $context;
     }
 );

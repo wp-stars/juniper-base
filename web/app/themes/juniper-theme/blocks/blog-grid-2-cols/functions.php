@@ -1,25 +1,24 @@
 <?php
 
 add_action('wp_enqueue_scripts', function() {
-	if (has_block('acf/blog-grid')) {
+	if (has_block('acf/blog-grid-2-cols')) {
 	$time = time();
 	$theme_path = get_template_directory_uri();
-		wp_enqueue_style('blog-grid-css', $theme_path . '/blocks/blog-grid/style.css', array(), $time, 'all');
-		wp_enqueue_script('blog-grid-js', $theme_path . '/blocks/blog-grid/script.js', array(), $time, true);
+
+		wp_enqueue_style('blog-grid-2-cols-css', $theme_path . '/blocks/blog-grid-2-cols/style.css', array(), $time, 'all');
+		wp_enqueue_script('blog-grid-2-cols-js', $theme_path . '/blocks/blog-grid-2-cols/script.js', array(), $time, true);
 	}
 });
 
  add_filter(
 
- 	'timber/acf-gutenberg-blocks-data/blog-grid',
-
-	
+ 	'timber/acf-gutenberg-blocks-data/blog-grid-2-cols',
 
  	function( $context ) {
 
 		$args = array(
 			'post_type'      => 'post',
-			'posts_per_page' => 3,
+			'posts_per_page' => 4,
 			'order'          => 'DESC',
 		);
 	
@@ -36,6 +35,7 @@ add_action('wp_enqueue_scripts', function() {
 					'featured_image' => has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : '',
 					'date'          => get_the_date('d/m/Y'),
 					'permalink'     => get_permalink(),
+					'excerpt'		=> get_the_excerpt(),
 				);
 	
 				$posts_data[] = $post_data;
@@ -46,6 +46,5 @@ add_action('wp_enqueue_scripts', function() {
 	
 		$context["posts"] = $posts_data;
 
-		
  	return $context;
  });

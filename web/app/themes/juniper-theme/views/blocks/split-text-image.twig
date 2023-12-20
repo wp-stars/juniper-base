@@ -13,59 +13,21 @@
 #}
 
 
-{############# add new field styles here to variable if the text should be left !! ###############}
-{# {% set textdirection = (fields.style == 'darktriangle') or (fields.style == 'imgbottomright') or (fields.style == 'imgtopright') or (fields.style == 'imgtoprighttriangle') ? 'textleft' : 'textright' %}
-
-
-<div class="split-text-img w-full relative my-20 py-12 {{textdirection}} {% if fields.style == 'dark' %} text-white dark-style {% endif %} {% if fields.style == 'imgtopright' %} pt-[3rem] pb-[3rem] {% endif %} container-{{fields.style}}">
-	<div class="bg-dark absolute background {% if fields.style == 'dark' %} fullscreen-background {% endif %} "></div>
-
-
-		{% if fields.style == 'darktriangle' %}
-			<svg class="dark-triangle-right" xmlns="http://www.w3.org/2000/svg" width="502" height="1014" viewbox="0 0 502 1014" fill="none">
-				<path d="M0 544L502 0V1014L0 544Z" fill="#093642"/>
-			</svg>
-		{% endif %}
-
-
-		{% if fields.style == 'imgtoprighttriangle' %}
-			<svg class="triangle-left" xmlns="http://www.w3.org/2000/svg" width="103" height="1066" viewbox="0 0 103 1066" fill="none">
-				<path d="M-164.609 1065.82L102.403 274.698L-170.661 0.20949L-164.609 1065.82Z" fill="#B4D43D" fill-opacity="0.6"/>
-			</svg>
-		{% endif %}
-	
-	<div class="container mx-auto relative">
-		<div class="flex flex-col {% if fields.style == 'darktriangle' %} flex-col-reverse {% endif %} {% if textdirection == 'textleft' %} lg:flex-row-reverse {% else %} lg:flex-row {% endif %} ">
-			<div class="img-wrapper min-h-[500px] lg:w-1/2">
-				<div class="img-content flex justify-center relative">
-					<div class="img-decoration decoration-{{fields.style}}"></div>
-					<div class="{{fields.style}}" style="background-image: url('{{ fields.image }}');"></div>
-				</div>
-			</div>
-			<div class="text-content lg:w-1/2 h-100 flex flex-col justify-center">
-				<div class="text-inner">
-					<p class="tagline {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.intro_title }}</p>
-					<h2 class="mb-4">{{ fields.title }}</h2>
-					<h3 class="mb-8 {% if fields.style == 'dark' %} text-primary {% endif %}">{{ fields.subtitle }}</h3>
-					<p class="lg:mb-12 {% if fields.style == 'dark' %}text-white{% endif %}">{{ fields.content }}</p>
-
-				
-					{% if fields.link %}
-						<div class="flex mt-8">
-							<a class="btn {% if fields.link_style == 'primary' %} btn-primary {% elseif fields.link_style == 'arrowdark' %} btn-underline {% else %} btn-underline-white {% endif %} w-fit" href="{{ fields.link.url }}">{{ fields.link.title }}</a>
-						</div>
-					{% endif %}
-
-				</div>
-			</div>
-		</div>
-	</div>
-</div> #}
-
-<div class=" container grid grid-cols-12 gap-[2rem] {{ reverse }}">
-    <div class="text col-span-6 ">
-		<h2>{{ fields.title }}</h2>
-       	<p class="text-2xl">{{ fields.content }}</p>
+<div class=" container my-[5.5rem] grid grid-cols-12 gap-[2rem] {{ dark_mode }}">
+    <div class="text col-span-6 flex flex-col items-start justify-{{ fields.text_alignment}} order-{{ reverse }}">
+		<p class="tagline"> {{ fields.tagline }} </p>
+		<h2 class="mb-8">{{ fields.title }}</h2>
+       	<p class="text-2xl ">{{ fields.content }}</p>
+		<div class="flex flex-row gap-4 mt-[4rem]">
+	{% for key, button in fields.buttons %}
+   		{% if button.button_text is defined and button.button_link is defined and button.button_text is not empty and button.button_link is not empty %}
+			{% set buttonClass = (key == 'button_1') ? 'btn-primary' : 'btn-outlined' %}
+       		<a href="{{ button.button_link }}" class="btn {{buttonClass}}">
+        	    {{ button.button_text }}
+       		</a>
+    	{% endif %}
+	{% endfor %}
+</div>
     </div>
     <div class="image col-span-6">
         <img src="{{ fields.image }}" alt="{{ image1.alt }}" />

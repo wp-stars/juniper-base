@@ -12,18 +12,53 @@
  	SupportsMultiple: true
 #}
 
-<section class="jumbotron-section bg-center bg-no-repeat bg-blend-multiply angled-bottom h-[552px] sm:h-auto relative" style="background-image: url('{{ jumbotron_bg_image }}'); background-size: cover;">
-	<div class="jumbotron-shape-left">
-		<svg xmlns="http://www.w3.org/2000/svg" width="91" height="475" viewBox="0 0 91 475" fill="none">
-			<path d="M91 288.032L0 0V475L91 288.032Z" fill="#B4D43D" fill-opacity="0.6"/>
-		</svg>
-	</div>
-	<div class="mx-0 w-full h-full flex flex-col justify-center bg-dark-transparent h-[552px] sm:h-auto sm:pt-[15rem] sm:pb-[15rem]">
-		<div class="container mx-auto">
-			<h1 class="mb-4 text-white z-10 relative break-words">{{ title }}</h1>
-		</div>
-	</div>
-	<div class="jumbotron-shape-bottom">
-		<div class="jumbotron-bottom-inner"></div>
-	</div>
-</section>
+
+<div class="jumbotron my-[5.5rem] grid grid-cols-12 gap-[2rem] {{ dark_mode }}">
+
+{# Fullwidth Layouts #}
+    {% if (textbox is defined or overlay is defined)%}
+        <div class="overlay-container col-span-12 relative {% if textbox %} h-[40rem] {% else %} h-[50rem] {% endif %}">
+ 			<div class="{% if overlay %} background-container absolute inset-0 {% endif %}"></div>            
+ 			<img class=" absolute inset-0 w-full h-full object-cover" src="{{ fields.background_image }}" alt="{{ fields.background_image.alt }} " />
+		
+            <div class="absolute inset-0 {% if textbox %}textbox{% elseif overlay %} overlay {% endif %}">
+                <p class="tagline">{{ fields.tagline }}</p>
+                <h1 class="mb-8">{{ fields.title }}</h1>
+                <p class="text-2xl">{{ fields.content }}</p>
+                <div class="flex flex-row gap-4 mt-[4rem]">
+                    {% for key, button in fields.buttons %}
+                        {% if button.button_text is defined and button.button_link is defined and button.button_text is not empty and button.button_link is not empty %}
+                            {% set buttonClass = (key == 'button_1') ? 'btn-primary' : 'btn-outlined' %}
+                            <a href="{{ button.button_link }}" class="btn {{buttonClass}}">
+                                {{ button.button_text }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+{# Split Text / Image Layouts #}
+    {% else %}
+        <div class="text col-span-6 flex flex-col items-start justify-center content-end max-w-[90%] {{ reverse }}">
+            <p class="tagline">{{ fields.tagline }}</p>
+            <h1 class="mb-8">{{ fields.title }}</h1>
+            <p class="text-2xl">{{ fields.content }}</p>
+            <div class="flex flex-row gap-4 mt-[4rem]">
+                {% for key, button in fields.buttons %}
+                    {% if button.button_text is defined and button.button_link is defined and button.button_text is not empty and button.button_link is not empty %}
+                        {% set buttonClass = (key == 'button_1') ? 'btn-primary' : 'btn-outlined' %}
+                        <a href="{{ button.button_link }}" class="btn {{buttonClass}}">
+                            {{ button.button_text }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="image col-span-6 h-[50rem]">
+            <img class="h-[100%] object-cover" src="{{ fields.background_image }}" alt="{{ fields.background_image.alt }}" />
+        </div>
+    {% endif %}
+</div>
+
+

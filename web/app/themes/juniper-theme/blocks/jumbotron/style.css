@@ -1,56 +1,43 @@
+ .jumbotron{
 
-.jumbotron-shape-left {
+ .background-container{
     position: absolute;
-}
-
-.jumbotron-shape-bottom {
-    position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
-    height: 200px;
-    width: 500px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, #fffffffb 22.8%, rgb(255 255 255 / 48%) 59.16%, rgb(255 255 255 / 9%) 100%), #ffffff00 50% / cover no-repeat !important;    z-index: 1 !important;
+    z-index: 1;
+}
+
+.textbox{
+    background-color: var(--neutral-10);
+    width: 80vw !important;
+    top: 30rem;
+    margin: 0 10%;
+    padding: 4rem;
+    z-index: 2;
+    height: fit-content;
+}
+
+.overlay{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    max-width: 50%;
+    margin-left: 10%;
+}
+}
+
+.jumbotron,.dark{
+    .background-container{
+        background: linear-gradient(90deg, #000000fb 22.8%, rgb(0 0 0 / 48%) 59.16%, rgb(0 0 0 / 9%) 100%), #00000000 50% / cover no-repeat !important;    z-index: 1 !important;
+    }
+
+    .textbox{
+        background-color: var(--neutral-100);
+    }
 
 }
 
-.jumbotron-bottom-inner {
-    height: 100%;
-    width: 100%;
-    transform: rotate(-6deg);
-    background-color: rgba(180, 212, 61, 0.6);
-    top: 138px;
-    position: relative;
-    left: 100px;
-}
-
-@media screen and (max-width: 640px) {
-
-    .jumbotron-section.angled-bottom {
-        clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 88%);
-    }
-}
-
-@media screen and (min-width: 800px) {
-    .jumbotron-shape-bottom {
-        height: 400px;
-        width: 1000px;
-    }
-
-    .jumbotron-bottom-inner {
-        top: 270px;
-        position: relative;
-        left: 100px;
-    }
-}
-
-@media screen and (min-width: 1700px) {
-    .jumbotron-shape-bottom {
-        height: 600px;
-        width: 2000px;
-    }
-
-    .jumbotron-bottom-inner {
-        top: 450px;
-        position: relative;
-        left: 700px;
-    }
-}
