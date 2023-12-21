@@ -1,20 +1,20 @@
 <div class="container footer-container">
-    <div class="asterisk absolute right-0" style="background-image: url({{ theme_dir }}/assets/img/asterisk.svg);">
+    <div class="asterisk absolute right-0" >
     </div>
     <div class="w-full h-full mx-auto py-4 flex flex-col justify-end relative relative">
         <div class="flex flex-col sm:flex-row mb-4 sm:mb-12">
             <div class="flex flex-col min-w-[300px] description">
-                <a href="{{site.url}}" class="flex items-center mb-8 sm:mb-6 text-white">
+                <a href="{{site.url}}" class="flex items-center mb-8 sm:mb-6">
                     <img src="{{ footer_logo }}" class="h-[95px] w-[6.25rem] mr-3" alt="{{site.name}}" />
                 </a>
-                <p class="red-hat-var-medium mb-6 text-white">WP-Stars GmbH</p>
-                <a class=" text-white" href="tel:+43125630960">+43 1 256 3096 0</a>
-                <a class="mb-3 text-white" href="mailto:office@wp-stars.com">office@wp-stars.com</a>
-                <p class="sm:mb-3 text-white">Schenkendorfgasse 83/4<br/>1210 Wien<br />Österreich</p>
+                <p class="red-hat-var-medium mb-6">Example GmbH</p>
+                <a class="" href="tel:+43125630960">+12 345 678 91011</a>
+                <a class="mb-3" href="mailto:office@wp-stars.com">example@example.com</a>
+                <p class="sm:mb-3">Example-street 1<br/>0000 Example<br />Example Country</p>
             </div>
-            <p class="flex mt-4 sm:mt-0 sm:self-end text-white">“{{ footer_quote }}”</p>
+            <p class="flex mt-4 sm:mt-0 sm:self-end">“{{ footer_quote }}”</p>
         </div>
-        <hr class="mb-[1.45rem] border-solid border-white w-full" />
+        <hr class="mb-[1.45rem] border-solid border-black w-full" />
         {% include "footer-menu.twig" with {'items': footer_menu.get_items, 'name': 'footer-menu' } %}
 
     </div>

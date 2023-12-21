@@ -293,3 +293,19 @@ function change_gravity_forms_language($locale) {
 
     return $locale;
 }
+
+// Enable SVG uploads
+function allow_svg_upload($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'allow_svg_upload');
+
+// Additional security measures for SVG uploads
+function validate_svg_upload($file, $filename, $mimes) {
+    if (substr($filename, -4) === '.svg' && $file['type'] === 'image/svg+xml') {
+        $file['type'] = 'image/svg+xml';
+    }
+    return $file;
+}
+add_filter('wp_check_filetype_and_ext', 'validate_svg_upload', 10, 4);
