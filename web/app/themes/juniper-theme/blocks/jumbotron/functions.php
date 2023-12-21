@@ -18,7 +18,7 @@ add_filter(
 
 
         $context["fields"]["dark_mode"] == true ?
-        $context["dark_mode"] = "dark" : $context["dark_mode"] = "";
+        $context["dark_mode"] = "dark" : $context["dark_mode"] = "light";
 
         if($context["fields"]["layout"] == "Text-Left"){
             $context["reverse"] = "order-first ml-[auto]";
