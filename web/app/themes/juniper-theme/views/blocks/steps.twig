@@ -1,0 +1,33 @@
+{#
+ 	Title: Steps
+ 	Description: 
+ 	Category: formatting
+ 	Icon: admin-comments
+ 	Keywords: steps list icons
+ 	Mode: edit
+ 	Align: full
+ 	PostTypes: page post
+ 	SupportsAlign: left right full
+ 	SupportsMode: true
+ 	SupportsMultiple: true
+#}
+
+
+<section class="py-[5.5rem] my-[5.5rem] {{ dark_mode }}">
+	<div class="steps container">
+		<h2 class="mb-[3rem] text-center">{{ fields.headline }}</h2>
+		<div class="grid grid-cols-{{ fields.steps|length }} gap-7">
+			{% for step in fields.steps %}
+				<div class="step-box col-span-1 text-center py-[2.5rem] px-[1.5rem]">
+					<div class="flex justify-center align-center mb-[2.5rem]">
+						<div class="w-[7.5rem] h-[7.5rem] border border-4 rounded-full flex justify-center items-center {% if dark_mode %} border-[var(--neutral-10)] {% else %} border-[var(--primary)] {% endif %}" >
+							<img class="w-[2.5rem] h-[2.5rem]" src={{ step.icon.url }} alt={{ step.icon.alt }}/>
+						</div>
+					</div>
+					<h3 class="mb-[0.8rem]"> {{ step.title }}</h3>
+					<p> {{ step.content }} </p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
