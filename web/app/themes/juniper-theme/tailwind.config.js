@@ -30,7 +30,6 @@ module.exports = {
     display:['group-hover']
   },
   plugins: [
-    require('flowbite/plugin'),
     require('@tailwindcss/line-clamp')
   ]
 }

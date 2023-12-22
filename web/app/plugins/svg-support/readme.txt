@@ -3,7 +3,7 @@ Contributors: Benbodhi
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Z9R7JERS82EQQ
 Tags: svg, vector, safesvg, safe svg, sanitization, sanitisation, sanitizer, sanitiser, sanitized, sanitised, sanitize, sanitise, css, style, mime, mime type, embed, img, render, inline, animation, animation, animate, js
 Requires at least: 4.8
-Tested up to: 6.1.1
+Tested up to: 6.4.1
 Requires PHP: 7.2
 Stable tag: 2.5.5
 License: GPLv2 or later

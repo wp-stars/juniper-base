@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://wp-stars.com">
-    <img alt="Juniper" src="https://5924544.fs1.hubspotusercontent-na1.net/hubfs/5924544/juniper/398672602-juniper-logo-01.png" height="300">
+    <img alt="Juniper" src="https://5924544.fs1.hubspotusercontent-na1.net/hubfs/5924544/juniper-base/398672602-juniper-logo-01.png" height="300">
   </a>
 </p>
 
@@ -40,7 +40,7 @@ With this approach you can create theme code with logic files separated from fro
    and follow the instructions in the console.
    Type in details from step 1 and 2. .env file will
    be crated for you (all DB and site details sits there)
-4. Local url should be localhost:8888/juniper/web
+4. Local url should be localhost:8888/juniper-base/web
 5. Fill correct domain details in .htaccess in main catalogue.
 6. Check if /web/ directory has .htaccess file with default WP entries.
 7. Run 
@@ -63,20 +63,20 @@ Put this .htaccess in the public_html folder
 <IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteCond %{HTTP_HOST} ^(www.)wp-stars.com$
-RewriteCond %{REQUEST_URI} !^/juniper/web/
+RewriteCond %{REQUEST_URI} !^/juniper-base/web/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /juniper/web/$1
+RewriteRule ^(.*)$ /juniper-base/web/$1
 RewriteCond %{HTTP_HOST} ^(www.)wp-stars.com$
 RewriteRule ^(/)?$ juniper/web/index.php [L]
 
 RewriteEngine On
-RewriteRule ^$ /juniper/web/ [L]
+RewriteRule ^$ /juniper-base/web/ [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/juniper/web/
-RewriteRule ^(.*)$ /juniper/web/$1
+RewriteCond %{REQUEST_URI} !^/juniper-base/web/
+RewriteRule ^(.*)$ /juniper-base/web/$1
 
 # This does not expose the internal URL.
 RewriteCond %{SCRIPT_FILENAME} -d
@@ -84,7 +84,7 @@ RewriteRule ^juniper/web/(.*[^/])$ http://wp-stars.com/$1/ [R=301]
 
 </IfModule>
 ```
-Folder structure ~/www.example.com/public_html/juniper/web/
+Folder structure ~/www.example.com/public_html/juniper-base/web/
 
 
 ## Deployment 

@@ -14,7 +14,7 @@
     "juniper", "timber", "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
   ],
   "support": {
-    "issues": "https://github.com/osomstudio/juniper/issues"
+    "issues": "https://github.com/osomstudio/juniper-base/issues"
   },
   "repositories": [
     {
