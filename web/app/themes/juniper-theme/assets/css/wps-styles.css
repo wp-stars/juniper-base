@@ -1,0 +1,172 @@
+a.borlabs-cookie-preference::after {
+    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" x="0px" y="0px"><title>cookie</title><path d="M19.3,12.833a1,1,0,1,0-1.1074-1.666A25.1145,25.1145,0,0,0,8.041,24.8506a1,1,0,0,0,.6719,1.2446.9891.9891,0,0,0,.2861.0425,1.0009,1.0009,0,0,0,.958-.7139A23.1088,23.1088,0,0,1,19.3,12.833Z"/><circle cx="22" cy="10" r="1"/><path d="M60.4023,28.6074a1.0063,1.0063,0,0,0-.8886-.0781A6.8329,6.8329,0,0,1,57,29a7.0081,7.0081,0,0,1-7-7,6.31,6.31,0,0,1,.06-.895.9987.9987,0,0,0-.8975-1.1406A8.9932,8.9932,0,0,1,41.458,8.1763a.9994.9994,0,0,0-1.13-1.3,7.0171,7.0171,0,0,1-7.3808-3.3741A1.135,1.135,0,0,0,32,3,29,29,0,1,0,61,32c0-.8911-.042-1.7783-.125-2.6362A1.0009,1.0009,0,0,0,60.4023,28.6074ZM32,59a27,27,0,0,1-.4736-53.9961A8.98,8.98,0,0,0,39.1846,8.998,11.0005,11.0005,0,0,0,48.002,21.8223C48.001,21.8813,48,21.94,48,22a9.0054,9.0054,0,0,0,10.9717,8.7827C58.99,31.1851,59,31.5923,59,32A27.0308,27.0308,0,0,1,32,59Z"/><path d="M28,45a4,4,0,1,0,4,4A4.0042,4.0042,0,0,0,28,45Zm0,6a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,28,51Z"/><path d="M43,34c-2.5049,0-4,1.8691-4,5,0,2.9863,1.2373,6,4,6,2.8154,0,5-3.2256,5-6A5.0059,5.0059,0,0,0,43,34Zm0,9c-1.4678,0-2-2.3921-2-4,0-3,1.5049-3,2-3a3.0033,3.0033,0,0,1,3,3C46,40.7466,44.5449,43,43,43Z"/><path d="M28.0957,23.7051a3.6892,3.6892,0,0,0,.7549-.08,6.1067,6.1067,0,0,0,2.9775-1.7974,11.0816,11.0816,0,0,0,2.3291-3.3867c.9395-2.2793.1211-3.5776-.45-4.1484a4.5571,4.5571,0,0,0-4.3388-.855,8.356,8.356,0,0,0-3.9034,2.0264,5.0064,5.0064,0,0,0,0,7.0712A3.6733,3.6733,0,0,0,28.0957,23.7051Zm-1.2168-6.8267A6.3527,6.3527,0,0,1,29.8027,15.39a5.0107,5.0107,0,0,1,1.0733-.1269,1.9915,1.9915,0,0,1,1.417.4438c.3886.3892.3935,1.0528.0146,1.9727a9.203,9.203,0,0,1-1.8935,2.7344,4.262,4.262,0,0,1-1.9717,1.2534,1.6151,1.6151,0,0,1-1.5635-.5459A3.0037,3.0037,0,0,1,26.8789,16.8784Z"/><path d="M16,28a5,5,0,1,0,5,5A5.0059,5.0059,0,0,0,16,28Zm0,8a3,3,0,1,1,3-3A3.0033,3.0033,0,0,1,16,36Z"/><path d="M60.3164,15.0513l-3-1a1,1,0,0,0-1.0234.2417l-4,4a1,1,0,0,0,.2109,1.5752l7,4A1,1,0,0,0,61,23V16A1,1,0,0,0,60.3164,15.0513ZM59,21.2769l-4.3672-2.4956,2.6377-2.6373,1.73.5767Z"/><path d="M54,9V4a.9994.9994,0,0,0-1.1641-.9863l-6,1A1,1,0,0,0,46,5v6a1,1,0,0,0,1.3164.9487l6-2A1,1,0,0,0,54,9Zm-2-.7207L48,9.6128V5.8472l4-.6665Z"/><circle cx="48" cy="15" r="1"/><circle cx="45" cy="29" r="1"/><circle cx="35" cy="29" r="1"/><circle cx="16" cy="22" r="1"/><circle cx="29" cy="37" r="1"/><circle cx="18" cy="47" r="1"/><circle cx="42" cy="50" r="1"/></svg>');
+    height: 48px;
+    width: 48px;
+    display: block;
+}
+
+a.borlabs-cookie-preference svg {
+    display: none;
+}
+
+.product-actions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+#productModalBtn {
+    align-content: center;
+    align-self: flex-start;
+    justify-content: center;
+    background-color: var(--ast-global-color-5);
+    border-radius: 4px;
+    display: flex;
+    flex-flow: row wrap;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    line-height: 2.1em;
+    margin: 1em 0 1rem;
+    min-width: 13em;
+    padding: 8px 16px;
+}
+
+
+.ls-productdetail__order_sample {
+    margin-right: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: calc(100px + 4rem) auto;
+    padding: 20px;
+    border: 2px solid;
+    border-color: var(--color-iwg_yellow);
+    border-radius: 45px;
+    width: fit-content;
+}
+
+.modal-content .wpforms-container {
+    max-width: 900px;
+}
+
+.modal-content div.wpforms-container-full .wpforms-form input.wpforms-field-medium,
+.modal-content div.wpforms-container-full .wpforms-form .wpforms-field-row.wpforms-field-medium {
+    max-width: 100%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Product Finder Styles */
+.entry-content > .wp-block-group.alignfull.has-background.is-style-productfinder-filter {
+    padding: 2rem !important;
+}
+
+.is-style-productfinder-filter .wp-block-columns {
+    margin-bottom: 0;
+}
+
+.is-style-productfinder-filter p {
+    margin-top: 0;
+}
+
+.facetwp-facet {
+    margin-top: 1rem;
+}
+
+/* Product detail styles */
+.ls-productdetail__order_sample {
+    color: var(--ast-global-color-5);
+}
+
+.ls-productdetail__order_sample:hover {
+    background-color: var(--color-primary);
+    color: var(--ast-global-color-5);
+}
+
+.hide-wishlist-link {
+    display: none !important;
+}
+
+.show-wishlist-link {
+    display: flex !important;
+}
+
+/* Footer styles */
+.newsletter {
+    position: relative;
+    z-index: 2;
+}
+
+.newsletterModal .modal-content {
+    background-color: #fff;
+    max-width: 600px;
+}
+
+.newsletterBtn {
+    align-content: center;
+    align-self: flex-start;
+    background-color: var(--color-primary);
+    border-radius: 4px;
+    display: flex;
+    flex-flow: row wrap;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    line-height: 2.1em;
+    margin: 1em 0 3em;
+    min-width: 13em;
+    padding: 8px 16px;
+    color: var(--ast-global-color-5);
+}
+
+.newsletterModal label.hs-form-booleancheckbox-display {
+    color: var(--ast-global-color-5) !important;
+}
+
+._brlbs-default {
+    color: #000;
+}
+
+._brlbs-btn {
+    color: #fff !important;
+    background: #000 !important;
+}
+
+.hbspt-form .hs-form-iframe {
+    min-height: 950px !important;
+}
+
+/* Footer logo styles */
+.wp-image-66,
+.wp-image-3402 {
+    margin-bottom: 1.75em !important;
+}

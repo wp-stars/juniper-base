@@ -1,0 +1,54 @@
+{% macro component(config, localized) %}
+    <div class="bc-w-2/3">
+        {% embed "system/embed/card/card-with-title.html.twig" with {contentSpacing: false} %}
+            {% import "log/macro/log-level.html.twig" as log_level %}
+            {% import "system/macro/card/card-heading.html.twig" as card_heading %}
+            {% import "system/macro/row/codearea.html.twig" as row_codearea %}
+
+            {% block header %}
+                <div class="bc-flex bc-justify-between bc-items-center">
+                    <h3 class="bc-text-lg bc-font-medium bc-leading-6 bc-mb-0">{{ config.log.createdAt.format('Y-m-d H:i:s') }}</h3>
+                    <div class="bc-flex">
+                        {{ log_level.component({
+                            level: config.log.level,
+                        }, localized) }}
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block content %}
+                {% import "system/macro/row/text.html.twig" as row_text %}
+
+                {{ row_text.component({
+                    label: localized.field.processId,
+                    value: config.log.processId,
+                }) }}
+
+                {{ row_text.component({
+                    label: localized.field.message,
+                    value: config.log.message,
+                }) }}
+
+                {% if config.log.context is not empty %}
+                    {{ row_codearea.component({
+                        clipboard: true,
+                        editorLanguage: 'javascript',
+                        id: 'context-' ~ config.log.id ~ (config.originalLog.id ? '-' ~ config.originalLog.id : ''),
+                        label: localized.field.context,
+                        value: config.log.context | json_encode(constant('JSON_PRETTY_PRINT')),
+                    }) }}
+                {% endif %}
+
+                {% if config.log.backtrace is not empty %}
+                    {{ row_codearea.component({
+                        clipboard: true,
+                        editorLanguage: 'javascript',
+                        id: 'backtrace-' ~ config.log.id ~ (config.originalLog.id ? '-' ~ config.originalLog.id : ''),
+                        label: localized.field.backtrace,
+                        value: config.log.backtrace | json_encode(constant('JSON_PRETTY_PRINT')),
+                    }) }}
+                {% endif %}
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endmacro %}

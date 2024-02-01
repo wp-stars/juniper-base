@@ -1,0 +1,246 @@
+{% embed "system/embed/card/card-with-info-panel.html.twig" %}
+    {% import "system/macro/card/card-heading.html.twig" as card_heading %}
+    {% block mainHeader %}
+        {{ card_heading.component({
+            title: localized.headline.generalSettings,
+        }) }}
+    {% endblock %}
+    {% block mainContent %}
+        {% import "system/macro/form-component/info-hint.html.twig" as hint %}
+        {% import "system/macro/row/input.html.twig" as row_input %}
+        {% import "system/macro/row/save.html.twig" as row_save %}
+        {% import "system/macro/row/switch-button.html.twig" as row_switch_button %}
+        {% import "system/macro/row/textarea.html.twig" as row_textarea %}
+
+        {{ row_switch_button.component({
+            id: 'showDialog',
+            hint: localized.hint.showDialog,
+            label: localized.field.showDialog,
+            value: data.showDialog,
+        }) }}
+
+        {{ row_switch_button.component({
+            id: 'showDialogOnLoginPage',
+            hint: localized.hint.showDialogOnLoginPage,
+            label: localized.field.showDialogOnLoginPage,
+            value: data.showDialogOnLoginPage,
+        }) }}
+
+        {{ row_switch_button.component({
+            id: 'enableBackdrop',
+            hint: localized.hint.enableBackdrop,
+            label: localized.field.enableBackdrop,
+            value: data.enableBackdrop,
+        }) }}
+
+        {% embed "system/embed/form-row.html.twig" %}
+            {% import "system/macro/form-component/info-hint.html.twig" as hint %}
+            {% import "system/macro/form-component/select.html.twig" as select %}
+            {% import "system/macro/form-component/input.html.twig" as input %}
+            {% import "system/macro/form-component/checkbox.html.twig" as checkbox %}
+
+            {% block label %}
+                <label>{{ localized.field.privacyPageId | raw }}</label>
+            {% endblock %}
+            {% block input %}
+                <div class="bc-flex bc-items-center bc-space-x-2">
+                    {{ select.component({
+                        id: 'privacyPageId',
+                        isDisabled: data.privacyPageCustomUrl is not empty,
+                        name: 'privacyPageId',
+                        label: localized.field.layout,
+                        options: options.pages.list,
+                        value: data.privacyPageId,
+                    }) }}
+
+                    {% embed "system/embed/hint.html.twig" with { dataAttribute: 'data-brlbs-request-permalink="privacyPageId" data-brlbs-insert-permalink="hideDialogOnPages"', hint: localized.hint.addToHideDialogOnPages} %}
+                        {% block icon %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                 class="bc-w-6 bc-h-6 bc-inline-block group-data-[brlbs-loading=true]:bc-hidden">
+                                <path
+                                    d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z"/>
+                                <path
+                                    d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z"/>
+                                <path
+                                    d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z"/>
+                            </svg>
+                            <svg
+                                class="bc-animate-spin bc-h-5 bc-w-5 bc-hidden group-data-[brlbs-loading=true]:bc-inline-block"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                      d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        {% endblock %}
+                    {% endembed %}
+
+                    {{ hint.component({
+                        hint: localized.hint.privacyPageId,
+                    }) }}
+                </div>
+
+                <div class="bc-flex bc-items-center bc-space-x-2 bc-pt-2 bc-w-3/4">
+                    {{ checkbox.component({
+                        id: 'enablePrivacyPageCustomUrl',
+                        name: 'enablePrivacyPageCustomUrl',
+                        dataAttribute: 'data-brlbs-enable-target="privacyPageCustomUrl" data-brlbs-disable-target="privacyPageId"',
+                        checked: data.privacyPageCustomUrl is not empty
+                    }) }}
+                    {{ input.component({
+                        id: 'privacyPageCustomUrl',
+                        isDisabled: data.privacyPageCustomUrl is empty,
+                        name: 'privacyPageCustomUrl',
+                        placeholder: 'https://',
+                        type: 'url',
+                        value: data.privacyPageCustomUrl,
+                        width: 'bc-w-full'
+                    }) }}
+                </div>
+            {% endblock %}
+        {% endembed %}
+
+        {% embed "system/embed/form-row.html.twig" %}
+            {% import "system/macro/form-component/info-hint.html.twig" as hint %}
+            {% import "system/macro/form-component/select.html.twig" as select %}
+            {% import "system/macro/form-component/input.html.twig" as input %}
+            {% import "system/macro/form-component/checkbox.html.twig" as checkbox %}
+
+            {% block label %}
+                <label>{{ localized.field.imprintPageId | raw }}</label>
+            {% endblock %}
+            {% block input %}
+                <div class="bc-flex bc-items-center bc-space-x-2">
+                    {{ select.component({
+                        id: 'imprintPageId',
+                        isDisabled: data.imprintPageCustomUrl is not empty,
+                        name: 'imprintPageId',
+                        label: localized.field.layout,
+                        options: options.pages.list,
+                        value: data.imprintPageId,
+                    }) }}
+
+                    {% embed "system/embed/hint.html.twig" with { dataAttribute: 'data-brlbs-request-permalink="imprintPageId" data-brlbs-insert-permalink="hideDialogOnPages"', hint: localized.hint.addToHideDialogOnPages} %}
+                        {% block icon %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                 class="bc-w-6 bc-h-6 bc-inline-block group-data-[brlbs-loading=true]:bc-hidden">
+                                <path
+                                    d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z"/>
+                                <path
+                                    d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z"/>
+                                <path
+                                    d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z"/>
+                            </svg>
+                            <svg
+                                class="bc-animate-spin bc-h-5 bc-w-5 bc-hidden group-data-[brlbs-loading=true]:bc-inline-block"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                      d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        {% endblock %}
+                    {% endembed %}
+
+                    {{ hint.component({
+                        hint: localized.hint.imprintPageId,
+                    }) }}
+                </div>
+
+                <div class="bc-flex bc-items-center bc-space-x-2 bc-pt-2 bc-w-3/4">
+                    {{ checkbox.component({
+                        id: 'enableImprintPageCustomUrl',
+                        name: 'enableImprintPageCustomUrl',
+                        dataAttribute: 'data-brlbs-enable-target="imprintPageCustomUrl" data-brlbs-disable-target="imprintPageId"',
+                        checked: data.imprintPageCustomUrl is not empty
+                    }) }}
+                    {{ input.component({
+                        id: 'imprintPageCustomUrl',
+                        isDisabled: data.imprintPageCustomUrl is empty,
+                        name: 'imprintPageCustomUrl',
+                        placeholder: 'https://',
+                        type: 'url',
+                        value: data.imprintPageCustomUrl,
+                        width: 'bc-w-full'
+                    }) }}
+                </div>
+            {% endblock %}
+        {% endembed %}
+        {{ row_textarea.component({
+            hint: localized.hint.hideDialogOnPages,
+            id: 'hideDialogOnPages',
+            isRequired: false,
+            label: localized.field.hideDialogOnPages,
+            value: data.hideDialogOnPages | join('\n'),
+        }) }}
+
+        {{ row_switch_button.component({
+            id: 'showBorlabsCookieBranding',
+            hint: localized.hint.showBorlabsCookieBranding,
+            label: localized.field.showBorlabsCookieBranding,
+            value: data.showBorlabsCookieBranding,
+        }) }}
+
+        <!-- Synchronization Settings -->
+        {{ synchronizationSettingsFields(
+            languages,
+            {
+                collectionName: "languages",
+                hasRepository: false,
+                withOverwriteTranslationOption: false,
+            }
+        ) | raw }}
+
+        {{ row_save.component({
+            action: 'save',
+            nonce: wpNonceField("#{controllerId}-save"),
+        }, localized) }}
+    {% endblock %}
+
+    {% block infoPanelHeader %}
+        {{ localized.global.headline.thingsToKnow | raw }}
+    {% endblock %}
+
+    {% block infoPanelContent %}
+        {% embed "system/embed/accordion/accordion-group.html.twig" %}
+            {% block content %}
+                {% embed "system/embed/accordion/accordion.html.twig" with {id: 'accordionChangeConsent', expanded: true} %}
+                    {% block title %}
+                        {{ localized.thingsToKnow.headlineHowToChangeConsent | raw }}
+                    {% endblock %}
+                    {% block content %}
+                        <p>{{ localized.thingsToKnow.howToChangeConsentA | raw }}</p>
+                        <p>
+                            <strong>{{ localized.thingsToKnow.howToChangeConsentB | raw }}</strong><span class="brlbs-cmpnt-code-example">[borlabs-cookie type="btn-consent-preferences" title="Lorem ipsum"/]</span>
+                        </p>
+                        <p>
+                            <strong>{{ localized.thingsToKnow.howToChangeConsentC | raw }}</strong><span class="brlbs-cmpnt-code-example">[borlabs-cookie type="btn-consent-preferences" title="Lorem ipsum" element="link"/]</span>
+                        </p>
+                        <p>
+                            <strong>{{ localized.thingsToKnow.howToChangeConsentD | raw }}</strong><span class="brlbs-cmpnt-code-example">&lt;span class=&quot;borlabs-cookie-open-dialog-preferences&quot; data-borlabs-cookie-title=&quot;Lorem ipsum&quot; &gt;&lt;/span&gt;</span>
+                        </p>
+                    {% endblock %}
+                {% endembed %}
+
+                {% embed "system/embed/accordion/accordion.html.twig" with {id: 'accordionOptOut'} %}
+                    {% block title %}
+                        {{ localized.thingsToKnow.headlineHowToOptOut | raw }}
+                    {% endblock %}
+                    {% block content %}
+                        <p>{{ localized.thingsToKnow.howToOptOutA | raw }}</p>
+                        <p>{{ localized.thingsToKnow.howToOptOutB | raw }}</p>
+                    {% endblock %}
+                {% endembed %}
+
+                {% embed "system/embed/accordion/accordion.html.twig" with {id: 'accordionDisplayUserId'} %}
+                    {% block title %}
+                        {{ localized.thingsToKnow.headlineHowToDisplayUserId | raw }}
+                    {% endblock %}
+                    {% block content %}
+                        <p>{{ localized.thingsToKnow.howToDisplayUserIdA | raw }}</p>
+                        <p>{{ localized.thingsToKnow.howToDisplayUserIdB | raw }}</p>
+                        <p>{{ localized.thingsToKnow.howToDisplayUserIdC | raw }}</p>
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+{% endembed %}

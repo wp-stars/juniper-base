@@ -1,0 +1,49 @@
+<?php
+/*
+ *  Copyright (c) 2024 Borlabs GmbH. All rights reserved.
+ *  This file may not be redistributed in whole or significant part.
+ *  Content of this file is protected by international copyright laws.
+ *
+ *  ----------------- Borlabs Cookie IS NOT FREE SOFTWARE -----------------
+ *
+ *  @copyright Borlabs GmbH, https://borlabs.io
+ */
+
+declare(strict_types=1);
+
+namespace Borlabs\Cookie\System\Installer\ServiceGroup\Entry;
+
+use Borlabs\Cookie\Localization\DefaultLocalizationStrings;
+use Borlabs\Cookie\Model\ServiceGroup\ServiceGroupModel;
+use Borlabs\Cookie\System\Installer\DefaultEntryInterface;
+use Borlabs\Cookie\System\Language\Language;
+
+final class StatisticsEntry implements DefaultEntryInterface
+{
+    private DefaultLocalizationStrings $defaultLocalizationStrings;
+
+    private Language $language;
+
+    public function __construct(
+        DefaultLocalizationStrings $defaultLocalizationStrings,
+        Language $language
+    ) {
+        $this->defaultLocalizationStrings = $defaultLocalizationStrings;
+        $this->language = $language;
+    }
+
+    public function getDefaultModel(): ServiceGroupModel
+    {
+        $model = new ServiceGroupModel();
+        $model->description = $this->defaultLocalizationStrings->get()['serviceGroup']['statisticsDescription'];
+        $model->key = 'statistics';
+        $model->language = $this->language->getSelectedLanguageCode();
+        $model->name = $this->defaultLocalizationStrings->get()['serviceGroup']['statisticsName'];
+        $model->position = 2;
+        $model->preSelected = false;
+        $model->status = true;
+        $model->undeletable = true;
+
+        return $model;
+    }
+}

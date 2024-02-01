@@ -1,0 +1,34 @@
+{% embed "system/embed/card/card-with-title.html.twig" with {contentSpacing: false} %}
+    {% import "system/macro/row/textarea.html.twig" as row_textarea %}
+    {% import "system/macro/row/save.html.twig" as row_save %}
+    {% import "system/macro/card/card-heading.html.twig" as card_heading %}
+    {% block header %}
+        {{ card_heading.component({
+            title: localized.headline.a11y,
+        }) }}
+    {% endblock %}
+    {% block content %}
+        {{ row_textarea.component({
+            id: 'a11yProviderDialogExplained',
+            label: localized.field.a11yProviderDialogExplained,
+            value: data.a11yProviderDialogExplained,
+        }) }}
+
+        {{ row_textarea.component({
+            id: 'a11yProviderListExplained',
+            label: localized.field.a11yProviderListExplained,
+            value: data.a11yProviderListExplained,
+        }) }}
+
+        {{ row_textarea.component({
+            id: 'a11yServiceGroupListExplained',
+            label: localized.field.a11yServiceGroupListExplained,
+            value: data.a11yServiceGroupListExplained,
+        }) }}
+
+        {{ row_save.component({
+            action: 'save',
+            nonce: wpNonceField("#{controllerId}-save"),
+        }, localized) }}
+    {% endblock %}
+{% endembed %}

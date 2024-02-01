@@ -1,0 +1,158 @@
+{% import "system/macro/navigation/breadcrumb.html.twig" as breadcrumb %}
+
+{% if not isPluginUnlocked() %}
+    {{ messages() | raw }}
+{% else %}
+
+    {% set breadCrumbTitle = localized.breadcrumb.install %}
+    {% set formTitle = localized.headline.installation %}
+    {% set formButtonTitle = localized.button.install %}
+    {% set labelTitle = localized.field.installPackage %}
+
+    {% if data.package.installedAt is not empty and data.package.version == data.package.borlabsServicePackageVersion %}
+        {% set breadCrumbTitle = localized.breadcrumb.reinstall %}
+        {% set formTitle = localized.headline.reinstallation %}
+        {% set formButtonTitle = localized.button.reinstall %}
+        {% set labelTitle = localized.field.reinstallPackage %}
+    {% endif %}
+
+    {% if data.package.installedAt is not empty and isVersionGreater(data.package.borlabsServicePackageVersion, data.package.version) %}
+        {% set breadCrumbTitle = localized.breadcrumb.update %}
+        {% set formTitle = localized.headline.update %}
+        {% set formButtonTitle = localized.button.update %}
+        {% set labelTitle = localized.field.updatePackage %}
+    {% endif %}
+
+    {% set updateAvailable = false %}
+
+    {% if isVersionGreater(data.package.borlabsServicePackageVersion, data.package.version) %}
+        {% set updateAvailable = true %}
+    {% endif %}
+
+    {% if data.suggestion is empty %}
+        {{ breadcrumb.component({
+            items: [
+                [localized.breadcrumb.module, '?page=borlabs-cookie-library'],
+                "#{breadCrumbTitle}: #{data.package.name}",
+            ]
+        }, localized) }}
+    {% else %}
+        {{ breadcrumb.component({
+            items: [
+                [localized.showScan.breadcrumb.module, '?page=borlabs-cookie-cloud-scan'],
+                [localized.showScan.breadcrumb.scanResults, wpNonceUrl("?page=borlabs-cookie-cloud-scan&action=details&id=#{data.suggestion.cloudScanId}", "borlabs-cookie-cloud-scan-#{data.suggestion.cloudScanId}-details")],
+                "#{breadCrumbTitle}: #{data.package.name}",
+            ]
+        }, localized) }}
+    {% endif %}
+
+    {{ messages() | raw }}
+
+    <!-- Package Information -->
+    {% include "library/partials/package-information.html.twig" %}
+
+    <form data-brlbs-package-install class="needs-validation bc-group/form" novalidate>
+        <!-- Components -->
+        {% include "library/partials/components.html.twig" %}
+
+        <!-- Configure Content Blocker / Service Components -->
+        {% for language in data.languages.list %}
+            {% include "library/partials/language-specific-component-settings.html.twig" %}
+        {% endfor %}
+
+        <div class="bc-w-full lg:bc-w-2/3">
+            {% embed "system/embed/card/card-with-title.html.twig" with {contentSpacing: false}  %}
+                {% import "system/macro/card/card-heading.html.twig" as card_heading %}
+
+                {% block header %}
+                    {{ card_heading.component({
+                        title: formTitle,
+                    }) }}
+                {% endblock %}
+
+                {% block content %}
+                    {% import "system/macro/anchor-button.html.twig" as anchor_button %}
+
+                    <div data-brlbs-trigger>
+                        {% if isLicenseExpired() %}
+                            <div class="bc-flex bc-items-center bc-px-5 bc-py-2.5">
+                                {{ getLicenseAlertMessage('licenseExpiredFeatureNotAvailable') | raw }}
+                            </div>
+                        {% else %}
+                            {% embed "system/embed/form-row.html.twig" %}
+                                {% import "system/macro/form-component/button.html.twig" as button %}
+
+                                {% block label %}
+                                    <span class="brlbs-cmpnt-text">{{ labelTitle | raw }}</span>
+                                {% endblock %}
+
+                                {% block input %}
+                                    <input type="hidden" name="id" value="{{ data.package.id }}">
+                                    {{ button.component({
+                                        backgroundColor: updateAvailable == true ? 'bc-bg-purple-600' : 'bc-bg-blue-600',
+                                        backgroundColorHover: updateAvailable == true ? 'enabled:hover:bc-bg-purple-700' : 'enabled:hover:bc-bg-blue-700',
+                                        button: formButtonTitle
+                                    }, localized) }}
+                                {% endblock %}
+                            {% endembed %}
+                        {% endif %}
+                    </div>
+                    <div data-brlbs-loading class="bc-hidden">
+                        <div class="bc-flex bc-p-5 bc-justify-center">
+                            <img src="{{ imageUrl('borlabs-cookie-icon-black.svg') }}" alt="" class="bc-animate-spin" style="width: 32px; height: 32px;">
+                        </div>
+                    </div>
+                    <div data-brlbs-error class="bc-hidden">
+                        <div class="bc-px-5 bc-py-5">
+                            <div class="brlbs-cmpnt-alert brlbs-cmpnt-alert-error" role="alert">{{ localized.alert.installationFailed }}</div>
+                        </div>
+                    </div>
+                    <div data-brlbs-result class="bc-hidden">
+                        <table class="brlbs-cmpnt-table bc-min-w-full">
+                            <thead class="bc-bg-gray-200">
+                                <tr>
+                                    <th class="bc-w-24 bc-text-left" scope="col">{{ localized.table.status }}</th>
+                                    <th class="bc-text-left" scope="col">{{ localized.table.componentType }}</th>
+                                    <th class="bc-text-left" scope="col">{{ localized.table.name }}</th>
+                                </tr>
+                            </thead>
+                            <tbody data-brlbs-result-list></tbody>
+                        </table>
+                        <div class="bc-px-5 bc-py-5">
+                            {% set followUpDescription = translation('followUp', data.package.translations) %}
+
+                            {% if followUpDescription is not empty %}
+                                <h4 class="bc-text-base bc-font-medium bc-mb-2">{{ localized.headline.followUp }}</h4>
+                                <p>{{ markdownToHtml(translation('followUp', data.package.translations)) | raw }}</p>
+                            {% endif %}
+
+                            {% if data.suggestion is empty %}
+                                <div class="bc-text-right">
+                                    {{ anchor_button.component({
+                                        href: '?page=borlabs-cookie-library',
+                                        linkText: localized.button.goBackToLibrary
+                                    }) }}
+                                </div>
+                            {% else %}
+                                <div class="bc-mt-6 bc-text-right">
+                                    {{ anchor_button.component({
+                                        href: wpNonceUrl("?page=borlabs-cookie-cloud-scan&action=details&id=#{data.suggestion.cloudScanId}", "borlabs-cookie-cloud-scan-#{data.suggestion.cloudScanId}-details"),
+                                        linkText: localized.button.goBackToScanResult
+                                    }) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </form>
+
+    <!-- Uninstall -->
+    {% include "library/partials/uninstall.html.twig" %}
+
+    <div class="bc-w-full lg:bc-w-2/3 bc-my-8 bc-p-4 bc-rounded-md bc-bg-neutral-200 bc-text-neutral-500 bc-shadow-inner bc-text-center bc-text-xxs">
+        <p class="bc-mb-4">{{ localized.alert.disclaimer }}</p>
+        <p>{{ localized.alert.copyrights }}</p>
+    </div>
+{% endif %}

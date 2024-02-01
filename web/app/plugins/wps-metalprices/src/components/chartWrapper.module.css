@@ -1,0 +1,80 @@
+:local(.container) {
+	border: 1px solid var(--color-iwg_grey);
+	border-radius: 16px;
+	margin-top: 44px;
+	overflow: hidden;
+}
+
+:local(.values) {
+	margin: 30px;
+	display: flex;
+	gap: 30px;
+	align-items: center;
+}
+
+@media (max-width: 660px) {
+	:local(.values) {
+		flex-direction: column;
+		gap: 5px;
+	}
+}
+
+:local(.currentPrice) {
+	font-weight: 700;
+	font-size: var(--font-size-xxl);
+}
+
+:local(.highlow) {
+	font-size: var(--font-size-s);
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	white-space: nowrap;
+}
+
+:local(.highlow__price) {
+	font-weight: 700;
+}
+
+:local(.priceChange) {
+	font-weight: 700;
+	font-size: var(--font-size-md);
+	white-space: nowrap;
+}
+
+:local(.datePicker) {
+	padding: 30px 30px 10px 30px;
+	display: flex;
+	column-gap: 20px;
+	align-items: center;
+	row-gap: 20px;
+}
+
+:local(.datePicker) label {
+	color: var(--color-black);
+}
+
+:local(.datePicker) input[type="tel"] {
+	border: none;
+}
+
+:local(.datePicker) .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium {
+	color: var(--color-grey_darkest);
+}
+
+:local(.datePicker) .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium:hover,
+:local(.datePicker) .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium:focus,
+:local(.datePicker) .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium:active {
+	background: none;
+	color: var(--color-black);
+}
+
+:local(.datePicker) .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium svg {
+	display: none;
+}
+
+:local(.datePicker) .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium:before {
+	content: "\13ba";
+	font-family: icons, sans-serif;
+	font-size: var(--font-size);
+}
