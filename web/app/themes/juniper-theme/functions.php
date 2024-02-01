@@ -9,6 +9,14 @@
  */
 
 
+namespace WPS;
+
+/**
+ * Define Constants
+ */
+define(__NAMESPACE__ . '\THEME_DIR', trailingslashit(get_stylesheet_directory()));
+define(__NAMESPACE__ . '\THEME_URI', trailingslashit(esc_url(get_stylesheet_directory_uri())));
+
 /**
  * If you are installing Timber as a Composer dependency in your theme, you'll need this block
  * to load your dependencies and initialize Timber. If you are using Timber via the WordPress.org
@@ -18,7 +26,7 @@ $composer_autoload = __DIR__ . '/vendor/autoload.php';
 
 if ( file_exists( $composer_autoload ) ) {
 	require_once $composer_autoload;
-	$timber = new Timber\Timber();
+	$timber = new \Timber\Timber();
 }
 
 require_once 'inc/include.php';
@@ -64,10 +72,10 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 
         try {
             $wp_root_path = str_replace('/wp-content/themes', '', get_theme_root());
-            $compiler = new ScssPhp\ScssPhp\Compiler();
+            $compiler = new \ScssPhp\ScssPhp\Compiler();
             $compiler->setImportPaths(__DIR__ . '/scss');
-            $compiler->setOutputStyle(ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
-            $compiler->setSourceMap(ScssPhp\ScssPhp\Compiler::SOURCE_MAP_FILE);
+            $compiler->setOutputStyle(\ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
+            $compiler->setSourceMap(\ScssPhp\ScssPhp\Compiler::SOURCE_MAP_FILE);
             $compiler->setSourceMapOptions([
                 'sourceMapURL' =>  get_stylesheet_directory_uri() . '/style.map',
                 'sourceMapBasepath' => get_stylesheet_directory_uri(),//$wp_root_path
@@ -114,7 +122,114 @@ function juniper_theme_enqueue() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'juniper_theme_enqueue' );
+add_action( 'wp_enqueue_scripts', 'WPS\juniper_theme_enqueue' );
+
+
+/**
+ * Required WordPress enqueue statements for child theme
+ * Registers Parent theme and main child theme assets
+ */
+function enqueue_ls_scripts() {
+    /** Deregister and register jquery to load in footer (enqueue happens per script dependency) */
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', includes_url('/js/jquery/jquery.js'), false, null, true);
+
+    wp_enqueue_style(
+        'child-style',
+        THEME_URI . 'style.css',
+        ['astra-theme-css'],
+        filemtime(THEME_DIR . 'style.css'),
+    );
+
+    wp_enqueue_style(
+        'wps-styles',
+        THEME_URI . 'assets/css/wps-styles.css',
+        [],
+        filemtime(THEME_DIR . 'assets/css/wps-styles.css')
+    );
+
+    global $post;
+    if (has_shortcode($post->post_content, 'facetwp')) {
+        wp_enqueue_style(
+            'productfinder-style',
+            THEME_URI . 'assets/css/productfinder.css',
+            [],
+            filemtime(THEME_DIR . 'assets/css/productfinder.css'),
+        );
+    }
+
+    /*$asset_file = include THEME_DIR . '/index.asset.php';
+    wp_register_script(
+        'custom-script',
+        THEME_URI . 'index.js',
+        $asset_file['dependencies'],
+        $asset_file['version'],
+        true
+    );
+    wp_enqueue_script(
+        'custom-script'
+    );*/
+
+    // Load css and js for homepage slider
+    if (is_front_page()) {
+        wp_enqueue_style(
+            'slider-homepage-style',
+            THEME_URI . 'assets/css/slider-homepage.css',
+            [],
+            filemtime(THEME_DIR . 'assets/css/slider-homepage.css'),
+        );
+
+        $asset_file = include THEME_DIR . 'assets/js/slider-homepage.asset.php';
+        wp_register_script(
+            'slider-homepage-script',
+            THEME_URI . 'assets/js/slider-homepage.js',
+            $asset_file['dependencies'],
+            $asset_file['version'],
+            true
+        );
+        wp_enqueue_script(
+            'slider-homepage-script'
+        );
+    }
+
+    $asset_file = include THEME_DIR . 'assets/js/sample-wishlist.asset.php';
+    wp_register_script(
+        'sample-wishlist-script',
+        THEME_URI . 'assets/js/sample-wishlist.js',
+        $asset_file['dependencies'],
+        $asset_file['version'],
+        true
+    );
+    global $post;
+    wp_localize_script(
+        'sample-wishlist-script', 'wpVars', [
+        'postID' => $post->ID,
+    ],
+    );
+    wp_enqueue_script(
+        'sample-wishlist-script'
+    );
+
+    wp_register_script(
+        'wps-scripts',
+        THEME_URI . 'assets/js/wps-scripts.js',
+        '',
+        filemtime(THEME_DIR . 'assets/js/wps-scripts.js'),
+        true
+    );
+    global $post;
+    wp_localize_script(
+        'wps-scripts', 'wpVars', [
+        'postID' => $post->ID,
+        'postName' => $post->post_title
+    ],
+    );
+    wp_enqueue_script(
+        'wps-scripts'
+    );
+}
+
+add_action('wp_enqueue_scripts', '\WPS\enqueue_ls_scripts');
 
 
 /**
@@ -142,18 +257,18 @@ if ( ! class_exists( 'Timber' ) ) {
 /**
  * Sets the directories (inside your theme) to find .twig files
  */
-Timber::$dirname = array( 'templates', 'views' );
+\Timber::$dirname = array( 'templates', 'views' );
 
 /**
  * By default, Timber does NOT autoescape values. Want to enable Twig's autoescape?
  * No prob! Just set this value to true
  */
-Timber::$autoescape = false;
+\Timber::$autoescape = false;
 
 
 //StarterSite class
 require_once 'class-startersite.php';
-$site = new StarterSite();
+$site = new \StarterSite();
 
 add_theme_support( 'custom-logo' );
 
@@ -180,7 +295,7 @@ function juniper_customizer_setting($wp_customize) {
     ) );
 }
 
-add_action('customize_register', 'juniper_customizer_setting');
+add_action('customize_register', 'WPS\juniper_customizer_setting');
 
 function wps_juniper_register_nav_menu(){
     register_nav_menus( array(
@@ -189,9 +304,9 @@ function wps_juniper_register_nav_menu(){
         'footer_menu'  => __( 'Footer Menu', 'wps_juniper' ),
     ) );
 }
-add_action( 'after_setup_theme', 'wps_juniper_register_nav_menu', 0 );
+add_action( 'after_setup_theme', 'WPS\wps_juniper_register_nav_menu', 0 );
 
-add_filter( 'timber/context', 'wps_add_to_context' );
+add_filter( 'timber/context', 'WPS\wps_add_to_context' );
 function wps_add_to_context( $context ) {
     $custom_logo_id                 = get_theme_mod( 'custom_logo' );
     $logo                           = wp_get_attachment_image_url( $custom_logo_id , 'full' );
@@ -234,7 +349,7 @@ function wps_add_to_context( $context ) {
     return $context;
 }
 
-add_action( 'wp_enqueue_scripts', 'wpse_enqueues' );
+add_action( 'wp_enqueue_scripts', 'WPS\wpse_enqueues' );
 function wpse_enqueues() {
     // Only enqueue on specified single CPTs
     if( is_singular() ) {
@@ -252,25 +367,25 @@ use wps\MailPoetGF;
 add_action('init', array(MailPoetGF::get_instance(), 'init'));
 
 
-add_filter( 'render_block', 'wps_juniper_add_class_to_list_block', 10, 2 );
+add_filter( 'render_block', 'WPS\wps_juniper_add_class_to_list_block', 10, 2 );
 function wps_juniper_add_class_to_list_block( $block_content, $block ) {
     if ( 'core/group' === $block['blockName'] ) {
-        $block_content = new WP_HTML_Tag_Processor( $block_content );
+        $block_content = new \WP_HTML_Tag_Processor( $block_content );
         $block_content->next_tag( 'div' );
         $block_content->add_class( 'container' );
         $block_content->add_class( 'wps-content' );
         $block_content->get_updated_html();
     }
-
     return $block_content;
 }
 
+add_filter('acf/settings/remove_wp_meta_box', '__return_false');
 function wps_juniper_acf_init() {
     
     acf_update_setting('google_api_key', 'AIzaSyA2nwpgRNcXh27RBL41e47d6pFcJda9qiY');
 }
 
-add_action('acf/init', 'wps_juniper_acf_init');
+add_action('acf/init', 'WPS\wps_juniper_acf_init');
 
 /**
  * Change the excerpt more string
@@ -278,17 +393,14 @@ add_action('acf/init', 'wps_juniper_acf_init');
 function wps_juniper_excerpt_more( $more ) {
     return ' [...]';
 }
-add_filter( 'excerpt_more', 'wps_juniper_excerpt_more' );
+add_filter( 'excerpt_more', 'WPS\wps_juniper_excerpt_more' );
 
 
-
-
-add_filter('locale', 'change_gravity_forms_language');
+add_filter('locale', 'WPS\change_gravity_forms_language');
 function change_gravity_forms_language($locale) {
 
     if (class_exists('RGForms')) {
-        $gravity_forms_language = 'de_DE';
-        return $gravity_forms_language;
+        return 'de_DE';
     }
 
     return $locale;
@@ -299,7 +411,7 @@ function allow_svg_upload($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
-add_filter('upload_mimes', 'allow_svg_upload');
+add_filter('upload_mimes', 'WPS\allow_svg_upload');
 
 // Additional security measures for SVG uploads
 function validate_svg_upload($file, $filename, $mimes) {
@@ -308,14 +420,14 @@ function validate_svg_upload($file, $filename, $mimes) {
     }
     return $file;
 }
-add_filter('wp_check_filetype_and_ext', 'validate_svg_upload', 10, 4);
+add_filter('wp_check_filetype_and_ext', 'WPS\validate_svg_upload', 10, 4);
 
 
 // Add woocommerce support
 function theme_add_woocommerce_support() {
     add_theme_support('woocommerce');
 }
-add_action('after_setup_theme', 'theme_add_woocommerce_support');
+add_action('after_setup_theme', 'WPS\theme_add_woocommerce_support');
 
 function timber_set_product($post) {
     global $product;
@@ -324,3 +436,16 @@ function timber_set_product($post) {
         $product = wc_get_product($post->ID);
     }
 }
+
+
+require_once THEME_DIR . 'ls-blocks/class-gutenberg-blocks.php';
+require_once THEME_DIR . 'shortcodes/index.php';
+require_once THEME_DIR . 'api/metalprices.php';
+require_once THEME_DIR . 'api/samples.php';
+// require_once THEME_DIR . 'inc/product/product-detailpage.php';
+require_once THEME_DIR . 'inc/job/job-detailpage.php';
+require_once THEME_DIR . 'inc/contact/contact-button.php';
+require_once THEME_DIR . 'inc/cover/cover-slider.php';
+require_once THEME_DIR . 'inc/news/news-acf.php';
+require_once THEME_DIR . 'inc/news/news-detailpage.php';
+require_once THEME_DIR . 'inc/admin/capabilities.php';

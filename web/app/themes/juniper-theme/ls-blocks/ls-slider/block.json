@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "ls/slider",
+	"version": "0.1.0",
+	"title": "Slider Block",
+	"category": "ls",
+	"icon": "slides",
+	"description": "Slider Block",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "iwgplating",
+	"attributes": {
+		"arrows": {
+			"type": "boolean",
+			"default": true
+		},
+		"dots": {
+			"type": "boolean",
+			"default": false
+		},
+		"logo": {
+			"type": "boolean",
+			"default": false
+		}
+	}
+}

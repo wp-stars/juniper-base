@@ -1,0 +1,158 @@
+{% import "system/macro/navigation/breadcrumb.html.twig" as breadcrumb %}
+{% import "system/macro/row/save.html.twig" as row_save %}
+{% import "system/macro/row/switch-button.html.twig" as row_switch_button %}
+
+{% if not isPluginUnlocked() %}
+    {{ messages() | raw }}
+{% else %}
+    {{ breadcrumb.component({
+        items: [localized.breadcrumb.module]}, localized)
+    }}
+
+    {{ messages() | raw }}
+
+    <form action="{{ "?page=#{controllerId}" }}" method="post" class="needs-validation bc-group/form" novalidate>
+        {% embed "system/embed/card/card-with-info-panel.html.twig" %}
+            {% import "system/macro/card/card-heading.html.twig" as card_heading %}
+            {% block mainHeader %}
+                {{ card_heading.component({
+                    title: localized.headline.generalSettings,
+                }) }}
+            {% endblock %}
+            {% block mainContent %}
+                {% import "system/macro/form-component/button.html.twig" as button %}
+                {% import "system/macro/form-component/status-indicator.html.twig" as status_indicator %}
+                {% import "system/macro/row/save.html.twig" as row_save %}
+                {% import "system/macro/row/switch-button.html.twig" as row_switch_button %}
+                {% import "system/macro/row/textarea.html.twig" as row_textarea %}
+
+                {{ row_switch_button.component({
+                    hint: localized.hint.iabTcfStatus,
+                    id: 'iabTcfStatus',
+                    label: localized.field.iabTcfStatus,
+                    value: data.iabTcfStatus,
+                }) }}
+
+                {{ row_switch_button.component({
+                    hint: localized.hint.compactLayout,
+                    id: 'compactLayout',
+                    label: localized.field.compactLayout,
+                    value: data.compactLayout,
+                }) }}
+
+                {{ row_textarea.component({
+                    hint: localized.hint.hostnamesForConsentAddition,
+                    id: 'hostnamesForConsentAddition',
+                    isRequired: false,
+                    label: localized.field.hostnamesForConsentAddition,
+                    value: data.hostnamesForConsentAddition | join('\n'),
+                }) }}
+
+                {% embed "system/embed/form-row.html.twig" %}
+                    {% import "system/macro/form-component/info-hint.html.twig" as hint %}
+
+                    {% block label %}
+                        <div class="bc-flex bc-items-center bc-space-x-1">
+                            <span>{{ localized.field.thirdPartyHostnamesForConsentAdditionList | raw }}</span>
+                            {{ hint.component({
+                                hint: localized.hint.thirdPartyHostnamesForConsentAdditionList,
+                            }) }}
+                        </div>
+                    {% endblock %}
+
+                    {% block input %}
+                        <ul class="bc-ml-4 bc-list-disc bc-text-left">
+                            {% for thirdPartyHostnameForConsentAddition in data.thirdPartyHostnamesForConsentAddition %}
+                                <li>{{ thirdPartyHostnameForConsentAddition }}</li>
+                            {% else %}
+                                <li class="-bc-ml-4 bc-list-none">-</li>
+                            {% endfor %}
+                        </ul>
+                    {% endblock %}
+                {% endembed %}
+
+                {% if isLicenseExpired() %}
+                    <div class="bc-flex bc-items-center bc-px-5 bc-py-2.5">
+                        {{ getLicenseAlertMessage('licenseExpiredFeatureNotAvailable') | raw }}
+                    </div>
+                {% endif %}
+
+                {% embed "system/embed/form-row.html.twig" %}
+                    {% block label %}
+                        <label for="gvlDownload">{{ localized.field.gvlStatus | raw }}</label>
+                    {% endblock %}
+                    {% block input %}
+                        {% import "system/macro/form-component/button.html.twig" as button %}
+                        {% import "system/macro/form-component/status-indicator.html.twig" as status_indicator %}
+                        <div>
+                            {{ status_indicator.component({
+                                status: data.gvlImported,
+                                okText: localized.text.gvlDownloaded,
+                                errorText: localized.text.gvlNotDownloaded
+                            }, localized) }}
+                        </div>
+                        <div class="bc-mt-2">
+                            {{ button.component({
+                                button: data.gvlImported ?
+                                '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bc-w-4 bc-h-4 bc-relative bc--top-0.5 bc-mr-2 bc-inline-block">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                    </svg>' ~ localized.button.updateGvl
+                                :
+                                '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bc-w-4 bc-h-4 bc-relative bc--top-0.5 bc-mr-2 bc-inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                    </svg>' ~ localized.button.downloadGvl,
+                                name: 'action',
+                                value: 'downloadGvl',
+                                id: 'downloadGvl',
+                                isDisabled: data.iabTcfStatus == false,
+                            }, localized) }}
+                        </div>
+                    {% endblock %}
+                {% endembed %}
+
+                {% embed "system/embed/form-row.html.twig" %}
+                    {% block label %}
+                        <label>{{ localized.text.gvlLastSyncAt }}</label>
+                    {% endblock %}
+                    {% block input %}
+                        {{ data.gvlLastSuccessfulCheckWithApiFormattedTime }}
+                    {% endblock %}
+                {% endembed %}
+
+                <!-- Synchronization Settings -->
+                {{ synchronizationSettingsFields(
+                    languages,
+                    {
+                        collectionName: "languages",
+                        hasRepository: false,
+                        withOverwriteTranslationOption: false,
+                    }
+                ) | raw }}
+
+                {{ row_save.component({
+                    action: 'save',
+                    nonce: wpNonceField("#{controllerId}-save"),
+                    value: data.id,
+                }, localized) }}
+            {% endblock %}
+
+            {% block infoPanelHeader %}
+                {{ localized.global.headline.thingsToKnow | raw }}
+            {% endblock %}
+
+            {% block infoPanelContent %}
+                {% embed "system/embed/accordion/accordion-group.html.twig" %}
+                    {% block content %}
+                        {% embed "system/embed/accordion/accordion.html.twig" with {id: 'accordionIabTcf', expanded: true} %}
+                            {% block title %}
+                                {{ localized.thingsToKnow.headlineIabTcf | raw }}
+                            {% endblock %}
+                            {% block content %}
+                                <p>{{ localized.thingsToKnow.iabTcfDescription | raw }}</p>
+                            {% endblock %}
+                        {% endembed %}
+                    {% endblock %}
+                {% endembed %}
+            {% endblock %}
+        {% endembed %}
+    </form>
+{% endif %}

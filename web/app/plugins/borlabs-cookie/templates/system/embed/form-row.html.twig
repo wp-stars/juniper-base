@@ -1,0 +1,8 @@
+<div class="bc-flex bc-gap-x-2 bc-items-center bc-py-2.5 {% if transparent != true %}odd:bc-bg-white even:bc-bg-gray-50 {% endif %} bc-px-5 last:bc-rounded-b-md">
+    <div class="bc-w-1/2 md:bc-w-5/12 bc-text-xs">
+        {% block label %}{% endblock %}
+    </div>
+    <div class="bc-w-1/2 md:bc-w-7/12">
+        {% block input %}{% endblock %}
+    </div>
+</div>

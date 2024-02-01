@@ -1,0 +1,19 @@
+:local(.tooltip__price) {
+	font-size: var(--font-size-md);
+	font-weight: 700;
+	line-height: var(--line-height-xs);
+}
+
+:local(.tooltip__date) {
+	color: var(--color-grey_dark);
+	font-size: var(--font-size-xs);
+	font-weight: 300;
+}
+
+.recharts-tooltip-wrapper-left :local(.tooltip) {
+	text-align: right;
+}
+
+.recharts-tooltip-wrapper-right :local(.tooltip) {
+	text-align: left;
+}
