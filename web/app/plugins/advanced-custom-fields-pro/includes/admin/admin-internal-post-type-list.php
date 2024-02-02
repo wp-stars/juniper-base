@@ -57,17 +57,11 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 		public $store = '';
 
 		/**
-		 * If this is a pro feature or not.
-		 *
-		 * @var bool
-		 */
-		public $is_pro_feature = false;
-
-		/**
 		 * Constructs the class.
 		 */
 		public function __construct() {
 			add_action( 'current_screen', array( $this, 'current_screen' ) );
+			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
 			// Handle post status change events.
 			add_action( 'trashed_post', array( $this, 'trashed_post' ) );
@@ -123,7 +117,7 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 			}
 
 			// Get the current view.
-			$this->view = acf_request_arg( 'post_status', '' );
+			$this->view = isset( $_GET['post_status'] ) ? sanitize_text_field( $_GET['post_status'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			// Setup and check for custom actions.
 			$this->setup_sync();
@@ -228,10 +222,10 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 		 * @return string
 		 */
 		public function admin_body_class( $classes ) {
-			$classes .= ' acf-admin-page acf-internal-post-type ' . esc_attr( $this->admin_body_class );
+			$classes .= " acf-admin-page acf-internal-post-type {$this->admin_body_class}";
 
 			if ( $this->view ) {
-				$classes .= ' view-' . esc_attr( $this->view );
+				$classes .= " view-{$this->view}";
 			}
 
 			return $classes;
@@ -278,13 +272,10 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 
 			// Check the post store to see if this failed registration.
 			if ( ! empty( $this->store ) && ! empty( $post->ID ) ) {
-				$store = acf_get_store( $this->store );
-
-				if ( $store ) {
-					$store_item = $store->get( $post->ID );
-					if ( ! empty( $store_item ) && ! empty( $store_item['not_registered'] ) ) {
-						$post_states['acf-registration-warning'] = $this->get_registration_error_state();
-					}
+				$store      = acf_get_store( $this->store );
+				$store_item = $store->get( $post->ID );
+				if ( ! empty( $store_item ) && ! empty( $store_item['not_registered'] ) ) {
+					$post_states['acf-registration-warning'] = $this->get_registration_error_state();
 				}
 			}
 
@@ -300,15 +291,7 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 		 */
 		public function get_not_found_html() {
 			ob_start();
-
-			$view = $this->post_type . '/list-empty';
-
-			if ( $this->is_pro_feature ) {
-				$view = ACF_PATH . 'pro/admin/views/' . $view . '.php';
-			}
-
-			acf_get_view( $view );
-
+			acf_get_view( $this->post_type . '/list-empty' );
 			return ob_get_clean();
 		}
 
@@ -425,21 +408,16 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 		 * @return  array
 		 */
 		public function page_row_actions( $actions, $post ) {
+
 			// Remove "Quick Edit" action.
 			unset( $actions['inline'], $actions['inline hide-if-no-js'] );
 
-			$duplicate_action_url = '';
-
 			// Append "Duplicate" action.
+			// TODO: We'll likely have to add support for CPTs/Taxonomies!
 			if ( 'acf-field-group' === $this->post_type ) {
-				$duplicate_action_url = $this->get_admin_url( '&acfduplicate=' . $post->ID . '&_wpnonce=' . wp_create_nonce( 'bulk-posts' ) );
-			} elseif ( 'acf-post-type' === $this->post_type ) {
-				$duplicate_action_url = wp_nonce_url( admin_url( 'post-new.php?post_type=acf-post-type&use_post_type=' . $post->ID ), 'acfduplicate-' . $post->ID );
-			} elseif ( 'acf-taxonomy' === $this->post_type ) {
-				$duplicate_action_url = wp_nonce_url( admin_url( 'post-new.php?post_type=acf-taxonomy&use_taxonomy=' . $post->ID ), 'acfduplicate-' . $post->ID );
+				$duplicate_action_url    = $this->get_admin_url( '&acfduplicate=' . $post->ID . '&_wpnonce=' . wp_create_nonce( 'bulk-posts' ) );
+				$actions['acfduplicate'] = '<a href="' . esc_url( $duplicate_action_url ) . '" aria-label="' . esc_attr__( 'Duplicate this item', 'acf' ) . '">' . __( 'Duplicate', 'acf' ) . '</a>';
 			}
-
-			$actions['acfduplicate'] = '<a href="' . esc_url( $duplicate_action_url ) . '" aria-label="' . esc_attr__( 'Duplicate this item', 'acf' ) . '">' . __( 'Duplicate', 'acf' ) . '</a>';
 
 			// Append the "Activate" or "Deactivate" actions.
 			if ( 'acf-disabled' === $post->post_status ) {
@@ -453,7 +431,12 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 			}
 
 			// Return actions in custom order.
-			$order = array( 'edit', 'acfduplicate', $activate_deactivate_action, 'trash' );
+			// TODO: We'll likely have to add support for CPTs/Taxonomies!
+			if ( 'acf-field-group' === $this->post_type ) {
+				$order = array( 'edit', 'acfduplicate', $activate_deactivate_action, 'trash' );
+			} else {
+				$order = array( 'edit', $activate_deactivate_action, 'trash' );
+			}
 
 			return array_merge( array_flip( $order ), $actions );
 		}
@@ -935,6 +918,7 @@ if ( ! class_exists( 'ACF_Admin_Internal_Post_Type_List' ) ) :
 				acf_delete_internal_post_type( $post_id, $this->post_type );
 			}
 		}
+
 	}
 
 endif; // Class exists check.

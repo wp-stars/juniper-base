@@ -1,22 +1,27 @@
-<div class="container footer-container">
-    <div class="asterisk absolute right-0" >
-    </div>
-    <div class="w-full h-full mx-auto py-4 flex flex-col justify-end relative relative">
-        <div class="flex flex-col sm:flex-row mb-4 sm:mb-12">
-            <div class="flex flex-col min-w-[300px] description">
-                <a href="{{site.url}}" class="flex items-center mb-8 sm:mb-6">
-                    <img src="{{ footer_logo }}" class="h-[95px] w-[6.25rem] mr-3" alt="{{site.name}}" />
-                </a>
-                <p class="red-hat-var-medium mb-6">Example GmbH</p>
-                <a class="" href="tel:+43125630960">+12 345 678 91011</a>
-                <a class="mb-3" href="mailto:office@wp-stars.com">example@example.com</a>
-                <p class="sm:mb-3">Example-street 1<br/>0000 Example<br />Example Country</p>
-            </div>
-            <p class="flex mt-4 sm:mt-0 sm:self-end">“{{ footer_quote }}”</p>
+<div class="footer-container bg-black text-white py-20">
+    <div class="container grid grid-cols-4">
+        <div>
+            <a href="{{site.url}}" class="flex items-center mb-8 sm:mb-6">
+                <img src="{{ footer_logo }}" class="h-[95px] w-[6.25rem] mr-3" alt="{{site.name}}" />
+            </a>
+            <p>Sonnenblumenweg 1</p>
+            <p>1182 Markgrafneusiedl</p>
+            <p>+43 (0) 2287 71073</p>
+            <p>office@iwgplating.com</p>
         </div>
-        <hr class="mb-[1.45rem] border-solid border-black w-full" />
-        {% include "footer-menu.twig" with {'items': footer_menu.get_items, 'name': 'footer-menu' } %}
-
+        <div>
+            {% include "footer-menu.twig" with {'items': footer_menu.get_items, 'name': 'footer-menu' } %}
+        </div>
+        <div>
+            Linkedin
+            Youtube
+        </div>
+        <div class="">
+            newsletter
+        </div>
+    </div>
+    <div class="container">
+        <p>2024 IWG Ing. W. Garhöfer Ges.m.b.H.</p>
     </div>
 </div>
 

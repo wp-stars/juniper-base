@@ -1,0 +1,23 @@
+{% if menu %}
+	<ul class="flex flex-col {% if name == 'primary-menu' %}lg:gap-10{% else %}lg:gap-5{% endif %} font-medium py-4 lg:p-0 mt-4 lg:flex-row lg:mt-0 border-0 w-full lg:w-fit {{ name }}">
+		{% for item in items %}
+			<li class="group dropdown rounded {{ item.classes | join(' ') }}">
+				<a class="block px-4 py-2 text-sm hover:bg-lightgray" target="{{ item.target }}" href="{{ item.link }}">
+					{{ item.title }}
+				</a>
+				<div id="submenu-{{ item.id }}" class="z-50 group-hover:block dropdown-menu absolute hidden h-auto">
+                    <div class="grid grid-cols-3 bg-white shadow-md rounded p-8 relative top-4">
+                        {% for child in item.children %}
+                            <div class="grid grid-cols-1 text-xs">
+                                <p>{{ child.title }}</p>
+                                {% for subchild in child.children %}
+                                    <a href="{{ subchild.link }}">{{ subchild.title }}</a>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

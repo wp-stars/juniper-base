@@ -67,11 +67,7 @@ if ( ! class_exists( 'ACF_Location_Options_Page' ) ) :
 					$choices[ $page['menu_slug'] ] = $page['page_title'];
 				}
 			} else {
-				$choices[''] = __( 'Select options page...', 'acf' );
-			}
-
-			if ( acf_get_setting( 'enable_options_pages_ui' ) ) {
-				$choices['add_new_options_page'] = __( 'Add New Options Page', 'acf' );
+				$choices[''] = __( 'No options pages exist', 'acf' );
 			}
 
 			// Return choices.
@@ -81,4 +77,5 @@ if ( ! class_exists( 'ACF_Location_Options_Page' ) ) :
 
 	// initialize
 	acf_register_location_type( 'ACF_Location_Options_Page' );
+
 endif; // class_exists check

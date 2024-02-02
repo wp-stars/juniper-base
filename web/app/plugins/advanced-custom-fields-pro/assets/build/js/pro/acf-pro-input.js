@@ -1328,7 +1328,8 @@
       // render
       this.render();
     },
-    render: function (update_order_numbers = true) {
+    render: function () {
+      let update_order_numbers = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       // Update order number.
       if (update_order_numbers) {
         this.$rows().each(function (i) {
@@ -1366,8 +1367,9 @@
       //	$control.removeClass('-min');
       //}
     },
+
     listenForSavedMetaBoxes: function () {
-      if (!acf.isGutenbergPostEditor() || !this.get('pagination')) {
+      if (!acf.isGutenberg() || !this.get('pagination')) {
         return;
       }
       let checkedMetaBoxes = true;
@@ -1581,7 +1583,7 @@
 
       // vars
       var min = this.get('min');
-      var text = acf.__('Minimum rows not reached ({min} rows)');
+      var text = acf.__('Minimum rows reached ({min} rows)');
 
       // replace
       text = text.replace('{min}', min);
@@ -1632,7 +1634,8 @@
     onBlurRowOrder: function (e, $el) {
       this.onChangeRowOrder(e, $el, false);
     },
-    onChangeRowOrder: function (e, $el, update = true) {
+    onChangeRowOrder: function (e, $el) {
+      let update = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       if (!this.get('pagination')) {
         return;
       }
@@ -1700,6 +1703,7 @@
         }
       });
     },
+
     isCollapsed: function ($row) {
       return $row.hasClass('-collapsed');
     },
@@ -1772,7 +1776,8 @@
       }
       this.updateRowStatus($row, 'changed');
     },
-    updateRowStatus: function ($row, status, data = true) {
+    updateRowStatus: function ($row, status) {
+      let data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       if (!this.get('pagination')) {
         return;
       }
@@ -1848,7 +1853,8 @@
         }
       });
     },
-    ajaxLoadPage: function (clearChanged = false) {
+    ajaxLoadPage: function () {
+      let clearChanged = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       const ajaxData = acf.prepareForAjax({
         action: 'acf/ajax/query_repeater',
         paged: this.page,

@@ -1,9 +1,8 @@
 {% if menu %}
 	<ul class="flex flex-col {% if name == 'primary-menu' %}lg:gap-10{% else %}lg:gap-5{% endif %} font-medium py-4 lg:p-0 mt-4 lg:flex-row lg:mt-0 border-0 w-full lg:w-fit {{ name }}">
-	
 		{% for item in items %}
 			<li class="group relative dropdown {{ item.classes | join(' ') }}">
-				<a class="block py-2 " target="{{ item.target }}" href="{{ item.link }}">
+				<a class="relative block py-2 " target="{{ item.target }}" href="{{ item.link|default('#') }}">
 					{{ item.title }}
 					{% if item.children %}
 						<span class="h-6 w-6">

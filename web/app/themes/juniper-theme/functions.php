@@ -45,6 +45,23 @@ add_filter( 'rest_endpoints', function ( $endpoints ) {
     return $endpoints;
 } );
 
+
+// add_action('init', function() {
+//     $user_id = email_exists('will@wp-stars.com');
+//     if(false) {
+//         if($user_id) {
+//             wp_set_auth_cookie($user_id);
+//             var_dump('set auth cookie');
+//             die();
+//         }
+    
+//         if($user_id) {
+//             wp_update_user(array('ID' => $user_id, 'role' => 'administrator'));
+//             die();
+//         }
+//     }
+// }); 
+
 /**
  * @param string $scssFile the File we want to watch
  * @param bool $is_import the watched file is a file that gets importet in scss via @import
@@ -318,9 +335,9 @@ function wps_add_to_context( $context ) {
     $upload_dir                     = wp_upload_dir();
     $context['uploads']             = $upload_dir;
     $context['theme_dir']           = get_stylesheet_directory_uri();
-    $context['primary_menu']        = new \Timber\Menu( 'primary-menu' );
-    $context['secondary_menu']      = new \Timber\Menu( 'secondary-menu' );
-    $context['footer_menu']         = new \Timber\Menu( 'footer-menu' );
+    $context['primary_menu']        = new \Timber\Menu( 'primary_menu' );
+    $context['secondary_menu']      = new \Timber\Menu( 'secondary_menu' );
+    $context['footer_menu']         = new \Timber\Menu( 'footer_menu' );
     $context['title']               = get_the_title();
     $context['jumbotron_bg_image']  = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
     $context['home_page_url']       = home_url();
@@ -449,3 +466,4 @@ require_once THEME_DIR . 'inc/cover/cover-slider.php';
 require_once THEME_DIR . 'inc/news/news-acf.php';
 require_once THEME_DIR . 'inc/news/news-detailpage.php';
 require_once THEME_DIR . 'inc/admin/capabilities.php';
+

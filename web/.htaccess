@@ -1,13 +1,3 @@
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /juniper-base/web/
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /juniper-base/web/index.php [L]
-</IfModule>
-
 # BEGIN WordPress
 # Die Anweisungen (Zeilen) zwischen „BEGIN WordPress“ und „END WordPress“ sind
 # dynamisch generiert und sollten nur über WordPress-Filter geändert werden.
@@ -15,11 +5,11 @@ RewriteRule . /juniper-base/web/index.php [L]
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /
+RewriteBase /iwg/web/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+RewriteRule . /iwg/web//index.php [L]
 </IfModule>
 
 # END WordPress
