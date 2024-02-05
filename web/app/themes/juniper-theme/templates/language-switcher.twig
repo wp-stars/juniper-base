@@ -1,0 +1,15 @@
+
+<div class="language-switcher relative group">
+    <button type="button" class="py-2 px-4 text-gray-800 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+        {{ current_language|upper }}
+    </button>
+    <ul class="absolute hidden group-hover:block bg-white border rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+        {% for language in languages %}
+            <li>
+                <a href="{{ language.url }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none">
+                    {{ language.language_code|upper }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

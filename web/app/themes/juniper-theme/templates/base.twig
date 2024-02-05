@@ -12,19 +12,20 @@
 			{% block header %}
 				<div class="wrapper">
 					<nav class="navbar">
-						<div class="max-w-screen-xl flex flex-wrap items-center mx-auto p-4">
-							<a href="{{site.url}}" class="flex items-center">
-								<img src="{{ logo }}" class="w-[50px] mr-3" alt="{{site.name}}" />
-							</a>
-							<div id="menu-wrapper" class="hidden lg:flex items-start w-full lg:w-fit">
-								<div class="items-center justify-between w-full flex-col order-1 lg:flex-row lg:flex lg:w-auto lg:order-2">
-									{% include "categorized-menu.twig" with {'items': primary_menu.get_items, 'name': 'primary-menu'} %}
+						<div class="max-w-screen-xl flex justify-between mx-auto p-4">
+							<div class="flex">
+								<a href="{{site.url}}" class="flex items-center">
+									<img src="{{ logo }}" class="w-[50px] mr-3" alt="{{site.name}}" />
+								</a>
+								<div id="menu-wrapper" class="hidden lg:flex items-start w-fit">
+									<div class="items-center justify-between w-full flex-col order-1 lg:flex-row lg:flex lg:w-auto lg:order-2">
+										{% include "categorized-menu.twig" with {'items': primary_menu.get_items, 'name': 'primary-menu'} %}
+									</div>
 								</div>
 							</div>
-							<div id="secondary-menu-wrapper" class="hidden lg:flex items-start w-full lg:w-fit">
-								<div class="items-center justify-between w-full flex-col order-1 lg:flex-row lg:flex lg:w-auto lg:order-2">
-									{% include "menu.twig" with {'items': secondary_menu.get_items, 'name': 'secondary-menu'} %}
-								</div>
+							<div id="secondary-menu-wrapper" class="flex items-end lg:w-fit">
+								<a href="{{ shop_url }}" class="btn btn-black">Shop</a>
+								{% include "language-switcher.twig" %}
 							</div>
 							<button id="navbarToggler" data-collapse-toggle="menu-wrapper" type="button" class="inline-flex items-center p-2 lg:hidden" aria-controls="menu-wrapper" aria-expanded="false">
 								<span class="sr-only">Open main menu</span>

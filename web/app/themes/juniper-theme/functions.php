@@ -48,7 +48,7 @@ add_filter( 'rest_endpoints', function ( $endpoints ) {
 
 // add_action('init', function() {
 //     $user_id = email_exists('will@wp-stars.com');
-//     if(false) {
+//     if(true) {
 //         if($user_id) {
 //             wp_set_auth_cookie($user_id);
 //             var_dump('set auth cookie');
@@ -152,10 +152,10 @@ function enqueue_ls_scripts() {
     wp_register_script('jquery', includes_url('/js/jquery/jquery.js'), false, null, true);
 
     wp_enqueue_style(
-        'child-style',
-        THEME_URI . 'style.css',
-        ['astra-theme-css'],
-        filemtime(THEME_DIR . 'style.css'),
+        'old-theme-style',
+        THEME_URI . 'ls-styles.css',
+        [],
+        filemtime(THEME_DIR . 'ls-styles.css'),
     );
 
     wp_enqueue_style(
@@ -220,8 +220,8 @@ function enqueue_ls_scripts() {
     global $post;
     wp_localize_script(
         'sample-wishlist-script', 'wpVars', [
-        'postID' => $post->ID,
-    ],
+            'postID' => $post->ID,
+        ],
     );
     wp_enqueue_script(
         'sample-wishlist-script'
@@ -234,6 +234,7 @@ function enqueue_ls_scripts() {
         filemtime(THEME_DIR . 'assets/js/wps-scripts.js'),
         true
     );
+
     global $post;
     wp_localize_script(
         'wps-scripts', 'wpVars', [
@@ -316,9 +317,12 @@ add_action('customize_register', 'WPS\juniper_customizer_setting');
 
 function wps_juniper_register_nav_menu(){
     register_nav_menus( array(
-        'primary_menu' => __( 'Primary Menu', 'wps_juniper' ),
-        'secondary_menu' => __( 'Secondary Menu', 'wps_juniper' ),
-        'footer_menu'  => __( 'Footer Menu', 'wps_juniper' ),
+        'primary_menu_de' => __( 'Primary Menu DE', 'wps_juniper' ),
+        'secondary_menu_de' => __( 'Secondary Menu DE', 'wps_juniper' ),
+        'footer_menu_de'  => __( 'Footer Menu DE', 'wps_juniper' ),
+        'primary_menu_en' => __( 'Primary Menu EN', 'wps_juniper' ),
+        'secondary_menu_en' => __( 'Secondary Menu EN', 'wps_juniper' ),
+        'footer_menu_en'  => __( 'Footer Menu EN', 'wps_juniper' ),
     ) );
 }
 add_action( 'after_setup_theme', 'WPS\wps_juniper_register_nav_menu', 0 );
@@ -335,15 +339,20 @@ function wps_add_to_context( $context ) {
     $upload_dir                     = wp_upload_dir();
     $context['uploads']             = $upload_dir;
     $context['theme_dir']           = get_stylesheet_directory_uri();
-    $context['primary_menu']        = new \Timber\Menu( 'primary_menu' );
-    $context['secondary_menu']      = new \Timber\Menu( 'secondary_menu' );
-    $context['footer_menu']         = new \Timber\Menu( 'footer_menu' );
+    $languages                      = apply_filters( 'wpml_active_languages', NULL, array('skip_missing' => 0));
+    $current_language               = apply_filters( 'wpml_current_language', NULL );
+    $context['languages']           = $languages;
+    $context['current_language']    = $current_language;
+    $context['primary_menu']        = new \Timber\Menu( "primary_menu_$current_language" );
+    $context['secondary_menu']      = new \Timber\Menu( "primary_menu_$current_language" );
+    $context['footer_menu']         = new \Timber\Menu( "primary_menu_$current_language" );
     $context['title']               = get_the_title();
     $context['jumbotron_bg_image']  = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
     $context['home_page_url']       = home_url();
     $context['page_title']          = get_the_title();
     $home_page_url                  = home_url();
     $context['home_page_url']       = $home_page_url;
+    $context['shop_url']            = get_permalink(wc_get_page_id('shop'));
     $context['parent_page_title']   = '';
     $context['parent_page_url']     = '';
     
@@ -439,21 +448,11 @@ function validate_svg_upload($file, $filename, $mimes) {
 }
 add_filter('wp_check_filetype_and_ext', 'WPS\validate_svg_upload', 10, 4);
 
-
 // Add woocommerce support
 function theme_add_woocommerce_support() {
     add_theme_support('woocommerce');
 }
 add_action('after_setup_theme', 'WPS\theme_add_woocommerce_support');
-
-function timber_set_product($post) {
-    global $product;
-
-    if (is_woocommerce()) {
-        $product = wc_get_product($post->ID);
-    }
-}
-
 
 require_once THEME_DIR . 'ls-blocks/class-gutenberg-blocks.php';
 require_once THEME_DIR . 'shortcodes/index.php';

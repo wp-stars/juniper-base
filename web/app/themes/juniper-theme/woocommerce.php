@@ -1,5 +1,14 @@
 <?php
 
+function timber_set_product($post) {
+    global $product;
+
+    if (is_woocommerce()) {
+        $product = wc_get_product($post->ID);
+    }
+}
+
+
 if (!class_exists('Timber')) {
     echo 'Timber not activated. Make sure you activate the plugin in <a href="/wp-admin/plugins.php#timber">/wp-admin/plugins.php</a>';
 
