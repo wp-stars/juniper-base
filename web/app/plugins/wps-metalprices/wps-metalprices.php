@@ -27,7 +27,7 @@ function enq_react(){
         'metalprices-style',
         plugin_dir_url( __FILE__ ) . '/build/index.css',
         [],
-        filemtime(plugin_dir_url( __FILE__ ) . '/build/index.css')
+        filemtime(plugin_dir_path( __FILE__ ) . '/build/index.css')
     );
 
 

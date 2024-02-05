@@ -15,7 +15,8 @@ module.exports = {
       body: ['Roboto']
     },
     colors: {
-      lightgray: '#f3f0f0'
+      lightgray: '#f3f0f0',
+      black: '#000'
     },
     fontSize: {
       xs: '0.75rem',
