@@ -5,18 +5,20 @@
 				<a class="block px-4 py-2 text-sm hover:bg-lightgray" target="{{ item.target }}" href="{{ item.link }}">
 					{{ item.title }}
 				</a>
-				<div id="submenu-{{ item.id }}" class="z-50 group-hover:block dropdown-menu absolute hidden h-auto">
-                    <div class="grid grid-cols-3 bg-white shadow-md rounded p-8 relative top-4">
-                        {% for child in item.children %}
-                            <div class="grid grid-cols-1 text-xs">
-                                <p>{{ child.title }}</p>
-                                {% for subchild in child.children %}
-                                    <a href="{{ subchild.link }}">{{ subchild.title }}</a>
-                                {% endfor %}
-                            </div>
-                        {% endfor %}
-                    </div>
-				</div>
+				{% if item.children %}
+					<div id="submenu-{{ item.id }}" class="z-50 group-hover:block dropdown-menu absolute hidden h-auto">
+						<div class="grid grid-cols-3 bg-white shadow-md rounded p-8 relative top-4">
+							{% for child in item.children %}
+								<div class="grid grid-cols-1 text-xs">
+									<p>{{ child.title }}</p>
+									{% for subchild in child.children %}
+										<a href="{{ subchild.link }}">{{ subchild.title }}</a>
+									{% endfor %}
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
 			</li>
 		{% endfor %}
 	</ul>
