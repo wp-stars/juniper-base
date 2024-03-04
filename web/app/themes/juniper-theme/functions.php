@@ -247,7 +247,7 @@ function enqueue_ls_scripts() {
     );
 }
 
-add_action('wp_enqueue_scripts', '\WPS\enqueue_ls_scripts');
+\add_action('wp_enqueue_scripts', '\WPS\enqueue_ls_scripts');
 
 
 /**
@@ -256,14 +256,14 @@ add_action('wp_enqueue_scripts', '\WPS\enqueue_ls_scripts');
  */
 if ( ! class_exists( 'Timber' ) ) {
 
-	add_action(
+	\add_action(
 		'admin_notices',
 		function () {
 			echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a></p></div>';
 		}
 	);
 
-	add_filter(
+	\add_filter(
 		'template_include',
 		function ( $template ) {
 			return get_stylesheet_directory() . '/static/no-timber.html';
@@ -288,7 +288,7 @@ if ( ! class_exists( 'Timber' ) ) {
 require_once 'class-startersite.php';
 $site = new \StarterSite();
 
-add_theme_support( 'custom-logo' );
+\add_theme_support( 'custom-logo' );
 
 function juniper_customizer_setting($wp_customize) {
     $wp_customize->add_setting('footer_logo');
@@ -312,11 +312,10 @@ function juniper_customizer_setting($wp_customize) {
         'description' => __( 'Enter footer quote.' ),
     ) );
 }
-
-add_action('customize_register', 'WPS\juniper_customizer_setting');
+\add_action('customize_register', 'WPS\juniper_customizer_setting');
 
 function wps_juniper_register_nav_menu(){
-    register_nav_menus( array(
+    \register_nav_menus( array(
         'primary_menu_de' => __( 'Primary Menu DE', 'wps_juniper' ),
         'secondary_menu_de' => __( 'Secondary Menu DE', 'wps_juniper' ),
         'footer_menu_de'  => __( 'Footer Menu DE', 'wps_juniper' ),
@@ -325,48 +324,48 @@ function wps_juniper_register_nav_menu(){
         'footer_menu_en'  => __( 'Footer Menu EN', 'wps_juniper' ),
     ) );
 }
-add_action( 'after_setup_theme', 'WPS\wps_juniper_register_nav_menu', 0 );
+\add_action( 'after_setup_theme', 'WPS\wps_juniper_register_nav_menu', 0 );
 
-add_filter( 'timber/context', 'WPS\wps_add_to_context' );
+\add_filter( 'timber/context', 'WPS\wps_add_to_context' );
 function wps_add_to_context( $context ) {
-    $custom_logo_id                 = get_theme_mod( 'custom_logo' );
-    $logo                           = wp_get_attachment_image_url( $custom_logo_id , 'full' );
+    $custom_logo_id                 = \get_theme_mod( 'custom_logo' );
+    $logo                           = \wp_get_attachment_image_url( $custom_logo_id , 'full' );
     $context['logo']                = $logo;
-    $footer_logo                    = get_theme_mod( 'footer_logo' );
+    $footer_logo                    = \get_theme_mod( 'footer_logo' );
     $context['footer_logo']         = $footer_logo;
-    $footer_quote                   = get_theme_mod( 'juniper_footer_textarea' );
+    $footer_quote                   = \get_theme_mod( 'juniper_footer_textarea' );
     $context['footer_quote']        = $footer_quote;
-    $upload_dir                     = wp_upload_dir();
+    $upload_dir                     = \wp_upload_dir();
     $context['uploads']             = $upload_dir;
-    $context['theme_dir']           = get_stylesheet_directory_uri();
-    $languages                      = apply_filters( 'wpml_active_languages', NULL, array('skip_missing' => 0));
-    $current_language               = apply_filters( 'wpml_current_language', NULL );
+    $context['theme_dir']           = \get_stylesheet_directory_uri();
+    $languages                      = \apply_filters( 'wpml_active_languages', NULL, array('skip_missing' => 0));
+    $current_language               = \apply_filters( 'wpml_current_language', NULL );
     $context['languages']           = $languages;
     $context['current_language']    = $current_language;
     $context['primary_menu']        = new \Timber\Menu( "primary_menu_$current_language" );
     $context['secondary_menu']      = new \Timber\Menu( "primary_menu_$current_language" );
     $context['footer_menu']         = new \Timber\Menu( "primary_menu_$current_language" );
-    $context['title']               = get_the_title();
-    $context['jumbotron_bg_image']  = get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
-    $context['home_page_url']       = home_url();
-    $context['page_title']          = get_the_title();
-    $home_page_url                  = home_url();
+    $context['title']               = \get_the_title();
+    $context['jumbotron_bg_image']  = \get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
+    $context['home_page_url']       = \home_url();
+    $context['page_title']          = \get_the_title();
+    $home_page_url                  = \home_url();
     $context['home_page_url']       = $home_page_url;
-    $context['shop_url']            = get_permalink(wc_get_page_id('shop'));
+    $context['shop_url']            = \get_permalink(wc_get_page_id('shop'));
     $context['parent_page_title']   = '';
     $context['parent_page_url']     = '';
     
-    if( is_single() ) {
-        $post_type = get_post_type();
-        $page = get_field($post_type . '_archive_page', 'option');
+    if( \is_single() ) {
+        $post_type = \get_post_type();
+        $page = \get_field($post_type . '_archive_page', 'option');
         if($page) {
             $context['parent_page_title'] = $page->post_title;
-            $context['parent_page_url']   = get_permalink($page);
+            $context['parent_page_url']   = \get_permalink($page);
         }
 
         if($post_type === "post") {
-            $post = get_post();
-            if($post_thumbnail = get_the_post_thumbnail_url( $post, 'full' )) {
+            $post = \get_post();
+            if($post_thumbnail = \get_the_post_thumbnail_url( $post, 'full' )) {
                 $context['jumbotron_bg_image'] = $post_thumbnail;  
             }
         }
@@ -375,12 +374,12 @@ function wps_add_to_context( $context ) {
     return $context;
 }
 
-add_action( 'wp_enqueue_scripts', 'WPS\wpse_enqueues' );
+\add_action( 'wp_enqueue_scripts', 'WPS\wpse_enqueues' );
 function wpse_enqueues() {
     // Only enqueue on specified single CPTs
-    if( is_singular() ) {
+    if( \is_singular() ) {
         $refresh_cache_time = time();
-        wp_enqueue_style( 'wps-jumbotron-css', get_stylesheet_directory_uri() . '/blocks/jumbotron/style.css', array(), $refresh_cache_time );
+        \wp_enqueue_style( 'wps-jumbotron-css', get_stylesheet_directory_uri() . '/blocks/jumbotron/style.css', array(), $refresh_cache_time );
     }
 }
 
@@ -390,10 +389,10 @@ require_once __DIR__.'/classes/MailPoetGF.php';
 use wps\MailPoetGF;
 
 // define in init so plugin functions are available in this class
-add_action('init', array(MailPoetGF::get_instance(), 'init'));
+\add_action('init', array(MailPoetGF::get_instance(), 'init'));
 
 
-add_filter( 'render_block', 'WPS\wps_juniper_add_class_to_list_block', 10, 2 );
+\add_filter( 'render_block', 'WPS\wps_juniper_add_class_to_list_block', 10, 2 );
 function wps_juniper_add_class_to_list_block( $block_content, $block ) {
     if ( 'core/group' === $block['blockName'] ) {
         $block_content = new \WP_HTML_Tag_Processor( $block_content );
@@ -405,13 +404,13 @@ function wps_juniper_add_class_to_list_block( $block_content, $block ) {
     return $block_content;
 }
 
-add_filter('acf/settings/remove_wp_meta_box', '__return_false');
+\add_filter('acf/settings/remove_wp_meta_box', '__return_false');
 function wps_juniper_acf_init() {
     
-    acf_update_setting('google_api_key', 'AIzaSyA2nwpgRNcXh27RBL41e47d6pFcJda9qiY');
+    \acf_update_setting('google_api_key', 'AIzaSyA2nwpgRNcXh27RBL41e47d6pFcJda9qiY');
 }
 
-add_action('acf/init', 'WPS\wps_juniper_acf_init');
+\add_action('acf/init', 'WPS\wps_juniper_acf_init');
 
 /**
  * Change the excerpt more string
@@ -419,13 +418,13 @@ add_action('acf/init', 'WPS\wps_juniper_acf_init');
 function wps_juniper_excerpt_more( $more ) {
     return ' [...]';
 }
-add_filter( 'excerpt_more', 'WPS\wps_juniper_excerpt_more' );
+\add_filter( 'excerpt_more', 'WPS\wps_juniper_excerpt_more' );
 
 
-add_filter('locale', 'WPS\change_gravity_forms_language');
+\add_filter('locale', 'WPS\change_gravity_forms_language');
 function change_gravity_forms_language($locale) {
 
-    if (class_exists('RGForms')) {
+    if (\class_exists('RGForms')) {
         return 'de_DE';
     }
 
@@ -437,22 +436,22 @@ function allow_svg_upload($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
-add_filter('upload_mimes', 'WPS\allow_svg_upload');
+\add_filter('upload_mimes', 'WPS\allow_svg_upload');
 
 // Additional security measures for SVG uploads
 function validate_svg_upload($file, $filename, $mimes) {
-    if (substr($filename, -4) === '.svg' && $file['type'] === 'image/svg+xml') {
+    if (\substr($filename, -4) === '.svg' && $file['type'] === 'image/svg+xml') {
         $file['type'] = 'image/svg+xml';
     }
     return $file;
 }
-add_filter('wp_check_filetype_and_ext', 'WPS\validate_svg_upload', 10, 4);
+\add_filter('wp_check_filetype_and_ext', 'WPS\validate_svg_upload', 10, 4);
 
 // Add woocommerce support
 function theme_add_woocommerce_support() {
-    add_theme_support('woocommerce');
+    \add_theme_support('woocommerce');
 }
-add_action('after_setup_theme', 'WPS\theme_add_woocommerce_support');
+\add_action('after_setup_theme', 'WPS\theme_add_woocommerce_support');
 
 require_once THEME_DIR . 'ls-blocks/class-gutenberg-blocks.php';
 require_once THEME_DIR . 'shortcodes/index.php';
