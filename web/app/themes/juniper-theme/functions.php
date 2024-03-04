@@ -351,7 +351,7 @@ function wps_add_to_context( $context ) {
     $context['page_title']          = \get_the_title();
     $home_page_url                  = \home_url();
     $context['home_page_url']       = $home_page_url;
-    $context['shop_url']            = \get_permalink(wc_get_page_id('shop'));
+    $context['shop_url']            = \get_permalink(\wc_get_page_id('shop'));
     $context['parent_page_title']   = '';
     $context['parent_page_url']     = '';
     
