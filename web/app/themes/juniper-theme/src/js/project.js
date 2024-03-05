@@ -17,4 +17,16 @@ const toggleMenu = () => {
 let navbarToggler = document.querySelector('#navbarToggler')
 navbarToggler.addEventListener('click', () => {
     toggleMenu()
-}) 
+})
+
+
+// open and close the dialog modal function
+const openModal = (id) => {
+    const dialog = document.getElementById("modal-" + id);
+    dialog.showModal();
+}
+
+const closeModal = (id) => {
+    const dialog = document.getElementById("modal-" + id);
+    dialog.close();
+}
