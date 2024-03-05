@@ -1,0 +1,40 @@
+<dialog id="modal-{{ modal.id }}" open>
+    <div style="--tw-bg-opacity: 0.75;" class="fixed z-10 inset-0 overflow-y-auto bg-black" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items justify-center h-full" aria-hidden="true">
+            <div class="relative w-full max-w-lg p-4 m-auto bg-white shadow-lg rounded-md">
+
+                <div class="flex items" id="modal-title">
+                    <h3 class="text-lg font-medium text-gray-900">{{ modal.title }}</h3>
+                    <form method="dialog" class="p-2 ml-auto">
+                        <button aria-label="Close">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500">
+                        {{ modal.content }}
+                    </p>
+                </div>
+
+                <div class="flex justify-end mt-4">
+                    {% if modal.showSubmitButton == true %}
+                        <button class="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md">
+                            {{ modal.submitButtonLabel }}
+                        </button>
+                    {% endif %}
+                    {% if modal.showCloseButton == true %}
+                        <form method="dialog">
+                            <button autofocus class="px-4 py-2 ml-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md">
+                                {{ modal.closeButtonLabel }}
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</dialog>
