@@ -9,7 +9,8 @@ RewriteBase /iwg/web/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /iwg/web//index.php [L]
+RewriteRule . /iwg/web/index.php [L]
 </IfModule>
+
 
 # END WordPress

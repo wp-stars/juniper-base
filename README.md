@@ -115,4 +115,53 @@ Other scripts worth mentioning are:
 
 3) taxonomy.sh - similarly to the antecedent case, the answer to questions posed by a series of commands allows you to expeditiously create a taxonomy assigned to a given type of post.
 
-## 
+# Modals
+
+To create a new modal, you can insert it via php, maybe in the functions.php file with this code:
+
+```php
+    use \wps\frontend\Modal;
+    require_once __DIR__.'/classes/frontend/Modal.php';
+    $modal = new Modal();
+    
+    // every modal needs to have an id, title and content
+    $modal->id = 'sample-box-full';
+    $modal->title = __('Sample Box is full', 'wps');
+    $modal->content = __('You can only order 3 samples at a time. Please remove one of the samples from your cart to add a new one.', 'wps');
+    // you can also add a submit button and a close button
+    $modal->showSubmitButton = true;
+    $modal->showCloseButton = true;
+    
+    // you can select another modal template (twigfile) or use the default one
+    // you will find the twig files in your theme under view/modals
+    $modal->template = 'modal.twig';
+    
+    // you can open oder close the modal on pageload
+    $modal->close();
+    $modal->open();
+    
+    // you need to render the function to display the modal
+    // the output will be a div in the footer with the modal content
+    $modal->render();
+
+```
+
+The close button works automatically, you can also open and close the modal with the javascript functions:
+```js
+    openModal('sample-box-full');
+    closeModal('sample-box-full');
+```
+
+You can also change the model with our pre render filter - so here you can do 
+some validation or ajax requests and then update the content of the Modal:
+
+```php
+   add_filter('wps_modal_render', function($modal){
+      if(isset($_POST['action']) && $_POST['action'] === 'sample-box-full'){
+         $modal->title = 'Vielen Dank für Ihre Anfrage';
+         $modal->content = 'Bis zum nächsten Einkauf';
+         $modal->open();
+      }
+      return $modal;
+   });
+```

@@ -386,6 +386,9 @@ function wpse_enqueues() {
 // custom wps functionality from classes
 
 require_once __DIR__.'/classes/MailPoetGF.php';
+
+use wps\frontend\Modal;
+use wps\frontend\ModalStatus;
 use wps\MailPoetGF;
 
 // define in init so plugin functions are available in this class
@@ -465,3 +468,23 @@ require_once THEME_DIR . 'inc/news/news-acf.php';
 require_once THEME_DIR . 'inc/news/news-detailpage.php';
 require_once THEME_DIR . 'inc/admin/capabilities.php';
 
+// handle demo modal
+/*
+require_once __DIR__.'/classes/frontend/Modal.php';
+$modal = new \wps\frontend\Modal();
+$modal->id = 'sample-box-full';
+$modal->title = __('Sample Box is full', 'wps');
+$modal->content = __('You can only order 3 samples at a time. Please remove one of the samples from your cart to add a new one.', 'wps');
+$modal->showSubmitButton = true;
+$modal->showCloseButton = true;
+$modal->close()->render();
+
+add_filter('wps_modal_render', function($modal){
+    if(isset($_POST['action']) && $_POST['action'] === 'sample-box-full'){
+        $modal->title = 'Vielen Dank für Ihre Anfrage';
+        $modal->content = 'Bis zum nächsten Einkauf';
+        $modal->open();
+    }
+    return $modal;
+});
+*/
