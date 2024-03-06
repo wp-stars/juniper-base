@@ -2272,6 +2272,49 @@ const ArticleResult = ({
 
 /***/ }),
 
+/***/ "./src/components/Checkbox.js":
+/*!************************************!*\
+  !*** ./src/components/Checkbox.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const Checkbox = ({
+  term,
+  filterItem,
+  handleTaxSelect
+}) => {
+  const [checked, setChecked] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const handleCheckboxClick = (name, e) => {
+    setChecked(!checked);
+    handleTaxSelect(name, e);
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "block"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    name: term.name,
+    value: term.term_id,
+    onChange: e => handleCheckboxClick(filterItem.name, e),
+    type: "checkbox",
+    checked: checked,
+    className: "form-checkbox h-5 w-5 text-indigo-600 focus:outline-none focus:ring focus:border-indigo-300 rounded"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "default-checkbox",
+    className: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+  }, term.name));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Checkbox);
+
+/***/ }),
+
 /***/ "./src/components/Filter.js":
 /*!**********************************!*\
   !*** ./src/components/Filter.js ***!
@@ -2289,8 +2332,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ArticleResult__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ArticleResult */ "./src/components/ArticleResult.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
-/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
+/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Checkbox */ "./src/components/Checkbox.js");
+
 
 
 
@@ -2298,15 +2343,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Filter = data => {
-  const [selectedFilterVals, setSelectedFilterVals] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [selectedFilterVals, setSelectedFilterVals] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    search: '',
+    taxonomies: []
+  });
+  const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts);
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
   const [loadingMore, setLoadingMore] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [maxPages, setMaxPages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.maxNumPages);
   const [showFilterItems, setShowFilterItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const isMobile = (0,react_responsive__WEBPACK_IMPORTED_MODULE_4__.useMediaQuery)({
+  const isMobile = (0,react_responsive__WEBPACK_IMPORTED_MODULE_5__.useMediaQuery)({
     query: `(max-width: 640px)`
   });
+  const [firstPageLoad, setFirstPageLoad] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const updateFilterVals = (e, term_id) => {
     e.preventDefault();
     let shallowFilterVals = [...selectedFilterVals];
@@ -2328,13 +2377,11 @@ const Filter = data => {
     newSelectedFilterVals.splice(targetIndex, 1);
     setSelectedFilterVals(newSelectedFilterVals);
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+  const searchPosts = () => {
     let queryString = `?post_type=${data.postType}`;
-    if (data.taxonomy) {
-      queryString += `&taxonomy=${data.taxonomy}`;
-      let taxQueryString = selectedFilterVals.join(",");
-      queryString += `&terms=${taxQueryString}`;
-    }
+    queryString += `&search=${encodeURIComponent(selectedFilterVals.search)}`;
+    let taxonomies = JSON.stringify(selectedFilterVals.taxonomies);
+    queryString += `&taxonomies=${encodeURIComponent(taxonomies)}`;
     queryString += `&page=${page}`;
     axios__WEBPACK_IMPORTED_MODULE_3___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
       if (page > 1) {
@@ -2347,21 +2394,72 @@ const Filter = data => {
     }).catch(err => {
       console.error(err);
     });
-  }, [selectedFilterVals, page]);
+  };
   const toggleFilterOpen = e => {
     e.preventDefault();
-    console.log('toggling filter');
     setShowFilterItems(!showFilterItems);
   };
+  const searchByText = e => {
+    e.preventDefault();
+    setSelectedFilterVals({
+      ...selectedFilterVals,
+      search: e.currentTarget.value
+    });
+  };
+  const handleTaxSelect = (name, e) => {
+    e.preventDefault();
+    setSelectedFilterVals({
+      ...selectedFilterVals,
+      taxonomies: [...selectedFilterVals.taxonomies, {
+        name: name,
+        value: [e.target.value]
+      }]
+    });
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (firstPageLoad) {
+      setFirstPageLoad(false);
+    }
+    if (selectedFilterVals && !firstPageLoad) {
+      const delayDebounceFn = setTimeout(() => {
+        // add in later
+        //window.history.replaceState(null, null, `?search=${encodeURIComponent(searchTerm)}&type=${encodeURIComponent(exerciseType)}`)
+        searchPosts();
+      }, 400);
+      return () => clearTimeout(delayDebounceFn);
+    }
+    return;
+  }, [selectedFilterVals]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     // window.addEventListener("resize", handleResize)
     if (!isMobile) setShowFilterItems(true);
   }, [isMobile]);
+  const handleCheckboxClick = (name, e) => {
+    e.target.checked = !e.target.checked;
+    handleTaxSelect(name, e);
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "filter-choices sm:min-h-[400px] mb-20 relative text-center text-white py-20 flex items-center"
+    className: "container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center border-b py-2 max-w-[50%]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M0.852114 14.3519L4.37266 10.8321C3.35227 9.60705 2.84344 8.03577 2.95204 6.44512C3.06064 4.85447 3.7783 3.36692 4.95573 2.29193C6.13316 1.21693 7.67971 0.637251 9.27365 0.673476C10.8676 0.709701 12.3862 1.35904 13.5136 2.48642C14.641 3.6138 15.2903 5.13241 15.3265 6.72635C15.3627 8.32029 14.7831 9.86684 13.7081 11.0443C12.6331 12.2217 11.1455 12.9394 9.55488 13.048C7.96423 13.1566 6.39295 12.6477 5.1679 11.6273L1.64805 15.1479C1.59579 15.2001 1.53375 15.2416 1.46546 15.2699C1.39718 15.2982 1.32399 15.3127 1.25008 15.3127C1.17617 15.3127 1.10299 15.2982 1.0347 15.2699C0.96642 15.2416 0.904376 15.2001 0.852114 15.1479C0.799852 15.0956 0.758396 15.0336 0.730112 14.9653C0.701828 14.897 0.68727 14.8238 0.68727 14.7499C0.68727 14.676 0.701828 14.6028 0.730112 14.5345C0.758396 14.4663 0.799852 14.4042 0.852114 14.3519ZM14.1876 6.87492C14.1876 5.87365 13.8907 4.89487 13.3344 4.06234C12.7781 3.22982 11.9875 2.58094 11.0624 2.19778C10.1374 1.81461 9.11947 1.71435 8.13744 1.90969C7.15541 2.10503 6.25336 2.58718 5.54536 3.29519C4.83735 4.00319 4.3552 4.90524 4.15986 5.88727C3.96452 6.8693 4.06477 7.8872 4.44794 8.81225C4.83111 9.7373 5.47999 10.528 6.31251 11.0842C7.14503 11.6405 8.12382 11.9374 9.12508 11.9374C10.4673 11.9359 11.7541 11.4021 12.7032 10.453C13.6522 9.50392 14.1861 8.21712 14.1876 6.87492Z",
+    fill: "black"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
+    type: "text",
+    placeholder: "Search products...",
+    "aria-label": "product search",
+    onChange: e => searchByText(e)
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto"
   }, isMobile ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex justify-center items-center"
@@ -2453,82 +2551,60 @@ const Filter = data => {
     strokeLinejoin: "round"
   })))) : null, showFilterItems ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "filter-items",
-    className: "inline-flex flex-wrap justify-start sm:justify-center py-20"
-  }, data.terms.map((term, index) => {
-    if (term.slug === "uncategorized") return null;
-    let isActive = selectedFilterVals.includes(term.term_id);
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      key: index,
-      className: `filter-btn w-fit inline-flex items-center ${isActive ? 'active' : ''}`,
-      type: "button",
-      onClick: e => updateFilterVals(e, term.term_id)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: `${isActive ? 'bg-accent' : 'bg-light'} self-stretch p-[0.375rem]`
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-      className: "object-contain",
-      src: term.fields.svg_icon,
-      alt: "Term Icon"
-    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "btn-inner"
-    }, term.name), isActive ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "remove-term",
-      onClick: event => removeTerm(event, term.term_id)
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "11",
-      height: "11",
-      viewBox: "0 0 11 11",
-      fill: "none"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-      d: "M7.89258 3.23987L2.89258 8.23987",
-      stroke: "#093642",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-      d: "M2.89258 3.23987L7.89258 8.23987",
-      stroke: "#093642",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    }))) : null);
+    className: "grid grid-cols-12 justify-start py-20"
+  }, data.filterOptions.map((filterItem, key) => {
+    if (filterItem.type === "dropdown") {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: key,
+        className: "col-span-12 relative max-w-64"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        onChange: e => handleTaxSelect(filterItem.name, e),
+        className: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+        value: "none"
+      }, "None"), filterItem.tax_options.map((term, index) => {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+          key: index,
+          value: term.term_id
+        }, term.name);
+      })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+        className: "fill-current h-4 w-4",
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 20 20"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+        d: "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+      }))));
+    }
+    if (filterItem.type === "checkbox") {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: key,
+        className: "col-span-12 block"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), filterItem.tax_options.map((term, index) => {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          key: index,
+          term: term,
+          filterItem: filterItem,
+          handleTaxSelect: handleTaxSelect
+        });
+      }));
+    }
+    return null;
   })) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "background bg-dark"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "absolute decoration left-0 top-5"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "89",
-    height: "1066",
-    viewBox: "0 0 89 1066",
-    fill: "none"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M-202 1065.32L88.3704 282.471L-176.427 -2.45403e-05L-202 1065.32Z",
-    fill: "#B4D43D",
-    fillOpacity: "0.6"
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full relative text-center mb-10"
+    className: "container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid grid-cols-3 mb-10"
   }, posts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((post, index) => {
-    if (data.style === "alternating") {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_AlternatingResult__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        key: index,
-        index: index,
-        post: post
-      });
-    }
-    if (data.style === "article") {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ArticleResult__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        key: index,
-        index: index,
-        post: post
-      });
-    }
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      key: index
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title));
+      key: index,
+      className: "max-w-sm rounded overflow-hidden shadow-lg"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "font-bold text-xl mb-2"
+    }, post.post_title));
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full text-center"
-  }, "keine Ergebnisse.")), loadingMore ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "keine Ergebnisse."))), loadingMore ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
@@ -4514,14 +4590,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const filterDivs = document.querySelectorAll(".filter-update-me");
+const filterDivs = document.querySelectorAll(".filter-entry");
 filterDivs.forEach(div => {
   let data = JSON.parse(div.dataset.initialData);
   const root = react_dom__WEBPACK_IMPORTED_MODULE_2___default().createRoot(div);
   root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Filter__WEBPACK_IMPORTED_MODULE_1__["default"], {
     ...data
   }));
-  div.classList.remove("filter-update-me");
+  div.classList.remove("filter-entry");
 });
 })();
 
