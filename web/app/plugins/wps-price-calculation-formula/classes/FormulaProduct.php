@@ -24,6 +24,12 @@ class FormulaProduct
         if($this->transformationVariablesRepository === null){
             $this->transformationVariablesRepository = new TransformationVariablesRepository();
         }
+
+        add_action('init', [$this, 'init']);
+    }
+
+    public function init(){
+        $this->transformationVariablesRepository->init();
     }
 
     private function updateStatus(): void
@@ -57,7 +63,6 @@ class FormulaProduct
 
     public function formulaInterpreter(TransformationVariablesRepository $transformationVariablesRepository): float
     {
-
         // replace every single value inside the formula
         foreach ($transformationVariablesRepository->get() as $key => $value) {
             $this->formula = $this->replaceSingleVariable($this->formula, $key, $value);

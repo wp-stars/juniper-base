@@ -31,7 +31,7 @@ class TransformationVariablesRepository
 
     public function __construct()
     {
-        add_action('init', [$this, 'init']);
+        add_action('acf/init', [$this, 'init']);
     }
 
     public function init(): void
@@ -48,9 +48,20 @@ class TransformationVariablesRepository
             throw new \Exception('ACF is not installed');
         }
 
-        $this->variables[$slug] = (float) get_field($slug, 'option');
-
+        //$this->variables[$slug] = (float) get_field($slug, 'option');
+        $this->variables[$slug] = (float) get_option('options_' . $slug, 0);
         return $this->variables[$slug];
+
+        /*global $wpdb;
+        $query = "SELECT option_value FROM {$wpdb->options} WHERE option_name = 'options_{$slug}'";
+        $result = $wpdb->get_results($query);
+
+        if(is_array($result) && count($result) > 0){
+            $this->variables[$slug] = (float) $result[0]->option_value;
+            return $this->variables[$slug];
+        }*/
+
+        return 0;
     }
 
 }

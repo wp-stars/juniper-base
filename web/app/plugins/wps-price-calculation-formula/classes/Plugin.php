@@ -21,6 +21,7 @@ class Plugin
         // run wordpress hooks
         add_action('plugins_loaded', [$this, 'pluginsLoaded']);
         add_action('init', [$this, 'init']);
+        add_action('acf/render_field/name=iwg_price_formular', [$this, 'descriptionsForFields']);
 
         new PriceFormulaHandler();
     }
@@ -38,6 +39,22 @@ class Plugin
     public function pluginsLoaded()
     {
        $this->activePlugins = apply_filters('active_plugins', get_option('active_plugins'));
+    }
+
+    public function descriptionsForFields(){
+
+        $variables = new TransformationVariablesRepository();
+        $variables->init();
+        $variables = $variables->get();
+
+        echo '<div style="display: flex;flex-direction: row; flex-wrap: wrap; gap: 20px;margin-top: 15px;">';
+        foreach ($variables as $key => $value) {
+            echo "<div style='border-bottom: solid 1px #ccc; padding-bottom: 5px; width: 33%;display: flex;flex-direction: row;justify-content: space-between;'>
+                    <strong>@@{$key}@@</strong>
+                    <span>{$value}</span>
+                </div>";
+        }
+        echo '</div>';
     }
 
     public function installProductFields(): void
