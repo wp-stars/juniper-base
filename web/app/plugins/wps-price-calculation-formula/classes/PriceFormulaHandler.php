@@ -5,6 +5,8 @@ namespace WPS\PriceCalculationFormula;
 class PriceFormulaHandler
 {
 
+    private TransformationVariablesRepository|null $transformationVariablesRepository = null;
+
     public  function __construct(){
 
         // wordpress actions
@@ -14,18 +16,36 @@ class PriceFormulaHandler
         // custom actions
         add_action(('wps_price_calculation_formula_update_options_page'), [$this, 'updateOptionsPageEvent']);
         add_action('wps_price_calculation_formula_update_single_product', [$this, 'updateSingleProductEvent']);
+
+        $this->transformationVariablesRepository = new TransformationVariablesRepository();
     }
 
     public function updateOptionsPageEvent(){
 
         $this->permissionCheck();
-        //todo: get all products that need to be updated
+
+        // get all products via $wpdb
+        global $wpdb;
+
+        $query = "SELECT ID 
+                  FROM {$wpdb->posts} 
+                  WHERE post_type = 'product' 
+                  AND post_status = 'publish'";
+
+        $products = $wpdb->get_results($query);
+
+        if(is_array($products) && count($products) > 0){
+            foreach($products as $product){
+                $product = new FormulaProduct($product->ID, $this->transformationVariablesRepository);
+                $product->updatePrice();
+            }
+        }
     }
 
     public function updateSingleProductEvent(int $post_id){
-
         $this->permissionCheck();
-        //todo: update single product price
+        $product = new FormulaProduct($post_id, $this->transformationVariablesRepository);
+        $product->updatePrice();
     }
 
     public function updateProductTrigger($post_id, $post, $update){
@@ -71,6 +91,4 @@ class PriceFormulaHandler
 
         exit();
     }
-
-    //todo: log every change into a log table
 }

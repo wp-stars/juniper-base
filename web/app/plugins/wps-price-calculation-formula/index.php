@@ -22,4 +22,6 @@ use WPS\PriceCalculationFormula\PriceFormulaHandler;
 
 require_once 'classes/Plugin.php';
 require_once 'classes/PriceFormulaHandler.php';
+require_once 'classes/FormulaProduct.php';
+require_once 'classes/TransformationVariablesRepository.php';
 new WPS\PriceCalculationFormula\Plugin(__DIR__);
