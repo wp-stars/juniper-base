@@ -35,6 +35,10 @@ class PriceFormulaHandler
         $products = $wpdb->get_results($query);
 
         if(is_array($products) && count($products) > 0){
+
+            // update values inside the transformationVariablesRepository
+            $this->transformationVariablesRepository->init();
+
             foreach($products as $product){
                 $product = new FormulaProduct($product->ID, $this->transformationVariablesRepository);
                 $product->updatePrice();
