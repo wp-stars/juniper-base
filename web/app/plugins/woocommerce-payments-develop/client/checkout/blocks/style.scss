@@ -1,0 +1,79 @@
+.wcpay-payment-element {
+	margin-bottom: 2rem;
+}
+
+.wcpay-card-mounted {
+	background-color: #fff;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+#express-payment-method-woopay {
+	width: 100%;
+}
+
+.wc-block-components-main
+	.wc-block-components-checkout-step--with-step-number
+	.wc-block-components-checkout-step__content
+	> :last-child {
+	padding: 0;
+}
+
+#contact-fields {
+	padding-bottom: 1.5em;
+}
+
+.wc-block-components-text-input button.wcpay-stripelink-modal-trigger {
+	top: 50%;
+	transform: translateY( -50% );
+}
+
+button.wcpay-stripelink-modal-trigger {
+	display: none;
+	position: absolute;
+	right: 5px;
+	width: 64px;
+	height: 40px;
+	background: no-repeat url( 'assets/images/payment-methods/link.svg?asset' );
+	background-color: transparent;
+	cursor: pointer;
+	border: none;
+}
+
+button.wcpay-stripelink-modal-trigger:hover {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.wc-block-checkout__payment-method
+	.wc-block-components-radio-control__label
+	span {
+	width: 95%;
+
+	img {
+		float: right;
+	}
+}
+
+#payment-method {
+	label img {
+		float: right;
+		border: 0;
+		padding: 0;
+		max-height: 1.618em;
+		min-height: 30px;
+	}
+
+	/* stylelint-disable-next-line selector-id-pattern */
+	#radio-control-wc-payment-method-options-woocommerce_payments_affirm__label
+		img {
+		min-width: 50px;
+	}
+	/* stylelint-disable-next-line selector-id-pattern */
+	#radio-control-wc-payment-method-options-woocommerce_payments_afterpay_clearpay__label
+		img {
+		min-width: 64px;
+	}
+}
+
+@import '../woopay/style';
+@import '../../components/loadable/style';
