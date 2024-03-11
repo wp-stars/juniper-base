@@ -22,6 +22,9 @@ class PriceFormulaHandler
 
     public function updateOptionsPageEvent(){
 
+        // log the event
+        Logger::optionsPageUpdate();
+
         $this->permissionCheck();
 
         // get all products via $wpdb
@@ -41,15 +44,16 @@ class PriceFormulaHandler
 
             foreach($products as $product){
                 $product = new FormulaProduct($product->ID, $this->transformationVariablesRepository);
-                $product->updatePrice();
+                $product->updatePrice(true);
             }
         }
     }
 
     public function updateSingleProductEvent(int $post_id){
+
         $this->permissionCheck();
         $product = new FormulaProduct($post_id, $this->transformationVariablesRepository);
-        $product->updatePrice();
+        $product->updatePrice(false);
     }
 
     public function updateProductTrigger($post_id, $post, $update){
