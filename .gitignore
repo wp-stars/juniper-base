@@ -19,8 +19,8 @@ web/.htaccess
 !.env.example
 
 # Composer
-/vendor/
-!/web/app/plugins/*/vendor/
+# /vendor/
+# !/web/app/plugins/*/vendor/
 
 # WP-CLI
 wp-cli.local.yml
