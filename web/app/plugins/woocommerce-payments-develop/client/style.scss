@@ -1,0 +1,149 @@
+@import './stylesheets/abstracts/colors';
+@import './stylesheets/abstracts/mixins';
+@import './stylesheets/abstracts/breakpoints';
+
+/* Fix top padding when layout breaks at 782px */
+.woocommerce-layout .woocommerce-layout__main {
+	@media screen and ( max-width: 782px ) {
+		padding-top: 16px;
+		padding-bottom: 16px;
+	}
+}
+
+.components-card__body {
+	> *:first-child {
+		margin-top: 0;
+	}
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.woocommerce-table {
+	font-weight: 300;
+	letter-spacing: 0.012rem;
+	color: $studio-gray-60;
+
+	.woocommerce-table__summary {
+		border-radius: 0 0 3px 3px;
+	}
+
+	.woocommerce-table__item {
+		white-space: nowrap;
+	}
+
+	.info-button {
+		width: 40px;
+		padding-right: 0;
+
+		> a {
+			height: 18px;
+			fill: $studio-gray-30;
+		}
+
+		+ .woocommerce-table__header {
+			border-left: none;
+		}
+
+		.is-placeholder {
+			display: none;
+		}
+	}
+
+	.payment-method__brand {
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+/**
+ * This styling changes the appearance of warning notices to match our designs.
+ * In particular it removes margins that aren't supposed to be present, and
+ * fixes the background color.
+ */
+.wcpay-test-mode-notice.components-notice.is-warning {
+	margin: 24px 0;
+	padding: 12px;
+	background-color: $studio-yellow-5;
+}
+
+.wcpay-test-mode-notice.components-notice.is-informational {
+	margin: 24px 0;
+	padding: 12px;
+}
+
+.wcpay-connect-error-notice.components-notice {
+	margin: 24px 0;
+	padding: 12px;
+}
+
+.payment-method-details {
+	display: flex;
+	align-items: flex-start;
+
+	@media screen and ( max-width: 1023px ) {
+		display: block;
+	}
+
+	&__column {
+		flex: 0 0 50%;
+	}
+
+	&-list-item {
+		display: inline-flex;
+	}
+}
+
+.payment-method-detail {
+	display: flex;
+	align-items: flex-start;
+	font-size: 14px;
+	line-height: 28px;
+
+	&__label {
+		margin: 0;
+		color: $studio-gray-60;
+		flex: 0 0 36%;
+		font-weight: normal;
+		line-height: 20px;
+		padding: 4px 0;
+	}
+
+	&__value {
+		margin: 0;
+		color: $studio-gray-80;
+		line-height: 20px;
+		padding: 4px 0;
+		word-break: break-word;
+	}
+}
+
+/**
+ * There is a bug with the Modal component that when the close X is hovered or focused, a tooltip
+ * appears outside of the view of the modal causing scrollbars. This is a work around to hide the
+ * tooltip until the bug is fixed.
+ * TODO: remove rule ones bug is closed
+ * https://github.com/WordPress/gutenberg/issues/15434
+ */
+.components-modal__content
+	.components-modal__header
+	.components-button
+	.components-tooltip {
+	display: none;
+}
+
+img {
+	&.payment-method__icon {
+		outline: 1px solid rgba( 0, 0, 0, 0.25 );
+		outline-offset: -1px;
+		border-radius: 3px;
+		display: block;
+
+		&.no-outline {
+			outline: none;
+			border-radius: 0;
+		}
+	}
+}

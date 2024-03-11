@@ -8,8 +8,8 @@
     	{% include "blocks/breadcrumbs.twig" with {'home_page_url': home_page_url, 'parent_page_title': parent_page_title, 'parent_page_url': parent_page_url, 'page_title': page_title, 'page_url': page_url} %}
 	{% endblock %}    
 
-    <article itemscope itemtype="http://schema.org/Product" class="container single-product-details {{ post.class }}">
-        <div class="grid grid-cols-2 gap-x-10">
+    <article itemscope itemtype="http://schema.org/Product" class="mt-[1.875rem] container single-product-details {{ post.class }}">
+        <div class="grid grid-cols-2 gap-x-10 mb-[6.25rem]">
             <div class="entry-images shadow-md">
                 {% do action('woocommerce_before_single_product_summary') %}
 
@@ -27,14 +27,10 @@
 
             <meta itemprop="url" content="{{ post.link }}" />
         </div>
-        <div class="grid grid-cols-2 gap-x-10">
+        <div class="grid grid-cols-1 gap-x-10">
             {% do action('woocommerce_after_single_product_summary') %}
         </div>
     </article>
-
-    <div class="container">
-        {% include ["partials/tease-product.twig"] with { products: related_products } %}
-    </div>
 
     {% do action('woocommerce_after_single_product') %}
 

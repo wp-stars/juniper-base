@@ -4,6 +4,11 @@
  * Author: WP Stars
 */
 
+@font-face{
+    font-family:icons;
+    src: url(./assets/fonts/icons.woff2) format("woff2");
+}
+
 body {
     color: #000;
     /* Desktop/Body */
@@ -11,4 +16,14 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: 24px; /* 150% */
+}
+
+
+
+.metals-and-accessories, 
+.product-categories {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px;
 }
