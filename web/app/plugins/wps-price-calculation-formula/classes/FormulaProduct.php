@@ -42,7 +42,11 @@ class FormulaProduct
         $this->formula = get_field('iwg_price_formular', $this->id);
     }
 
-    public function updatePrice(): bool
+    /**
+     * @param bool $passive shows if the price update is triggered "passive" by updating the rule or active by updating the product
+     * @return bool
+     */
+    public function updatePrice(bool $system = false): bool
     {
 
         if(!$this->activeRule){
@@ -55,6 +59,10 @@ class FormulaProduct
         $result = $this->product->save();
 
         if(is_int($result) && $result > 0){
+
+            // log the event
+            Logger::productUpdate($this->id, $system);
+
             return true;
         }
 

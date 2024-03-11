@@ -22,6 +22,7 @@ class Plugin
         add_action('plugins_loaded', [$this, 'pluginsLoaded']);
         add_action('init', [$this, 'init']);
         add_action('acf/render_field/name=iwg_price_formular', [$this, 'descriptionsForFields']);
+        add_action('add_meta_boxes', [$this, 'metaboxes']);
 
         new PriceFormulaHandler();
     }
@@ -39,6 +40,36 @@ class Plugin
     public function pluginsLoaded()
     {
        $this->activePlugins = apply_filters('active_plugins', get_option('active_plugins'));
+    }
+
+    public function metaboxes(){
+        add_meta_box(
+            'wps_price_calculation_formula',
+            'Logging',
+            [$this, 'renderMetabox'],
+            'product',
+            'side',
+            'high'
+        );
+    }
+
+    public function renderMetabox($post){
+
+        // show the last 5 price updates
+        $latestProductUpdates = Logger::getLatestProductUpdates($post->ID);
+
+        if(!!$latestProductUpdates && is_array($latestProductUpdates) && count($latestProductUpdates)>0){
+            foreach ($latestProductUpdates as $productUpdate){
+                $date = new \DateTime($productUpdate->date);
+                $user = get_user_by('id', $productUpdate->user_id);
+
+                if($user){
+                    echo "<p>{$date->format('d.m.Y H:i:s')}<br>{$user->user_login} - {$productUpdate->new_price}€</p>";
+                }else{
+                    echo "<p>{$date->format('d.m.Y H:i:s')}<br>System - {$productUpdate->new_price}€</p>";
+                }
+            }
+        }
     }
 
     public function descriptionsForFields(){
