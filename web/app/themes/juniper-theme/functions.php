@@ -371,6 +371,11 @@ function wps_add_to_context( $context ) {
         }
     }
 
+    if( \is_product() ) {
+        $context['parent_page_title'] = 'Produkte';
+        $context['parent_page_url']   = \get_permalink(\wc_get_page_id('shop'));
+    }
+
     return $context;
 }
 
@@ -488,3 +493,7 @@ add_filter('wps_modal_render', function($modal){
     return $modal;
 });
 */
+
+// Woocommerce related hooks
+require_once __DIR__.'/classes/frontend/WC_Customizations.php';
+$woocommerce = new frontend\WC_Customizations();

@@ -13,32 +13,29 @@
 #}
 
 
-<section class="breadcrumbs container h-10 justify-start items-center flex mx-auto mb-[5rem]">
-	<div class="justify-start items-center flex">
-		<div class="page font-['Red Hat Mono'] uppercase">			
-			<a class="flex items-center" href={{ home_page_url }}>
-				<div class="h-6 w-6">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-						<path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						<path d="M9 22V12H15V22" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-				</div>
+<section class="breadcrumbs container h-10 justify-start items-center flex mx-auto mb-[0.875rem]">
+	<div class="justify-start items-center inline-flex gap-x-2">
+		<div class="page">			
+			<a class="flex items-center text-gray" href={{ home_page_url }}>
+				Home
 			</a>
 		</div>
 		{% if parent_page_title %}
-			<div class="divider">
-			</div>
-			<div class="page justify-start items-center flex">
-				<div class="uppercase">
-					<a href={{ parent_page_url}}>{{ parent_page_title }}</a>
-				</div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
+				<path d="M18.9397 6.64015C19.2923 6.28761 19.2923 5.71754 18.9397 5.36875L13.8391 0.264406C13.4866 -0.0881353 12.9165 -0.0881353 12.5677 0.264406C12.2189 0.616947 12.2152 1.18701 12.5677 1.5358L16.1306 5.09872L0.900105 5.10247C0.401297 5.10247 0 5.50377 0 6.00258C0 6.50139 0.401297 6.90268 0.900105 6.90268H16.1306L12.5677 10.4656C12.2152 10.8181 12.2152 11.3882 12.5677 11.737C12.9203 12.0858 13.4903 12.0895 13.8391 11.737L18.9397 6.64015Z" fill="black"/>
+			</svg>	
+			<div class="page justify-start items-center flex text-gray">
+				<a href={{ parent_page_url}}>
+					{{ parent_page_title }}
+				</a>
 			</div>
 		{% endif %}
 		{% if page_title %}
-			<div class="divider">
-			</div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
+				<path d="M18.9397 6.64015C19.2923 6.28761 19.2923 5.71754 18.9397 5.36875L13.8391 0.264406C13.4866 -0.0881353 12.9165 -0.0881353 12.5677 0.264406C12.2189 0.616947 12.2152 1.18701 12.5677 1.5358L16.1306 5.09872L0.900105 5.10247C0.401297 5.10247 0 5.50377 0 6.00258C0 6.50139 0.401297 6.90268 0.900105 6.90268H16.1306L12.5677 10.4656C12.2152 10.8181 12.2152 11.3882 12.5677 11.737C12.9203 12.0858 13.4903 12.0895 13.8391 11.737L18.9397 6.64015Z" fill="black"/>
+			</svg>
 			<div class="page current justify-start items-center flex">
-				<div class="uppercase">{{ page_title }}</div>
+				{{ page_title }}
 			</div>
 		{% endif %}
 	</div>
