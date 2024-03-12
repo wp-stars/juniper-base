@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 
 
 const filterDivs = document.querySelectorAll(".filter-entry")
+console.log('filter frontend')
 
 filterDivs.forEach(div => {
     let data = JSON.parse(div.dataset.initialData)
