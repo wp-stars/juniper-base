@@ -27,3 +27,11 @@ body {
     font-weight: 400;
     line-height: 12px;
 }
+
+.menu-spacer::before {
+    display: flex;
+    content: "";
+    height: 26px;
+    width: 1px;
+    background-color: #999;
+}

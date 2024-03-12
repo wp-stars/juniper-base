@@ -701,6 +701,10 @@ video {
   top: 1rem;
 }
 
+.top-\[-23px\] {
+  top: -23px;
+}
+
 .top-\[10\%\] {
   top: 10%;
 }
@@ -795,6 +799,11 @@ video {
 .mx-\[1\.25rem\] {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
+}
+
+.mx-\[14px\] {
+  margin-left: 14px;
+  margin-right: 14px;
 }
 
 .mx-\[auto\] {
@@ -918,8 +927,16 @@ video {
   margin-bottom: 0.8rem;
 }
 
+.mb-\[13px\] {
+  margin-bottom: 13px;
+}
+
 .mb-\[2\.5rem\] {
   margin-bottom: 2.5rem;
+}
+
+.mb-\[31px\] {
+  margin-bottom: 31px;
 }
 
 .mb-\[3rem\] {
@@ -932,6 +949,10 @@ video {
 
 .mb-\[6\.25rem\] {
   margin-bottom: 6.25rem;
+}
+
+.mb-\[8\.125rem\] {
+  margin-bottom: 8.125rem;
 }
 
 .mb-\[8rem\] {
@@ -1010,8 +1031,16 @@ video {
   margin-top: 2rem;
 }
 
+.mt-\[0\.25rem\] {
+  margin-top: 0.25rem;
+}
+
 .mt-\[1\.5rem\] {
   margin-top: 1.5rem;
+}
+
+.mt-\[1\.875rem\] {
+  margin-top: 1.875rem;
 }
 
 .mt-\[2\.5rem\] {
@@ -1032,26 +1061,6 @@ video {
 
 .mt-\[6rem\] {
   margin-top: 6rem;
-}
-
-.mt-\[1\.875rem\] {
-  margin-top: 1.875rem;
-}
-
-.mt-\[8\.125rem\] {
-  margin-top: 8.125rem;
-}
-
-.mb-\[8\.125rem\] {
-  margin-bottom: 8.125rem;
-}
-
-.mb-\[13px\] {
-  margin-bottom: 13px;
-}
-
-.mb-\[31px\] {
-  margin-bottom: 31px;
 }
 
 .line-clamp-4 {
@@ -1499,8 +1508,24 @@ video {
   gap: 2rem;
 }
 
+.gap-\[10px\] {
+  gap: 10px;
+}
+
+.gap-\[14px\] {
+  gap: 14px;
+}
+
+.gap-\[18px\] {
+  gap: 18px;
+}
+
 .gap-\[2rem\] {
   gap: 2rem;
+}
+
+.gap-\[30px\] {
+  gap: 30px;
 }
 
 .gap-\[4rem\] {
@@ -1661,6 +1686,11 @@ video {
   border-color: var(--primary);
 }
 
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
 .bg-\[none\] {
   background-color: none;
 }
@@ -1765,6 +1795,16 @@ video {
 .px-\[1\.5rem\] {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.px-\[6px\] {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .py-1 {
@@ -2475,10 +2515,6 @@ video {
 
   .lg\:flex-row {
     flex-direction: row;
-  }
-
-  .lg\:gap-10 {
-    gap: 2.5rem;
   }
 
   .lg\:gap-5 {

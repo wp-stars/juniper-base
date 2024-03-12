@@ -352,6 +352,9 @@ function wps_add_to_context( $context ) {
     $home_page_url                  = \home_url();
     $context['home_page_url']       = $home_page_url;
     $context['shop_url']            = \get_permalink(\wc_get_page_id('shop'));
+    $context['account_url']         = \wc_get_page_permalink( 'myaccount' );
+    $context['cart_url']            = \wc_get_cart_url();
+    $context['cart_count']          = \WC()->cart->get_cart_contents_count();
     $context['parent_page_title']   = '';
     $context['parent_page_url']     = '';
     
