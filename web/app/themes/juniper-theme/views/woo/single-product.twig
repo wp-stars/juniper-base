@@ -5,7 +5,13 @@
     {% do action('woocommerce_before_single_product') %}
 
     {% block breadcrumbs %}
-    	{% include "blocks/breadcrumbs.twig" with {'home_page_url': home_page_url, 'parent_page_title': parent_page_title, 'parent_page_url': parent_page_url, 'page_title': page_title, 'page_url': page_url} %}
+    	{% include "blocks/breadcrumbs.twig" with {
+            'home_page_url': home_page_url, 
+            'parent_page_title': parent_page_title, 
+            'parent_page_url': parent_page_url, 
+            'page_title': page_title, 
+            'page_url': page_url
+        } %}
 	{% endblock %}    
 
     <article itemscope itemtype="http://schema.org/Product" class="mt-[1.875rem] container single-product-details {{ post.class }}">
@@ -20,11 +26,9 @@
                 {% do action('wps_print_product_categories') %}
                 {% do action('wps_print_metals_and_accessories') %}
 
-
                 {% do action('woocommerce_single_product_summary') %}
             </div>
-
-
+            
             <meta itemprop="url" content="{{ post.link }}" />
         </div>
         <div class="grid grid-cols-1 gap-x-10">
