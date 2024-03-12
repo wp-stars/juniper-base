@@ -468,18 +468,32 @@ require_once THEME_DIR . 'inc/news/news-acf.php';
 require_once THEME_DIR . 'inc/news/news-detailpage.php';
 require_once THEME_DIR . 'inc/admin/capabilities.php';
 
-// handle demo modal
-/*
-require_once __DIR__.'/classes/frontend/Modal.php';
-$modal = new \wps\frontend\Modal();
-$modal->id = 'sample-box-full';
-$modal->title = __('Sample Box is full', 'wps');
-$modal->content = __('You can only order 3 samples at a time. Please remove one of the samples from your cart to add a new one.', 'wps');
-$modal->showSubmitButton = true;
-$modal->showCloseButton = true;
-$modal->close()->render();
+
+
+
+// handle product request modal
+
+add_action('init', function(){
+    require_once __DIR__.'/classes/frontend/Modal.php';
+    $modal = new \wps\frontend\Modal();
+    $modal->id = 'product-request-modal';
+    $modal->view = 'productRequestModal.twig';
+    $modal->title = __('Produktanfrage', 'wps');
+    $modal->content = '';
+    $modal->variables['form'] = '';
+    $modal->showSubmitButton = false;
+    $modal->showCloseButton = false;
+    $modal->open()->render();
+
+});
 
 add_filter('wps_modal_render', function($modal){
+
+    if($modal->id === 'product-request-modal'){
+        $modal->content = do_shortcode('[gravityform id="1" title="false" description="false" ajax="true"]');
+        return $modal;
+    }
+
     if(isset($_POST['action']) && $_POST['action'] === 'sample-box-full'){
         $modal->title = 'Vielen Dank für Ihre Anfrage';
         $modal->content = 'Bis zum nächsten Einkauf';
@@ -487,4 +501,3 @@ add_filter('wps_modal_render', function($modal){
     }
     return $modal;
 });
-*/

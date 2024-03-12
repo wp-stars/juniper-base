@@ -595,6 +595,10 @@ video {
   border-width: 0;
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .visible {
   visibility: visible;
 }
@@ -629,6 +633,11 @@ video {
 
 .inset-0 {
   inset: 0px;
+}
+
+.inset-y-0 {
+  top: 0px;
+  bottom: 0px;
 }
 
 .-top-12 {
@@ -669,10 +678,6 @@ video {
 
 .top-4 {
   top: 1rem;
-}
-
-.top-5 {
-  top: 1.25rem;
 }
 
 .top-\[10\%\] {
@@ -944,6 +949,10 @@ video {
   margin-right: auto;
 }
 
+.ms-2 {
+  margin-inline-start: 0.5rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -1057,6 +1066,10 @@ video {
 
 .h-4 {
   height: 1rem;
+}
+
+.h-5 {
+  height: 1.25rem;
 }
 
 .h-6 {
@@ -1184,6 +1197,10 @@ video {
   width: 11rem;
 }
 
+.w-5 {
+  width: 1.25rem;
+}
+
 .w-6 {
   width: 1.5rem;
 }
@@ -1249,8 +1266,20 @@ video {
   min-width: 500px;
 }
 
+.max-w-2xl {
+  max-width: 42rem;
+}
+
+.max-w-64 {
+  max-width: 16rem;
+}
+
 .max-w-\[300px\] {
   max-width: 300px;
+}
+
+.max-w-\[50\%\] {
+  max-width: 50%;
 }
 
 .max-w-\[600px\] {
@@ -1497,6 +1526,10 @@ video {
   align-self: stretch;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -1543,6 +1576,10 @@ video {
 
 .border-4 {
   border-width: 4px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
 }
 
 .border-b-2 {
@@ -1641,6 +1678,11 @@ video {
   padding-right: 0.25rem;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1726,6 +1768,10 @@ video {
 
 .pr-4 {
   padding-right: 1rem;
+}
+
+.pr-8 {
+  padding-right: 2rem;
 }
 
 .pt-20 {
@@ -1916,6 +1962,12 @@ video {
   outline-offset: 2px;
 }
 
+.focus\:ring:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .group:hover .group-hover\:block {
   display: block;
 }
@@ -2059,10 +2111,6 @@ video {
 
   .sm\:max-h-\[auto\] {
     max-height: auto;
-  }
-
-  .sm\:min-h-\[400px\] {
-    min-height: 400px;
   }
 
   .sm\:min-h-\[500px\] {
