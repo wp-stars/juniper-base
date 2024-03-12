@@ -2163,115 +2163,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./src/components/AlternatingResult.js":
-/*!*********************************************!*\
-  !*** ./src/components/AlternatingResult.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-const AlternatingResult = ({
-  index,
-  post
-}) => {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `container mx-auto min-h-[600px] mb-52 grid grid-cols-1 sm:grid-cols-2 ${index % 2 === 0 ? 'even' : 'odd'}`
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `order-1 ${index % 2 === 0 ? 'sm:order-1' : 'sm:order-2'}`
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "min-h-[650px] sm:min-h-[unset]"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "teaser-image absolute z-0"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "absolute decoration"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    className: "absolute",
-    src: post.fields.teaser_image
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "showcase-image z-10 relative"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    className: "max-w-[300px]",
-    alt: "Showcase Image",
-    src: post.fields.showcase_image
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `order-2 ${index % 2 === 0 ? 'sm:order-2' : 'sm:order-1'} flex flex-col justify-center text-left`
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, post.post_title, " // ", post.fields.year), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "mb-10"
-  }, post.terms.map((term, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
-    key: index
-  }, index < post.terms.length && index > 0 && ' // ', (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    dangerouslySetInnerHTML: {
-      __html: `${term.name}`
-    }
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "mb-20"
-  }, post.excerpt), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    className: "btn-underline",
-    href: post.link
-  }, "Mehr \xFCber ", post.post_title)));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AlternatingResult);
-
-/***/ }),
-
-/***/ "./src/components/ArticleResult.js":
-/*!*****************************************!*\
-  !*** ./src/components/ArticleResult.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-const ArticleResult = ({
-  index,
-  post
-}) => {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "container mx-auto mb-12"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `w-full article-row grid grid-cols-12 ${index % 2 === 0 ? 'even' : 'odd'}`
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "img-content col-span-12 sm:col-span-5"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: post.featured_image
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "article-text flex flex-col items-start text-left justify-center col-span-12 sm:col-span-7"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    className: "mb-5"
-  }, post.post_title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "mb-10 sm:mb-5 description"
-  }, post.post_author, " // ", post.post_date, " // ", post.terms.map((term, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), {
-    key: index
-  }, index < post.terms.length && index > 0 && ' // ', (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    dangerouslySetInnerHTML: {
-      __html: `${term.name}`
-    }
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "mb-10 line-clamp-4"
-  }, post.excerpt), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: post.link,
-    className: "btn-underline"
-  }, "weiter lesen"))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ArticleResult);
-
-/***/ }),
-
 /***/ "./src/components/Checkbox.js":
 /*!************************************!*\
   !*** ./src/components/Checkbox.js ***!
@@ -2328,21 +2219,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _AlternatingResult__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlternatingResult */ "./src/components/AlternatingResult.js");
-/* harmony import */ var _ArticleResult__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ArticleResult */ "./src/components/ArticleResult.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
-/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Checkbox */ "./src/components/Checkbox.js");
-
-
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
+/* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Checkbox */ "./src/components/Checkbox.js");
 
 
 
 
 
 const Filter = data => {
+  console.log('inside filter');
   const [selectedFilterVals, setSelectedFilterVals] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     search: '',
     taxonomies: []
@@ -2352,7 +2240,7 @@ const Filter = data => {
   const [loadingMore, setLoadingMore] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [maxPages, setMaxPages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.maxNumPages);
   const [showFilterItems, setShowFilterItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const isMobile = (0,react_responsive__WEBPACK_IMPORTED_MODULE_5__.useMediaQuery)({
+  const isMobile = (0,react_responsive__WEBPACK_IMPORTED_MODULE_3__.useMediaQuery)({
     query: `(max-width: 640px)`
   });
   const [firstPageLoad, setFirstPageLoad] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
@@ -2383,7 +2271,7 @@ const Filter = data => {
     let taxonomies = JSON.stringify(selectedFilterVals.taxonomies);
     queryString += `&taxonomies=${encodeURIComponent(taxonomies)}`;
     queryString += `&page=${page}`;
-    axios__WEBPACK_IMPORTED_MODULE_3___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
       if (page > 1) {
         setPosts([...posts, ...res.data.posts]);
       } else {
@@ -2434,10 +2322,6 @@ const Filter = data => {
     // window.addEventListener("resize", handleResize)
     if (!isMobile) setShowFilterItems(true);
   }, [isMobile]);
-  const handleCheckboxClick = (name, e) => {
-    e.target.checked = !e.target.checked;
-    handleTaxSelect(name, e);
-  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2582,7 +2466,7 @@ const Filter = data => {
         key: key,
         className: "col-span-12 block"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), filterItem.tax_options.map((term, index) => {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: index,
           term: term,
           filterItem: filterItem,
@@ -4591,6 +4475,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const filterDivs = document.querySelectorAll(".filter-entry");
+console.log('filter frontend');
 filterDivs.forEach(div => {
   let data = JSON.parse(div.dataset.initialData);
   const root = react_dom__WEBPACK_IMPORTED_MODULE_2___default().createRoot(div);
