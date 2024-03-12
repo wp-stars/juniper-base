@@ -3,6 +3,27 @@
     "title": "Filter",
     "fields": [
         {
+            "key": "field_65e5c3f5c6145",
+            "label": "Title",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_651199b6236a6",
             "label": "Post Type",
             "name": "post_type",
@@ -35,10 +56,15 @@
                 "acf-taxonomy": "acf-taxonomy",
                 "acf-field-group": "acf-field-group",
                 "acf-field": "acf-field",
-                "wpcf7_contact_form": "wpcf7_contact_form",
+                "product": "product",
+                "product_variation": "product_variation",
+                "shop_order": "shop_order",
+                "shop_order_refund": "shop_order_refund",
+                "shop_coupon": "shop_coupon",
+                "shop_order_placehold": "shop_order_placehold",
+                "patterns_ai_data": "patterns_ai_data",
                 "jobs": "jobs",
-                "projects": "projects",
-                "services": "services"
+                "metalprices": "metalprices"
             },
             "default_value": false,
             "return_format": "value",
@@ -49,11 +75,11 @@
             "placeholder": ""
         },
         {
-            "key": "field_651aba2349afb",
-            "label": "Taxonomy",
-            "name": "taxonomy",
+            "key": "field_65e7231575342",
+            "label": "Filter Options",
+            "name": "filter_options",
             "aria-label": "",
-            "type": "select",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -62,40 +88,87 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [],
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_6511a1f41ab6d",
-            "label": "Style",
-            "name": "style",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "article": "Article",
-                "alternating": "Alternating"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": ""
+            "wpml_cf_preferences": 0,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_65e7232375343",
+                    "label": "Filter Choices",
+                    "name": "filter_choices",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 0,
+                    "choices": {
+                        "category": "Categories",
+                        "post_tag": "Tags",
+                        "nav_menu": "Navigation Menus",
+                        "link_category": "Link Categories",
+                        "post_format": "Formats",
+                        "wp_theme": "Themes",
+                        "wp_template_part_area": "Template Part Areas",
+                        "wp_pattern_category": "Pattern Categories",
+                        "product_type": "Product type",
+                        "product_visibility": "Product visibility",
+                        "product_cat": "Product categories",
+                        "product_tag": "Product tags",
+                        "product_shipping_class": "Product shipping classes",
+                        "translation_priority": "Translation Priorities",
+                        "job-categories": "Job Categories",
+                        "metals-and-accessories": "Metals And Accessories",
+                        "purchasability": "Purchasability"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_65e7231575342"
+                },
+                {
+                    "key": "field_65e7233075344",
+                    "label": "Type",
+                    "name": "type",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 0,
+                    "choices": {
+                        "dropdown": "Dropdown",
+                        "checkbox": "Checkbox"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "parent_repeater": "field_65e7231575342"
+                }
+            ]
         }
     ],
     "location": [
@@ -116,5 +189,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1696250437
+    "acfml_field_group_mode": "advanced",
+    "modified": 1710274807
 }
