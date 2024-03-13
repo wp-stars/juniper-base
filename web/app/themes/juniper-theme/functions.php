@@ -352,6 +352,9 @@ function wps_add_to_context( $context ) {
     $home_page_url                  = \home_url();
     $context['home_page_url']       = $home_page_url;
     $context['shop_url']            = \get_permalink(\wc_get_page_id('shop'));
+    $context['account_url']         = \wc_get_page_permalink( 'myaccount' );
+    $context['cart_url']            = \wc_get_cart_url();
+    $context['cart_count']          = \WC()->cart->get_cart_contents_count();
     $context['parent_page_title']   = '';
     $context['parent_page_url']     = '';
     
@@ -369,6 +372,11 @@ function wps_add_to_context( $context ) {
                 $context['jumbotron_bg_image'] = $post_thumbnail;  
             }
         }
+    }
+
+    if( \is_product() ) {
+        $context['parent_page_title'] = 'Produkte';
+        $context['parent_page_url']   = \get_permalink(\wc_get_page_id('shop'));
     }
 
     return $context;
@@ -499,5 +507,10 @@ add_filter('wps_modal_render', function($modal){
         $modal->content = 'Bis zum nächsten Einkauf';
         $modal->open();
     }
+  
     return $modal;
 });
+
+// Woocommerce related hooks
+require_once __DIR__.'/classes/frontend/WC_Customizations.php';
+$woocommerce = new frontend\WC_Customizations();

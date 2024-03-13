@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react"
-import AlternatingResult from "./AlternatingResult"
-import ArticleResult from "./ArticleResult"
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
 import Checkbox from "./Checkbox"
 
 const Filter = ( data ) => {
+    console.log('inside filter')
     const [selectedFilterVals, setSelectedFilterVals] = useState({
         search: '',
         taxonomies: []
@@ -228,7 +227,7 @@ const Filter = ( data ) => {
                             {posts.map((post, index) => {
                                 return (
                                     <div key={index} className="max-w-sm rounded overflow-hidden shadow-lg">
-                                        <div className="font-bold text-xl mb-2">{post.post_title}</div>
+                                        <div dangerouslySetInnerHTML={{}} className="font-bold text-xl mb-2">{post.post_title}</div>
                                     </div>
                                 )
                             })}

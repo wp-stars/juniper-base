@@ -4,25 +4,37 @@
 
     {% do action('woocommerce_before_single_product') %}
 
-    <article itemscope itemtype="http://schema.org/Product" class="single-product-details {{ post.class }}">
+    {% block breadcrumbs %}
+    	{% include "blocks/breadcrumbs.twig" with {
+            'home_page_url': home_page_url, 
+            'parent_page_title': parent_page_title, 
+            'parent_page_url': parent_page_url, 
+            'page_title': page_title, 
+            'page_url': page_url
+        } %}
+	{% endblock %}    
 
-        <div class="entry-images">
-            {% do action('woocommerce_before_single_product_summary') %}
+    <article itemscope itemtype="http://schema.org/Product" class="mt-[1.875rem] container single-product-details {{ post.class }}">
+        <div class="grid grid-cols-2 gap-x-10 mb-[6.25rem]">
+            <div class="entry-images shadow-md">
+                {% do action('woocommerce_before_single_product_summary') %}
 
-            <img src="{{ post.thumbnail.src('shop_single') }}" />
+                <img src="{{ post.thumbnail.src('shop_single') }}" />
+            </div>
+
+            <div class="summary entry-summary">
+                {% do action('wps_print_product_categories') %}
+                {% do action('wps_print_metals_and_accessories') %}
+
+                {% do action('woocommerce_single_product_summary') %}
+            </div>
+            
+            <meta itemprop="url" content="{{ post.link }}" />
         </div>
-
-        <div class="summary entry-summary">
-            {% do action('woocommerce_single_product_summary') %}
+        <div class="grid grid-cols-1 gap-x-10">
+            {% do action('woocommerce_after_single_product_summary') %}
         </div>
-
-        {% do action('woocommerce_after_single_product_summary') %}
-
-        <meta itemprop="url" content="{{ post.link }}" />
-
     </article>
-
-    {% include ["partials/tease-product.twig"] with { products: related_products } %}
 
     {% do action('woocommerce_after_single_product') %}
 

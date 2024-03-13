@@ -1,0 +1,46 @@
+#payment .payment_method_woocommerce_payments .testmode-info {
+	margin-bottom: 0.5em;
+}
+
+#wcpay-upe-element,
+.wcpay-upe-element {
+	padding: 7px 7px;
+	margin-bottom: 0.5em;
+
+	&.processing {
+		min-height: 70px;
+	}
+}
+
+.wcpay-checkout-email-field {
+	position: relative;
+}
+
+.wcpay-checkout-email-field button.wcpay-stripelink-modal-trigger {
+	display: none;
+	position: absolute;
+	right: 5px;
+	width: 64px;
+	height: 40px;
+	background: no-repeat url( 'assets/images/payment-methods/link.svg?asset' );
+	background-color: none;
+	cursor: pointer;
+	border: none;
+}
+
+#payment .payment_methods {
+	li label img {
+		float: right;
+		border: 0;
+		padding: 0;
+		max-height: 1.618em;
+		min-height: 30px;
+	}
+
+	.payment_method_woocommerce_payments_affirm label img {
+		min-width: 50px;
+	}
+	.payment_method_woocommerce_payments_afterpay_clearpay label img {
+		min-width: 64px;
+	}
+}

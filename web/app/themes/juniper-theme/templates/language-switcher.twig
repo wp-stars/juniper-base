@@ -1,9 +1,12 @@
 
 <div class="language-switcher relative group">
-    <button type="button" class="py-2 px-4 text-gray-800 hover:text-gray-600 focus:outline-none focus:text-gray-600">
+    <button type="button" class="py-2 px-4 border-2 rounded-full border-black flex">
         {{ current_language|upper }}
+        <svg class="mt-[0.25rem]" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M11.8393 5.71433L7.4643 10.0893C7.40334 10.1505 7.33089 10.1991 7.25112 10.2322C7.17135 10.2653 7.08583 10.2823 6.99946 10.2823C6.91309 10.2823 6.82757 10.2653 6.7478 10.2322C6.66803 10.1991 6.59558 10.1505 6.53462 10.0893L2.15962 5.71433C2.03633 5.59105 1.96707 5.42384 1.96707 5.24949C1.96707 5.07514 2.03633 4.90793 2.15962 4.78464C2.2829 4.66136 2.45011 4.5921 2.62446 4.5921C2.79881 4.5921 2.96602 4.66136 3.0893 4.78464L7.00001 8.69535L10.9107 4.7841C11.034 4.66081 11.2012 4.59155 11.3756 4.59155C11.5499 4.59155 11.7171 4.66081 11.8404 4.7841C11.9637 4.90738 12.0329 5.07459 12.0329 5.24894C12.0329 5.42329 11.9637 5.5905 11.8404 5.71379L11.8393 5.71433Z" fill="black"/>
+        </svg>
     </button>
-    <ul class="absolute hidden group-hover:block bg-white border rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+    <ul class="absolute hidden w-full group-hover:block bg-white border rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
         {% for language in languages %}
             <li>
                 <a href="{{ language.url }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none">

@@ -142,13 +142,15 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page ) {
         $post_obj->ID = $post->ID;
         $post_obj->fields = get_fields($post);
         $post_obj->excerpt = wp_trim_excerpt('', $post);
-        // $post_obj->terms = get_the_terms($post, $taxonomy) ? get_the_terms($post, $taxonomy) : [];
         $post_obj->post_title = $post->post_title;
         $post_obj->post_name = $post->post_name;
         $post_obj->featured_image = get_the_post_thumbnail_url($post);
         $post_obj->link = get_permalink($post);
 
+        $post_obj->html = do_action('wps_get_product_card', $post_obj->ID);
+
         $post_arr[] = $post_obj;
+
     }
 
     $data_arr['posts'] = $post_arr;

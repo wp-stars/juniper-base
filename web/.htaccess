@@ -1,7 +1,7 @@
 # BEGIN WordPress
-# Die Anweisungen (Zeilen) zwischen „BEGIN WordPress“ und „END WordPress“ sind
-# dynamisch generiert und sollten nur über WordPress-Filter geändert werden.
-# Alle Änderungen an den Anweisungen zwischen diesen Markierungen werden überschrieben.
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -11,6 +11,5 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /iwg/web/index.php [L]
 </IfModule>
-
 
 # END WordPress
