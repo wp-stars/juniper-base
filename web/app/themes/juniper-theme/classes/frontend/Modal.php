@@ -17,7 +17,7 @@ class Modal
     public string $title = 'title undefined';
     public string $content = 'content undefined';
     public string $twigTemplateDir = 'modals/'; // relative to theme root
-    public string $view = 'modal.twig';
+    public string $view = 'defaultModal.twig';
     public ModalStatus $status = ModalStatus::closed;
 
     //submitButton
