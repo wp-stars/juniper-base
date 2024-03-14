@@ -39,7 +39,7 @@ class Exporter
         $ordering_party->addChild('bmd:Email', $order_data['billing']['email']);
 
         $address = $ordering_party->addChild('bmd:Address');
-        $address->addChild('bmd:Salutation', 'Frau');
+        $address->addChild('bmd:Salutation', '');
         $address->addChild('bmd:FirstName', $order_data['billing']['first_name']);
         $address->addChild('bmd:LastName', $order_data['billing']['last_name']);
         $address->addChild('bmd:AdditionalName', '');
