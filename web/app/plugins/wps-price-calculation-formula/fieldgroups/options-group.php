@@ -135,8 +135,8 @@ return [
     ],
     [
         'key' => 'field_65e855f654d0f06',
-        'label' => 'Transformation Bad',
-        'name' => 'transformation_bad',
+        'label' => 'Transformation Rh Schwarz',
+        'name' => 'transformation_rh_schwarz',
         'aria-label' => '',
         'type' => 'number',
         'instructions' => '',
