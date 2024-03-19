@@ -2230,13 +2230,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Filter = data => {
-  console.log('inside filter');
   const [selectedFilterVals, setSelectedFilterVals] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     search: '',
     taxonomies: []
   });
   const [posts, setPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts);
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
+  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [loadingMore, setLoadingMore] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [maxPages, setMaxPages] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.maxNumPages);
   const [showFilterItems, setShowFilterItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
@@ -2266,6 +2266,7 @@ const Filter = data => {
     setSelectedFilterVals(newSelectedFilterVals);
   };
   const searchPosts = () => {
+    setLoading(true);
     let queryString = `?post_type=${data.postType}`;
     queryString += `&search=${encodeURIComponent(selectedFilterVals.search)}`;
     let taxonomies = JSON.stringify(selectedFilterVals.taxonomies);
@@ -2279,6 +2280,7 @@ const Filter = data => {
       }
       setMaxPages(res.data.maxNumPages);
       setLoadingMore(false);
+      setLoading(false);
     }).catch(err => {
       console.error(err);
     });
@@ -2326,6 +2328,10 @@ const Filter = data => {
     className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    className: "mb-[30px]"
+  }, data.title)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "container mb-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center border-b py-2 max-w-[50%]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -2338,7 +2344,7 @@ const Filter = data => {
     d: "M0.852114 14.3519L4.37266 10.8321C3.35227 9.60705 2.84344 8.03577 2.95204 6.44512C3.06064 4.85447 3.7783 3.36692 4.95573 2.29193C6.13316 1.21693 7.67971 0.637251 9.27365 0.673476C10.8676 0.709701 12.3862 1.35904 13.5136 2.48642C14.641 3.6138 15.2903 5.13241 15.3265 6.72635C15.3627 8.32029 14.7831 9.86684 13.7081 11.0443C12.6331 12.2217 11.1455 12.9394 9.55488 13.048C7.96423 13.1566 6.39295 12.6477 5.1679 11.6273L1.64805 15.1479C1.59579 15.2001 1.53375 15.2416 1.46546 15.2699C1.39718 15.2982 1.32399 15.3127 1.25008 15.3127C1.17617 15.3127 1.10299 15.2982 1.0347 15.2699C0.96642 15.2416 0.904376 15.2001 0.852114 15.1479C0.799852 15.0956 0.758396 15.0336 0.730112 14.9653C0.701828 14.897 0.68727 14.8238 0.68727 14.7499C0.68727 14.676 0.701828 14.6028 0.730112 14.5345C0.758396 14.4663 0.799852 14.4042 0.852114 14.3519ZM14.1876 6.87492C14.1876 5.87365 13.8907 4.89487 13.3344 4.06234C12.7781 3.22982 11.9875 2.58094 11.0624 2.19778C10.1374 1.81461 9.11947 1.71435 8.13744 1.90969C7.15541 2.10503 6.25336 2.58718 5.54536 3.29519C4.83735 4.00319 4.3552 4.90524 4.15986 5.88727C3.96452 6.8693 4.06477 7.8872 4.44794 8.81225C4.83111 9.7373 5.47999 10.528 6.31251 11.0842C7.14503 11.6405 8.12382 11.9374 9.12508 11.9374C10.4673 11.9359 11.7541 11.4021 12.7032 10.453C13.6522 9.50392 14.1861 8.21712 14.1876 6.87492Z",
     fill: "black"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
+    className: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:shadow-none",
     type: "text",
     placeholder: "Search products...",
     "aria-label": "product search",
@@ -2435,12 +2441,12 @@ const Filter = data => {
     strokeLinejoin: "round"
   })))) : null, showFilterItems ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "filter-items",
-    className: "grid grid-cols-12 justify-start py-20"
+    className: "grid grid-cols-12 justify-start"
   }, data.filterOptions.map((filterItem, key) => {
     if (filterItem.type === "dropdown") {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: key,
-        className: "col-span-12 relative max-w-64"
+        className: "col-span-12 relative max-w-64 mb-8"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
         onChange: e => handleTaxSelect(filterItem.name, e),
         className: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
@@ -2464,7 +2470,7 @@ const Filter = data => {
     if (filterItem.type === "checkbox") {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: key,
-        className: "col-span-12 block"
+        className: "col-span-12 block mb-8"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), filterItem.tax_options.map((term, index) => {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: index,
@@ -2476,19 +2482,21 @@ const Filter = data => {
     }
     return null;
   })) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "container"
+    className: "container mt-[54px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-3 mb-10"
-  }, posts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((post, index) => {
+    className: "grid grid-cols-3 mb-10 gap-[42px]"
+  }, !loading ? posts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((post, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: index,
-      className: "max-w-sm rounded overflow-hidden shadow-lg"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "font-bold text-xl mb-2"
-    }, post.post_title));
+      dangerouslySetInnerHTML: {
+        __html: atob(post.html)
+      }
+    });
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full text-center"
-  }, "keine Ergebnisse."))), loadingMore ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "keine Ergebnisse.") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "container flex justify-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")))), loadingMore ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
@@ -4475,7 +4483,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const filterDivs = document.querySelectorAll(".filter-entry");
-console.log('filter frontend');
 filterDivs.forEach(div => {
   let data = JSON.parse(div.dataset.initialData);
   const root = react_dom__WEBPACK_IMPORTED_MODULE_2___default().createRoot(div);

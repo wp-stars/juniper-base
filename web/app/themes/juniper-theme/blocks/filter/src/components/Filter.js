@@ -4,18 +4,19 @@ import { useMediaQuery } from 'react-responsive'
 import Checkbox from "./Checkbox"
 
 const Filter = ( data ) => {
-    console.log('inside filter')
     const [selectedFilterVals, setSelectedFilterVals] = useState({
         search: '',
         taxonomies: []
     })
     const [posts, setPosts] = useState(data.posts)
     const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(false)
     const [loadingMore, setLoadingMore] = useState(false)
     const [maxPages, setMaxPages] = useState(data.maxNumPages)
     const [showFilterItems, setShowFilterItems] = useState(false)
     const isMobile = useMediaQuery({ query: `(max-width: 640px)` })
     const [firstPageLoad, setFirstPageLoad] = useState(true)
+
     
 
     const updateFilterVals = (e, term_id) => {
@@ -44,6 +45,7 @@ const Filter = ( data ) => {
     }
 
     const searchPosts = () => {
+        setLoading(true)
         let queryString = `?post_type=${data.postType}`
         queryString += `&search=${encodeURIComponent(selectedFilterVals.search)}`
         let taxonomies = JSON.stringify(selectedFilterVals.taxonomies)
@@ -59,6 +61,7 @@ const Filter = ( data ) => {
                 }
                 setMaxPages(res.data.maxNumPages)
                 setLoadingMore(false)
+                setLoading(false)
             })
             .catch(err => {
                 console.error(err)
@@ -119,12 +122,15 @@ const Filter = ( data ) => {
     return (
         <div className="w-full">
             <div className="container">
+                <h1 className="mb-[30px]">{data.title}</h1>
+            </div>
+            <div className="container mb-8">
                 <div className="flex items-center border-b py-2 max-w-[50%]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M0.852114 14.3519L4.37266 10.8321C3.35227 9.60705 2.84344 8.03577 2.95204 6.44512C3.06064 4.85447 3.7783 3.36692 4.95573 2.29193C6.13316 1.21693 7.67971 0.637251 9.27365 0.673476C10.8676 0.709701 12.3862 1.35904 13.5136 2.48642C14.641 3.6138 15.2903 5.13241 15.3265 6.72635C15.3627 8.32029 14.7831 9.86684 13.7081 11.0443C12.6331 12.2217 11.1455 12.9394 9.55488 13.048C7.96423 13.1566 6.39295 12.6477 5.1679 11.6273L1.64805 15.1479C1.59579 15.2001 1.53375 15.2416 1.46546 15.2699C1.39718 15.2982 1.32399 15.3127 1.25008 15.3127C1.17617 15.3127 1.10299 15.2982 1.0347 15.2699C0.96642 15.2416 0.904376 15.2001 0.852114 15.1479C0.799852 15.0956 0.758396 15.0336 0.730112 14.9653C0.701828 14.897 0.68727 14.8238 0.68727 14.7499C0.68727 14.676 0.701828 14.6028 0.730112 14.5345C0.758396 14.4663 0.799852 14.4042 0.852114 14.3519ZM14.1876 6.87492C14.1876 5.87365 13.8907 4.89487 13.3344 4.06234C12.7781 3.22982 11.9875 2.58094 11.0624 2.19778C10.1374 1.81461 9.11947 1.71435 8.13744 1.90969C7.15541 2.10503 6.25336 2.58718 5.54536 3.29519C4.83735 4.00319 4.3552 4.90524 4.15986 5.88727C3.96452 6.8693 4.06477 7.8872 4.44794 8.81225C4.83111 9.7373 5.47999 10.528 6.31251 11.0842C7.14503 11.6405 8.12382 11.9374 9.12508 11.9374C10.4673 11.9359 11.7541 11.4021 12.7032 10.453C13.6522 9.50392 14.1861 8.21712 14.1876 6.87492Z" fill="black"/>
                     </svg>
                     <input 
-                        className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" 
+                        className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:shadow-none" 
                         type="text" 
                         placeholder="Search products..." 
                         aria-label="product search"
@@ -161,11 +167,11 @@ const Filter = ( data ) => {
                     </div>
                 : null}
                 {showFilterItems ? 
-                    <div id="filter-items" className="grid grid-cols-12 justify-start py-20">
+                    <div id="filter-items" className="grid grid-cols-12 justify-start">
                         {data.filterOptions.map((filterItem, key) => {
                             if(filterItem.type === "dropdown") {
                                 return (
-                                    <div key={key} className="col-span-12 relative max-w-64">
+                                    <div key={key} className="col-span-12 relative max-w-64 mb-8">
                                         <label>{filterItem.label}</label>
                                         <select 
                                             onChange={(e) => handleTaxSelect(filterItem.name, e)} 
@@ -184,7 +190,7 @@ const Filter = ( data ) => {
                             }
                             if(filterItem.type === "checkbox") {
                                 return (
-                                    <div key={key} className="col-span-12 block">
+                                    <div key={key} className="col-span-12 block mb-8">
                                         <label>{filterItem.label}</label>
                                         {filterItem.tax_options.map((term, index) => {
                                             return (
@@ -196,46 +202,28 @@ const Filter = ( data ) => {
                             }
                             return null
                         })}
-                        
-                        {/* {data.terms.map((term, index) => {
-                            if(term.slug === "uncategorized") return null
-                            
-                            let isActive = false
-                            //selectedFilterVals.includes(term.term_id)
-                            return (
-                                <button key={index} className={`filter-btn w-fit inline-flex items-center ${isActive ? 'active' : ''}`} type="button" onClick={(e) => updateFilterVals(e, term.term_id)}>
-                                    <span className={`${isActive ? 'bg-accent' : 'bg-light'} self-stretch p-[0.375rem]`}><img className="object-contain" src={term.fields.svg_icon} alt="Term Icon" /></span>
-                                    <span className="btn-inner">{term.name}</span>
-                                    {isActive ? 
-                                        <span className="remove-term" onClick={(event) => removeTerm(event, term.term_id)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
-                                                <path d="M7.89258 3.23987L2.89258 8.23987" stroke="#093642" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                                <path d="M2.89258 3.23987L7.89258 8.23987" stroke="#093642" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                            </svg>
-                                        </span>
-                                    : null}
-                                </button>
-                            )
-                        })} */}
                     </div>
                 : null}
             </div>
-            <div className="container">
-                <div className="grid grid-cols-3 mb-10">
-                    {posts.length ? 
-                        <>
-                            {posts.map((post, index) => {
-                                return (
-                                    <div key={index} className="max-w-sm rounded overflow-hidden shadow-lg">
-                                        <div dangerouslySetInnerHTML={{}} className="font-bold text-xl mb-2">{post.post_title}</div>
-                                    </div>
-                                )
-                            })}
-                        </>
-                    : 
-                        <div className="w-full text-center">
-                            keine Ergebnisse.
-                        </div>
+            <div className="container mt-[54px]">
+                <div className="grid grid-cols-3 mb-10 gap-[42px]">
+                    {!loading ? 
+                        posts.length ? 
+                            <>
+                                {posts.map((post, index) => {
+                                    return (
+                                        <div key={index} dangerouslySetInnerHTML={{ __html: atob(post.html) }}></div>
+                                    )
+                                })}
+                            </>
+                        : 
+                            <div className="w-full text-center">
+                                keine Ergebnisse.
+                            </div>
+                    :   
+                        <div className="container flex justify-center">
+                            <p>Loading...</p>
+                        </div>  
                     }
                 </div>
             </div>
