@@ -15,7 +15,7 @@ class TransformationVariablesRepository
         'transformation_au' => 0,
         'transformation_ag' => 0,
         'transformation_pd' => 0,
-        'transformation_bad' => 0,
+        'transformation_rh_schwarz' => 0,
         'transformation_rhodium' => 0,
         'transformation_platin' => 0,
         'transformation_ruthenium' => 0,
