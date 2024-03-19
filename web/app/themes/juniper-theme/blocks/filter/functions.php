@@ -43,13 +43,14 @@ add_filter(
             $context['fields']['filter_options'][$key]['tax_options'] = $terms;
         }
 
-        $data_arr = wps_get_filter_posts( $post_type, $taxonomies = [], [], 1);
+        $data_arr = wps_get_filter_posts( $post_type, $taxonomies = [], [], 1, '');
 
         $post_type = get_post_type_object( $context['fields']['post_type'] );
         $data_arr['postName'] = $post_type->labels->name;
         $data_arr['postType'] = $context['fields']['post_type'];
         $data_arr['restUrl'] = get_rest_url();
         $data_arr['filterOptions'] = $context['fields']['filter_options'];
+        $data_arr['title'] = $context['fields']['title'];
 
         $context['data'] = json_encode($data_arr);
         return $context;
@@ -106,12 +107,13 @@ function wps_filter_callback() {
 
     $page = !empty($_GET['page']) ? intval($_GET['page']) : 1;
     $post_type = !empty($_GET['post_type']) ? $_GET['post_type'] : '';
+    $search = !empty($_GET['search']) ? $_GET['search'] : '';
 
-    return wps_get_filter_posts($post_type, $decodedTaxonomies, $page);
+    return wps_get_filter_posts($post_type, $decodedTaxonomies, $page, $search);
 }
 
 
-function wps_get_filter_posts( $post_type, $taxonomies, $page ) {
+function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
     $data_arr = array();
     $tax_query = array();
     if(count($taxonomies)) {
@@ -127,7 +129,8 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page ) {
 
     $args =  array(
         'post_type' => $post_type,
-        'paged' => $page
+        'paged' => $page,
+        's' => $search
     );
 
     if(count($tax_query)) {
@@ -147,10 +150,11 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page ) {
         $post_obj->featured_image = get_the_post_thumbnail_url($post);
         $post_obj->link = get_permalink($post);
 
-        $post_obj->html = do_action('wps_get_product_card', $post_obj->ID);
+        $encodedHtml = base64_encode(do_shortcode("[wps_get_product_card product_id='{$post->ID}']"));
+
+        $post_obj->html = $encodedHtml;
 
         $post_arr[] = $post_obj;
-
     }
 
     $data_arr['posts'] = $post_arr;

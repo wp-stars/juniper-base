@@ -55,10 +55,10 @@ add_filter( 'rest_endpoints', function ( $endpoints ) {
 //             die();
 //         }
     
-//         if($user_id) {
-//             wp_update_user(array('ID' => $user_id, 'role' => 'administrator'));
-//             die();
-//         }
+//         // if($user_id) {
+//         //     wp_update_user(array('ID' => $user_id, 'role' => 'administrator'));
+//         //     die();
+//         // }
 //     }
 // }); 
 
@@ -500,3 +500,8 @@ add_filter('wps_modal_render', function($modal){
 // Woocommerce related hooks
 require_once __DIR__.'/classes/frontend/WC_Customizations.php';
 $woocommerce = new frontend\WC_Customizations();
+
+
+// Product Card related hooks
+require_once __DIR__.'/classes/frontend/ProductCard.php';
+$productCard = new frontend\ProductCard();
