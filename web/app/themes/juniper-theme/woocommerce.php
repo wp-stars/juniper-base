@@ -43,5 +43,7 @@ if (is_singular('product')) {
         $context['title'] = single_term_title('', false);
     }
 
+    $context['page_content'] = apply_filters( 'the_content', get_the_content() );
+
     Timber::render('views/woo/archive.twig', $context);
 }

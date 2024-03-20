@@ -45,22 +45,19 @@ add_filter( 'rest_endpoints', function ( $endpoints ) {
     return $endpoints;
 } );
 
-
 // add_action('init', function() {
 //     $user_id = email_exists('will@wp-stars.com');
-//     if(true) {
-//         if($user_id) {
-//             wp_set_auth_cookie($user_id);
-//             var_dump('set auth cookie');
-//             die();
-//         }
-    
-//         // if($user_id) {
-//         //     wp_update_user(array('ID' => $user_id, 'role' => 'administrator'));
-//         //     die();
-//         // }
+//     // Redirect URL //
+//     if ( !is_wp_error( $user_id ) )
+//     {
+//         wp_clear_auth_cookie();
+//         wp_set_current_user ( $user_id );
+//         wp_set_auth_cookie  ( $user_id );
+
+//         wp_safe_redirect( '/' );
+//         exit();
 //     }
-// }); 
+// });
 
 /**
  * @param string $scssFile the File we want to watch
