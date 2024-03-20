@@ -18,6 +18,33 @@ if (!class_exists('Timber')) {
 $context = Timber::context();
 $context['sidebar'] = Timber::get_widgets('shop-sidebar');
 
+if (is_shop()) {
+    $page_id = get_option( 'woocommerce_shop_page_id' ); // Replace with your custom page ID
+    $post = get_post($page_id);
+    $context['page_content'] = apply_filters( 'the_content', $post->post_content );
+
+    if (has_block('acf/filter')) {
+        $time = time();
+        $theme_path = get_template_directory_uri();
+
+        wp_enqueue_style('filter-css', $theme_path . '/blocks/filter/style.css', array(), $time, 'all');
+        wp_enqueue_script('filter-js', $theme_path . '/blocks/filter/script.js', array(), $time, true);
+
+        $attributes = [];
+        wp_enqueue_script( 'dashboardBlockFrontendScript', $theme_path . '/blocks/filter/build/frontend.js', array(
+            'wp-blocks',
+            'wp-element',
+            'wp-editor',
+            'wp-api',
+            'wp-element',
+            'wp-i18n',
+            'wp-polyfill',
+            'wp-api-fetch'
+        ), $time, true );
+        wp_localize_script( 'dashboardBlockFrontendScript', 'filterData', $attributes );
+    }
+}
+
 if (is_singular('product')) {
     $context['post'] = Timber::get_post();
     $product = wc_get_product($context['post']->ID);
@@ -43,7 +70,6 @@ if (is_singular('product')) {
         $context['title'] = single_term_title('', false);
     }
 
-    $context['page_content'] = apply_filters( 'the_content', get_the_content() );
-
+    wp_reset_postdata();
     Timber::render('views/woo/archive.twig', $context);
 }
