@@ -13,6 +13,17 @@ class ProductCard {
         $product = wc_get_product($product_id);
 
         $html = "";
+
+        $terms = wp_get_post_terms($product_id, 'metals-and-accessories', array('fields' => 'names'));
+
+        // Check if there are any terms and not an error
+        if (!is_wp_error($terms) && !empty($terms)) {
+            // Implode the names array to a single string separated by "|"
+            $terms_string = implode(' | ', $terms);
+        } else {
+            $terms_string = '';
+        }
+
         ob_start();
         ?>
             <div class="overflow-hidden shadow-lg relative product-card">
@@ -31,11 +42,13 @@ class ProductCard {
                         <?php }
                     ?>
                 </a>
-                <span class="absolute top-0 right-0 p-1 bg-accent">Neu</span>
+                <?php if(has_term("new", 'product_tag', $product->get_id())) { ?>
+                    <span class="absolute top-0 right-0 p-1 bg-accent"><?= __('New', 'wps-juniper'); ?></span>
+                <?php } ?>
                 <hr class="my-[24px] w-[calc(100% - 40px)] mx-[20px]" /> 
                 <div class="px-[20px] pb-[20px]">
                     <div class="flex flex-col">
-                        <p class="uppercase mb-8 text-xs">Precious Metal Electrolytes | gold | Silver</p>
+                        <p class="uppercase mb-8 text-xs"><?= $terms_string; ?></p>
                         <a href="<?= $product->get_permalink(); ?>">
                             <h4 class="mb-8"><?= $product->get_title(); ?></h4>
                         </a>

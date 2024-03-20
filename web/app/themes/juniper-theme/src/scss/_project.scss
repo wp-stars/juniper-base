@@ -89,6 +89,8 @@ select {
 
 .product-card .gallery-image img {
     width: 100%;
+    height: 350px;
+    object-fit: cover;
 }
 
 .woocommerce .products ul::after, .woocommerce .products ul::before, .woocommerce ul.products::after, .woocommerce ul.products::before {
