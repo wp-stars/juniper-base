@@ -43,7 +43,7 @@ add_filter(
             $context['fields']['filter_options'][$key]['tax_options'] = $terms;
         }
 
-        $data_arr = wps_get_filter_posts( $post_type, $taxonomies = [], [], 1, '');
+        $data_arr = wps_get_filter_posts( $post_type, $taxonomies = [], 1, '');
 
         $post_type = get_post_type_object( $context['fields']['post_type'] );
         $data_arr['postName'] = $post_type->labels->name;
