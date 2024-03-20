@@ -94,3 +94,11 @@ select {
 .woocommerce .products ul::after, .woocommerce .products ul::before, .woocommerce ul.products::after, .woocommerce ul.products::before {
     display: none;
 }
+
+.components-button.wc-block-components-button.wp-element-button.wc-block-cart__submit-button.contained {
+    display: flex;
+    color: #fff;
+    border-radius: 4px;
+    background: var(--Primary-IWG-Black, #000);
+    margin-top: 16px;
+}
