@@ -141,7 +141,7 @@ if (!class_exists('FooterNewsletter')) {
             $newsletterForm = ob_get_contents();
             ob_get_clean();
 
-            $button = '<button class="newsletterBtn">' . pll__('Subscribe', 'iwgplating') . '</button>';
+            $button = '<button class="newsletterBtn">' . __('Subscribe', 'iwgplating') . '</button>';
 
             // Set the flag to indicate that the modal has been displayed
             self::$modal_displayed = true;
