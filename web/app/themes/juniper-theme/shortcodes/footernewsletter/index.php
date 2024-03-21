@@ -73,6 +73,7 @@ if (!class_exists('FooterNewsletter')) {
          * Constructor
          */
         public function __construct() {
+    
             add_action(
                 'init',
                 function () {
@@ -111,6 +112,7 @@ if (!class_exists('FooterNewsletter')) {
          * @return string html markup
          */
         public function shortcode_markup($attributes = []): string {
+            
             if (self::$modal_displayed) {
                 return ''; // Return empty string if modal has already been displayed
             }
@@ -124,24 +126,24 @@ if (!class_exists('FooterNewsletter')) {
             }
 
             ob_start();
-            echo do_shortcode("[borlabs-cookie id=\"hubspot\" type=\"content-blocker\"]
+            // echo do_shortcode("[borlabs-cookie id=\"hubspot\" type=\"content-blocker\"]
                  
-                <script>
-                    window.BorlabsCookie.callWhenLoaded('hbspt', function () { 
-                        window.setTimeout(function () { 
-                            hbspt.forms.create({ 
-                                portalId: '25864699', 
-                                formId: '$formId', 
-                                target: '.newsletter-wrapper-$form_id'
-                            });
-                        }, 3000);
-                    });
-                </script>
-            [/borlabs-cookie]");
+            //     <script>
+            //         window.BorlabsCookie.callWhenLoaded('hbspt', function () { 
+            //             window.setTimeout(function () { 
+            //                 hbspt.forms.create({ 
+            //                     portalId: '25864699', 
+            //                     formId: '$formId', 
+            //                     target: '.newsletter-wrapper-$form_id'
+            //                 });
+            //             }, 3000);
+            //         });
+            //     </script>
+            // [/borlabs-cookie]");
             $newsletterForm = ob_get_contents();
             ob_get_clean();
 
-            $button = '<button class="newsletterBtn">' . pll__('Subscribe', 'iwgplating') . '</button>';
+            $button = '<button class="newsletterBtn">' . __('Subscribe', 'iwgplating') . '</button>';
 
             // Set the flag to indicate that the modal has been displayed
             self::$modal_displayed = true;
