@@ -20,7 +20,7 @@ import Chart from './chart';
 import styles from './chartWrapper.module.css';
 import {useState} from '@wordpress/element';
 import axios from 'axios'
-const {siteUrl} = wpVars;
+const {restUrl} = wpVars;
 
 const ChartWrapper = () => {
 	const {data, setData} = useContext(DataContext);
@@ -28,7 +28,7 @@ const ChartWrapper = () => {
 	let error = '';
 
 	const getData = async (getPreviewData = false) => {
-		axios.get(`${siteUrl}/wp-json/ls/v1/metalprices/?after=${data.after}&before=${data.before}&key=${data.selectedMetal}&preview=${getPreviewData}`)
+		axios.get(`${restUrl}ls/v1/metalprices/?after=${data.after}&before=${data.before}&key=${data.selectedMetal}&preview=${getPreviewData}`)
 			.then(res => {
 				let response = res.data
 				const trend = getTrend(response.prices, 'price');

@@ -5,7 +5,7 @@
  * @package IWGPlating
  */
 
-namespace WPS\MetalPrices;
+namespace WPS\API\MetalPrices;
 
 use WP_REST_Server;
 use WP_REST_Request;

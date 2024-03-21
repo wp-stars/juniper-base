@@ -39,7 +39,7 @@ function enq_react(){
     );
     $current_user = wp_get_current_user();
     $wp_vars = [
-        'siteUrl' => get_site_url(),
+        'restUrl' => get_rest_url(),
         'metals' => [
             ['key' => 'gold', 'label' => __('Gold', 'iwgplating'), 'number' => 79, 'short' => 'Au', 'unit' => '€/g'],
             ['key' => 'silver', 'label' => __('Silver', 'iwgplating'), 'number' => 47, 'short' => 'Ag', 'unit' => '€/kg'],
