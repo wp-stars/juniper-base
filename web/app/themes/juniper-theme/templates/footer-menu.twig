@@ -1,7 +1,7 @@
-<ul class="grid grid-cols-1 sm:flex sm:flex-wrap justify-start sm:justify-center text-sm font-medium w-full {{ name }}">
+<ul class="grid grid-cols-1 sm:flex sm:flex-wrap flex-col justify-center  md:justify-start text-sm font-medium min-w-[50%] md:min-w-0 {{ name }}">
     {% for item in items %}
-        <li class="mb-2 sm:mb-0 sm:text-center text-left sm:mx-8">
-            <a href="{{ item.link }}" class="hover:underline uppercase">{{ item.title }}</a>
+        <li class="mb-2 sm:mb-0 text-left">
+            <a href="{{ item.link }}" class="hover:underline uppercase text-base font-normal leading-6">{{ item.title }}</a>
         </li>
     {% endfor %}
 </ul>
