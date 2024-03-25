@@ -71,6 +71,18 @@ class FormulaProduct
 
     public function formulaInterpreter(TransformationVariablesRepository $transformationVariablesRepository): float
     {
+
+        // check if the formular is empty
+        if(empty($this->formula)){
+            return 0.0;
+        }
+
+        // check if the formular contains an ',' and replace it with a '.'
+        if(strpos($this->formula, ',') !== false){
+            $this->formula = str_replace(',', '.', $this->formula);
+            update_field('iwg_price_formular', $this->formula, $this->id);
+        }
+
         // replace every single value inside the formula
         foreach ($transformationVariablesRepository->get() as $key => $value) {
             $this->formula = $this->replaceSingleVariable($this->formula, $key, $value);
@@ -87,7 +99,12 @@ class FormulaProduct
             return 0.0;
         }
 
-        return (float) $result * 1.0;
+        // turn $result into a positive value
+        if($result < 0){
+            $result = $result * -1;
+        }
+
+        return (float) $result;
     }
 
     public function replaceSingleVariable($input, $variable, $replacement){

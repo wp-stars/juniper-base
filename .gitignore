@@ -37,3 +37,5 @@ web/app/cache
 web/app/w3tc-config
 
 # !web/.htaccess
+
+web/wp/bmd-exports/

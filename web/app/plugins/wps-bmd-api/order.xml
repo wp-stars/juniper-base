@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<n1:Order xsi:schemaLocation="http://www.bmd.at/xsd/ORDER/2.0/ http://www.bmd.at/xsd/ORDER/2.0/ORDER.xsd http://www.bmd.at/xsd/COMMONTYPES/2.0/ http://www.bmd.at/xsd/COMMONTYPES/2.0/COMMONTYPES.xsd" n1:Language="ger" n1:GeneratingSystem="MUSTERFIRMA" n1:DocumentType="Order" n1:DocumentTitle="Order" xmlns:n1="http://www.bmd.at/xsd/ORDER/2.0/" xmlns:bmd="http://www.bmd.at/xsd/COMMONTYPES/2.0/" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <n1:OrderingParty>
+        <bmd:ExternalOrderingPartyID>1</bmd:ExternalOrderingPartyID>
+        <bmd:VATIdentificationNumber>ATU1234567</bmd:VATIdentificationNumber>
+        <bmd:Email>manu@mustermann.at</bmd:Email>
+        <bmd:Address>
+            <bmd:Salutation>Frau</bmd:Salutation>
+            <bmd:FirstName>Manuela</bmd:FirstName>
+            <bmd:LastName>Mustermann</bmd:LastName>
+            <bmd:AdditionalName>Allgemein Mediziner</bmd:AdditionalName>
+            <bmd:AcademicTitle>Dr.</bmd:AcademicTitle>
+            <bmd:Street>Mustergasse 12</bmd:Street>
+            <bmd:Town>Musterstadt</bmd:Town>
+            <bmd:ZIP>7700</bmd:ZIP>
+            <bmd:Country>AT</bmd:Country>
+        </bmd:Address>
+    </n1:OrderingParty>
+    <n1:InvoiceRecipient>
+        <bmd:ExternalInvoiceRecipientID>1</bmd:ExternalInvoiceRecipientID>
+        <bmd:VATIdentificationNumber>ATU1234568</bmd:VATIdentificationNumber>
+        <bmd:Email>test@bmd.at</bmd:Email>
+        <bmd:Address>
+            <bmd:FirstName>Max</bmd:FirstName>
+            <bmd:LastName>Mustermann</bmd:LastName>
+            <bmd:Street>Rechnungstrasse 1</bmd:Street>
+            <bmd:Town>Musterstadt</bmd:Town>
+            <bmd:ZIP>7700</bmd:ZIP>
+            <bmd:Country>AT</bmd:Country>
+        </bmd:Address>
+    </n1:InvoiceRecipient>
+    <n1:DeliveryRecipient>
+        <bmd:ExternalDeliveryRecipientID>1</bmd:ExternalDeliveryRecipientID>
+        <bmd:VATIdentificationNumber>ATU1234569</bmd:VATIdentificationNumber>
+        <bmd:Email>manfred@mustermann.at</bmd:Email>
+        <bmd:Address>
+            <bmd:FirstName>Manfred</bmd:FirstName>
+            <bmd:LastName>Mustermann</bmd:LastName>
+            <bmd:Street>Liefergasse 1</bmd:Street>
+            <bmd:Town>Musterstadt</bmd:Town>
+            <bmd:ZIP>7700</bmd:ZIP>
+            <bmd:Country>AT</bmd:Country>
+        </bmd:Address>
+    </n1:DeliveryRecipient>
+    <n1:OrderReference>23128633</n1:OrderReference> <!-- WordPress Order ID -->
+    <n1:OrderDate>2018-11-18</n1:OrderDate>
+    <n1:DeliveryDateRequested>2017-11-19</n1:DeliveryDateRequested> <!--Gew�nschter Liefertermin-->
+    <n1:GrossPrice>false</n1:GrossPrice> <!--Bruttopreis-Kennzeichen - sind die �bergebenen VK-Preise inkl. (true) oder exkl. Steuer (false)-->
+    <n1:DiscountPercentage>0.00</n1:DiscountPercentage> <!--Schlussrabatt auf die Auftrags Gesamtsumme-->
+    <n1:ItemList>
+        <n1:ListLineItem>
+            <n1:OrderPosNumber>1</n1:OrderPosNumber>
+            <n1:EANCode>1234568</n1:EANCode> <!--EAN-Nummer - M�glicher Artikelidentifier-->
+            <n1:DistributorsArticleNo>2001</n1:DistributorsArticleNo> <!--BMD-Artikelnummer - M�glicher Artikelidentifier-->
+            <n1:CustomersArticleNo>123456</n1:CustomersArticleNo> <!--Kunden-Artikelnummer - M�glicher Artikelidentifier-->
+            <n1:DistributorsArticleName>Mini-Muster</n1:DistributorsArticleName>
+            <n1:OrderQuantity bmd:Unit="Stk">1.00</n1:OrderQuantity>
+            <n1:Price bmd:PricePer="1" bmd:Unit="Stk" bmd:Currency="EUR">19.90</n1:Price>
+            <n1:DiscountPercentage>0.00</n1:DiscountPercentage>
+            <n1:DeliveryDate>2018-11-19</n1:DeliveryDate>
+        </n1:ListLineItem>
+        <n1:ListLineItem>
+            <n1:OrderPosNumber>2</n1:OrderPosNumber>
+            <n1:DistributorsArticleNo>2002</n1:DistributorsArticleNo>
+            <n1:DistributorsArticleName>Maxi-Muster</n1:DistributorsArticleName>
+            <n1:ArticleDescription>Dies ist ein Mustertext für die Artikelbeschreibung der jeweiligen Auftragsposition</n1:ArticleDescription>
+            <n1:OrderQuantity bmd:Unit="Stk">1.00</n1:OrderQuantity>
+            <n1:Price bmd:PricePer="10" bmd:Unit="Stk" bmd:Currency="EUR">299.90</n1:Price>
+            <n1:DiscountAmount>0.00</n1:DiscountAmount>
+            <n1:DeliveryDate>2018-11-19</n1:DeliveryDate>
+        </n1:ListLineItem>
+    </n1:ItemList>
+</n1:Order>

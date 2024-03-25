@@ -22,7 +22,7 @@ class Plugin
         add_action('plugins_loaded', [$this, 'pluginsLoaded']);
         add_action('init', [$this, 'init']);
         add_action('acf/render_field/name=iwg_price_formular', [$this, 'descriptionsForFields']);
-        add_action('add_meta_boxes', [$this, 'metaboxes']);
+        //add_action('add_meta_boxes', [$this, 'metaboxes']);
 
         new PriceFormulaHandler();
     }
