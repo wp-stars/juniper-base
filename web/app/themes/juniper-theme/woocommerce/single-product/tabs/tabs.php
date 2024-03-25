@@ -21,7 +21,7 @@ if ( ! empty( $product_tabs ) ) : ?>
 		<ul class="tabs wc-tabs flex flex-wrap border-t" role="tablist">
 			<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
 				<li class="<?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
-					<a href="#tab-<?php echo esc_attr( $key ); ?>" class="text-black py-2 px-4 inline-block border-t-2 border-transparent hover:border-black focus:border-black">
+					<a href="#tab-<?php echo esc_attr( $key ); ?>" class="<?= $key === 0 ? 'active' : ''; ?>text-black py-2 px-4 inline-block border-t-2 border-transparent hover:border-black focus:border-black">
 						<?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?>
 					</a>
 				</li>
