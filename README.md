@@ -165,3 +165,14 @@ some validation or ajax requests and then update the content of the Modal:
       return $modal;
    });
 ```
+
+# BMD Export
+
+The Plugin 'wps-bmd-api' handles the order export for bmd.
+When the 'woocommerce_thankyou' is triggered, it will create a new xml file and persits it into the upload directory:
+
+```console
+/iwg/web/wp/bmd-exports/
+```
+
+You can test this export for every order. Use the tool in 'Werkzeuge/BMD API Export' - enter the order id, click on "testen" and your are able to get all the data and the xml file.

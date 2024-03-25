@@ -491,7 +491,7 @@ add_action('init', function(){
     $modal->variables['form'] = '';
     $modal->showSubmitButton = false;
     $modal->showCloseButton = false;
-    $modal->open()->render();
+    $modal->close()->render();
 
 });
 
