@@ -21,4 +21,4 @@
 require_once __DIR__ . '/classes/Plugin.php';
 require_once __DIR__ . '/classes/Exporter.php';
 
-new \wps\bmd\Plugin();
+new \wps\bmd\Plugin(__DIR__);
