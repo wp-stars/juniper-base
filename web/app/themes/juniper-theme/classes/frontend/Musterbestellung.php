@@ -119,16 +119,25 @@ function enqueue_custom_js_for_musterbestellung() {
     if (is_product()) {
         global $product;
         if ($product->get_type() === 'musterbestellung') {
-            wp_enqueue_script('custom-musterbestellung-js', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), '', true);
+            wp_enqueue_script('single-musterbestellung-js', get_template_directory_uri() . '/assets/js/single-musterbestellung.js', array('jquery'), '', true);
 
             // Localize script to inject PHP values if necessary (demonstrative; not used directly in your JS)
-            wp_localize_script('custom-musterbestellung-js', 'musterbestellungParams', array(
+            wp_localize_script('single-musterbestellung-js', 'singleMusterbestellungParams', array(
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'restUrl' => get_rest_url()
                 // Any other data you might want to pass from PHP to your JS; this is just a placeholder
             ));
         }
     }
+
+    wp_enqueue_script('custom-musterbestellung-js', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), '', true);
+
+    // Localize script to inject PHP values if necessary (demonstrative; not used directly in your JS)
+    wp_localize_script('custom-musterbestellung-js', 'customMusterbestellungParams', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'restUrl' => get_rest_url()
+        // Any other data you might want to pass from PHP to your JS; this is just a placeholder
+    ));
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_custom_js_for_musterbestellung');
@@ -157,4 +166,119 @@ function get_musterbestellung_products(WP_REST_Request $request) {
     
     return new WP_REST_Response($products, 200);
 }
+
+add_filter('woocommerce_add_cart_item_data', 'add_musterbestellung_data_to_cart_item', 10, 3);
+
+function add_musterbestellung_data_to_cart_item($cart_item_data, $product_id, $variation_id) {
+    if (isset($_COOKIE['musterbestellungProducts'])) {
+        // Decode the JSON from the cookie
+        $musterbestellungProducts = json_decode(stripslashes($_COOKIE['musterbestellungProducts']), true);
+
+        if(count($musterbestellungProducts) > 0) {
+            $musterbestellungData = array_map('setupMusterbestellungData', $musterbestellungProducts);
+            $cart_item_data['musterbestellung_custom_data'] = $musterbestellungData;
+            
+        }
+    }
+
+    return $cart_item_data;
+}
+
+function setupMusterbestellungData($product_id) {
+    return array(
+        'product_id' => $product_id,
+        'product_name' => get_the_title($product_id)
+    );
+}
+
+add_filter('woocommerce_get_item_data', 'display_musterbestellung_data_in_cart', 10, 2);
+
+function display_musterbestellung_data_in_cart($item_data, $cart_item) {
+    if (isset($cart_item['musterbestellung_custom_data'])) {
+        foreach ($cart_item['musterbestellung_custom_data'] as $key => $value) {
+            $index = $key + 1;
+            $item_data[] = array(
+                'name' => "Product $index",
+                'value' => $value['product_name']
+            );
+        }
+    }
+
+    return $item_data;
+}
+
+add_action('woocommerce_checkout_create_order_line_item', 'save_musterbestellung_data_with_order', 10, 4);
+
+function save_musterbestellung_data_with_order($item, $cart_item_key, $values, $order) {
+    if (isset($values['musterbestellung_custom_data'])) {
+        foreach ($values['musterbestellung_custom_data'] as $key => $value) {
+            $index = $key + 1;
+            $item->add_meta_data("Product $index ID", $value['product_id']);
+            $item->add_meta_data("Product $index Name", $values['product_name']);
+        }
+    }
+}
+
+add_filter('woocommerce_add_to_cart_validation', 'limit_musterbestellung_product_in_cart', 10, 3);
+
+function limit_musterbestellung_product_in_cart($passed, $product_id, $quantity) {
+    $product = wc_get_product($product_id);
+    if ($product->get_type() === 'musterbestellung') {
+        // Check if cart contains a product of type 'musterbestellung'
+        foreach(WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+            $cart_product = wc_get_product($cart_item['product_id']);
+            if($cart_product->get_type() === 'musterbestellung') {
+                
+                // Prevent the new product from being added if you decide not to remove the existing one
+                wc_add_notice(__('You can only have one "Musterbestellung" product in your cart.', 'woocommerce'), 'error');
+                return false;
+            }
+        }
+    }
+
+    return $passed;
+}
+
+add_filter('woocommerce_quantity_input_args', 'musterbestellung_quantity_input_args', 10, 2);
+
+function musterbestellung_quantity_input_args($args, $product) {
+    if ('musterbestellung' === $product->get_type()) {
+        $args['max_value'] = 1;  // Set maximum quantity to 1
+        $args['min_value'] = 0;  // Set minimum quantity to 1 to enforce single item only
+    }
+
+    return $args;
+}
+
+add_action('woocommerce_before_cart_item_quantity_zero', 'check_musterbestellung_product_quantity', 10, 2);
+add_action('woocommerce_after_cart_item_quantity_update', 'check_musterbestellung_product_quantity', 10, 2);
+
+function check_musterbestellung_product_quantity($cart_item_key, $quantity) {
+    $cart_item = WC()->cart->get_cart_item($cart_item_key);
+    $product = wc_get_product($cart_item['product_id']);
+    
+    if ($product->get_type() === 'musterbestellung' && $quantity > 1) {
+        WC()->cart->set_quantity($cart_item_key, 1); // Set the quantity back to 1 if higher
+    }
+}
+
+function enqueue_disable_add_to_cart_script() {
+    $musterbestellung_in_cart = false;
+
+    foreach (WC()->cart->get_cart() as $cart_item) {
+        $product = wc_get_product($cart_item['product_id']);
+        if ($product && 'musterbestellung' === $product->get_type()) {
+            $musterbestellung_in_cart = true;
+            break;
+        }
+    }
+
+    if ($musterbestellung_in_cart) {
+        wp_enqueue_script('disable-add-to-cart', get_template_directory_uri() . '/assets/js/disable-add-to-cart.js', array(), false, true);
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_disable_add_to_cart_script');
+
+
+
 

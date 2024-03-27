@@ -1,42 +1,11 @@
-
-var selects = document.querySelectorAll('.musterbestellung-custom-fields select');
-
-selects.forEach(function(select) {
-    select.addEventListener('change', function() {
-        // Get all selected values except the current one (empty value filter for unselected states)
-        var selectedValues = Array.from(selects).filter(function(s) { return s.value }).map(function(s) { return s.value; });
-        
-        const selectedString = JSON.stringify(selectedValues);
-
-        // Calculate expiration date (current date + 7 days)
-        const date = new Date();
-        date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)); // 7 days in milliseconds
-        const expires = "expires=" + date.toUTCString();
-
-        // Set the cookie with the array string and expiration date
-        document.cookie = "musterbestellungProducts=" + selectedString + ";" + expires + ";path=/";
-
-        selects.forEach(function(innerSelect) {
-            // Iterate over all options in each select
-            Array.from(innerSelect.options).forEach(function(option) {
-                option.disabled = false; // Enable all options before applying logic
-
-                // Disable option if it's selected in another select and not the current one
-                if (selectedValues.includes(option.value) && innerSelect.value !== option.value) {
-                    option.disabled = true;
-                }
-            });
-        });
-    });
-});
 const cookieName = 'musterbestellungProducts';
 
-function fetchAndUpdateProductImages() {
+function fetchAndUpdateMusterbestellung() {
     const productIds = JSON.parse(getCookie(cookieName)) || [];
     const container = document.querySelector('#musterbestellung .products');
     const productNumberSpan = document.querySelector('#musterbestellung .product-number');
 
-    fetch(`${musterbestellungParams.restUrl}wps/v1/get-musterbestellung/?ids=${productIds.join(',')}`)
+    fetch(`${customMusterbestellungParams.restUrl}wps/v1/get-musterbestellung/?ids=${productIds.join(',')}`)
         .then(response => response.json())
         .then(products => {
             // Update the product number display
@@ -54,13 +23,19 @@ function fetchAndUpdateProductImages() {
                 if (product) {
                     // Display product image with tooltip
                     productDiv.innerHTML = `
-                        <div class="tooltip group">
-                            <img src="${product.image[0]}" style="display: block; margin-bottom: 10px;">
-                            <span class="tooltiptext bg-accent rounded-sm p-1 text-black group-hover:visible">${product.name}</span>
+                        <div class="tooltip group mb-4">
+                            <div class="product overflow-hidden rounded-full">
+                                <img src="${product.image[0]}" style="display: block;">
+                            </div>
+                            <span class="tooltiptext bg-accent rounded-sm p-1 text-black invisible group-hover:visible">${product.name}</span>
                         </div>`;
                 } else {
                     // Display placeholder
-                    productDiv.innerHTML = `<div class="placeholder" style="width: 50px; height: 50px; background-color: #eee; margin-bottom: 10px;"></div>`;
+                    productDiv.innerHTML = `<div class="placeholder border-solid border-2 border-black rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M19.25 11C19.25 11.1823 19.1776 11.3572 19.0486 11.4861C18.9197 11.6151 18.7448 11.6875 18.5625 11.6875H11.6875V18.5625C11.6875 18.7448 11.6151 18.9197 11.4861 19.0486C11.3572 19.1776 11.1823 19.25 11 19.25C10.8177 19.25 10.6428 19.1776 10.5139 19.0486C10.3849 18.9197 10.3125 18.7448 10.3125 18.5625V11.6875H3.4375C3.25516 11.6875 3.0803 11.6151 2.95136 11.4861C2.82243 11.3572 2.75 11.1823 2.75 11C2.75 10.8177 2.82243 10.6428 2.95136 10.5139C3.0803 10.3849 3.25516 10.3125 3.4375 10.3125H10.3125V3.4375C10.3125 3.25516 10.3849 3.0803 10.5139 2.95136C10.6428 2.82243 10.8177 2.75 11 2.75C11.1823 2.75 11.3572 2.82243 11.4861 2.95136C11.6151 3.0803 11.6875 3.25516 11.6875 3.4375V10.3125H18.5625C18.7448 10.3125 18.9197 10.3849 19.0486 10.5139C19.1776 10.6428 19.25 10.8177 19.25 11Z" fill="black"/>
+                        </svg>
+                    </div>`;
                 }
                 container.appendChild(productDiv);
             }
@@ -73,13 +48,13 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-fetchAndUpdateProductImages();
+fetchAndUpdateMusterbestellung();
 
 // Set up an observer to watch for cookie changes
 let lastCookie = document.cookie;
 setInterval(() => {
     if (document.cookie !== lastCookie) {
         lastCookie = document.cookie;
-        fetchAndUpdateProductImages();
+        fetchAndUpdateMusterbestellung();
     }
 }, 1000); // Poll every 1000ms
