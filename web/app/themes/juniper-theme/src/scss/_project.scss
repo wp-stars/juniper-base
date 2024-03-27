@@ -121,49 +121,51 @@ select {
     margin: 0rem 0rem 2rem 0rem !important;
 }
 
-.woocommerce-checkout .woocommerce-order-details .order_details,table{
-border-radius: 0 0 5px 5px !important;
-border: solid #737373 1px !important;
-border-top: none !important;
+.woocommerce-checkout .woocommerce-order-details .order_details, 
+table {
+    tfoot{
+        th,td{
+            border-top: solid #737373 1px !important;
+        }
+        th{
+            border-right: solid #737373 1px ;
+        }
+    } 
 
-tfoot{
-    th,td{
-        border-top: solid #737373 1px !important;
-    }
-    th{
-        border-right: solid #737373 1px ;
-    }
-} 
+    .order_item{
+        .product-name{
+            border-top: solid #737373 1px !important;
+            border-right: solid #737373 1px ;
+        }
+        .product-total{
+            border-top: solid #737373 1px !important;
 
-.order_item{
-    .product-name{
-        border-top: solid #737373 1px !important;
-        border-right: solid #737373 1px ;
-    }
-    .product-total{
-        border-top: solid #737373 1px !important;
-
-    }
-} 
+        }
+    } 
 }
 
 .woocommerce-checkout .woocommerce-customer-details address{
     border-radius: 0 0 5px 5px !important;
-border: solid #737373 1px !important;
-border-top: none !important;
+    border: solid #737373 1px !important;
+    border-top: none !important;
+}
+
 .woocommerce-customer-details--phone::before,.woocommerce-customer-details--email::before{
     display: none;
 }
+
 .woocommerce-customer-details--phone,.woocommerce-customer-details--email{
     padding-left: 0 !important;
 }
+
 .woocommerce-customer-details--email{
     margin-top: 0;
 }
   
   
 .components-button.wc-block-components-button.wp-element-button.wc-block-cart__submit-button.contained,
-.components-button.wc-block-components-button.wp-element-button.wc-block-components-checkout-place-order-button.contained {    display: flex;
+.components-button.wc-block-components-button.wp-element-button.wc-block-components-checkout-place-order-button.contained {    
+    display: flex;
     color: #fff;
     border-radius: 4px;
     background: var(--Primary-IWG-Black, #000);
@@ -175,9 +177,7 @@ border-top: none !important;
 }
 
 .tooltip .tooltiptext {
-    visibility: hidden;
     right: 90px;
-    /* Position the tooltip */
     position: absolute;
     z-index: 1;
     left: -130px;
@@ -185,6 +185,31 @@ border-top: none !important;
     font-size: 12px;
 }
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
+
+#musterbestellung {
+    z-index: 99;
+    .placeholder,
+    .product {
+        height: 72px;
+        width: 72px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .product {
+        img {
+            object-fit: cover;
+            object-position: center;
+            min-width: 100%;
+            min-height: 100%;
+        }
+    }
+}
+
+.musterbestellung-custom-fields {
+    select {
+        padding: 0.5rem;
+        border-radius: 3px;
+    }
 }
