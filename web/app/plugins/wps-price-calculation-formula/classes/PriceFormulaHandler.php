@@ -20,10 +20,53 @@ class PriceFormulaHandler
         $this->transformationVariablesRepository = new TransformationVariablesRepository();
     }
 
+    public function createPostForMetalPriceChart(){
+
+        $user_id = get_current_user_id();
+
+        $transformationVariablesRepository = new TransformationVariablesRepository();
+        $transformationVariablesRepository->init();
+
+        $data = $transformationVariablesRepository->get();
+
+        //dump($data);
+
+        $date = new \DateTime('today', new \DateTimeZone('Europe/Berlin'));
+        $post_title = wp_date('d. F Y', $date->getTimestamp());
+
+        // create wordpress post
+        $post_id = post_exists($post_title);
+
+        if($post_id === 0){
+
+            $post = array(
+                'post_title' => $post_title,
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_author' => $user_id,
+                'post_type' => 'metalprices',
+            );
+
+            $post_id = wp_insert_post($post);
+        }
+
+        if(is_int($post_id) && $post_id > 0){
+            update_post_meta($post_id, 'metalprice_gold', $data['transformation_gold']);
+            update_post_meta($post_id, 'metalprice_silver', $data['transformation_silber']);
+            update_post_meta($post_id, 'metalprice_platin', $data['transformation_platin']);
+            update_post_meta($post_id, 'metalprice_palladium', $data['transformation_palladium']);
+            update_post_meta($post_id, 'metalprice_rhodium', $data['transformation_rhodium']);
+            update_post_meta($post_id, 'metalprice_ruthenium', $data['transformation_ruthenium']);
+        }
+    }
+
     public function updateOptionsPageEvent(){
 
         // log the event
         Logger::optionsPageUpdate();
+
+        // create Post for the Metalprice Chart inside of the wps-metalprices plugin
+        $this->createPostForMetalPriceChart();
 
         $this->permissionCheck();
 
