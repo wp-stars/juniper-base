@@ -198,6 +198,7 @@ table {
     }
 
     .product {
+        position: relative;
         img {
             object-fit: cover;
             object-position: center;
@@ -205,11 +206,25 @@ table {
             min-height: 100%;
         }
     }
+
+    .delete-product {
+        display: flex;
+        padding: 6px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+        border: 1px solid #CC1718;
+        background: #FEF0EF;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+    }
 }
 
 .musterbestellung-custom-fields {
     select {
         padding: 0.5rem;
         border-radius: 3px;
+        border: 1px solid black;
     }
 }

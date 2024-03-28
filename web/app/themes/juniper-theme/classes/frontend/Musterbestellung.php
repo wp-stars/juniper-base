@@ -105,7 +105,19 @@ function add_custom_fields_to_musterbestellung_frontend() {
 
 // Function to populate the options in the custom fields
 function get_products_options() {
-    $products = wc_get_products(array('status' => 'publish', 'limit' => -1));
+    $args = array(
+        'status' => 'publish',
+        'limit' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'purchasability', // Your custom taxonomy name
+                'field'    => 'slug',
+                'terms'    => 'sample-available', // Your taxonomy term's slug
+            ),
+        ),
+    );
+
+    $products = wc_get_products($args);
     $options = array('' => __('Select a Product', 'woocommerce'));
     foreach ($products as $product) {
         if ('musterbestellung' !== $product->get_type()) {
@@ -131,35 +143,86 @@ function enqueue_custom_js_for_musterbestellung() {
     }
 
     wp_enqueue_script('custom-musterbestellung-js', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), '', true);
+    
+    $products = [];
 
-    // Localize script to inject PHP values if necessary (demonstrative; not used directly in your JS)
+    if (isset($_COOKIE['musterbestellungProducts'])) {
+        $musterbestellungProducts = json_decode(stripslashes($_COOKIE['musterbestellungProducts']), true);
+        $products = [];
+    
+        foreach ($musterbestellungProducts as $id) {
+            // Assuming getProductImageById is a function that returns an image URL by product ID
+            $product = new \stdClass();
+    
+            $product->image = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'single-post-thumbnail' );
+            $product->name = get_the_title( $id );
+            $product->id = $id;
+            
+            $products[] = $product; 
+        }
+    }
+
     wp_localize_script('custom-musterbestellung-js', 'customMusterbestellungParams', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
-        'restUrl' => get_rest_url()
-        // Any other data you might want to pass from PHP to your JS; this is just a placeholder
+        'restUrl' => get_rest_url(),
+        'musterbestellungProducts' => $products
     ));
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_custom_js_for_musterbestellung');
 
 add_action('rest_api_init', function () {
-    register_rest_route('wps/v1', '/get-musterbestellung/', array(
+    register_rest_route('wps/v1', '/musterbestellung/', array(
         'methods' => 'GET',
-        'callback' => 'get_musterbestellung_products',
+        'callback' => 'update_musterbestellung_products',
         'permission_callback' => '__return_true', // Adjust permissions based on your needs
     ));
 });
 
-function get_musterbestellung_products(WP_REST_Request $request) {
-    $product_ids = explode(',', $request->get_param('ids'));
+function update_musterbestellung_products(WP_REST_Request $request) {
+    $productIds = explode(',', $request->get_param('ids'));
+
+    $updateCart = true;
+    if (isset($_COOKIE['musterbestellungProducts'])) {
+        $musterbestellungProducts = json_decode(stripslashes($_COOKIE['musterbestellungProducts']), true);
+        sort($musterbestellungProducts);
+        sort($productIds);
+
+        // Check if there are differences
+        if (!empty(array_diff_assoc($musterbestellungProducts, $productIds)) || !empty(array_diff_assoc($productIds, $musterbestellungProducts))) {
+            $updateCart = false;
+        }
+    }
+
+    if($updateCart) {
+        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+            if (isset($cart_item['data']) && $cart_item['data']->get_type() === 'musterbestellung') {            
+                if (!empty($productIds)) {
+                    // Update cart item with custom data
+                    WC()->cart->cart_contents[$cart_item_key]['musterbestellung_custom_data'] = array_map('setupMusterbestellungData', $productIds);
+                } else {
+                    // If $productIds is empty, remove the product from the cart
+                    WC()->cart->remove_cart_item($cart_item_key);
+                }
+                $cart_updated = true;
+            }
+        }
+
+        if ($cart_updated) {
+            WC()->cart->set_session();
+        }
+
+    }
+
     $products = [];
     
-    foreach ($product_ids as $id) {
+    foreach ($productIds as $id) {
         // Assuming getProductImageById is a function that returns an image URL by product ID
         $product = new \stdClass();
 
         $product->image = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'single-post-thumbnail' );
         $product->name = get_the_title( $id );
+        $product->id = $id;
         
         $products[] = $product; 
     }
@@ -223,17 +286,20 @@ add_filter('woocommerce_add_to_cart_validation', 'limit_musterbestellung_product
 
 function limit_musterbestellung_product_in_cart($passed, $product_id, $quantity) {
     $product = wc_get_product($product_id);
+    $musterbestellung_count = 0;
     if ($product->get_type() === 'musterbestellung') {
         // Check if cart contains a product of type 'musterbestellung'
         foreach(WC()->cart->get_cart() as $cart_item_key => $cart_item) {
             $cart_product = wc_get_product($cart_item['product_id']);
             if($cart_product->get_type() === 'musterbestellung') {
-                
-                // Prevent the new product from being added if you decide not to remove the existing one
-                wc_add_notice(__('You can only have one "Musterbestellung" product in your cart.', 'woocommerce'), 'error');
-                return false;
+                $musterbestellung_count++;
             }
         }
+    }
+
+    if($musterbestellung_count >= 1) {
+        wc_add_notice(__('You can only have one "Musterbestellung" product in your cart.', 'woocommerce'), 'error');
+        return false;
     }
 
     return $passed;
@@ -278,6 +344,69 @@ function enqueue_disable_add_to_cart_script() {
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_disable_add_to_cart_script');
+
+add_action( 'wp_loaded', 'maybe_load_cart', 5 );
+/**
+ * Loads the cart, session and notices should it be required.
+ *
+ * Note: Only needed should the site be running WooCommerce 3.6
+ * or higher as they are not included during a REST request.
+ *
+ * @see https://plugins.trac.wordpress.org/browser/cart-rest-api-for-woocommerce/trunk/includes/class-cocart-init.php#L145
+ * @since   2.0.0
+ * @version 2.0.3
+ */
+function maybe_load_cart() {
+	if ( version_compare( WC_VERSION, '3.6.0', '>=' ) && WC()->is_rest_api_request() ) {
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return;
+		}
+
+		$rest_prefix = 'wps/v1/musterbestellung/';
+		$req_uri     = esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+
+		$is_my_endpoint = ( false !== strpos( $req_uri, $rest_prefix ) );
+
+		if ( ! $is_my_endpoint ) {
+			return;
+		}
+
+		require_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+		require_once WC_ABSPATH . 'includes/wc-notice-functions.php';
+
+		if ( null === WC()->session ) {
+			$session_class = apply_filters( 'woocommerce_session_handler', 'WC_Session_Handler' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+
+			// Prefix session class with global namespace if not already namespaced
+			if ( false === strpos( $session_class, '\\' ) ) {
+				$session_class = '\\' . $session_class;
+			}
+
+			WC()->session = new $session_class();
+			WC()->session->init();
+		}
+
+		/**
+		 * For logged in customers, pull data from their account rather than the
+		 * session which may contain incomplete data.
+		 */
+		if ( is_null( WC()->customer ) ) {
+			if ( is_user_logged_in() ) {
+				WC()->customer = new WC_Customer( get_current_user_id() );
+			} else {
+				WC()->customer = new WC_Customer( get_current_user_id(), true );
+			}
+
+			// Customer should be saved during shutdown.
+			add_action( 'shutdown', array( WC()->customer, 'save' ), 10 );
+		}
+
+		// Load Cart.
+		if ( null === WC()->cart ) {
+			WC()->cart = new WC_Cart();
+		}
+	}
+}
 
 
 
