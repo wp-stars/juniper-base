@@ -165,6 +165,7 @@ function enqueue_custom_js_for_musterbestellung() {
     wp_localize_script('custom-musterbestellung-js', 'customMusterbestellungParams', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
         'restUrl' => get_rest_url(),
+        'themeUrl' => get_template_directory_uri(),
         'musterbestellungProducts' => $products
     ));
 }

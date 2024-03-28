@@ -1,6 +1,7 @@
 const cookieName = 'musterbestellungProducts';
 let isUpdating = false
 function fetchAndUpdateMusterbestellung(reload = false) {
+    showLoading()
     const productIds = JSON.parse(getCookie(cookieName)) || [];
     isUpdating = true
     fetch(`${customMusterbestellungParams.restUrl}wps/v1/musterbestellung/?ids=${productIds.join(',')}`)
@@ -11,8 +12,22 @@ function fetchAndUpdateMusterbestellung(reload = false) {
                 return
             }
             isUpdating = false
+
             injectProductsHTML(products, productIds)
         });
+}
+
+const showLoading = () => {
+    const container = document.querySelector('#musterbestellung .products');
+    container.innerHTML = '';
+
+    const loadingDiv = document.createElement('div');
+    loadingDiv.classList.add('products-loading')
+    loadingDiv.innerHTML = `
+        <img src="${customMusterbestellungParams.themeUrl}/assets/img/musterbestellung-loading.svg" alt="loading" />
+    `
+    container.appendChild(loadingDiv);
+
 }
 
 const initializeMusterbestellung = () => {

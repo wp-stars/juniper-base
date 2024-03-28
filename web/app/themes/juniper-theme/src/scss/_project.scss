@@ -185,6 +185,14 @@ table {
     font-size: 12px;
 }
 
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
 
 #musterbestellung {
     z-index: 99;
@@ -218,6 +226,10 @@ table {
         position: absolute;
         top: -5px;
         right: -5px;
+    }
+
+    .products-loading {
+        animation: spin 2s linear infinite;
     }
 }
 
