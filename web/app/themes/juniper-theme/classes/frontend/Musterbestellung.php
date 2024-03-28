@@ -299,7 +299,6 @@ function limit_musterbestellung_product_in_cart($passed, $product_id, $quantity)
     }
 
     if($musterbestellung_count >= 1) {
-        wc_add_notice(__('You can only have one "Musterbestellung" product in your cart.', 'woocommerce'), 'error');
         return false;
     }
 

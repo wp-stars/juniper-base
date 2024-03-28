@@ -60,7 +60,8 @@ Clone repo
 
 Run bash start.sh
 
-Put this .htaccess in the public_html folder
+Put this .htaccess in the public_html folder, you can also configure the document root accordingly if you have access to that. This is a matter of preference.
+
 ```
 <IfModule mod_rewrite.c>
 RewriteEngine on
@@ -176,3 +177,8 @@ When the 'woocommerce_thankyou' is triggered, it will create a new xml file and 
 ```
 
 You can test this export for every order. Use the tool in 'Werkzeuge/BMD API Export' - enter the order id, click on "testen" and your are able to get all the data and the xml file.
+
+# Borlabs & WP Rocket
+
+Both of these plugins need to be installed via composer when the project is finished. Each has a self hosted composer package, and should be included in package.json, if it isn't already. Once it is installed via composer, it can be safely activated. 
+

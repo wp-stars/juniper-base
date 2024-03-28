@@ -31,7 +31,7 @@ if (is_shop()) {
         wp_enqueue_script('filter-js', $theme_path . '/blocks/filter/script.js', array(), $time, true);
 
         $attributes = [];
-        wp_enqueue_script( 'dashboardBlockFrontendScript', $theme_path . '/blocks/filter/build/frontend.js', array(
+        wp_enqueue_script( 'filterBlockFrontendScript', $theme_path . '/blocks/filter/build/frontend.js', array(
             'wp-blocks',
             'wp-element',
             'wp-editor',
@@ -41,7 +41,7 @@ if (is_shop()) {
             'wp-polyfill',
             'wp-api-fetch'
         ), $time, true );
-        wp_localize_script( 'dashboardBlockFrontendScript', 'filterData', $attributes );
+        wp_localize_script( 'filterBlockFrontendScript', 'filterData', $attributes );
     }
 }
 
