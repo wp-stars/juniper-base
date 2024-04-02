@@ -10,7 +10,7 @@
 						<div class="grid grid-cols-3 bg-white shadow-md rounded p-8 relative top-4">
 							{% for child in item.children %}
 								<div class="grid grid-cols-1 text-xs">
-									<p>{{ child.title }}</p>
+									<p><strong>{{ child.title }}</strong></p>
 									{% for subchild in child.children %}
 										<a href="{{ subchild.link }}">{{ subchild.title }}</a>
 									{% endfor %}
