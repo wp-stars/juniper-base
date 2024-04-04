@@ -206,13 +206,15 @@ const Filter = ( data ) => {
                 : null}
             </div>
             <div className="container mt-[54px]">
-                <div className="grid grid-cols-3 mb-10 gap-[42px]">
+                <div className="grid grid-cols-3 mb-10 gap-[42px] filter-grid">
                     {!loading ? 
                         posts.length ? 
                             <>
                                 {posts.map((post, index) => {
                                     return (
-                                        <div key={index} dangerouslySetInnerHTML={{ __html: atob(post.html) }}></div>
+                                      
+                                        <div key={index} className="flex flex-col h-full"  dangerouslySetInnerHTML={{ __html: atob(post.html) }}></div>
+                                     
                                     )
                                 })}
                             </>

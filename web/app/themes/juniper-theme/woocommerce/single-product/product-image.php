@@ -33,6 +33,7 @@ $wrapper_classes   = apply_filters(
         'woocommerce-product-gallery--' . ( $post_thumbnail_id ? 'with-images' : 'without-images' ),
         'woocommerce-product-gallery--columns-' . absint( $columns ),
         'images',
+        'max-h-[27.5rem]'
     )
 );
 ?>
@@ -43,7 +44,7 @@ $wrapper_classes   = apply_filters(
             $attachment_ids = $product->get_gallery_image_ids();
             foreach ( $attachment_ids as $attachment_id ) {
 				add_image_size( 'custom-size', 800, 800, true ); 
-                echo '<div>' . wp_get_attachment_image( $attachment_id, 'custom-size' ) . '</div>';
+                echo '<div>' . wp_get_attachment_image($attachment_id, 'custom-size', false, array('class' => 'max-h-[27.5rem] object-cover')) . '</div>';
             }
         } else {
             echo '<div class="woocommerce-product-gallery__image--placeholder">';

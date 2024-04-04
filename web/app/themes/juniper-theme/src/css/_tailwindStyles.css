@@ -1255,12 +1255,20 @@ video {
   height: 100% !important;
 }
 
+.h-\[16rem\] {
+  height: 16rem;
+}
+
 .max-h-\[25rem\] {
   max-height: 25rem;
 }
 
 .max-h-\[80\%\] {
   max-height: 80%;
+}
+
+.max-h-\[27\.5rem\] {
+  max-height: 27.5rem;
 }
 
 .min-h-\[1000px\] {
@@ -1466,6 +1474,10 @@ video {
 
 .grid-flow-row-dense {
   grid-auto-flow: row dense;
+}
+
+.auto-rows-fr {
+  grid-auto-rows: minmax(0, 1fr);
 }
 
 .grid-cols-1 {
