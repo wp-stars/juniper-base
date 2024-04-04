@@ -240,3 +240,45 @@ table {
         border: 1px solid black;
     }
 }
+
+.woocommerce-Tabs-panel{
+    font-size: 14px;
+    line-height: 20px;
+    
+    h4{
+        margin-top: 60px;
+        margin-bottom: 16px;
+        font-size: 24px;
+    }
+
+    li::before {
+        content: "• ";  /* Unicode character for a bullet */
+        padding-right: 5px; /* Optional: Adjusts spacing between the bullet and the list item */
+        font-weight: bold; /* Makes the bullet bolder */
+        font-size: 26px;
+        vertical-align: sub;
+      }
+} 
+
+.slick-dots {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+
+    li{
+        margin: 0px !important;
+    }
+
+    li button:before {
+        content: url('data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSI+CjxjaXJjbGUgY3g9IjYiIGN5PSI2IiByPSI1LjUiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM3MzczNzMiLz4KPC9zdmc+Cg==') !important;
+        display: inline-block;
+    }
+
+    li.slick-active button:before {
+        content: url('data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSI+CjxjaXJjbGUgY3g9IjYiIGN5PSI2IiByPSI1LjUiIGZpbGw9IiNGRkVCMDAiIHN0cm9rZT0iIzczNzM3MyIvPgo8L3N2Zz4K') !important;
+        display: inline-block;
+    }
+    
+    
+}
