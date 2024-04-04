@@ -26,7 +26,7 @@ class ProductCard {
 
         ob_start();
         ?>
-            <div class="overflow-hidden shadow-lg relative product-card h-[100%]">
+            <div class="overflow-hidden shadow-lg relative product-card h-[100%] pb-[20px]">
                 <a href="<?= $product->get_permalink(); ?>">
                     <?php 
                     $attachment_ids = $product->get_gallery_image_ids();
@@ -45,7 +45,7 @@ class ProductCard {
                 <?php } ?>
                 <hr class="my-[24px] w-[calc(100% - 40px)] mx-[20px]" /> 
                 <!-- <div class="px-[20px] pb-[20px]"> -->
-                    <div class="flex flex-col px-[20px] pb-[20px] justify-between h-[16rem]">
+                    <div class="flex flex-col px-[20px] justify-between h-[16rem]">
                         <p class="uppercase mb-8 text-xs"><?= $terms_string; ?></p>
                         <a href="<?= $product->get_permalink(); ?>">
                             <h4 class="mb-8"><?= $product->get_title(); ?></h4>
