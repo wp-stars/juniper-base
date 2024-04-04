@@ -19,4 +19,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-the_title( '<h2 class="product_title entry-title">', '</h2>' );
+the_title( '<h2 class="product_title entry-title mb-1.5">', '</h2>' );
+do_action('wps_print_custom_text_field');

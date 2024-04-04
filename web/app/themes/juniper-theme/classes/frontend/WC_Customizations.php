@@ -11,6 +11,11 @@ class WC_Customizations {
         add_action('wps_print_metals_and_accessories', array($this, 'print_metals_and_accessories'));
 
         add_filter( 'woocommerce_product_tabs', array($this, 'add_product_tabs'), 9999 );
+
+        add_action('woocommerce_product_options_general_product_data', array($this, 'add_custom_text_field'));
+        add_action('woocommerce_process_product_meta', array($this, 'save_custom_text_field'));
+        add_action('wps_print_custom_text_field', array($this, 'print_custom_text_field'));
+
     }
 
     public function add_product_tabs() {
@@ -45,7 +50,7 @@ class WC_Customizations {
 
         if ($product_categories) {
             ?>
-            <div class="flex flex-wrap product-categories mb-[13px]">
+            <div class="flex flex-wrap product-categories mb-[13px] gap-3.5">
                 <?php
                 foreach ($product_categories as $category) {
                     ?>
@@ -79,5 +84,35 @@ class WC_Customizations {
             <?php
         }
     }
+
+    public function add_custom_text_field() {
+        woocommerce_wp_text_input(array(
+            'id' => '_custom_text_field',
+            'label' => __('Custom Text Field', 'woocommerce'),
+            'placeholder' => '',
+            'desc_tip' => 'true',
+            'description' => __('Enter the custom value here.', 'woocommerce'),
+        ));
+    }
+
+    public function save_custom_text_field($post_id) {
+        $custom_field_value = isset($_POST['_custom_text_field']) ? $_POST['_custom_text_field'] : '';
+        if (!empty($custom_field_value)) {
+            update_post_meta($post_id, '_custom_text_field', sanitize_text_field($custom_field_value));
+        }
+    }
+
+
+    public function print_custom_text_field() {
+        global $product;
+
+        $custom_value = get_post_meta($product->get_id(), '_custom_text_field', true);
+
+        if (!empty($custom_value)) {
+            echo '<h3 class="text-black text-2xl font-bold leading-7 mb-3.5">' . esc_html($custom_value) . '</h3>';
+        }
+    }
 }
+
+
 
