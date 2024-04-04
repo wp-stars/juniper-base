@@ -54,28 +54,3 @@ $wrapper_classes   = apply_filters(
     </div>
 </div>
 
-<script>
-    jQuery(document).ready(function() {
-        if (jQuery('.woocommerce-product-gallery__wrapper').length > 0) {
-            // Initialization of Slick slider
-            jQuery('.woocommerce-product-gallery__wrapper').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                fade: true,
-                dots: true,
-                // asNavFor: '.woocommerce-product-gallery-thumbnails'
-            });
-        } else {
-            console.log('Element not found');
-        }
-    });
-
-	jQuery(document).ready(function() {
-        if (jQuery('.woocommerce-product-gallery__wrapper').length > 0) {
-            jQuery('.woocommerce-product-gallery__wrapper').slick();
-        } else {
-            console.log('Element not found');
-        }
-    });
-</script>
