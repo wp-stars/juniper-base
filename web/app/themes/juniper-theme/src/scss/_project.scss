@@ -289,3 +289,7 @@ table {
 .slick-slider .slick-list{
     height: 100% !important;
 }
+
+.filter-grid{
+    grid-auto-columns: minmax(0, 1fr);
+}
