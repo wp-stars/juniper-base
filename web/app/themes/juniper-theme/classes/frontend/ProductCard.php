@@ -29,16 +29,14 @@ class ProductCard {
             <div class="overflow-hidden shadow-lg relative product-card">
                 <a href="<?= $product->get_permalink(); ?>">
                     <?php 
-                        $attachment_ids = $product->get_gallery_image_ids();
-                        if ( $attachment_ids && is_array( $attachment_ids ) ) {?>
-                            <div class="product-gallery">
-                                <?php foreach ( $attachment_ids as $attachment_id ) {
-                                    // You can adjust the image size or add additional attributes as needed
-                                    $image_html = wp_get_attachment_image( $attachment_id, 'medium' );
-                                    echo '<div class="gallery-image">' . $image_html . '</div>';
-                                } ?>
-
-                            </div>
+                    $attachment_ids = $product->get_gallery_image_ids();
+                    if ( $attachment_ids && is_array( $attachment_ids ) ) {?>
+                        <div class="product-gallery slick-slider product-card-slider h-[21rem]">
+                            <?php foreach ( $attachment_ids as $attachment_id ) {
+                               $image_html = wp_get_attachment_image($attachment_id, 'medium', false, array( 'class' => '!h-[100%] w-[100%] object-cover' ));
+                                echo '<div class="h-[100%]">' . $image_html . '</div>';  
+                            } ?>
+                        </div>
                         <?php }
                     ?>
                 </a>
@@ -75,6 +73,8 @@ class ProductCard {
 
         return $html;
     }
-
 }
+?>
+
+
 
