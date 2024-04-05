@@ -67,7 +67,7 @@ if ( $product->is_in_stock() ) : ?>
 				</button>
 			<?php } ?> 
 			
-			<button class="btn btn-bordered" type="button">
+			<button class="btn btn-bordered product-question-button" onclick="openModal('product-request-modal');" data-id="<?php echo $product->get_id();?>" type="button">
 				<?= __('Fragen zum Produkt?', 'wps-juniper'); ?>
 			</button>
 		</div>

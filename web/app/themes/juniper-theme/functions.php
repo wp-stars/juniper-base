@@ -488,6 +488,7 @@ require_once THEME_DIR . 'inc/admin/capabilities.php';
 
 add_action('init', function(){
     require_once __DIR__.'/classes/frontend/Modal.php';
+
     $modal = new \wps\frontend\Modal();
     $modal->id = 'product-request-modal';
     $modal->view = 'productRequestModal.twig';
@@ -503,7 +504,16 @@ add_action('init', function(){
 add_filter('wps_modal_render', function($modal){
 
     if($modal->id === 'product-request-modal'){
-        $modal->content = do_shortcode('[gravityform id="1" title="false" description="false" ajax="true"]');
+        global $product;
+
+        $productName = '';
+        if(isset($product) && !!$product){
+            if(!!$product->get_title() && $product->get_title() !== ''){
+                $productName = $product->get_title();
+            }
+        }
+
+        $modal->content = do_shortcode("[gravityform id='1' field_values='productName={$productName}' title='false' description='false' ajax='true']");
         return $modal;
     }
 
