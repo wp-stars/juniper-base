@@ -4,9 +4,16 @@ const Checkbox = ({ term, filterItem, handleTaxSelect }) => {
     const [checked, setChecked] = useState(false)    
 
     const handleCheckboxClick = (name, e) => {
-        setChecked(!checked)
-        handleTaxSelect(name, e)
-    }
+        const isChecked = e.target.checked; // Check if the checkbox is checked
+        setChecked(isChecked);
+        // Call handleTaxSelect with appropriate parameters based on whether the checkbox is checked
+        if (isChecked) {
+            handleTaxSelect(name, e);
+        } else {
+            // If the checkbox is unchecked, pass "none" as the value
+            handleTaxSelect(name, { target: { value: "none" } });
+        }
+    };
     return (
         <div className="block" >
             <input 

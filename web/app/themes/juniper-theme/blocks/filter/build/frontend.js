@@ -2185,8 +2185,19 @@ const Checkbox = ({
 }) => {
   const [checked, setChecked] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const handleCheckboxClick = (name, e) => {
-    setChecked(!checked);
-    handleTaxSelect(name, e);
+    const isChecked = e.target.checked; // Check if the checkbox is checked
+    setChecked(isChecked);
+    // Call handleTaxSelect with appropriate parameters based on whether the checkbox is checked
+    if (isChecked) {
+      handleTaxSelect(name, e);
+    } else {
+      // If the checkbox is unchecked, pass "none" as the value
+      handleTaxSelect(name, {
+        target: {
+          value: "none"
+        }
+      });
+    }
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "block"
@@ -2244,34 +2255,41 @@ const Filter = data => {
     query: `(max-width: 640px)`
   });
   const [firstPageLoad, setFirstPageLoad] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
-  const updateFilterVals = (e, term_id) => {
-    e.preventDefault();
-    let shallowFilterVals = [...selectedFilterVals];
-    if (shallowFilterVals.includes(term_id)) {
-      shallowFilterVals = shallowFilterVals.splice(shallowFilterVals.indexOf(term_id), 1);
-    } else {
-      shallowFilterVals.push(term_id);
-    }
-    setSelectedFilterVals(shallowFilterVals);
-  };
+
+  // const updateFilterVals = (e, term_id) => {
+  //     e.preventDefault()
+  //     let shallowFilterVals = [...selectedFilterVals]
+  //     if(shallowFilterVals.includes(term_id)) {
+  //         shallowFilterVals = shallowFilterVals.splice(shallowFilterVals.indexOf(term_id), 1)
+  //     } else {
+  //         shallowFilterVals.push(term_id)
+  //     }
+
+  //     setSelectedFilterVals(shallowFilterVals)
+  // }
+
   const loadMorePosts = () => {
     setLoadingMore(true);
     setPage(page + 1);
   };
-  const removeTerm = (event, termId) => {
-    event.stopPropagation();
-    let newSelectedFilterVals = [...selectedFilterVals],
-      targetIndex = newSelectedFilterVals.indexOf(termId);
-    newSelectedFilterVals.splice(targetIndex, 1);
-    setSelectedFilterVals(newSelectedFilterVals);
-  };
+
+  // const removeTerm = ( event, termId ) => {
+  //     event.stopPropagation()
+  //     let newSelectedFilterVals = [...selectedFilterVals],
+  //         targetIndex = newSelectedFilterVals.indexOf(termId)
+  //     newSelectedFilterVals.splice(targetIndex, 1)
+  //     setSelectedFilterVals(newSelectedFilterVals)
+  // }
+
   const searchPosts = () => {
     setLoading(true);
-    let queryString = `?post_type=${data.postType}`;
+    let queryString = '';
+    queryString += `?post_type=${data.postType}`;
     queryString += `&search=${encodeURIComponent(selectedFilterVals.search)}`;
     let taxonomies = JSON.stringify(selectedFilterVals.taxonomies);
     queryString += `&taxonomies=${encodeURIComponent(taxonomies)}`;
     queryString += `&page=${page}`;
+    console.log(queryString);
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
       if (page > 1) {
         setPosts([...posts, ...res.data.posts]);
@@ -2288,6 +2306,9 @@ const Filter = data => {
   const toggleFilterOpen = e => {
     e.preventDefault();
     setShowFilterItems(!showFilterItems);
+    if (!showFilterItems) {
+      // resetFilter(); 
+    }
   };
   const searchByText = e => {
     e.preventDefault();
@@ -2297,14 +2318,36 @@ const Filter = data => {
     });
   };
   const handleTaxSelect = (name, e) => {
-    e.preventDefault();
+    const selectedValue = e.target.value;
+    const updatedTaxonomies = [...selectedFilterVals.taxonomies]; // Copy the existing taxonomies
+
+    // Check if the selected value is "none"
+    if (selectedValue === "none") {
+      // Remove the taxonomy with the specified name from the updated taxonomies
+      const indexToRemove = updatedTaxonomies.findIndex(taxonomy => taxonomy.name === name);
+      if (indexToRemove !== -1) {
+        updatedTaxonomies.splice(indexToRemove, 1);
+      }
+    } else {
+      // Add or update the taxonomy with the specified name and value in the updated taxonomies
+      const existingTaxonomyIndex = updatedTaxonomies.findIndex(taxonomy => taxonomy.name === name);
+      const selectedTaxonomy = {
+        name,
+        value: [selectedValue]
+      };
+      if (existingTaxonomyIndex !== -1) {
+        updatedTaxonomies[existingTaxonomyIndex] = selectedTaxonomy;
+      } else {
+        updatedTaxonomies.push(selectedTaxonomy);
+      }
+    }
+
+    // Update the selected filter values with the updated taxonomies
     setSelectedFilterVals({
       ...selectedFilterVals,
-      taxonomies: [...selectedFilterVals.taxonomies, {
-        name: name,
-        value: [e.target.value]
-      }]
+      taxonomies: updatedTaxonomies
     });
+    console.log(selectedFilterVals);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (firstPageLoad) {
@@ -2315,7 +2358,7 @@ const Filter = data => {
         // add in later
         //window.history.replaceState(null, null, `?search=${encodeURIComponent(searchTerm)}&type=${encodeURIComponent(exerciseType)}`)
         searchPosts();
-      }, 400);
+      }, 100);
       return () => clearTimeout(delayDebounceFn);
     }
     return;
@@ -2324,6 +2367,10 @@ const Filter = data => {
     // window.addEventListener("resize", handleResize)
     if (!isMobile) setShowFilterItems(true);
   }, [isMobile]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const event = new Event('filterRenderingDone');
+    document.dispatchEvent(event);
+  }, [posts]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2449,7 +2496,7 @@ const Filter = data => {
         className: "col-span-12 relative max-w-64 mb-8"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
         onChange: e => handleTaxSelect(filterItem.name, e),
-        className: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
         value: "none"
       }, "None"), filterItem.tax_options.map((term, index) => {
@@ -2457,15 +2504,7 @@ const Filter = data => {
           key: index,
           value: term.term_id
         }, term.name);
-      })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-        className: "fill-current h-4 w-4",
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 20 20"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-        d: "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-      }))));
+      })));
     }
     if (filterItem.type === "checkbox") {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2484,14 +2523,17 @@ const Filter = data => {
   })) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mt-[54px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-3 mb-10 gap-[42px]"
+    className: "grid grid-cols-3 mb-10 gap-[42px] filter-grid"
   }, !loading ? posts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.map((post, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      key: index,
-      dangerouslySetInnerHTML: {
-        __html: atob(post.html)
-      }
-    });
+    if (post.product_type !== "musterbestellung") {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: index,
+        className: "flex flex-col h-full",
+        dangerouslySetInnerHTML: {
+          __html: atob(post.html)
+        }
+      });
+    }
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full text-center"
   }, "keine Ergebnisse.") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

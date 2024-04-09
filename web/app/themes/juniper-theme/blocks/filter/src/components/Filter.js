@@ -19,39 +19,42 @@ const Filter = ( data ) => {
 
     
 
-    const updateFilterVals = (e, term_id) => {
-        e.preventDefault()
-        let shallowFilterVals = [...selectedFilterVals]
-        if(shallowFilterVals.includes(term_id)) {
-            shallowFilterVals = shallowFilterVals.splice(shallowFilterVals.indexOf(term_id), 1)
-        } else {
-            shallowFilterVals.push(term_id)
-        }
+    // const updateFilterVals = (e, term_id) => {
+    //     e.preventDefault()
+    //     let shallowFilterVals = [...selectedFilterVals]
+    //     if(shallowFilterVals.includes(term_id)) {
+    //         shallowFilterVals = shallowFilterVals.splice(shallowFilterVals.indexOf(term_id), 1)
+    //     } else {
+    //         shallowFilterVals.push(term_id)
+    //     }
 
-        setSelectedFilterVals(shallowFilterVals)
-    }
+    //     setSelectedFilterVals(shallowFilterVals)
+    // }
 
     const loadMorePosts = () => {
         setLoadingMore(true)
         setPage(page + 1)
     }
 
-    const removeTerm = ( event, termId ) => {
-        event.stopPropagation()
-        let newSelectedFilterVals = [...selectedFilterVals],
-            targetIndex = newSelectedFilterVals.indexOf(termId)
-        newSelectedFilterVals.splice(targetIndex, 1)
-        setSelectedFilterVals(newSelectedFilterVals)
-    }
+    // const removeTerm = ( event, termId ) => {
+    //     event.stopPropagation()
+    //     let newSelectedFilterVals = [...selectedFilterVals],
+    //         targetIndex = newSelectedFilterVals.indexOf(termId)
+    //     newSelectedFilterVals.splice(targetIndex, 1)
+    //     setSelectedFilterVals(newSelectedFilterVals)
+    // }
 
     const searchPosts = () => {
         setLoading(true)
-        let queryString = `?post_type=${data.postType}`
+
+        let queryString = ''
+        queryString += `?post_type=${data.postType}`
         queryString += `&search=${encodeURIComponent(selectedFilterVals.search)}`
         let taxonomies = JSON.stringify(selectedFilterVals.taxonomies)
         queryString += `&taxonomies=${encodeURIComponent(taxonomies)}`
 
         queryString += `&page=${page}`
+        console.log(queryString)
         axios.get(`${data.restUrl}wps/v1/data${queryString}`)
             .then(res => {
                 if(page > 1) {
@@ -70,7 +73,10 @@ const Filter = ( data ) => {
     
     const toggleFilterOpen = (e) => {
         e.preventDefault()
-        setShowFilterItems(!showFilterItems)
+        setShowFilterItems(!showFilterItems);
+         if (!showFilterItems) {
+        // resetFilter(); 
+    }
     }
 
     const searchByText = (e) => {
@@ -82,32 +88,52 @@ const Filter = ( data ) => {
     }
 
     const handleTaxSelect = (name, e) => {
-        e.preventDefault()
+        const selectedValue = e.target.value;
+        const updatedTaxonomies = [...selectedFilterVals.taxonomies]; // Copy the existing taxonomies
+        
+        // Check if the selected value is "none"
+        if (selectedValue === "none") {
+            // Remove the taxonomy with the specified name from the updated taxonomies
+            const indexToRemove = updatedTaxonomies.findIndex(taxonomy => taxonomy.name === name);
+            if (indexToRemove !== -1) {
+                updatedTaxonomies.splice(indexToRemove, 1);
+            }
+        } else {
+            // Add or update the taxonomy with the specified name and value in the updated taxonomies
+            const existingTaxonomyIndex = updatedTaxonomies.findIndex(taxonomy => taxonomy.name === name);
+            const selectedTaxonomy = { name, value: [selectedValue] };
+            if (existingTaxonomyIndex !== -1) {
+                updatedTaxonomies[existingTaxonomyIndex] = selectedTaxonomy;
+            } else {
+                updatedTaxonomies.push(selectedTaxonomy);
+            }
+        }
+    
+        // Update the selected filter values with the updated taxonomies
         setSelectedFilterVals({
             ...selectedFilterVals,
-            taxonomies: [
-                ...selectedFilterVals.taxonomies,
-                {
-                    name: name,
-                    value: [e.target.value]
-                }
-            ]
-        })
-    }
+            taxonomies: updatedTaxonomies
+        });
+        
+        console.log(selectedFilterVals);
+    };
+
 
 
     useEffect(() => {
+      
         if(firstPageLoad) {
             setFirstPageLoad(false)
         }
 
         if(selectedFilterVals && !firstPageLoad) {
             const delayDebounceFn = setTimeout(() => {
+                
                 // add in later
                 //window.history.replaceState(null, null, `?search=${encodeURIComponent(searchTerm)}&type=${encodeURIComponent(exerciseType)}`)
                 searchPosts()
-            }, 400)
-          
+            }, 100)
+     
             return () => clearTimeout(delayDebounceFn)
         }
         return
@@ -117,6 +143,11 @@ const Filter = ( data ) => {
         // window.addEventListener("resize", handleResize)
         if(!isMobile) setShowFilterItems(true)
     }, [isMobile])
+
+    useEffect(() => {
+        const event = new Event('filterRenderingDone');
+        document.dispatchEvent(event);
+    }, [posts]);
   
 
     return (
@@ -175,16 +206,16 @@ const Filter = ( data ) => {
                                         <label>{filterItem.label}</label>
                                         <select 
                                             onChange={(e) => handleTaxSelect(filterItem.name, e)} 
-                                            className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                            className="select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                                         >
                                             <option value="none">None</option>
                                             {filterItem.tax_options.map((term, index) => {
                                                 return <option key={index} value={term.term_id}>{term.name}</option>
                                             })}
                                         </select>
-                                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        {/* <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 )
                             }
@@ -211,11 +242,13 @@ const Filter = ( data ) => {
                         posts.length ? 
                             <>
                                 {posts.map((post, index) => {
+                                    if(post.product_type !== "musterbestellung"){
                                     return (
                                       
                                         <div key={index} className="flex flex-col h-full"  dangerouslySetInnerHTML={{ __html: atob(post.html) }}></div>
                                      
                                     )
+                                    }
                                 })}
                             </>
                         : 

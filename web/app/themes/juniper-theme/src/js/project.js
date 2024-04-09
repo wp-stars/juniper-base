@@ -31,10 +31,7 @@ const closeModal = (id) => {
     dialog.close();
 }
 
-jQuery(document).ready(function() {
-    console.log("ready");
-
-    // Check and initialize slider for .product-card-slider
+const loadProductCardSlider = () => {
     if (jQuery('.product-card-slider').length > 0) {
         jQuery('.product-card-slider').slick({
             slidesToShow: 1,
@@ -48,6 +45,12 @@ jQuery(document).ready(function() {
         console.log('Product card slider element not found');
     }
 
+   }
+
+jQuery(document).ready(function() {
+
+    loadProductCardSlider();
+ 
     jQuery('.product-card-slider').on('click', '.slick-dots li', function(e) {
         e.preventDefault();
         e.stopPropagation(); // To stop the event from bubbling up to the parent link
@@ -68,3 +71,8 @@ jQuery(document).ready(function() {
     }
 });
 
+
+jQuery(document).on('filterRenderingDone', function () {
+    loadProductCardSlider();
+    console.log("load slider")
+});
