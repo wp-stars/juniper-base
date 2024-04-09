@@ -538,3 +538,10 @@ $productCard = new frontend\ProductCard();
 
 // musterbestellung related code
 require_once __DIR__.'/classes/frontend/Musterbestellung.php';
+
+
+// disable fullscreen mode in gutenberg by default
+add_action( 'enqueue_block_editor_assets', function(){
+    $script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } }";
+    wp_add_inline_script( 'wp-blocks', $script );
+} );
