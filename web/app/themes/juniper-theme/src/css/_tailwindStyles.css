@@ -1074,6 +1074,10 @@ video {
   margin-top: 1.5rem;
 }
 
+.mt-7 {
+  margin-top: 1.75rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -2044,6 +2048,10 @@ video {
 
 .text-4xl {
   font-size: 2.441rem;
+}
+
+.text-\[11px\] {
+  font-size: 11px;
 }
 
 .text-base {

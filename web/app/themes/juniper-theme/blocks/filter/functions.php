@@ -133,6 +133,17 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         's' => $search
     );
 
+    if ($exclude_product_type) {
+        // Exclude products of specific product type
+        $args['meta_query'] = array(
+            array(
+                'key' => '_product_type',
+                'value' => $exclude_product_type,
+                'compare' => '!='
+            )
+        );
+    }
+
     if(count($tax_query)) {
         $args['tax_query'] = $tax_query;
     }
@@ -149,6 +160,14 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         $post_obj->post_name = $post->post_name;
         $post_obj->featured_image = get_the_post_thumbnail_url($post);
         $post_obj->link = get_permalink($post);
+        // $post_obj->type = get_type($post);
+
+        $product_type = '';
+        $terms = get_the_terms($post, 'product_type');
+        if ($terms && !is_wp_error($terms)) {
+            $product_type = $terms[0]->name;
+        }
+        $post_obj->product_type = $product_type;
 
         $encodedHtml = base64_encode(do_shortcode("[wps_get_product_card product_id='{$post->ID}']"));
 

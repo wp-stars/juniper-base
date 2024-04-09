@@ -293,3 +293,17 @@ table {
 .filter-grid{
     grid-auto-columns: minmax(0, 1fr);
 }
+
+select::-ms-expand {
+    display: none !important;
+}
+
+.select-filter{
+    -o-appearance: none;
+    -ms-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
