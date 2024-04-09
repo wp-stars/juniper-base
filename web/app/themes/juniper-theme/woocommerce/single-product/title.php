@@ -20,4 +20,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 the_title( '<h2 class="product_title entry-title mb-1.5">', '</h2>' );
-do_action('wps_print_custom_text_field');
+do_action('wps_print_subheadline_text_field');

@@ -12,9 +12,9 @@ class WC_Customizations {
 
         add_filter( 'woocommerce_product_tabs', array($this, 'add_product_tabs'), 9999 );
 
-        add_action('woocommerce_product_options_general_product_data', array($this, 'add_custom_text_field'));
-        add_action('woocommerce_process_product_meta', array($this, 'save_custom_text_field'));
-        add_action('wps_print_custom_text_field', array($this, 'print_custom_text_field'));
+        add_action('woocommerce_product_options_general_product_data', array($this, 'add_subheadline_text_field'));
+        add_action('woocommerce_process_product_meta', array($this, 'save_subheadline_text_field'));
+        add_action('wps_print_subheadline_text_field', array($this, 'print_subheadline_text_field'));
 
     }
 
@@ -67,46 +67,45 @@ class WC_Customizations {
         global $product;
         $product_id = $product->get_id();
         $product_tags = wp_get_post_terms($product_id, 'metals-and-accessories');
-
+    
         if ($product_tags) {
             ?>
             <div class="flex flex-wrap metals-and-accessories mb-[31px]">
                 <?php
-                $category_names = array();
+                $tag_names = array(); // Initialize $tag_names array
                 foreach ($product_tags as $tag) {
-                    $tag_names[] = esc_html($tag->name);
+                    $tag_names[] = esc_html($tag->name); // Add tag name to $tag_names array
                 }
-                $tag_text = implode(' | ', $tag_names);
+                $tag_text = implode(' | ', $tag_names); // Create a string from the $tag_names array
                 ?>
-                    <div class="uppercase inline-block"><?php echo esc_html($tag->name); ?></div>
-                
+                <div class="uppercase inline-block"><?php echo $tag_text; ?></div> <!-- Display all tag names -->
             </div>
             <?php
         }
     }
 
-    public function add_custom_text_field() {
+    public function add_subheadline_text_field() {
         woocommerce_wp_text_input(array(
-            'id' => '_custom_text_field',
-            'label' => __('Custom Text Field', 'woocommerce'),
+            'id' => '_subheadline_text_field',
+            'label' => __('Subheadline for the Product', 'woocommerce'),
             'placeholder' => '',
             'desc_tip' => 'true',
-            'description' => __('Enter the custom value here.', 'woocommerce'),
+            'description' => __('Enter the subheadline for the product, which will be shown below the Header.', 'woocommerce'),
         ));
     }
 
-    public function save_custom_text_field($post_id) {
-        $custom_field_value = isset($_POST['_custom_text_field']) ? $_POST['_custom_text_field'] : '';
+    public function save_subheadline_text_field($post_id) {
+        $custom_field_value = isset($_POST['_subheadline_text_field']) ? $_POST['_subheadline_text_field'] : '';
         if (!empty($custom_field_value)) {
-            update_post_meta($post_id, '_custom_text_field', sanitize_text_field($custom_field_value));
+            update_post_meta($post_id, '_subheadline_text_field', sanitize_text_field($custom_field_value));
         }
     }
 
 
-    public function print_custom_text_field() {
+    public function print_subheadline_text_field() {
         global $product;
 
-        $custom_value = get_post_meta($product->get_id(), '_custom_text_field', true);
+        $custom_value = get_post_meta($product->get_id(), '_subheadline_text_field', true);
 
         if (!empty($custom_value)) {
             echo '<h3 class="text-black text-2xl font-bold leading-7 mb-3.5">' . esc_html($custom_value) . '</h3>';
