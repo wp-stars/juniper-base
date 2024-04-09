@@ -54,7 +54,6 @@ const Filter = ( data ) => {
         queryString += `&taxonomies=${encodeURIComponent(taxonomies)}`
 
         queryString += `&page=${page}`
-        console.log(queryString)
         axios.get(`${data.restUrl}wps/v1/data${queryString}`)
             .then(res => {
                 if(page > 1) {
@@ -115,7 +114,6 @@ const Filter = ( data ) => {
             taxonomies: updatedTaxonomies
         });
         
-        console.log(selectedFilterVals);
     };
 
 
