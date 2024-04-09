@@ -19,6 +19,7 @@ class Modal
     public string $twigTemplateDir = 'modals/'; // relative to theme root
     public string $view = 'defaultModal.twig';
     public ModalStatus $status = ModalStatus::closed;
+    public array $variables = [];
 
     //submitButton
     public bool $showSubmitButton = false;
