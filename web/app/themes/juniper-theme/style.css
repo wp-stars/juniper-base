@@ -44,3 +44,13 @@ section#content {
     width: 1px;
     background-color: #999;
 }
+
+.gform_button.button {
+    background: #000;
+}
+
+.gform_button.button:hover,
+.gform_button.button:active,
+.gform_button.button:focus{
+    background: #444;
+}
