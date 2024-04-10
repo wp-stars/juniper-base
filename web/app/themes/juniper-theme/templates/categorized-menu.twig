@@ -14,8 +14,8 @@
 						<div class="grid {% if key == '1' %}grid-cols-3{% endif %} bg-white shadow-md rounded p-8 relative top-4">
 							{% for child in item.children %}
 								{% if item.children %}
-									<div class="grid grid-cols-1 text-xs">
-										<a class="{% if key == '1' %}border-b border-gray-400{% endif %}" href="{{ child.link }}">{{ child.title }}</a>
+									<div class="grid grid-cols-1 text-xs {% if key == '1' %}p-4{% endif %}">
+										<a class="{% if key == '1' %}border-b border-gray-400 mb-2 font-black{% endif %}" href="{{ child.link }}">{{ child.title }}</a>
 										{% for subchild in child.children %}
 											<a href="{{ subchild.link }}">{{ subchild.title }}</a>
 										{% endfor %}
