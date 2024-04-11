@@ -50,7 +50,24 @@ class ProductCard {
                         <a href="<?= $product->get_permalink(); ?>">
                             <h4 class="mb-8"><?= $product->get_title(); ?></h4>
                         </a>
-                        <h5 class="mb-8"><?= $product->get_price_html(); ?></h5>
+                        <h5 class="mb-8">
+                        <?php 
+                            if ( $product->is_on_sale() ) : 
+                                $regular_price = wc_price( $product->get_regular_price() );
+                                $sale_price = wc_price( $product->get_sale_price() );
+                            ?>
+                            <div class="flex flex-row">
+                            <span class="regular-price line-through pr-2 text-[#737373]"><?php echo $regular_price; ?></span>
+                            <span class="sale-price"><?php echo $sale_price; ?></span>
+                            </div>
+                            <?php else: 
+                                $price_html = $product->get_price_html();
+                                if ( $price_html ) : ?>
+                                    <span class="price"><?php echo $price_html; ?></span>
+                                <?php endif; 
+                            endif;
+                         ?>
+                         </h5>
                         <div class="inline-flex justify-between ">
                             <a href="<?= $product->add_to_cart_url(); ?>" class="btn btn-black text-white w-[100%] text-center">
                                 <?= __('In den Warenkorb', 'wps-theme'); ?>
