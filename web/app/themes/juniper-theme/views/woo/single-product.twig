@@ -15,12 +15,12 @@
 	{% endblock %}    
 
     <article itemscope itemtype="http://schema.org/Product" class="mt-[1.875rem] container single-product-details {{ post.class }}">
-        <div class="grid grid-cols-2 gap-x-10 mb-[6.25rem]">
-            <div class="entry-images shadow-md">
+        <div class="flex flex-col md:flex-row gap-y-10 md:gap-x-10 mb-[6.25rem] px-auto">
+            <div class="entry-images shadow-md max-w-[400px]">
                 {% do action('woocommerce_before_single_product_summary') %}
             </div>
 
-            <div class="summary entry-summary">
+            <div class="summary entry-summary flex-grow">
                 {% do action('wps_print_product_categories') %}
                 {% do action('wps_print_metals_and_accessories') %}
                 {% do action('woocommerce_single_product_summary') %}

@@ -311,3 +311,17 @@ select::-ms-expand {
 .slick-dots{
     bottom: 5px !important;
 }
+
+.single-product .woocommerce-tabs{
+    h3{
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.8rem;
+    }
+
+    li,p{
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.25rem;
+    }
+}

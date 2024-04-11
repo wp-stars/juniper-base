@@ -16,25 +16,32 @@ class WC_Customizations {
         add_action('woocommerce_process_product_meta', array($this, 'save_subheadline_text_field'));
         add_action('wps_print_subheadline_text_field', array($this, 'print_subheadline_text_field'));
 
+        add_filter( 'woocommerce_product_data_tabs', array($this, 'add_technical_data_guide_product_tab') );
+        add_action( 'woocommerce_product_data_panels', array($this, 'display_technical_data_guide_product_data_tab_content') );
+        add_action( 'woocommerce_admin_process_product_object', array($this, 'save_technical_data_guide_fields_values') );
     }
 
-    public function add_product_tabs() {
+    public function add_product_tabs($tabs) {
         $tabs['description'] = array(
             'title' => __( 'Description', 'wps-juniper' ), // TAB TITLE
             'priority' => 50,
             'callback' => array($this, 'product_description_tab'), // TAB CONTENT CALLBACK
         );
 
-        $tabs['technical_data'] = array(
-            'title' => __( 'Technical Data', 'wps-juniper' ), // TAB TITLE
+        $tabs['technical_data_guide'] = array(
+            'title' => __( 'Technical Data', 'wps-juniper' ),
+            // 'target' => 'technical_data_product_data',
+            // 'class' => array( 'show_if_simple', 'show_if_variable' ),
             'priority' => 50,
-            'callback' => array($this, 'product_technical_data_tab'), // TAB CONTENT CALLBACK
+            'callback' => array($this, 'product_technical_data_tab'),
         );
+
         return $tabs;
     }
 
     public function product_technical_data_tab() {
-        echo 'Technical data';
+        global $product;
+        echo wp_kses_post($product->get_meta('_technical_data'));
     }
 
     public function product_description_tab() {
@@ -108,10 +115,47 @@ class WC_Customizations {
         $custom_value = get_post_meta($product->get_id(), '_subheadline_text_field', true);
 
         if (!empty($custom_value)) {
-            echo '<h3 class="text-black text-2xl font-bold leading-7 mb-3.5">' . esc_html($custom_value) . '</h3>';
+            echo '<h2 class="text-black text-2xl font-bold leading-7 mb-3.5">' . esc_html($custom_value) . '</h2>';
         }
     }
+
+
+
+    public function add_technical_data_guide_product_tab($tabs) {
+        $tabs['technical_data_guide'] = array(
+            'label'    => __( 'Technical Data', 'text-domain' ),
+            'target'   => 'technical_data_product_data',
+            'class'    => array( 'show_if_simple', 'show_if_variable' ),
+        );
+        return $tabs;
+    }
+
+    public function display_technical_data_guide_product_data_tab_content() {
+        global $product_object;
+
+        echo '<div id="technical_data_product_data" class="panel woocommerce_options_panel">
+        <div class="options_group px-2">';
+
+        echo '<h4>Technical Data for the product "<strong>'.$product_object->get_name().'</strong>"…</h4>';
+
+        wp_editor(
+            htmlspecialchars_decode($product_object->get_meta('_technical_data')), 
+            '_technical_data', 
+            array(
+                'wpautop' => false,
+                'media_buttons' => true,
+                'textarea_name' => '_technical_data',
+                'textarea_rows' => 15, 
+            )
+        );
+
+        echo '</div></div>';
+    }
+
+    public function save_technical_data_guide_fields_values( $product ) {
+        $technical_data = isset( $_POST['_technical_data'] ) ? wp_kses_post($_POST['_technical_data']) : '';
+        $product->update_meta_data( '_technical_data', $technical_data );
+    }
+    
+
 }
-
-
-
