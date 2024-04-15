@@ -2211,7 +2211,7 @@ const Checkbox = ({
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: "default-checkbox",
     className: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-  }, term.name));
+  }, translation.checkbox));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Checkbox);
 
@@ -2289,7 +2289,6 @@ const Filter = data => {
     let taxonomies = JSON.stringify(selectedFilterVals.taxonomies);
     queryString += `&taxonomies=${encodeURIComponent(taxonomies)}`;
     queryString += `&page=${page}`;
-    console.log(queryString);
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(`${data.restUrl}wps/v1/data${queryString}`).then(res => {
       if (page > 1) {
         setPosts([...posts, ...res.data.posts]);
@@ -2299,6 +2298,7 @@ const Filter = data => {
       setMaxPages(res.data.maxNumPages);
       setLoadingMore(false);
       setLoading(false);
+      console.log(res);
     }).catch(err => {
       console.error(err);
     });
@@ -2347,7 +2347,6 @@ const Filter = data => {
       ...selectedFilterVals,
       taxonomies: updatedTaxonomies
     });
-    console.log(selectedFilterVals);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (firstPageLoad) {
@@ -2393,7 +2392,7 @@ const Filter = data => {
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     className: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:shadow-none",
     type: "text",
-    placeholder: "Search products...",
+    placeholder: translation.product_search,
     "aria-label": "product search",
     onChange: e => searchByText(e)
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2408,7 +2407,7 @@ const Filter = data => {
     onClick: toggleFilterOpen
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "sr-only"
-  }, "Open filter"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+  }, translation.open_filter), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     className: "w-[2.5rem] h-[2.5rem] open-toggle",
     xmlns: "http://www.w3.org/2000/svg",
     width: "40",
@@ -2494,7 +2493,7 @@ const Filter = data => {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: key,
         className: "col-span-12 relative max-w-64 mb-8"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, translation.metals_accessories), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
         onChange: e => handleTaxSelect(filterItem.name, e),
         className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
@@ -2510,7 +2509,7 @@ const Filter = data => {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: key,
         className: "col-span-12 block mb-8"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), filterItem.tax_options.map((term, index) => {
+      }, filterItem.tax_options.map((term, index) => {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: index,
           term: term,
@@ -2536,11 +2535,11 @@ const Filter = data => {
     }
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full text-center"
-  }, "keine Ergebnisse.") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, translation.no_results) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")))), loadingMore ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, translation.loading)))), loadingMore ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Loading...")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, translation.loading)) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center"
   }, page < maxPages ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: () => loadMorePosts(),

@@ -29,7 +29,7 @@ const Checkbox = ({ term, filterItem, handleTaxSelect }) => {
                 htmlFor="default-checkbox" 
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
-                {term.name}
+                {translation.checkbox}
             </label>
         </div>
     )

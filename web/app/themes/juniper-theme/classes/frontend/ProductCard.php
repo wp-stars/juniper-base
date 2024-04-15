@@ -6,6 +6,8 @@ class ProductCard {
 
     public function __construct() {
         add_shortcode('wps_get_product_card', [$this, 'product_card_html']);
+
+        header('Content-Type: text/html; charset=utf-8');
     }
 
     public function product_card_html( $atts ) {
@@ -57,7 +59,7 @@ class ProductCard {
                                 $sale_price = wc_price( $product->get_sale_price() );
                             ?>
                             <div class="flex flex-row">
-                            <span class="regular-price line-through pr-2 text-[#737373]"><?php echo $regular_price; ?></span>
+                        <span class="regular-price line-through pr-2 text-[#737373]"><?php echo $regular_price; ?></span>
                             <span class="sale-price"><?php echo $sale_price; ?></span>
                             </div>
                             <?php else: 
