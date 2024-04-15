@@ -139,7 +139,16 @@ function juniper_theme_enqueue() {
     wp_enqueue_style( 'slick-theme-css', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css', array(), '1.8.1' );
     wp_enqueue_script( 'slick-js', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', array('jquery'), '1.8.1', true );
 
+
+    wp_enqueue_script( 'filter-js', get_template_directory_uri() . '/blocks/filter/src/components/Filter.js', array(), $refresh_cache_time, true );
+    wp_enqueue_script( 'checkbox-js', get_template_directory_uri() . '/blocks/filter/src/components/Checkbox.js', array(), $refresh_cache_time, true );
+
+            // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), null, true);
+            // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/single-musterbestellung.js', array('jquery'), null, true);
+
 }
+
+
 
 add_action( 'wp_enqueue_scripts', 'WPS\juniper_theme_enqueue' );
 
@@ -247,6 +256,21 @@ function enqueue_ls_scripts() {
     wp_enqueue_script(
         'wps-scripts'
     );
+
+
+    $translation_array = array(
+        'loading' => __('Laden...', 'text-domain'),
+        'no_results' => __('Keine Ergebnise.', 'text-domain'),
+        'open_filter' => __('Filter öffnen', 'text-domain'),
+        'metals_accessories' => __(' Metalle und Zubehör', 'text-domain'),
+        'checkbox' => __('Muster erhältlich', 'text-domain'),
+        'product_search' => __('Suche Produkte...', 'text-domain'),
+    );
+
+
+    wp_localize_script( 'filter-js', 'translation', $translation_array );
+
+
 }
 
 \add_action('wp_enqueue_scripts', '\WPS\enqueue_ls_scripts');
