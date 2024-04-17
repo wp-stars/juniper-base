@@ -40,7 +40,7 @@ defined( 'ABSPATH' ) || exit;
 			</p>
 
 		<?php else : ?>
-			<h1 class="mt-12">Thank you</h1>
+			<h1 class="mt-12"><?php _e('Thank you', 'woocommerce');?></h1>
 			<?php wc_get_template( 'checkout/order-received.php', array( 'order' => $order ) ); ?>
 
 			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
