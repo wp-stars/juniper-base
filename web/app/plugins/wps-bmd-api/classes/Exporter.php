@@ -42,9 +42,14 @@ class Exporter
     public function getOrderData(): array
     {
 
+        // get vat number
+        $billing_address = $this->order->get_address('billing');
+        $vat_id = $billing_address['vat_id'] ?? '';
+        $salutation = $this->order->get_billing_title() ?? '';
+
         // orderingParty address
         $orderingPartyAddress = [];
-        $orderingPartyAddress['bmd:Salutation'] = '';
+        $orderingPartyAddress['bmd:Salutation'] = $salutation;
         $orderingPartyAddress['bmd:FirstName'] = $this->order->get_billing_first_name();
         $orderingPartyAddress['bmd:LastName'] = $this->order->get_billing_last_name();
         $orderingPartyAddress['bmd:AdditionalName'] = '';
@@ -75,7 +80,7 @@ class Exporter
         // orderingParty
         $orderingParty = [];
         $orderingParty['bmd:ExternalOrderingPartyID'] = get_current_user_id();
-        $orderingParty['bmd:VATIdentificationNumber'] = '';
+        $orderingParty['bmd:VATIdentificationNumber'] = $vat_id;
         $orderingParty['bmd:Email'] = $this->order->get_billing_email();
         $orderingParty['bmd:Address'] = $orderingPartyAddress;
 
@@ -89,7 +94,7 @@ class Exporter
         // deliveryRecipient
         $deliveryRecipient = [];
         $deliveryRecipient['bmd:ExternalDeliveryRecipientID'] = get_current_user_id();
-        $deliveryRecipient['bmd:VATIdentificationNumber'] = '';
+        $deliveryRecipient['bmd:VATIdentificationNumber'] = $vat_id;
         $deliveryRecipient['bmd:Email'] = $this->order->get_billing_email();
         $deliveryRecipient['bmd:Address'] = $deliveryRecipientAddress;
 
@@ -272,15 +277,15 @@ class Exporter
         }
 
         // create a silence is golden php file if it does not exist
-       if(!file_exists(ABSPATH . '/' . $this->uploadDir . '/index.php')){
-           file_put_contents(ABSPATH . '/' . $this->uploadDir . '/index.php', '<?php // Silence is golden.');
-       }
+        if(!file_exists(ABSPATH . '/' . $this->uploadDir . '/index.php')){
+            file_put_contents(ABSPATH . '/' . $this->uploadDir . '/index.php', '<?php // Silence is golden.');
+        }
 
         // create a .htaccess file if it does not exist
         if(!file_exists(ABSPATH . '/' . $this->uploadDir . '/.htaccess')){
             file_put_contents(ABSPATH . '/' . $this->uploadDir . '/.htaccess', 'deny from all');
         }
 
-       file_put_contents($file, $this->formatXML());
+        file_put_contents($file, $this->formatXML());
     }
 }

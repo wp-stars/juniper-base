@@ -53,7 +53,14 @@ class Plugin
 
         if(false === $order) {
             if(false === $silent){
-                dump('order not found');
+
+                if(function_exists('dump')){
+                    dump('order not found');
+                }else{
+                    echo '<pre>';
+                    var_dump('order not found');
+                    echo '</pre>';
+                }
             }
             return;
         }
@@ -66,7 +73,14 @@ class Plugin
         if(false === $silent){
             echo '<p><strong>XML Upload Pfad:</strong> ' . $exporter->getUploadDir() . '</p>';
             echo '<h2>Daten aus der Order #' . $orderID . '</h2>';
-            dump($exporter->data);
+
+            if(function_exists('dump')){
+                dump($exporter->data);
+            }else{
+                echo '<pre>';
+                var_dump($exporter->data);
+                echo '</pre>';
+            }
 
             echo '<h2>Erzeugtes XML aus der Order #' . $orderID . '</h2>';
             echo '<pre style="overflow-x: auto; border-right: solid 15px #ccc; background-color: #ccc; padding: 15px;">' . htmlentities($exporter->formatXML()) . '</pre>';
@@ -78,6 +92,4 @@ class Plugin
         }
 
     }
-
-
 }
