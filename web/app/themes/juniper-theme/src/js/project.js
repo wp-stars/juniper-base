@@ -30,10 +30,10 @@ const closeModal = (id) => {
     const dialog = document.getElementById("modal-" + id);
     dialog.close();
 }
-
-const loadProductCardSlider = () => {
-    if (jQuery('.product-card-slider').length > 0) {
-        jQuery('.product-card-slider').slick({
+jQuery(document).ready(function() {
+    // Function to initialize the slider
+    const initSlider = ($element) => {
+        $element.not('.slick-initialized').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: true,
@@ -41,38 +41,26 @@ const loadProductCardSlider = () => {
             dots: true,
             // asNavFor: '.woocommerce-product-gallery-thumbnails'
         });
-    } else {
-        console.log('Product card slider element not found');
-    }
+    };
 
-   }
+    // Initialize slider on page load
+    initSlider(jQuery('.product-card-slider'));
 
-jQuery(document).ready(function() {
-
-    loadProductCardSlider();
- 
-    jQuery('.product-card-slider').on('click', '.slick-dots li', function(e) {
+    // Event delegation for dynamically added elements
+    jQuery(document).on('click', '.product-card-slider .slick-dots li', function(e) {
         e.preventDefault();
         e.stopPropagation(); // To stop the event from bubbling up to the parent link
     });
 
     // Check and initialize slider for .woocommerce-product-gallery__wrapper
     if (jQuery('.woocommerce-product-gallery__wrapper').length > 0) {
-        jQuery('.woocommerce-product-gallery__wrapper').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-            fade: true,
-            dots: true,
-            // asNavFor: '.woocommerce-product-gallery-thumbnails'
-        });
+        initSlider(jQuery('.woocommerce-product-gallery__wrapper'));
     } else {
         console.log('WooCommerce product gallery wrapper element not found');
     }
-});
 
-
-jQuery(document).on('filterRenderingDone', function () {
-    loadProductCardSlider();
-    console.log("load slider")
+    // Event listener for filter rendering done
+    jQuery(document).on('filterRenderingDone', function () {
+        initSlider(jQuery('.product-card-slider')); // Reinitialize the slider after filter rendering is done
+    });
 });
