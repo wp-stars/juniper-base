@@ -265,6 +265,7 @@ function enqueue_ls_scripts() {
         'metals_accessories' => __(' Metalle und Zubehör', 'text-domain'),
         'checkbox' => __('Muster erhältlich', 'text-domain'),
         'product_search' => __('Suche Produkte...', 'text-domain'),
+        'load_more' => __('mehr laden', 'text-domain'),
     );
 
 

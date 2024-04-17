@@ -162,6 +162,23 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         $post_obj->link = get_permalink($post);
         // $post_obj->type = get_type($post);
 
+        $taxonomies = get_post_taxonomies($post);
+        $taxonomy_data = array();
+        foreach ($taxonomies as $taxonomy) {
+            $terms = get_the_terms($post, $taxonomy);
+            if ($terms && !is_wp_error($terms)) {
+                foreach ($terms as $term) {
+                    $taxonomy_data[$taxonomy][] = array(
+                        'term_id' => $term->term_id,
+                        'name' => $term->name,
+                        'slug' => $term->slug
+                    );
+                }
+            }
+        }
+        $post_obj->taxonomies = $taxonomy_data;
+        
+
         $product_type = '';
         $terms = get_the_terms($post, 'product_type');
         if ($terms && !is_wp_error($terms)) {
