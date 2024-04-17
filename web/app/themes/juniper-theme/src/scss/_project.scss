@@ -395,7 +395,8 @@ form.checkout_coupon.woocommerce-form-coupon button.button:active {
     background: var(--Greyscale-70, #4D4D4D);
 }
 
-div.step-buttons button.alt,
+div.wc-gzd-order-submit button.button.alt,
+div.step-wrapper div.step-buttons button.button.alt,
 button.woocommerce-button.button.woocommerce-form-login__submit {
     color: #fff;
     background-color: #000;
@@ -407,15 +408,12 @@ button.woocommerce-button.button.woocommerce-form-login__submit {
     align-items: center;
     gap: 10px;
     font-size: 14px;
-}
 
-button.woocommerce-button.button.woocommerce-form-login__submit:hover,
-button.woocommerce-button.button.woocommerce-form-login__submit:focus,
-button.woocommerce-button.button.woocommerce-form-login__submit:active,
-div.step-buttons button.alt:hover,
-div.step-buttons button.alt:focus,
-div.step-buttons button.alt:active {
-    background-color: var(--Greyscale-70, #4D4D4D);
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: var(--Greyscale-70, #4D4D4D);
+    }
 }
 
 input.input-text:focus,
@@ -492,4 +490,8 @@ form.checkout.woocommerce-checkout span.woocommerce-input-wrapper input.input-te
 .col2-set.addresses a.edit:focus,
 .col2-set.addresses a.edit:active {
     background-color: var(--Greyscale-70, #4D4D4D);
+}
+
+div.woocommerce-gzdp-checkout-verify-data header.title {
+    margin-top: 4rem;
 }
