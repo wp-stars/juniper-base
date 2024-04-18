@@ -2348,36 +2348,12 @@ const Filter = data => {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "mb-[30px]"
+    className: " mb-0 sm:mb-[30px]"
   }, data.title)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "container mb-8"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center border-b py-2 max-w-[50%]"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
-    fill: "none"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M0.852114 14.3519L4.37266 10.8321C3.35227 9.60705 2.84344 8.03577 2.95204 6.44512C3.06064 4.85447 3.7783 3.36692 4.95573 2.29193C6.13316 1.21693 7.67971 0.637251 9.27365 0.673476C10.8676 0.709701 12.3862 1.35904 13.5136 2.48642C14.641 3.6138 15.2903 5.13241 15.3265 6.72635C15.3627 8.32029 14.7831 9.86684 13.7081 11.0443C12.6331 12.2217 11.1455 12.9394 9.55488 13.048C7.96423 13.1566 6.39295 12.6477 5.1679 11.6273L1.64805 15.1479C1.59579 15.2001 1.53375 15.2416 1.46546 15.2699C1.39718 15.2982 1.32399 15.3127 1.25008 15.3127C1.17617 15.3127 1.10299 15.2982 1.0347 15.2699C0.96642 15.2416 0.904376 15.2001 0.852114 15.1479C0.799852 15.0956 0.758396 15.0336 0.730112 14.9653C0.701828 14.897 0.68727 14.8238 0.68727 14.7499C0.68727 14.676 0.701828 14.6028 0.730112 14.5345C0.758396 14.4663 0.799852 14.4042 0.852114 14.3519ZM14.1876 6.87492C14.1876 5.87365 13.8907 4.89487 13.3344 4.06234C12.7781 3.22982 11.9875 2.58094 11.0624 2.19778C10.1374 1.81461 9.11947 1.71435 8.13744 1.90969C7.15541 2.10503 6.25336 2.58718 5.54536 3.29519C4.83735 4.00319 4.3552 4.90524 4.15986 5.88727C3.96452 6.8693 4.06477 7.8872 4.44794 8.81225C4.83111 9.7373 5.47999 10.528 6.31251 11.0842C7.14503 11.6405 8.12382 11.9374 9.12508 11.9374C10.4673 11.9359 11.7541 11.4021 12.7032 10.453C13.6522 9.50392 14.1861 8.21712 14.1876 6.87492Z",
-    fill: "black"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:shadow-none",
-    type: "text",
-    placeholder: translation.product_search,
-    "aria-label": "product search",
-    onChange: e => setFilters({
-      ...filters,
-      searchText: e.target.value.trim().toLowerCase()
-    })
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto"
   }, isMobile ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full flex justify-center items-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    className: "text-white"
-  }, "Filter"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "w-full flex justify-end items-center mt-[-55px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
     className: `filter-toggle inline-flex items-center p-2 justify-center text-sm ml-4 ${showFilterItems ? 'open' : 'closed'}`,
     onClick: toggleFilterOpen
@@ -2391,59 +2367,10 @@ const Filter = data => {
     viewBox: "0 0 40 41",
     fill: "none"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M6.66669 35.5929V23.9263",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M6.66669 17.2594V5.59277",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M20 35.5928V20.5928",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M20 13.9261V5.59277",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M33.3333 35.5926V27.2593",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M33.3333 20.5928V5.59277",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M1.66669 23.9263H11.6667",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M15 13.9263H25",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-    d: "M28.3333 27.2593H38.3333",
-    stroke: "#F9F9F9",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
+    xmlns: "http://www.w3.org/2000/svg",
+    id: "Vector",
+    d: "M6.25 13.4375H11.6562C11.8714 14.4971 12.4463 15.4498 13.2835 16.1341C14.1207 16.8184 15.1687 17.1922 16.25 17.1922C17.3313 17.1922 18.3793 16.8184 19.2165 16.1341C20.0537 15.4498 20.6286 14.4971 20.8437 13.4375H33.75C33.9986 13.4375 34.2371 13.3387 34.4129 13.1629C34.5887 12.9871 34.6875 12.7486 34.6875 12.5C34.6875 12.2514 34.5887 12.0129 34.4129 11.8371C34.2371 11.6613 33.9986 11.5625 33.75 11.5625H20.8437C20.6286 10.5029 20.0537 9.55018 19.2165 8.8659C18.3793 8.18161 17.3313 7.8078 16.25 7.8078C15.1687 7.8078 14.1207 8.18161 13.2835 8.8659C12.4463 9.55018 11.8714 10.5029 11.6562 11.5625H6.25C6.00136 11.5625 5.7629 11.6613 5.58709 11.8371C5.41127 12.0129 5.3125 12.2514 5.3125 12.5C5.3125 12.7486 5.41127 12.9871 5.58709 13.1629C5.7629 13.3387 6.00136 13.4375 6.25 13.4375ZM16.25 9.6875C16.8063 9.6875 17.35 9.85245 17.8125 10.1615C18.2751 10.4705 18.6355 10.9098 18.8484 11.4237C19.0613 11.9376 19.117 12.5031 19.0085 13.0487C18.8999 13.5943 18.6321 14.0954 18.2387 14.4887C17.8454 14.8821 17.3443 15.1499 16.7987 15.2585C16.2531 15.367 15.6876 15.3113 15.1737 15.0984C14.6598 14.8855 14.2205 14.5251 13.9115 14.0625C13.6025 13.6 13.4375 13.0563 13.4375 12.5C13.4375 11.7541 13.7338 11.0387 14.2613 10.5113C14.7887 9.98382 15.5041 9.6875 16.25 9.6875ZM33.75 26.5625H30.8438C30.6286 25.5029 30.0537 24.5502 29.2165 23.8659C28.3793 23.1816 27.3313 22.8078 26.25 22.8078C25.1687 22.8078 24.1207 23.1816 23.2835 23.8659C22.4463 24.5502 21.8714 25.5029 21.6562 26.5625H6.25C6.00136 26.5625 5.7629 26.6613 5.58709 26.8371C5.41127 27.0129 5.3125 27.2514 5.3125 27.5C5.3125 27.7486 5.41127 27.9871 5.58709 28.1629C5.7629 28.3387 6.00136 28.4375 6.25 28.4375H21.6562C21.8714 29.4971 22.4463 30.4498 23.2835 31.1341C24.1207 31.8184 25.1687 32.1922 26.25 32.1922C27.3313 32.1922 28.3793 31.8184 29.2165 31.1341C30.0537 30.4498 30.6286 29.4971 30.8438 28.4375H33.75C33.9986 28.4375 34.2371 28.3387 34.4129 28.1629C34.5887 27.9871 34.6875 27.7486 34.6875 27.5C34.6875 27.2514 34.5887 27.0129 34.4129 26.8371C34.2371 26.6613 33.9986 26.5625 33.75 26.5625ZM26.25 30.3125C25.6937 30.3125 25.15 30.1475 24.6875 29.8385C24.2249 29.5295 23.8645 29.0902 23.6516 28.5763C23.4387 28.0624 23.383 27.4969 23.4915 26.9513C23.6001 26.4057 23.8679 25.9046 24.2613 25.5113C24.6546 25.1179 25.1557 24.8501 25.7013 24.7415C26.2469 24.633 26.8124 24.6887 27.3263 24.9016C27.8402 25.1145 28.2795 25.4749 28.5885 25.9375C28.8975 26.4 29.0625 26.9437 29.0625 27.5C29.0625 28.2459 28.7662 28.9613 28.2387 29.4887C27.7113 30.0162 26.9959 30.3125 26.25 30.3125Z",
+    fill: "black"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     className: "w-[2.5rem] h-[2.5rem] close-toggle",
     xmlns: "http://www.w3.org/2000/svg",
@@ -2451,30 +2378,54 @@ const Filter = data => {
     fill: "none"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M26.25 8.75L8.75 26.25",
-    stroke: "#F9F9F9",
+    stroke: "#000",
     strokeWidth: "2",
     strokeLinecap: "round",
     strokeLinejoin: "round"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M8.75 8.75L26.25 26.25",
-    stroke: "#F9F9F9",
+    stroke: "#000",
     strokeWidth: "2",
     strokeLinecap: "round",
     strokeLinejoin: "round"
   })))) : null, showFilterItems ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "filter-items",
-    className: "grid grid-cols-12 justify-start"
-  }, data.filterOptions.map((filterItem, key) => {
+    className: "grid grid-cols-12 justify-start mt-[30px] sm:mt-0"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center border-b py-2 col-span-12 max-w-96 mb-7 focus-visible:border-0"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M0.852114 14.3519L4.37266 10.8321C3.35227 9.60705 2.84344 8.03577 2.95204 6.44512C3.06064 4.85447 3.7783 3.36692 4.95573 2.29193C6.13316 1.21693 7.67971 0.637251 9.27365 0.673476C10.8676 0.709701 12.3862 1.35904 13.5136 2.48642C14.641 3.6138 15.2903 5.13241 15.3265 6.72635C15.3627 8.32029 14.7831 9.86684 13.7081 11.0443C12.6331 12.2217 11.1455 12.9394 9.55488 13.048C7.96423 13.1566 6.39295 12.6477 5.1679 11.6273L1.64805 15.1479C1.59579 15.2001 1.53375 15.2416 1.46546 15.2699C1.39718 15.2982 1.32399 15.3127 1.25008 15.3127C1.17617 15.3127 1.10299 15.2982 1.0347 15.2699C0.96642 15.2416 0.904376 15.2001 0.852114 15.1479C0.799852 15.0956 0.758396 15.0336 0.730112 14.9653C0.701828 14.897 0.68727 14.8238 0.68727 14.7499C0.68727 14.676 0.701828 14.6028 0.730112 14.5345C0.758396 14.4663 0.799852 14.4042 0.852114 14.3519ZM14.1876 6.87492C14.1876 5.87365 13.8907 4.89487 13.3344 4.06234C12.7781 3.22982 11.9875 2.58094 11.0624 2.19778C10.1374 1.81461 9.11947 1.71435 8.13744 1.90969C7.15541 2.10503 6.25336 2.58718 5.54536 3.29519C4.83735 4.00319 4.3552 4.90524 4.15986 5.88727C3.96452 6.8693 4.06477 7.8872 4.44794 8.81225C4.83111 9.7373 5.47999 10.528 6.31251 11.0842C7.14503 11.6405 8.12382 11.9374 9.12508 11.9374C10.4673 11.9359 11.7541 11.4021 12.7032 10.453C13.6522 9.50392 14.1861 8.21712 14.1876 6.87492Z",
+    fill: "black"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "appearance-none bg-transparent border-none w-full text-[#737373] mr-3 py-1 px-2 leading-tight focus:ring-transparent focus:shadow-none focus-visible:ring-transparent",
+    type: "text",
+    placeholder: translation.product_search,
+    "aria-label": "product search",
+    onChange: e => setFilters({
+      ...filters,
+      searchText: e.target.value.trim().toLowerCase()
+    })
+  })), data.filterOptions.map((filterItem, key) => {
     if (filterItem.type === "dropdown") {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: key,
-        className: "col-span-12 relative max-w-64 mb-8"
+        className: "col-span-12 relative w-full max-w-full sm:max-w-64 mb-8"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, translation.metals_accessories), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
         onChange: e => handleTaxSelect("metalsAndAccessories", e),
-        className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373]"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+        value: "",
+        disabled: true,
+        selected: true
+      }, "Select metals & accessories"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
         value: "none"
-      }, "None"), filterItem.tax_options.map((term, index) => {
+      }, "All"), filterItem.tax_options.map((term, index) => {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
           key: index,
           value: term.term_id
@@ -2497,11 +2448,11 @@ const Filter = data => {
   })) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mt-[54px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-3 mb-10 gap-[42px] filter-grid"
+    className: "grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid"
   }, !loading ? originalDisplayedPosts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, displayedPosts.map((post, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: index,
-      className: "flex flex-col h-full",
+      className: "flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0",
       dangerouslySetInnerHTML: {
         __html: atob(post.html)
       }

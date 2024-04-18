@@ -33,16 +33,18 @@ if ( $related_products ) : ?>
 		
 		<?php woocommerce_product_loop_start(); ?>
 
-			<?php foreach ( $related_products as $related_product ) : ?>
-
-					<?php
-						echo do_shortcode("[wps_get_product_card product_id='{$related_product->get_id()}']");
-					// $post_object = get_post( $related_product->get_id() );
-
-					// setup_postdata( $GLOBALS['post'] =& $post_object ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited, Squiz.PHP.DisallowMultipleAssignments.Found
-
-					// wc_get_template_part( 'content', 'product' );
-					?>
+		<?php 
+			// Counter for limiting to 3 products
+			$product_count = 0;
+			foreach ( $related_products as $related_product ) : 
+				if ($product_count >= 3) {
+					break; // Stop the loop if 3 products have been displayed
+				}
+				?>
+				<?php
+					echo do_shortcode("[wps_get_product_card product_id='{$related_product->get_id()}']");
+					$product_count++;
+				?>
 
 			<?php endforeach; ?>
 

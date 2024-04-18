@@ -19,4 +19,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<ul class="products grid grid-cols-3 gap-[42px]">
+<ul class="products grid grid-cols-6 gap-[42px]">
