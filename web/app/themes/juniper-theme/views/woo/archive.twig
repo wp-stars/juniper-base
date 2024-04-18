@@ -1,6 +1,19 @@
 {% extends 'base.twig' %}
 
+ 
+
 {% block content %}
+
+  {% block breadcrumbs %}
+    	{% include "blocks/breadcrumbs.twig" with {
+            'home_page_url': home_page_url, 
+            'parent_page_title': parent_page_title, 
+            'parent_page_url': parent_page_url, 
+            'page_title': page_title, 
+            'page_url': page_url
+        } %}
+	{% endblock %} 
+    <h1 class="container mb-[-8px]">Shop</h1>
     {# This is just so we can have a static shop page & use gutenberg blocks. #}
     {{ page_content }}
 {% endblock  %}
