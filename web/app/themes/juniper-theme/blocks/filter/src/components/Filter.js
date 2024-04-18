@@ -175,7 +175,7 @@ useEffect(() => {
                                         <label>{translation.metals_accessories}</label>
                                         <select 
                                             onChange={(e) => handleTaxSelect("metalsAndAccessories", e)}
-                                            className="select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373]"
+                                            className="select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
                                         >
                                             <option value="" disabled selected>Select metals & accessories</option>
                                             <option value="none">All</option>

@@ -1147,6 +1147,14 @@ video {
   margin-top: 30px;
 }
 
+.mb-28 {
+  margin-bottom: 7rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
 .block {
   display: block;
 }
@@ -1748,6 +1756,10 @@ video {
   overflow-y: auto;
 }
 
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -2155,6 +2167,10 @@ video {
   font-size: 0.75rem;
 }
 
+.text-3xl {
+  font-size: 1.953rem;
+}
+
 .font-black {
   font-weight: 900;
 }
@@ -2487,6 +2503,18 @@ video {
     margin-top: 0px;
   }
 
+  .sm\:mb-\[6\.25rem\] {
+    margin-bottom: 6.25rem;
+  }
+
+  .sm\:mb-72 {
+    margin-bottom: 18rem;
+  }
+
+  .sm\:mt-16 {
+    margin-top: 4rem;
+  }
+
   .sm\:block {
     display: block;
   }
@@ -2538,6 +2566,10 @@ video {
 
   .sm\:w-full {
     width: 100%;
+  }
+
+  .sm\:w-auto {
+    width: auto;
   }
 
   .sm\:max-w-\[70\%\] {
@@ -2636,6 +2668,14 @@ video {
 
   .sm\:pt-\[15rem\] {
     padding-top: 15rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.9rem;
+  }
+
+  .sm\:text-5xl {
+    font-size: 3.052rem;
   }
 
   .sm\:leading-3 {

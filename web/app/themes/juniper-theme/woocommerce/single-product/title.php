@@ -19,5 +19,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-the_title( '<h1 class="product_title entry-title mb-2 text-5xl leading-10">', '</h1>' );
+the_title( '<h1 class="product_title entry-title mb-2 text-4xl sm:text-5xl  break-words">', '</h1>' );
 do_action('wps_print_subheadline_text_field');

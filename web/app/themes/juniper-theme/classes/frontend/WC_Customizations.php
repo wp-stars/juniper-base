@@ -115,7 +115,7 @@ class WC_Customizations {
         $custom_value = get_post_meta($product->get_id(), '_subheadline_text_field', true);
 
         if (!empty($custom_value)) {
-            echo '<h2 class="text-black text-2xl font-bold leading-7 mb-3.5">' . esc_html($custom_value) . '</h2>';
+            echo '<h2 class="text-black text-2xl font-bold mb-3.5">' . esc_html($custom_value) . '</h2>';
         }
     }
 

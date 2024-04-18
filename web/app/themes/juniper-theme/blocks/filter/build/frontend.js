@@ -2418,7 +2418,7 @@ const Filter = data => {
         className: "col-span-12 relative w-full max-w-full sm:max-w-64 mb-8"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, translation.metals_accessories), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
         onChange: e => handleTaxSelect("metalsAndAccessories", e),
-        className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373]"
+        className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
         value: "",
         disabled: true,
