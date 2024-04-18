@@ -21,24 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( $related_products ) : ?>
 
-	<section class="related products mb-72">
+	<section class="related products mb-28 sm:mb-72">
 
 		<?php
 		$heading = apply_filters( 'woocommerce_product_related_products_heading', __( 'Related products', 'woocommerce' ) );
 
 		if ( $heading ) :
 			?>
-			<h2 class="mb-[30px]"><?php echo esc_html( $heading ); ?></h2>
+			<h2 class="mb-[30px] text-3xl"><?php echo esc_html( $heading ); ?></h2>
 		<?php endif; ?>
 		
 		<?php woocommerce_product_loop_start(); ?>
 
 		<?php 
-			// Counter for limiting to 3 products
 			$product_count = 0;
 			foreach ( $related_products as $related_product ) : 
 				if ($product_count >= 3) {
-					break; // Stop the loop if 3 products have been displayed
+					break;
 				}
 				?>
 				<?php
