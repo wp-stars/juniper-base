@@ -144,7 +144,10 @@ function attachAppendEventListeners() {
     appendButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = e.currentTarget.getAttribute('data-product-id');
-            // const updatedProductIds = productIds.filter(id => id !== productId);
+
+            if(productIds.includes(productId)) {
+                return
+            }
 
             productIds.push(productId);
             setCookie(cookieName, JSON.stringify(productIds));
