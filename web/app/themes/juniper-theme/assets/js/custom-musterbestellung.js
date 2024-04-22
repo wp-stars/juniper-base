@@ -133,3 +133,27 @@ setInterval(() => {
     }
 }, 1000); // Poll every 500ms
 
+
+// add to musterbestellung
+function attachAppendEventListeners() {
+
+    let products = customMusterbestellungParams.musterbestellungProducts;
+    let productIds = products.map(product => product.id)
+
+    const appendButtons = document.querySelectorAll('.add-to-musterbestellung');
+    appendButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = e.currentTarget.getAttribute('data-product-id');
+
+            if(productIds.includes(productId)) {
+                return
+            }
+
+            productIds.push(productId);
+            setCookie(cookieName, JSON.stringify(productIds));
+            fetchAndUpdateMusterbestellung(true)
+        });
+    });
+}
+
+attachAppendEventListeners();
