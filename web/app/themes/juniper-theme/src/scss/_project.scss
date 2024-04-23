@@ -1069,3 +1069,43 @@ button#place_order.button.alt {
         border: solid 3px white;
     }
 }
+
+
+.child-link::after{
+    color: #000;
+    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="15px" height="20px" viewBox="0 0 25 25"><path style="fill:%23232326" d="m17.5 5.999-.707.707 5.293 5.293H1v1h21.086l-5.294 5.295.707.707L24 12.499l-6.5-6.5z" data-name="Right"/></svg>');
+    font-family: icons, sans-serif;
+    font-size: 14px;
+    opacity: 0;
+    transform: translate(0);
+    transition: all .15s ease;
+    vertical-align: middle;
+    padding-right: 20px;
+}
+
+.child-link:hover:after{
+    opacity: 1;
+    transform: translate(80px);
+    padding-left: 20px;
+    padding-right: 0px;
+}
+
+.child-link:hover{
+    font-weight: 700;
+}
+
+.menu-second-level-container:nth-child(1) a{
+border-color: #898989;
+}
+.menu-second-level-container:nth-child(2) a{
+    border-color: #8cd6ed;
+}
+.menu-second-level-container:nth-child(3) a{
+    border-color: #e76e5b;
+}
+.wide-width {
+    max-width: 650px; /* or whatever width you prefer when there are subchildren */
+}
+.narrow-width {
+    max-width: 450px; /* or another width when there are no subchildren */
+}
