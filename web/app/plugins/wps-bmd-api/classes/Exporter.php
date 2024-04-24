@@ -45,7 +45,11 @@ class Exporter
         // get vat number
         $billing_address = $this->order->get_address('billing');
         $vat_id = $billing_address['vat_id'] ?? '';
-        $salutation = $this->order->get_billing_title() ?? '';
+
+        $salutation = '';
+        if(method_exists($this->order, 'get_billing_title')){
+            $salutation = $this->order->get_billing_title() ?? '';
+        }
 
         // orderingParty address
         $orderingPartyAddress = [];
