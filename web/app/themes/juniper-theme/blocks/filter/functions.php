@@ -114,6 +114,7 @@ function wps_filter_callback() {
 
 
 function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
+
     $data_arr = array();
     $tax_query = array();
     if(count($taxonomies)) {
@@ -133,7 +134,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         's' => $search
     );
 
-    if ($exclude_product_type) {
+    /*if ($exclude_product_type) {
         // Exclude products of specific product type
         $args['meta_query'] = array(
             array(
@@ -142,7 +143,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
                 'compare' => '!='
             )
         );
-    }
+    }*/
 
     if(count($tax_query)) {
         $args['tax_query'] = $tax_query;
