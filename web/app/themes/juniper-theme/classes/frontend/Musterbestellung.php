@@ -152,13 +152,13 @@ function enqueue_custom_js_for_musterbestellung() {
     
         foreach ($musterbestellungProducts as $id) {
             // Assuming getProductImageById is a function that returns an image URL by product ID
-            $product = new \stdClass();
+            $local_product = new \stdClass();
     
-            $product->image = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'single-post-thumbnail' );
-            $product->name = get_the_title( $id );
-            $product->id = $id;
+            $local_product->image = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'single-post-thumbnail' );
+            $local_product->name = get_the_title( $id );
+            $local_product->id = $id;
             
-            $products[] = $product; 
+            $products[] = $local_product; 
         }
     }
 
