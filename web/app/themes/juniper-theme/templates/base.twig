@@ -131,7 +131,7 @@
 							 </div>
 						</div>
 
-						<div id="menu-wrapper-2" class="h-[95vh] w-[100vw] hidden bg-white flex flex-col items-center pt-14">
+						<div id="menu-wrapper-2" class="h-[95vh] w-[100vw] hidden bg-white flex flex-col items-center pt-14 absolute">
 
 						<div id="personal-menu-wrapper" class=" flex items-center gap-[10px] mb-[22px]">
 						
@@ -154,14 +154,14 @@
 					
 								</div>
 
-							<div id="secondary-menu-wrapper" class="items-center gap-[18px] flex flex-col">
+							<div id="secondary-menu-wrapper" class="items-center gap-[13px] flex flex-col">
 
-									<a href="{{ shop_url }}" class="btn btn-black text-white min-w-[150px]">Produkte</a>
-									<a href="{{ shop_url }}" class="btn btn-accent min-w-[150px]">Online Shop</a>
+									<a href="{{ shop_url }}" class="btn btn-black font-semibold text-white min-w-[150px]">Produkte</a>
+									<a href="{{ shop_url }}" class="btn btn-accent font-semibold min-w-[150px]">Online Shop</a>
 								</div>
 
 						<div id="menu-wrapper" class="flex flex-col items-center">
-										{% include "categorized-menu.twig" with {'items': primary_menu.get_items, 'name': 'primary-menu'} %}
+										{% include "categorized-menu-mobile.twig" with {'items': primary_menu.get_items, 'name': 'primary-menu'} %}
 								</div>
 
 						</div>
