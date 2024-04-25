@@ -30,16 +30,28 @@ const closeModal = (id) => {
     const dialog = document.getElementById("modal-" + id);
     dialog.close();
 }
+
 jQuery(document).ready(function() {
-    // Function to initialize the slider
     const initSlider = ($element) => {
-        $element.not('.slick-initialized').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-            fade: true,
-            dots: true,
-            // asNavFor: '.woocommerce-product-gallery-thumbnails'
+        // Initialize the slider first with default settings
+        $element.each(function() {
+            const $slider = jQuery(this);
+            if (!$slider.hasClass('slick-initialized')) {
+                $slider.slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: true,
+                    fade: true,
+                    dots: false // Initialize without dots
+                });
+
+                // Check the number of slides after initialization
+                const slideCount = $slider.slick('getSlick').slideCount;
+                if (slideCount > 1) {
+                    // Update the slider options to show dots if there are more than one slide
+                    $slider.slick('slickSetOption', 'dots', true, true);
+                }
+            }
         });
     };
 
