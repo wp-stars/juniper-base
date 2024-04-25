@@ -263,6 +263,8 @@ function enqueue_ls_scripts() {
         'no_results' => __('Keine Ergebnise.', 'text-domain'),
         'open_filter' => __('Filter öffnen', 'text-domain'),
         'metals_accessories' => __(' Metalle und Zubehör', 'text-domain'),
+        'colors' => __(' Farben', 'text-domain'),
+        'product_category' => __(' Kategorien', 'text-domain'),
         'checkbox' => __('Muster erhältlich', 'text-domain'),
         'product_search' => __('Suche Produkte...', 'text-domain'),
         'load_more' => __('mehr laden', 'text-domain'),
