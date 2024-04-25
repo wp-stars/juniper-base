@@ -1,16 +1,17 @@
 <?php
 
-namespace Juniper\Taxonomies;
+namespace IWG\Taxonomies\Product;
 
-class MetalsAndAccessories
+class Anwendung
 {
     public string $taxonomy_slug;
     public string $taxonomy_name;
+    public string $postType = 'product';
 
     public function __construct()
     {
-        $this->taxonomy_slug = 'metals-and-accessories';
-        $this->taxonomy_name = __('Metals And Accessories', 'juniper');
+        $this->taxonomy_slug = 'anwendung';
+        $this->taxonomy_name = __('Anwendung', 'juniper');
 
         add_action('init', array( $this, 'register_custom_taxonomy' ));
     }
@@ -24,7 +25,6 @@ class MetalsAndAccessories
             'hierarchical' => true
         );
 
-        register_taxonomy($this->taxonomy_slug, 'product', $args);
+        register_taxonomy($this->taxonomy_slug, $this->postType, $args);
     }
-
 }
