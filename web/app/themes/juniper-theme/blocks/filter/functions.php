@@ -51,7 +51,7 @@ add_filter(
         $data_arr['restUrl'] = get_rest_url();
         $data_arr['filterOptions'] = $context['fields']['filter_options'];
         $data_arr['title'] = $context['fields']['title'];
-        $data_arr['shop'] = $context['fields']['shop'];
+        // $data_arr['shop'] = $context['fields']['shop'];
 
         $context['data'] = json_encode($data_arr);
         return $context;
