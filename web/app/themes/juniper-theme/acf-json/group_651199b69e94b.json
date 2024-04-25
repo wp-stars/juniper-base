@@ -62,6 +62,7 @@
                 "shop_order_refund": "shop_order_refund",
                 "shop_coupon": "shop_coupon",
                 "shop_order_placehold": "shop_order_placehold",
+                "wpcf7_contact_form": "wpcf7_contact_form",
                 "patterns_ai_data": "patterns_ai_data",
                 "jobs": "jobs",
                 "metalprices": "metalprices"
@@ -113,23 +114,28 @@
                     },
                     "wpml_cf_preferences": 0,
                     "choices": {
-                        "category": "Categories",
-                        "post_tag": "Tags",
-                        "nav_menu": "Navigation Menus",
-                        "link_category": "Link Categories",
-                        "post_format": "Formats",
+                        "category": "Kategorien",
+                        "post_tag": "Schlagwörter",
+                        "nav_menu": "Navigationsmenüs",
+                        "link_category": "Linkkategorien",
+                        "post_format": "Formate",
                         "wp_theme": "Themes",
-                        "wp_template_part_area": "Template Part Areas",
-                        "wp_pattern_category": "Pattern Categories",
-                        "product_type": "Product type",
-                        "product_visibility": "Product visibility",
-                        "product_cat": "Product categories",
-                        "product_tag": "Product tags",
-                        "product_shipping_class": "Product shipping classes",
-                        "translation_priority": "Translation Priorities",
+                        "wp_template_part_area": "Template-Teil-Bereiche",
+                        "wp_pattern_category": "Vorlagen-Kategorien",
+                        "product_type": "Produkttyp",
+                        "product_visibility": "Sichtbarkeit des Produkts",
+                        "product_cat": "Produkt-Kategorien",
+                        "product_tag": "Produkt Schlagwörter",
+                        "product_shipping_class": "Produkt Versandklasse",
+                        "pa_brand": "Produkt Brand",
+                        "pa_color": "Produkt Color",
+                        "pa_size": "Produkt Size",
                         "job-categories": "Job Categories",
                         "metals-and-accessories": "Metals And Accessories",
-                        "purchasability": "Purchasability"
+                        "purchasability": "Purchasability",
+                        "application": "Applikation",
+                        "color": "Farbe",
+                        "anwendung": "Anwendung"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -169,6 +175,27 @@
                     "parent_repeater": "field_65e7231575342"
                 }
             ]
+        },
+        {
+            "key": "field_662a40a959b3f",
+            "label": "Shop",
+            "name": "shop",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "message": "Es werden nur kaufbare Produkte angezeigt",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -190,5 +217,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1710274807
+    "modified": 1714045207
 }

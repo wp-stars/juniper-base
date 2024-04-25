@@ -3,8 +3,8 @@ import axios from 'axios'
 import { useMediaQuery } from 'react-responsive'
 import Checkbox from "./Checkbox"
 
-const Filter = ( data ) => {
-    console.log(data)
+const FilterShop = ( data ) => {
+    console.log(data, "this is the data")
     const [originalDisplayedPosts, setOriginalDisplayedPosts] = useState(
         data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6)
     );
@@ -14,9 +14,7 @@ const Filter = ( data ) => {
     const [filters, setFilters] = useState({
         searchText: "",
         purchasability: false,
-        metalsAndAccessories: undefined,
-        color: undefined,
-        productCat: undefined
+        metalsAndAccessories: undefined
     });
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
@@ -73,34 +71,24 @@ const Filter = ( data ) => {
     };
 
 
- const applyFilters = ({ searchText, purchasability, metalsAndAccessories, color, productCat }) => {
-    let filtered = originalDisplayedPosts;
-
-    if (searchText) {
-        filtered = filtered.filter(post => post.post_title.toLowerCase().includes(searchText));
-    }
-
-    if (purchasability) {
-        filtered = filtered.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === "sample-available"));
-    }
-
-    if (metalsAndAccessories && metalsAndAccessories !== "none") {
-        filtered = filtered.filter(post => post.taxonomies["metals-and-accessories"]?.some(term => term.term_id === parseInt(metalsAndAccessories)));
-    }
-
-    if (color && color !== "none") {
-        filtered = filtered.filter(post => post.taxonomies["color"]?.some(term => term.term_id === parseInt(color)));
-    }
-
-    if (productCat && productCat !== "none") {
-        filtered = filtered.filter(post => post.taxonomies["product_cat"]?.some(term => term.term_id === parseInt(productCat)));
-    }
-
-    setFilteredPosts(filtered);
-    setDisplayedPosts(filtered.slice(0, 6));  // Show only the first 6
-};
-
+    const applyFilters = ({ searchText, purchasability, metalsAndAccessories }) => {
+        let filtered = originalDisplayedPosts;
     
+        if (searchText) {
+            filtered = filtered.filter(post => post.post_title.toLowerCase().includes(searchText));
+        }
+    
+        if (purchasability) {
+            filtered = filtered.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === "sample-available"));
+        }
+    
+        if (metalsAndAccessories && metalsAndAccessories !== "none") {
+            filtered = filtered.filter(post => post.taxonomies["metals-and-accessories"]?.some(term => term.term_id === parseInt(metalsAndAccessories)));
+        }
+    
+        setFilteredPosts(filtered);  // Store all filtered posts
+        setDisplayedPosts(filtered.slice(0, 6));  // Show only the first 6
+    };
     
     
 
@@ -143,7 +131,7 @@ useEffect(() => {
   
 
     return (
-        <div className="w-full">
+        <div className="w-full ">
             <div className="container">
                 <h1 className=" mb-0 sm:mb-[30px]">{data.title}</h1>
             </div>
@@ -181,32 +169,24 @@ useEffect(() => {
                         onChange={(e) => setFilters({ ...filters, searchText: e.target.value.trim().toLowerCase() })}
                     />
                 </div>
-                {data.filterOptions.map((filterItem, key) => {
-     if (filterItem.type === "dropdown") {
-        const isMetals = filterItem.name === "metals-and-accessories";
-        const isColor = filterItem.name === "color";
-        const isProductCat = filterItem.name === "product_cat";
-
-        if (isMetals || isColor || isProductCat) {
-            return (
-                <div key={key} className="col-span-12 relative w-full max-w-full sm:max-w-64 mb-8">
-                    <label>{isMetals ? translation.metals_accessories : isColor ? translation.colors : translation.product_category}</label>
-                    <select 
-                        onChange={(e) => handleTaxSelect(isMetals ? "metalsAndAccessories" : isColor ? "color" : "productCat", e)}
-                        className="select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
-                    >
-                        <option value="" disabled selected>Select {isMetals ? "metals & accessories" : isColor ? "color" : "category"}</option>
-                        <option value="none">All</option>
-                        {filterItem.tax_options.map((term, index) => {
-                            return <option key={index} value={term.term_id}>{term.name}</option>
-                        })}
-                    </select>
-                </div>
-            )
-        }
-    }
-
-
+                        {data.filterOptions.map((filterItem, key) => {
+                            if(filterItem.type === "dropdown") {
+                                return (
+                                    <div key={key} className="col-span-12 relative w-full max-w-full sm:max-w-64 mb-8">
+                                        <label>{translation.metals_accessories}</label>
+                                        <select 
+                                            onChange={(e) => handleTaxSelect("metalsAndAccessories", e)}
+                                            className="select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
+                                        >
+                                            <option value="" disabled selected>Select metals & accessories</option>
+                                            <option value="none">All</option>
+                                            {filterItem.tax_options.map((term, index) => {
+                                                return <option key={index} value={term.term_id}>{term.name}</option>
+                                            })}
+                                        </select>
+                                    </div>
+                                )
+                            }
                             if(filterItem.type === "checkbox") {
                                 return (
                                     <div key={key} className="col-span-12 block mb-8">
@@ -263,4 +243,4 @@ useEffect(() => {
     )
 }
 
-export default Filter
+export default FilterShop

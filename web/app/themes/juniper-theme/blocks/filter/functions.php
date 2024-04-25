@@ -51,6 +51,7 @@ add_filter(
         $data_arr['restUrl'] = get_rest_url();
         $data_arr['filterOptions'] = $context['fields']['filter_options'];
         $data_arr['title'] = $context['fields']['title'];
+        $data_arr['shop'] = $context['fields']['shop'];
 
         $context['data'] = json_encode($data_arr);
         return $context;
@@ -164,6 +165,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         // $post_obj->type = get_type($post);
 
         $taxonomies = get_post_taxonomies($post);
+       
         $taxonomy_data = array();
         foreach ($taxonomies as $taxonomy) {
             $terms = get_the_terms($post, $taxonomy);
@@ -177,6 +179,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
                 }
             }
         }
+      
         $post_obj->taxonomies = $taxonomy_data;
         
 
@@ -193,6 +196,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 
         $post_arr[] = $post_obj;
     }
+
 
     $data_arr['posts'] = $post_arr;
     $data_arr['maxNumPages'] = $filter_query->max_num_pages;
