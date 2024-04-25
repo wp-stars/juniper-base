@@ -10,7 +10,7 @@ class Purchasability
     public function __construct()
     {
         $this->taxonomy_slug = 'purchasability';
-        $this->taxonomy_name = 'Purchasability';
+        $this->taxonomy_name = __('Purchasability', 'juniper');
 
         add_action('init', array( $this, 'register_custom_taxonomy' ));
     }

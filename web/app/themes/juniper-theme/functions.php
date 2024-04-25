@@ -506,8 +506,21 @@ require_once THEME_DIR . 'inc/news/news-acf.php';
 require_once THEME_DIR . 'inc/news/news-detailpage.php';
 require_once THEME_DIR . 'inc/admin/capabilities.php';
 
+// mrx create taxonomies and import fieldgroups
+(function(){
 
+    // taxonomies
+    require_once THEME_DIR . 'taxonomies/product/Application.php';
+    require_once THEME_DIR . 'taxonomies/product/Color.php';
+    require_once THEME_DIR . 'taxonomies/product/Anwendung.php';
+    new \IWG\Taxonomies\Product\Application();
+    new \IWG\Taxonomies\Product\Color();
+    new \IWG\Taxonomies\Product\Anwendung();
 
+    // fieldgroups
+    include THEME_DIR . 'fieldgroups/product-group.php';
+
+})();
 
 // handle product request modal
 
@@ -570,3 +583,4 @@ add_action( 'enqueue_block_editor_assets', function(){
     $script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } }";
     wp_add_inline_script( 'wp-blocks', $script );
 } );
+
