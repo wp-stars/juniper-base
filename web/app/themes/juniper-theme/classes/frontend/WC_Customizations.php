@@ -12,9 +12,10 @@ class WC_Customizations {
 
         add_filter( 'woocommerce_product_tabs', array($this, 'add_product_tabs'), 9999 );
 
-        add_action('woocommerce_product_options_general_product_data', array($this, 'add_subheadline_text_field'));
-        add_action('woocommerce_process_product_meta', array($this, 'save_subheadline_text_field'));
-        add_action('wps_print_subheadline_text_field', array($this, 'print_subheadline_text_field'));
+        // hide product subheadline field from product data metabox - we replaced it with a ACF Field
+        //add_action('woocommerce_product_options_general_product_data', array($this, 'add_subheadline_text_field'));
+        //add_action('woocommerce_process_product_meta', array($this, 'save_subheadline_text_field'));
+        //add_action('wps_print_subheadline_text_field', array($this, 'print_subheadline_text_field'));
 
         add_filter( 'woocommerce_product_data_tabs', array($this, 'add_technical_data_guide_product_tab') );
         add_action( 'woocommerce_product_data_panels', array($this, 'display_technical_data_guide_product_data_tab_content') );
