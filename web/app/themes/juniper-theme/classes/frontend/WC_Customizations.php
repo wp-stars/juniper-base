@@ -48,7 +48,20 @@ class WC_Customizations {
     public function product_description_tab() {
         global $product;
 
-        echo $product->get_description();
+        //echo $product->get_description();
+
+        echo '<h3>' . get_field('wps_sp_description_title', $product->get_id()) . '</h3>';
+        echo get_field('wps_sp_description_text', $product->get_id());
+
+        echo '<h3>'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
+        echo get_field('wps_sp_features_text', $product->get_id());
+
+        echo '<h3>' . __('Anwendung', 'wps-juniper') . '</h3>';
+        echo get_field('wps_sp_areas_of_application_text', $product->get_id());
+
+        echo '<h3>'.__('Downloads', 'wps-juniper').'</h3>';
+        echo get_field('wps_sp_description_title', $product->get_id());
+
     }
 
     public function custom_product_categories() {
