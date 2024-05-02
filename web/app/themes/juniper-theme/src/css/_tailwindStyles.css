@@ -1138,6 +1138,14 @@ video {
   margin-top: 6rem;
 }
 
+.mb-2\.5 {
+  margin-bottom: 0.625rem;
+}
+
+.mt-\[50px\] {
+  margin-top: 50px;
+}
+
 .block {
   display: block;
 }
@@ -1674,6 +1682,10 @@ video {
 
 .gap-\[4rem\] {
   gap: 4rem;
+}
+
+.gap-\[1\.25rem\] {
+  gap: 1.25rem;
 }
 
 .gap-x-10 {
@@ -2519,6 +2531,10 @@ video {
 
   .sm\:mt-auto {
     margin-top: auto;
+  }
+
+  .sm\:mt-\[-55px\] {
+    margin-top: -55px;
   }
 
   .sm\:block {

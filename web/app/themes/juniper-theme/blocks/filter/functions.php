@@ -51,9 +51,10 @@ add_filter(
         $data_arr['restUrl'] = get_rest_url();
         $data_arr['filterOptions'] = $context['fields']['filter_options'];
         $data_arr['title'] = $context['fields']['title'];
-        // $data_arr['shop'] = $context['fields']['shop'];
+        $data_arr['shop'] = $context['fields']['shop'];
 
         $context['data'] = json_encode($data_arr);
+
         return $context;
     }
 );
@@ -154,14 +155,17 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 
     $post_arr = array();
     foreach ($filter_query->posts as $post) {
+    //   var_dump($post);
         $post_obj = new stdClass();
         $post_obj->ID = $post->ID;
-        $post_obj->fields = get_fields($post);
+        $post_obj->fields = get_fields(json_encode($post));
         $post_obj->excerpt = wp_trim_excerpt('', $post);
         $post_obj->post_title = $post->post_title;
         $post_obj->post_name = $post->post_name;
         $post_obj->featured_image = get_the_post_thumbnail_url($post);
         $post_obj->link = get_permalink($post);
+        $post_obj->price = (int)(wc_get_product( $post->ID ))->get_regular_price();
+
         // $post_obj->type = get_type($post);
 
         $taxonomies = get_post_taxonomies($post);
@@ -179,7 +183,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
                 }
             }
         }
-      
+
         $post_obj->taxonomies = $taxonomy_data;
         
 

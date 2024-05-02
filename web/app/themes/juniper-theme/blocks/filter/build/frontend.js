@@ -2179,39 +2179,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Checkbox = ({
-  term,
-  filterItem,
-  handleTaxSelect
+  label,
+  isChecked,
+  onChange
 }) => {
-  const [checked, setChecked] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const handleCheckboxClick = (name, e) => {
-    const isChecked = e.target.checked; // Check if the checkbox is checked
+  const [checked, setChecked] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(isChecked);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setChecked(isChecked);
-    // Call handleTaxSelect with appropriate parameters based on whether the checkbox is checked
-    if (isChecked) {
-      handleTaxSelect(name, e);
-    } else {
-      // If the checkbox is unchecked, pass "none" as the value
-      handleTaxSelect(name, {
-        target: {
-          value: "none"
-        }
-      });
-    }
+  }, [isChecked]);
+  const handleCheckboxChange = e => {
+    const isChecked = e.target.checked;
+    setChecked(isChecked);
+    onChange(isChecked); // Pass the state back to the parent component
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "block"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    name: term.name,
-    value: term.term_id,
-    onChange: e => handleCheckboxClick(filterItem.name, e),
     type: "checkbox",
     checked: checked,
+    onChange: handleCheckboxChange,
     className: "form-checkbox h-5 w-5 text-indigo-600 focus:outline-none focus:ring focus:border-indigo-300 rounded"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "default-checkbox",
-    className: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-  }, translation.checkbox));
+    className: "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+  }, label));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Checkbox);
 
@@ -2250,7 +2240,8 @@ const Filter = data => {
     purchasability: false,
     metalsAndAccessories: undefined,
     color: undefined,
-    productCat: undefined
+    productCat: undefined,
+    onlineAvailable: false // New filter state
   });
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
@@ -2285,8 +2276,8 @@ const Filter = data => {
     eventSlider();
   };
   const calculateDisplayedRange = () => {
-    const totalPosts = filteredPosts.length; // Total posts after filtering
-    const lastPostIndex = displayedPosts.length; // The number of posts currently displayed
+    const totalPosts = filteredPosts.length;
+    const lastPostIndex = displayedPosts.length;
     return `${lastPostIndex} of ${totalPosts} products`;
   };
   const handleTaxSelect = (name, e) => {
@@ -2308,7 +2299,8 @@ const Filter = data => {
     purchasability,
     metalsAndAccessories,
     color,
-    productCat
+    productCat,
+    onlineAvailable
   }) => {
     let filtered = originalDisplayedPosts;
     if (searchText) {
@@ -2326,8 +2318,21 @@ const Filter = data => {
     if (productCat && productCat !== "none") {
       filtered = filtered.filter(post => post.taxonomies["product_cat"]?.some(term => term.term_id === parseInt(productCat)));
     }
+    if (onlineAvailable) {
+      filtered = filtered.filter(post => post.price != null && post.price > 0);
+    }
     setFilteredPosts(filtered);
-    setDisplayedPosts(filtered.slice(0, 6)); // Show only the first 6
+    setDisplayedPosts(filtered.slice(0, 6));
+  };
+  const resetFilters = () => {
+    setFilters({
+      searchText: "",
+      purchasability: false,
+      metalsAndAccessories: 'none',
+      color: 'none',
+      productCat: 'none',
+      onlineAvailable: false
+    });
   };
   const eventSlider = () => {
     const event = new Event('filterRenderingDone');
@@ -2347,6 +2352,7 @@ const Filter = data => {
         searchPosts(i);
       }
     }
+    console.log(displayedPosts);
   }, [maxPages]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!isMobile) setShowFilterItems(true);
@@ -2363,7 +2369,7 @@ const Filter = data => {
   }, data.title)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto"
   }, isMobile ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full flex justify-end items-center mt-[-55px]"
+    className: "w-full flex justify-end items-center mt-3 sm:mt-[-55px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
     className: `filter-toggle inline-flex items-center p-2 justify-center text-sm ml-4 ${showFilterItems ? 'open' : 'closed'}`,
@@ -2422,46 +2428,75 @@ const Filter = data => {
       ...filters,
       searchText: e.target.value.trim().toLowerCase()
     })
-  })), data.filterOptions.map((filterItem, key) => {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col sm:flex-row col-span-12 gap-[1.25rem]"
+  }, data.filterOptions.map((filterItem, key) => {
     if (filterItem.type === "dropdown") {
-      const isMetals = filterItem.name === "metals-and-accessories";
-      const isColor = filterItem.name === "color";
-      const isProductCat = filterItem.name === "product_cat";
-      if (isMetals || isColor || isProductCat) {
+      const filterName = filterItem.name;
+      let stateKey;
+      let translationKey;
+      switch (filterName) {
+        case "metals-and-accessories":
+          stateKey = "metalsAndAccessories";
+          translationKey = translation.metals_accessories;
+          break;
+        case "color":
+          stateKey = "color";
+          translationKey = translation.colors;
+          break;
+        case "product_cat":
+          stateKey = "productCat";
+          translationKey = translation.product_category;
+          break;
+        default:
+          // Handle unexpected cases
+          stateKey = "";
+          translationKey = "";
+      }
+      if (stateKey) {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           key: key,
-          className: "col-span-12 relative w-full max-w-full sm:max-w-64 mb-8"
-        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, isMetals ? translation.metals_accessories : isColor ? translation.colors : translation.product_category), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-          onChange: e => handleTaxSelect(isMetals ? "metalsAndAccessories" : isColor ? "color" : "productCat", e),
+          className: "col-span-12 relative w-full max-w-full sm:max-w-64 mb-2.5"
+        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, translationKey), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+          value: filters[stateKey] || "none" // Use the specific state key and default to "none" if undefined
+          ,
+          onChange: e => handleTaxSelect(stateKey, e),
           className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
         }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-          value: "",
-          disabled: true,
-          selected: true
-        }, "Select ", isMetals ? "metals & accessories" : isColor ? "color" : "category"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
           value: "none"
-        }, "All"), filterItem.tax_options.map((term, index) => {
+        }, "Select ", translationKey), filterItem.tax_options.map((term, index) => {
           return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-            key: index,
+            key: term.term_id,
             value: term.term_id
           }, term.name);
         })));
       }
     }
-    if (filterItem.type === "checkbox") {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        key: key,
-        className: "col-span-12 block mb-8"
-      }, filterItem.tax_options.map((term, index) => {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          term: term,
-          filterItem: filterItem,
-          handleTaxSelect: handleTaxSelect
-        });
-      }));
-    }
-    return null;
-  })) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "container mb-5 col-span-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "button",
+    onClick: resetFilters,
+    className: "text-black text-xs font-normal leading-tight"
+  }, "Delete All Filters")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-row gap-[1.25rem] col-span-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    label: "Sample Available",
+    isChecked: filters.purchasability,
+    onChange: isChecked => setFilters(prevFilters => ({
+      ...prevFilters,
+      purchasability: isChecked
+    }))
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "col-span-12 block mb-8"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    label: "Online Available",
+    isChecked: filters.onlineAvailable,
+    onChange: isChecked => setFilters(prevFilters => ({
+      ...prevFilters,
+      onlineAvailable: isChecked
+    }))
+  })))) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mt-[54px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid"
@@ -4487,14 +4522,16 @@ const setupFilters = () => {
     div.classList.remove("filter-entry");
   });
 
-  // // Handle FilterShop entries
-  // const filterShopDivs = document.querySelectorAll(".filter-entry-shop");
-  // filterShopDivs.forEach(div => {
-  //     let data = JSON.parse(div.dataset.initialData);
-  //     const root = ReactDOM.createRoot(div);
-  //     root.render(<FilterShop {...data} />);
-  //     div.classList.remove("filter-entry-shop");
-  // });
+  // Handle FilterShop entries
+  const filterShopDivs = document.querySelectorAll(".filter-entry-shop");
+  filterShopDivs.forEach(div => {
+    let data = JSON.parse(div.dataset.initialData);
+    const root = react_dom__WEBPACK_IMPORTED_MODULE_1___default().createRoot(div);
+    root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FilterShop, {
+      ...data
+    }));
+    div.classList.remove("filter-entry-shop");
+  });
 };
 document.addEventListener('DOMContentLoaded', setupFilters);
 })();
