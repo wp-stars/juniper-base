@@ -1,9 +1,10 @@
 <?php
 
+
 namespace WPS\frontend;
 
 class ProductCard {
-
+    
     public function __construct() {
         add_shortcode('wps_get_product_card', [$this, 'product_card_html']);
 
@@ -11,6 +12,7 @@ class ProductCard {
     }
 
     public function product_card_html( $atts ) {
+        header('Content-Type: text/html; charset=utf-8');
         $product_id = $atts['product_id'];
         $product = wc_get_product($product_id);
 
@@ -28,7 +30,9 @@ class ProductCard {
         // Check if there are any terms and not an error
         if (!is_wp_error($terms) && !empty($terms)) {
             // Implode the names array to a single string separated by "|"
-            $terms_string = implode(' | ', $terms);
+            // $terms_string = ;
+            $terms_string = htmlspecialchars(implode(' | ', $terms), ENT_QUOTES, 'UTF-8');
+
         } else {
             $terms_string = '';
         }
@@ -42,14 +46,14 @@ class ProductCard {
                         // Display the main product image as the first slide
                         $post_thumbnail_id = $product->get_image_id();
                         if ($post_thumbnail_id) {
-                            echo '<div class="h-[100%]">' . wp_get_attachment_image($post_thumbnail_id, 'medium', false, array( 'class' => '!h-[100%] w-[100%] object-cover' )) . '</div>';
+                            echo '<div class="h-[100%]">' . wp_get_attachment_image($post_thumbnail_id, 'large', false, array( 'class' => '!h-[100%] w-[100%] object-cover' )) . '</div>';
                         }
 
                         // Display the gallery images
                         $attachment_ids = $product->get_gallery_image_ids();
                         foreach ($attachment_ids as $attachment_id) {
                             if ($attachment_id !== $post_thumbnail_id) { // Ensure the main image is not repeated
-                                $image_html = wp_get_attachment_image($attachment_id, 'medium', false, array( 'class' => '!h-[100%] w-[100%] object-cover' ));
+                                $image_html = wp_get_attachment_image($attachment_id, 'large', false, array( 'class' => '!h-[100%] w-[100%] object-cover' ));
                                 echo '<div class="h-[100%]">' . $image_html . '</div>';
                             }
                         }
