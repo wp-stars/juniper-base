@@ -110,21 +110,38 @@ class WC_Customizations {
 
     public function custom_product_categories() {
         global $product;
+
+        $tags = [];
+
         $product_id = $product->get_id();
         $product_categories = wp_get_post_terms($product_id, 'product_cat');
+        $isNew = has_term( 'neu', 'product_tag', $product_id );
 
-        if ($product_categories) {
-            ?>
-            <div class="flex flex-wrap product-categories mb-[13px] gap-3.5">
-                <?php
-                foreach ($product_categories as $category) {
-                    ?>
-                    <div class="py-1 px-3 bg-accent uppercase inline-block"><?php echo esc_html($category->name); ?></div>
-                    <?php
-                }
-                ?>
-            </div>
-            <?php
+        // add the new tag to the tags array
+        if($isNew){
+            $tags[] = [
+                'label' => __('Neu', 'wps'),
+                'color' => 'bg-accent'
+            ];
+        }
+
+        // add the product categories to the tags array
+        if(!!$product_categories && is_array($product_categories) && count($product_categories) > 0){
+            foreach ($product_categories as $category) {
+                $tags[] = [
+                    'label' => esc_html($category->name),
+                    'color' => 'bg-accent'
+                ];
+            }
+        }
+
+        // print the tags to the template
+        if(count($tags) > 0){
+            echo '<div class="flex flex-wrap product-categories mb-[13px] gap-3.5">';
+            foreach ($tags as $tag) {
+                echo '<div class="py-1 px-3 uppercase inline-block '.$tag['color'].'">'.$tag['label'].'</div>';
+            }
+            echo '</div>';
         }
     }
 
