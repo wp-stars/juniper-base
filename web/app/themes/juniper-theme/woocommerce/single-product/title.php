@@ -19,5 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-the_title( '<h1 class="product_title entry-title mb-2 text-4xl sm:text-5xl  break-words">', '</h1>' );
-do_action('wps_print_subheadline_text_field');
+
+
+the_title( '<h1 class="product_title entry-title mb-2 text-4xl sm:text-5xl leading-10 break-words">', '</h1>' );
+
+if (function_exists('get_field')) {
+    $subheadline = get_field('wps_sp_description_title');
+    if ($subheadline) {
+        echo '<h2 class="text-black text-2xl font-bold mb-3.5">' . $subheadline . '</h2>';
+    }
+};
