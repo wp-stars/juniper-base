@@ -24,13 +24,13 @@ class WC_Customizations {
 
     public function add_product_tabs($tabs) {
         $tabs['description'] = array(
-            'title' => __( 'Description', 'wps-juniper' ), // TAB TITLE
+            'title' => __( 'Beschreibung', 'wps-juniper' ), // TAB TITLE
             'priority' => 50,
             'callback' => array($this, 'product_description_tab'), // TAB CONTENT CALLBACK
         );
 
         $tabs['technical_data_guide'] = array(
-            'title' => __( 'Technical Data', 'wps-juniper' ),
+            'title' => __( 'Technische Daten', 'wps-juniper' ),
             // 'target' => 'technical_data_product_data',
             // 'class' => array( 'show_if_simple', 'show_if_variable' ),
             'priority' => 50,
@@ -42,7 +42,11 @@ class WC_Customizations {
 
     public function product_technical_data_tab() {
         global $product;
-        echo wp_kses_post($product->get_meta('_technical_data'));
+        if(!!$product && !!($productMeta = $product->get_meta('_technical_data'))){
+            echo '<div class="technical-data-tab-content">';
+            echo wp_kses_post($productMeta);
+            echo '</div>';
+        }
     }
 
     public function product_description_tab() {
@@ -75,21 +79,21 @@ class WC_Customizations {
 
         if(!!$featureText){
             $html .= '<div class="mb-6">';
-            $html .= '<h3>'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
+            $html .= '<h3 class="mb-4">'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
             $html .= $featureText;
             $html .= '</div>';
         }
 
         if(!!$applicationText){
             $html .= '<div class="mb-6">';
-            $html .= '<h3>' . __('Anwendung', 'wps-juniper') . '</h3>';
+            $html .= '<h3 class="mb-4">' . __('Anwendung', 'wps-juniper') . '</h3>';
             $html .= $applicationText;
             $html .= '</div>';
         }
 
         if(is_array($downloads) && count($downloads) > 0){
             $html .= '<div class="mb-6">';
-            $html .= '<h3>'.__('Downloads', 'wps-juniper').'</h3>';
+            $html .= '<h3 class="mb-4">'.__('Downloads', 'wps-juniper').'</h3>';
             $html .= '<ul class="list-none no-before-element">';
             foreach ($downloads as $download){
                 $download = $download['pdf'];
@@ -128,7 +132,7 @@ class WC_Customizations {
         global $product;
         $product_id = $product->get_id();
         $product_tags = wp_get_post_terms($product_id, 'metals-and-accessories');
-    
+
         if ($product_tags) {
             ?>
             <div class="flex flex-wrap metals-and-accessories mb-[31px]">
@@ -193,13 +197,13 @@ class WC_Customizations {
         echo '<h4>Technical Data for the product "<strong>'.$product_object->get_name().'</strong>"…</h4>';
 
         wp_editor(
-            htmlspecialchars_decode($product_object->get_meta('_technical_data')), 
-            '_technical_data', 
+            htmlspecialchars_decode($product_object->get_meta('_technical_data')),
+            '_technical_data',
             array(
                 'wpautop' => false,
                 'media_buttons' => true,
                 'textarea_name' => '_technical_data',
-                'textarea_rows' => 15, 
+                'textarea_rows' => 15,
             )
         );
 
@@ -210,6 +214,6 @@ class WC_Customizations {
         $technical_data = isset( $_POST['_technical_data'] ) ? wp_kses_post($_POST['_technical_data']) : '';
         $product->update_meta_data( '_technical_data', $technical_data );
     }
-    
+
 
 }
