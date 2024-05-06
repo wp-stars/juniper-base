@@ -25,8 +25,8 @@ define(__NAMESPACE__ . '\THEME_URI', trailingslashit(esc_url(get_stylesheet_dire
 $composer_autoload = __DIR__ . '/vendor/autoload.php';
 
 if ( file_exists( $composer_autoload ) ) {
-	require_once $composer_autoload;
-	$timber = new \Timber\Timber();
+    require_once $composer_autoload;
+    $timber = new \Timber\Timber();
 }
 
 require_once 'inc/include.php';
@@ -81,7 +81,7 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
         return;
     };
 
-    
+
     if( filemtime($scssFile) > filemtime($css_file) || filesize($css_file) == 0) {
 
         try {
@@ -121,8 +121,8 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 }
 
 function juniper_theme_enqueue() {
-	$refresh_cache_time = time();
-	// wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
+    $refresh_cache_time = time();
+    // wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'nav-js', get_template_directory_uri() . '/src/js/nav.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', array(), $refresh_cache_time, true );
     wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', array(), $refresh_cache_time );
@@ -143,8 +143,8 @@ function juniper_theme_enqueue() {
     wp_enqueue_script( 'filter-js', get_template_directory_uri() . '/blocks/filter/src/components/Filter.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'checkbox-js', get_template_directory_uri() . '/blocks/filter/src/components/Checkbox.js', array(), $refresh_cache_time, true );
 
-            // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), null, true);
-            // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/single-musterbestellung.js', array('jquery'), null, true);
+    // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), null, true);
+    // wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/single-musterbestellung.js', array('jquery'), null, true);
 
 }
 
@@ -231,8 +231,8 @@ function enqueue_ls_scripts() {
     global $post;
     wp_localize_script(
         'sample-wishlist-script', 'wpVars', [
-            'postID' => $post->ID,
-        ],
+        'postID' => $post->ID,
+    ],
     );
     wp_enqueue_script(
         'sample-wishlist-script'
@@ -285,20 +285,20 @@ function enqueue_ls_scripts() {
  */
 if ( ! class_exists( 'Timber' ) ) {
 
-	\add_action(
-		'admin_notices',
-		function () {
-			echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a></p></div>';
-		}
-	);
+    \add_action(
+        'admin_notices',
+        function () {
+            echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a></p></div>';
+        }
+    );
 
-	\add_filter(
-		'template_include',
-		function ( $template ) {
-			return get_stylesheet_directory() . '/static/no-timber.html';
-		}
-	);
-	return;
+    \add_filter(
+        'template_include',
+        function ( $template ) {
+            return get_stylesheet_directory() . '/static/no-timber.html';
+        }
+    );
+    return;
 }
 
 /**
@@ -333,7 +333,7 @@ function juniper_customizer_setting($wp_customize) {
         'default' => 'Lorem Ipsum Dolor Sit amet',
         'sanitize_callback' => 'sanitize_textarea_field',
     ) );
-      
+
     $wp_customize->add_control( 'juniper_footer_textarea', array(
         'type' => 'textarea',
         'section' => 'title_tagline', // // Add a default or your own section
@@ -389,7 +389,7 @@ function wps_add_to_context( $context ) {
         $context['cart_count']      = \WC()->cart->get_cart_contents_count();
     }
 
-    
+
     if( \is_single() ) {
         $post_type = \get_post_type();
         $page = \get_field($post_type . '_archive_page', 'option');
@@ -401,7 +401,7 @@ function wps_add_to_context( $context ) {
         if($post_type === "post") {
             $post = \get_post();
             if($post_thumbnail = \get_the_post_thumbnail_url( $post, 'full' )) {
-                $context['jumbotron_bg_image'] = $post_thumbnail;  
+                $context['jumbotron_bg_image'] = $post_thumbnail;
             }
         }
     }
@@ -449,7 +449,7 @@ function wps_juniper_add_class_to_list_block( $block_content, $block ) {
 
 \add_filter('acf/settings/remove_wp_meta_box', '__return_false');
 function wps_juniper_acf_init() {
-    
+
     \acf_update_setting('google_api_key', 'AIzaSyA2nwpgRNcXh27RBL41e47d6pFcJda9qiY');
 }
 
@@ -521,6 +521,7 @@ require_once THEME_DIR . 'inc/admin/capabilities.php';
 
     // fieldgroups
     include THEME_DIR . 'fieldgroups/product-group.php';
+    include THEME_DIR . 'fieldgroups/product_cat_group.php';
 
 })();
 
@@ -562,7 +563,7 @@ add_filter('wps_modal_render', function($modal){
         $modal->content = 'Bis zum nächsten Einkauf';
         $modal->open();
     }
-  
+
     return $modal;
 });
 
