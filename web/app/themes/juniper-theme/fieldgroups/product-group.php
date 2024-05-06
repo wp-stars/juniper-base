@@ -7,27 +7,6 @@ if ( function_exists('acf_add_local_field_group') ):
         'title' => 'Produkte',
         'fields' => array(
             array(
-                'key' => 'field_662916464d436_001',
-                'label' => 'Unterüberschrift',
-                'name' => 'wps_sp_subheadline',
-                'aria-label' => '',
-                'type' => 'text',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'wpml_cf_preferences' => 2,
-                'default_value' => 'Subheadline',
-                'maxlength' => '',
-                'placeholder' => '',
-                'prepend' => '',
-                'append' => '',
-            ),
-            array(
                 'key' => 'field_662916464d436',
                 'label' => 'Beschreibung: Headline',
                 'name' => 'wps_sp_description_title',
