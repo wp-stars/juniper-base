@@ -48,20 +48,42 @@ class WC_Customizations {
     public function product_description_tab() {
         global $product;
 
-        //echo $product->get_description();
+        $html = '';
+        $title = get_field('wps_sp_description_title', $product->get_id()) ?? '';
+        $description = get_field('wps_sp_description_text', $product->get_id()) ?? '';
+        $featureText = get_field('wps_sp_features_text', $product->get_id()) ?? '';
+        $applicationText = get_field('wps_sp_areas_of_application_text', $product->get_id()) ?? '';
+        $descriptionTitle = get_field('wps_sp_description_title', $product->get_id()) ?? '';
 
-        echo '<h3>' . get_field('wps_sp_description_title', $product->get_id()) . '</h3>';
-        echo get_field('wps_sp_description_text', $product->get_id());
+        if(!!$title || !!$description){
+            $html .= '<div class="mb-6">';
+            if(!!$title) $html .= "<h3>$title</h3>";
+            if(!!$description) $html.= $description;
+            $html .= '</div>';
+        }
 
-        echo '<h3>'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
-        echo get_field('wps_sp_features_text', $product->get_id());
+        if(!!$featureText){
+            $html .= '<div class="mb-6">';
+            $html .= '<h3>'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
+            $html .= $featureText;
+            $html .= '</div>';
+        }
 
-        echo '<h3>' . __('Anwendung', 'wps-juniper') . '</h3>';
-        echo get_field('wps_sp_areas_of_application_text', $product->get_id());
+        if(!!$applicationText){
+            $html .= '<div class="mb-6">';
+            $html .= '<h3>' . __('Anwendung', 'wps-juniper') . '</h3>';
+            $html .= $applicationText;
+            $html .= '</div>';
+        }
 
-        echo '<h3>'.__('Downloads', 'wps-juniper').'</h3>';
-        echo get_field('wps_sp_description_title', $product->get_id());
+        if($descriptionTitle){
+            $html .= '<div class="mb-6">';
+            $html .= '<h3>'.__('Downloads', 'wps-juniper').'</h3>';
+            $html .= $descriptionTitle;
+            $html .= '</div>';
+        }
 
+        echo $html;
     }
 
     public function custom_product_categories() {
