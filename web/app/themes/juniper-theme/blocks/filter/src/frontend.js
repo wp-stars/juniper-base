@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import Filter from "./components/Filter";
-// import FilterShop from "./components/FilterShop"; // Import the new component
+import FilterShop from "./components/FilterShop"; 
 
 const setupFilters = () => {
     // Handle Filter entries
