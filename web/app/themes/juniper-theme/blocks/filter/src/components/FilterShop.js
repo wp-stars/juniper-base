@@ -190,10 +190,10 @@ useEffect(() => {
                             if(filterItem.type === "checkbox") {
                                 return (
                                     <div key={key} className="col-span-12 block mb-8">
-                                        <label>{filterItem.label}</label>
+                                        {/* <label>{filterItem.label}</label> */}
                                         {filterItem.tax_options.map((term, index) => {
                                             return (
-                                                <Checkbox term={term} filterItem={filterItem} handleTaxSelect={handleTaxSelect} />
+                                                <Checkbox label="Sample Available" term={term} filterItem={filterItem} handleTaxSelect={handleTaxSelect} />
                                             )
                                         })}
                                     </div>
