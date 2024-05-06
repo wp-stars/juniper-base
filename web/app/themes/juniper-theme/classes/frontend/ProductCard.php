@@ -16,7 +16,14 @@ class ProductCard {
 
         $html = "";
 
-        $terms = wp_get_post_terms($product_id, 'metals-and-accessories', array('fields' => 'names'));
+      
+        $metals_terms = wp_get_post_terms($product_id, 'metals-and-accessories', array('fields' => 'names'));
+        $color_terms = wp_get_post_terms($product_id, 'color', array('fields' => 'names'));
+        $category_terms = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'names'));
+        $application_terms = wp_get_post_terms($product_id, 'application', array('fields' => 'names'));
+
+        $terms = array_merge($metals_terms, $color_terms, $category_terms, $application_terms);
+
 
         // Check if there are any terms and not an error
         if (!is_wp_error($terms) && !empty($terms)) {
