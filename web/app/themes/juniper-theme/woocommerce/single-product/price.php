@@ -16,10 +16,18 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+    exit; // Exit if accessed directly
 }
 
 global $product;
+
+// hide price if the price is zero
+$price = $product->get_price();
+if($price == 0){
+    echo '<h5 class="' . esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ) . ' mb-5"></h5>';
+    return;
+}
+
 
 ?>
 <h5 class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?> mb-5"><?php echo $product->get_price_html(); ?></h5>
