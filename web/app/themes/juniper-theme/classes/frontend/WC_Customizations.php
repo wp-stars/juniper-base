@@ -128,9 +128,12 @@ class WC_Customizations {
         // add the product categories to the tags array
         if(!!$product_categories && is_array($product_categories) && count($product_categories) > 0){
             foreach ($product_categories as $category) {
+
+                $color = get_field('wps_product_cat_color', 'product_cat_'.$category->term_id) ?? __('bg-accent', 'wps');
+
                 $tags[] = [
                     'label' => esc_html($category->name),
-                    'color' => 'bg-accent'
+                    'color' => $color
                 ];
             }
         }
@@ -139,7 +142,14 @@ class WC_Customizations {
         if(count($tags) > 0){
             echo '<div class="flex flex-wrap product-categories mb-[13px] gap-3.5">';
             foreach ($tags as $tag) {
-                echo '<div class="py-1 px-3 uppercase inline-block '.$tag['color'].'">'.$tag['label'].'</div>';
+
+                if($tag['color'] === 'bg-accent'){
+                    echo '<div class="py-1 px-3 uppercase inline-block bg-accent">'.$tag['label'].'</div>';
+                }else{
+                    echo '<div class="py-1 px-3 uppercase inline-block" style="background-color: '.$tag['color'].';">'.$tag['label'].'</div>';
+                }
+
+
             }
             echo '</div>';
         }
