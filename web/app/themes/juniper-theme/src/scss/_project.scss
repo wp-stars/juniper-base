@@ -1114,3 +1114,8 @@ border-color: #898989;
 .narrow-width {
     max-width: 450px; /* or another width when there are no subchildren */
 }
+
+ul.no-before-element li::before {
+    content: none;
+    display: none;
+}
