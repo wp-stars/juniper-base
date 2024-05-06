@@ -2755,8 +2755,9 @@ const FilterShop = data => {
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: key,
         className: "col-span-12 block mb-8"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, filterItem.label), filterItem.tax_options.map((term, index) => {
+      }, filterItem.tax_options.map((term, index) => {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          label: "Sample Available",
           term: term,
           filterItem: filterItem,
           handleTaxSelect: handleTaxSelect
