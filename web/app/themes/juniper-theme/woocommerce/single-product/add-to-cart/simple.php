@@ -66,7 +66,7 @@ if ( !!$product->is_purchasable() && $product->is_in_stock() ) : ?>
             $sample_available = false;
             if ( ! empty( $purchasability_terms ) && ! is_wp_error( $purchasability_terms ) ) {
                 foreach ( $purchasability_terms as $term ) {
-                    if ( $term->name == 'Sample Available' ) {
+                    if ( $term->slug == 'muster-verfuegbar' ) {
                         $sample_available = true;
                         break;
                     }
