@@ -112,11 +112,17 @@ class WC_Customizations {
         global $product;
         $product_id = $product->get_id();
         $product_categories = wp_get_post_terms($product_id, 'product_cat');
+        $isNew = has_term( 'neu', 'product_tag', $product_id );
 
         if ($product_categories) {
             ?>
             <div class="flex flex-wrap product-categories mb-[13px] gap-3.5">
                 <?php
+
+                if($isNew){
+                    echo '<div class="py-1 px-3 bg-accent uppercase inline-block">' . __('Neu', 'wps') . '</div>';
+                }
+
                 foreach ($product_categories as $category) {
                     ?>
                     <div class="py-1 px-3 bg-accent uppercase inline-block"><?php echo esc_html($category->name); ?></div>
