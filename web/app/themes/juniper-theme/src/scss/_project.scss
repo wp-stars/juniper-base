@@ -1115,7 +1115,26 @@ border-color: #898989;
     max-width: 450px; /* or another width when there are no subchildren */
 }
 
+// utility class for lists without a list bullet
 ul.no-before-element li::before {
     content: none;
     display: none;
+}
+
+div.woocommerce-tabs.wc-tabs-wrapper ul.tabs li a {
+    transform: translateY(-2px);
+    transition: border-color 0.3s ease;
+}
+
+div.woocommerce-tabs.wc-tabs-wrapper ul.tabs li.description_tab a {
+    padding-left: 0;
+}
+
+div.woocommerce-tabs.wc-tabs-wrapper ul.tabs li.active a {
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+div.woocommerce-Tabs-panel.panel.entry-content.wc-tab {
+    max-width: 80%;
 }

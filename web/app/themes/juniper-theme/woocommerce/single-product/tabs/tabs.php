@@ -18,12 +18,12 @@ $product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
 if ( ! empty( $product_tabs ) ) : ?>
 
 	<div class="woocommerce-tabs wc-tabs-wrapper mb-[8.125rem]">
-	<ul class="tabs wc-tabs flex flex-wrap border-t mb-11 gap-x-6" role="tablist">
+	<ul class="tabs wc-tabs flex flex-wrap border-t mb-11" role="tablist">
     <?php foreach ($product_tabs as $key => $product_tab) : ?>
         <li class="<?= esc_attr($key); ?>_tab" id="tab-title-<?php echo esc_attr($key); ?>" role="tab"
             aria-controls="tab-<?php echo esc_attr($key); ?>">
             <a href="#tab-<?php echo esc_attr($key); ?>"
-                class="<?= $key === 0 ? 'active' : ''; ?> tab-link text-black py-1 inline-block border-t-2 border-transparent hover:border-black focus:border-black text-base">
+                class="<?= $key === 0 ? 'active' : ''; ?> tab-link text-black py-1 px-6 inline-block border-t-2 border-transparent hover:border-black focus:border-black text-base">
                 <?php echo wp_kses_post(apply_filters('woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key)); ?>
             </a>
         </li>
