@@ -149,7 +149,7 @@ class WC_Customizations {
 
                 $style = "style='background-color: $color; border: solid 1px $borderColor !important; color: $textColor;'";
 
-                echo "<div class='py-1 px-3 uppercase inline-block $class' $style>$label</div>";
+                echo "<div class='py-2 px-2 uppercase inline-block $class' $style>$label</div>";
 
             }
             echo '</div>';
