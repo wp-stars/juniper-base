@@ -1157,3 +1157,9 @@ div.woocommerce-Tabs-panel.panel.entry-content.wc-tab {
     font-size: 2.75rem;
     line-height: 3.4375rem
 }
+
+span.wps-icon-arrow::before {
+    content: "\27F6";
+    vertical-align: super;
+    font-size: 1em;
+}
