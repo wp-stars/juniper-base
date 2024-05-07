@@ -67,28 +67,28 @@ class WC_Customizations {
                 </svg>';
 
         if(!!$title || !!$description){
-            $html .= '<div class="mb-6">';
+            $html .= '<div class="mb-10">';
             if(!!$title) $html .= "<h3>$title</h3>";
             if(!!$description) $html.= $description;
             $html .= '</div>';
         }
 
         if(!!$featureText){
-            $html .= '<div class="mb-6">';
+            $html .= '<div class="mb-10">';
             $html .= '<h3 class="mb-4">'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
             $html .= $featureText;
             $html .= '</div>';
         }
 
         if(!!$applicationText){
-            $html .= '<div class="mb-6">';
+            $html .= '<div class="mb-10">';
             $html .= '<h3 class="mb-4">' . __('Anwendung', 'wps-juniper') . '</h3>';
             $html .= $applicationText;
             $html .= '</div>';
         }
 
         if(is_array($downloads) && count($downloads) > 0){
-            $html .= '<div class="mb-6">';
+            $html .= '<div class="mb-10">';
             $html .= '<h3 class="mb-4">'.__('Downloads', 'wps-juniper').'</h3>';
             $html .= '<ul class="list-none no-before-element">';
             foreach ($downloads as $download){
