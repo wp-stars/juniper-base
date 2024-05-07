@@ -1138,3 +1138,17 @@ div.woocommerce-tabs.wc-tabs-wrapper ul.tabs li.active a {
 div.woocommerce-Tabs-panel.panel.entry-content.wc-tab {
     max-width: 80%;
 }
+
+.gform-theme--framework .gform-field-label>.gfield_required {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+#gform_wrapper_1[data-form-index="0"].gform-theme {
+    --gf-color-primary: #000 !important;
+    --gf-color-primary-rgb: 0, 0, 0 !important;
+    --gf-color-primary-contrast: #fff !important;
+    --gf-color-primary-contrast-rgb: 255, 255, 255 !important;
+    --gf-color-primary-darker: #555 !important;
+    --gf-color-primary-lighter: #555 !important;
+}
