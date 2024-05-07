@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-the_title( '<h1 class="product_title entry-title mb-2 text-4xl sm:text-5xl leading-10 break-words">', '</h1>' );
+the_title( '<h1 class="product_title entry-title mb-2 text-4xl leading-10 break-words">', '</h1>' );
 
 if (function_exists('get_field')) {
     $subheadline = get_field('wps_sp_description_title');
