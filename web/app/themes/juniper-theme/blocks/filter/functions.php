@@ -157,22 +157,22 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
     foreach ($filter_query->posts as $post) {
     //   var_dump($post);
 
-    $fields = get_fields($post->ID);
+    // $fields = get_fields($post->ID);
 
         $post_obj = new stdClass();
         $post_obj->ID = $post->ID;
-        // $post_obj->fields = get_fields(json_encode($post));
+        $post_obj->fields = get_fields(json_encode($post));
         $post_obj->excerpt = wp_trim_excerpt('', $post);
         $post_obj->post_title = $post->post_title;
         $post_obj->post_name = $post->post_name;
         $post_obj->featured_image = get_the_post_thumbnail_url($post);
         $post_obj->link = get_permalink($post);
         $post_obj->price = (int)(wc_get_product( $post->ID ))->get_regular_price();
-        $post_obj->subheadline = htmlspecialchars($fields['wps_sp_subheadline'] ?? '');
-        $post_obj->description_title = htmlspecialchars($fields['wps_sp_description_title'] ?? '');
-        $post_obj->description_text = htmlspecialchars($fields['wps_sp_description_text'] ?? '');
-        $post_obj->features_text = htmlspecialchars($fields['wps_sp_features_text'] ?? '');
-        $post_obj->areas_of_application = htmlspecialchars($fields['wps_sp_areas_of_application_text'] ?? '');
+        // $post_obj->subheadline = htmlspecialchars($fields['wps_sp_subheadline'] ?? '');
+        // $post_obj->description_title = htmlspecialchars($fields['wps_sp_description_title'] ?? '');
+        // $post_obj->description_text = htmlspecialchars($fields['wps_sp_description_text'] ?? '');
+        // $post_obj->features_text = htmlspecialchars($fields['wps_sp_features_text'] ?? '');
+        // $post_obj->areas_of_application = htmlspecialchars($fields['wps_sp_areas_of_application_text'] ?? '');
 
 
         $taxonomies = get_post_taxonomies($post);

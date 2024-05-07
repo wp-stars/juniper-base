@@ -81,16 +81,17 @@ const Filter = (data) => {
 
         if (searchText) {
             filtered = filtered.filter(post =>
-                post.post_title.toLowerCase().includes(searchText) ||
-                post.excerpt.toLowerCase().includes(searchText) ||
-                (post.description_text && post.description_text.toLowerCase().includes(searchText)) ||  
-                (post.description_title && post.description_title.toLowerCase().includes(searchText)) || 
-                (post.subheadline && post.subheadline.toLowerCase().includes(searchText)) ||
-                (post.features_text && post.features_text.toLowerCase().includes(searchText)) ||
-                (post.areas_of_application && post.areas_of_application.toLowerCase().includes(searchText)) ||
-                Object.values(post.taxonomies).some(taxonomy => 
-                    taxonomy.some(term => term.name.toLowerCase().includes(searchText))
-                )
+                post.post_title.toLowerCase().includes(searchText) 
+                // ||
+                // post.excerpt.toLowerCase().includes(searchText) ||
+                // (post.description_text && post.description_text.toLowerCase().includes(searchText)) ||  
+                // (post.description_title && post.description_title.toLowerCase().includes(searchText)) || 
+                // (post.subheadline && post.subheadline.toLowerCase().includes(searchText)) ||
+                // (post.features_text && post.features_text.toLowerCase().includes(searchText)) ||
+                // (post.areas_of_application && post.areas_of_application.toLowerCase().includes(searchText)) ||
+                // Object.values(post.taxonomies).some(taxonomy => 
+                //     taxonomy.some(term => term.name.toLowerCase().includes(searchText))
+                // )
             );
         }
         
