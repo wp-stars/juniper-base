@@ -121,7 +121,8 @@ class WC_Customizations {
         if($isNew){
             $tags[] = [
                 'label' => __('Neu', 'wps'),
-                'color' => 'bg-accent'
+                'color' => '#FFEB00',
+                'class' => 'font-bold'
             ];
         }
 
@@ -129,11 +130,12 @@ class WC_Customizations {
         if(!!$product_categories && is_array($product_categories) && count($product_categories) > 0){
             foreach ($product_categories as $category) {
 
-                $color = get_field('wps_product_cat_color', 'product_cat_'.$category->term_id) ?? __('bg-accent', 'wps');
+                $color = get_field('wps_product_cat_color', 'product_cat_'.$category->term_id) ?? '#ffffff';
 
                 $tags[] = [
                     'label' => esc_html($category->name),
-                    'color' => $color
+                    'color' => $color,
+                    'class' => ''
                 ];
             }
         }
@@ -143,12 +145,15 @@ class WC_Customizations {
             echo '<div class="flex flex-wrap product-categories mb-[13px] gap-3.5">';
             foreach ($tags as $tag) {
 
-                if($tag['color'] === 'bg-accent'){
-                    echo '<div class="py-1 px-3 uppercase inline-block bg-accent">'.$tag['label'].'</div>';
-                }else{
-                    echo '<div class="py-1 px-3 uppercase inline-block" style="background-color: '.$tag['color'].';">'.$tag['label'].'</div>';
-                }
+                extract($tag);
+                $borderColor = $color;
+                $textColor = '#000';
 
+                if($color === '#ffffff') $borderColor = '#000';
+
+                $style = "style='background-color: $color; border: solid 1px $borderColor !important; color: $textColor;'";
+
+                echo "<div class='py-1 px-3 uppercase inline-block $class' $style>$label</div>";
 
             }
             echo '</div>';
