@@ -155,18 +155,18 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 
     $post_arr = array();
     foreach ($filter_query->posts as $post) {
-    //   var_dump($post);
 
-    $fields = get_fields($post->ID);
+
+    // $fields = get_fields($post->ID);
 
         $post_obj = new stdClass();
         $post_obj->ID = $post->ID;
         // $post_obj->fields = get_fields(json_encode($post));
-        $post_obj->excerpt = wp_trim_excerpt('', $post);
-        $post_obj->post_title = htmlspecialchars($post->post_title);
+        $post_obj->excerpt = htmlspecialchars(wp_trim_excerpt('', $post));
+        // $post_obj->post_title = htmlspecialchars($post->post_title);
         $post_obj->post_name = htmlspecialchars($post->post_name);
-        $post_obj->featured_image = get_the_post_thumbnail_url($post);
-        $post_obj->link = get_permalink($post);
+        $post_obj->featured_image = htmlspecialchars(get_the_post_thumbnail_url($post));
+        $post_obj->link = htmlspecialchars(get_permalink($post));
         $post_obj->price = (int)(wc_get_product( $post->ID ))->get_regular_price();
         $post_obj->subheadline = htmlspecialchars($fields['wps_sp_subheadline'] ?? '');
         $post_obj->description_title = htmlspecialchars($fields['wps_sp_description_title'] ?? '');
@@ -174,7 +174,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         $post_obj->features_text = htmlspecialchars($fields['wps_sp_features_text'] ?? '');
         $post_obj->areas_of_application = htmlspecialchars($fields['wps_sp_areas_of_application_text'] ?? '');
 
-
+      
         $taxonomies = get_post_taxonomies($post);
        
         $taxonomy_data = array();
@@ -208,10 +208,10 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         $post_arr[] = $post_obj;
     }
 
-
+   
     $data_arr['posts'] = $post_arr;
     $data_arr['maxNumPages'] = $filter_query->max_num_pages;
-
+   
     return $data_arr;
 }
 

@@ -2232,7 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const Filter = data => {
   console.log(data);
-  const [originalDisplayedPosts, setOriginalDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6));
+  const [originalDisplayedPosts, setOriginalDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 9));
   const [filteredPosts, setFilteredPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [displayedPosts, setDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(originalDisplayedPosts);
   const [filters, setFilters] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
@@ -2271,7 +2271,7 @@ const Filter = data => {
     if (!showFilterItems) {}
   };
   const loadMorePosts = () => {
-    const nextPostsToShow = filteredPosts.slice(displayedPosts.length, displayedPosts.length + 6);
+    const nextPostsToShow = filteredPosts.slice(displayedPosts.length, displayedPosts.length + 9);
     setDisplayedPosts(displayedPosts.concat(nextPostsToShow));
     eventSlider();
   };
@@ -2322,7 +2322,7 @@ const Filter = data => {
       filtered = filtered.filter(post => post.price != null && post.price > 0);
     }
     setFilteredPosts(filtered);
-    setDisplayedPosts(filtered.slice(0, 6));
+    setDisplayedPosts(filtered.slice(0, 9));
   };
   const resetFilters = () => {
     setFilters({
@@ -2342,8 +2342,8 @@ const Filter = data => {
     applyFilters(filters);
   }, [filters, originalDisplayedPosts]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const startIndex = (page - 1) * 6;
-    const endIndex = startIndex + 6;
+    const startIndex = (page - 1) * 9;
+    const endIndex = startIndex + 9;
     setDisplayedPosts(originalDisplayedPosts.slice(startIndex, endIndex));
   }, [page, originalDisplayedPosts]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -2499,11 +2499,11 @@ const Filter = data => {
   })))) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mt-[54px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid"
+    className: "grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid flex flex-wrap"
   }, !loading ? originalDisplayedPosts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, displayedPosts.map((post, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: index,
-      className: "flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0",
+      className: "flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow",
       dangerouslySetInnerHTML: {
         __html: atob(post.html)
       }
@@ -4784,6 +4784,7 @@ const setupFilters = () => {
   const filterDivs = document.querySelectorAll(".filter-entry");
   filterDivs.forEach(div => {
     let data = JSON.parse(div.dataset.initialData);
+    console.log(data);
     const root = react_dom__WEBPACK_IMPORTED_MODULE_1___default().createRoot(div);
     root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Filter__WEBPACK_IMPORTED_MODULE_2__["default"], {
       ...data

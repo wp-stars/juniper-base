@@ -39,7 +39,14 @@ class ProductCard {
 
         ob_start();
         ?>
-            <div class="overflow-hidden shadow-lg relative product-card h-[100%] pb-[20px] border border-solid border-[#DCDDDE] col-span-6 sm:col-span-3 md:col-span-2 ">
+            <div class="overflow-hidden shadow-lg relative product-card h-[100%] pb-[20px] border border-solid border-[#DCDDDE] col-span-6 sm:col-span-3 md:col-span-2 flex flex-col">
+            <?php
+                $label_new = get_field('label-new', $product->get_id());
+                if ($label_new) { ?>
+                    <span class="absolute top-0 right-0 p-1 bg-accent"><?= __('New', 'wps-juniper'); ?></span>
+                <?php } ?>
+
+                <div class="stretch-this">
                 <a href="<?= $product->get_permalink(); ?>">
                     <div class="product-gallery slick-slider product-card-slider h-[21rem]">
                         <?php 
@@ -60,15 +67,10 @@ class ProductCard {
                         ?>
                     </div>
                 </a>
-
-                <?php
-                $label_new = get_field('label-new', $product->get_id());
-                if ($label_new) { ?>
-                    <span class="absolute top-0 right-0 p-1 bg-accent"><?= __('New', 'wps-juniper'); ?></span>
-                <?php } ?>
-                
                 <hr class="my-[24px] w-[calc(100% - 40px)] mx-[20px]" />
-                <div class="flex flex-col px-[20px] justify-between h-[16rem]">
+                </div>
+
+                <div class="flex flex-col px-[20px] justify-between grow">
                     <p class="uppercase mb-8 text-xs"><?= $terms_string; ?></p>
                     <a href="<?= $product->get_permalink(); ?>">
                         <h4 class="mb-8"><?= $product->get_title(); ?></h4>
@@ -111,3 +113,11 @@ class ProductCard {
     }
 }
 ?>
+
+
+<div class="parent">
+    <div class="child-1">
+    </div>
+    <div class="child-2">
+    </div>
+</div>

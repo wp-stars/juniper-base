@@ -6,7 +6,7 @@ import Checkbox from "./Checkbox"
 const Filter = (data) => {
     console.log(data)
     const [originalDisplayedPosts, setOriginalDisplayedPosts] = useState(
-        data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6)
+        data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 9)
     );
     const [filteredPosts, setFilteredPosts] = useState([]);
 
@@ -54,7 +54,7 @@ const Filter = (data) => {
     }
 
     const loadMorePosts = () => {
-        const nextPostsToShow = filteredPosts.slice(displayedPosts.length, displayedPosts.length + 6);
+        const nextPostsToShow = filteredPosts.slice(displayedPosts.length, displayedPosts.length + 9);
         setDisplayedPosts(displayedPosts.concat(nextPostsToShow));
         eventSlider();
     };
@@ -117,7 +117,7 @@ const Filter = (data) => {
         }
 
         setFilteredPosts(filtered);
-        setDisplayedPosts(filtered.slice(0, 6));
+        setDisplayedPosts(filtered.slice(0, 9));
     };
 
 
@@ -147,8 +147,8 @@ const Filter = (data) => {
 
 
     useEffect(() => {
-        const startIndex = (page - 1) * 6;
-        const endIndex = startIndex + 6;
+        const startIndex = (page - 1) * 9;
+        const endIndex = startIndex + 9;
         setDisplayedPosts(originalDisplayedPosts.slice(startIndex, endIndex));
     }, [page, originalDisplayedPosts]);
 
@@ -298,13 +298,13 @@ const Filter = (data) => {
             </div>
             
             <div className="container mt-[54px]">
-                <div className="grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid">
+                <div className="grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid flex flex-wrap">
                     {!loading ?
                         originalDisplayedPosts.length ?
                             <>
                                 {displayedPosts.map((post, index) => {
                                     return (
-                                        <div key={index} className="flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0" dangerouslySetInnerHTML={{ __html: atob(post.html) }}></div>
+                                        <div key={index} className="flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow" dangerouslySetInnerHTML={{ __html: atob(post.html) }}></div>
                                     )
 
                                 })}
