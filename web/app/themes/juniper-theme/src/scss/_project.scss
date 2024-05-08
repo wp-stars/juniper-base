@@ -273,6 +273,7 @@ table {
     li button:before {
         content: url('data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSI+CjxjaXJjbGUgY3g9IjYiIGN5PSI2IiByPSI1LjUiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM3MzczNzMiLz4KPC9zdmc+Cg==') !important;
         display: inline-block;
+        opacity: 1 !important;
     }
 
     li.slick-active button:before {
@@ -1139,6 +1140,11 @@ div.woocommerce-Tabs-panel.panel.entry-content.wc-tab {
     max-width: 80%;
 }
 
+
+.product-card-btn:focus{
+    box-shadow: 0px 0px 0px 3px #000;
+    border: 3px solid #fff;
+
 .gform-theme--framework .gform-field-label>.gfield_required {
     color: #000000 !important;
     font-weight: bold !important;
@@ -1200,4 +1206,5 @@ button.btn.btn-primary.single_add_to_cart_button {
         border: solid 2px #fff;
         outline: 2px solid #000;
     }
+
 }
