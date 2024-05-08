@@ -1181,6 +1181,7 @@ button.btn.btn-accent.add-to-musterbestellung {
     &:focus {
         border: solid 2px #fff;
         outline: 2px solid #000;
+        text-decoration: underline solid 2px #000;
     }
 }
 

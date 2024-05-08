@@ -107,10 +107,19 @@ class Exporter
         $itemPos = 0;
         foreach ($this->order->get_items() as $item_id => $item) {
             $itemPos++;
+
+            $itemName = $item->get_name();
+            if(function_exists('get_field')){
+                $bmdArticleName = get_field('wps_sp_bmd_product_name', $item->get_product_id()) ?? '';
+                if(!!$bmdArticleName){
+                    $itemName = $bmdArticleName;
+                }
+            }
+
             $itemList[] = [
                 'n1:OrderPosNumber' => $itemPos,
                 'n1:DistributorsArticleNo' => $item->get_product_id(),
-                'n1:DistributorsArticleName' => $item->get_name(),
+                'n1:DistributorsArticleName' => $itemName,
                 'n1:OrderQuantity' => $item->get_quantity(),
                 'n1:Price' => $item->get_total(),
                 'n1:DiscountAmount' => 0.00,
