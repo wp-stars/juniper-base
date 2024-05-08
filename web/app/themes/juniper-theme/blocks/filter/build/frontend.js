@@ -2560,8 +2560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const FilterShop = data => {
-  console.log(data, "this is the data");
-  const [originalDisplayedPosts, setOriginalDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6));
+  const [originalDisplayedPosts, setOriginalDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.filter(post => post.product_type !== "musterbestellung" && post.price > 0).slice(0, 6));
   const [filteredPosts, setFilteredPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [displayedPosts, setDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(originalDisplayedPosts);
   const [filters, setFilters] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
@@ -2581,9 +2580,10 @@ const FilterShop = data => {
     try {
       const response = await axios__WEBPACK_IMPORTED_MODULE_1___default().get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&page=${pageNum}`);
       if (response.data && response.data.posts.length > 0) {
-        setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...response.data.posts]);
+        const postsWithPrice = response.data.posts.filter(post => post.price > 0);
+        setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...postsWithPrice]);
         if (pageNum === 1) {
-          setDisplayedPosts(response.data.posts);
+          setDisplayedPosts(postsWithPrice);
         }
       }
       setMaxPages(response.data.maxPages || maxPages);
@@ -2627,7 +2627,7 @@ const FilterShop = data => {
   }) => {
     let filtered = originalDisplayedPosts;
     if (searchText) {
-      filtered = filtered.filter(post => post.post_title.toLowerCase().includes(searchText));
+      filtered = filtered.filter(post => post.post_title.toLowerCase().includes(searchText) || post.excerpt.toLowerCase().includes(searchText) || post.description_text && post.description_text.toLowerCase().includes(searchText) || post.description_title && post.description_title.toLowerCase().includes(searchText) || post.subheadline && post.subheadline.toLowerCase().includes(searchText) || post.features_text && post.features_text.toLowerCase().includes(searchText) || post.areas_of_application && post.areas_of_application.toLowerCase().includes(searchText) || Object.values(post.taxonomies).some(taxonomy => taxonomy.some(term => term.name.toLowerCase().includes(searchText))));
     }
     if (purchasability) {
       filtered = filtered.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === "sample-available"));
