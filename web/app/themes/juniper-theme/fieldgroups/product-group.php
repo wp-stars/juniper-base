@@ -7,6 +7,27 @@ if ( function_exists('acf_add_local_field_group') ):
         'title' => 'Produkte',
         'fields' => array(
             array(
+                'key' => 'field_sd3216464d43609876',
+                'label' => 'BMD Produkt Name',
+                'name' => 'wps_sp_bmd_product_name',
+                'aria-label' => '',
+                'type' => 'text',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'wpml_cf_preferences' => 2,
+                'default_value' => 'Beschreibung',
+                'maxlength' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+            ),
+            array(
                 'key' => 'field_662916464d436',
                 'label' => 'Beschreibung: Headline',
                 'name' => 'wps_sp_description_title',
