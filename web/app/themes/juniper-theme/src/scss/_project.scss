@@ -1163,3 +1163,40 @@ span.wps-icon-arrow::before {
     vertical-align: super;
     font-size: 1em;
 }
+
+button.btn.btn-accent.add-to-musterbestellung {
+    border: solid 2px #FFEB00;
+
+    &:hover {
+        border: solid 2px #000;
+    }
+
+    &:focus {
+        border: solid 2px #fff;
+        outline: 2px solid #000;
+    }
+}
+
+button.btn.btn-bordered.product-question-button {
+    &:hover,
+    &:focus{
+        text-decoration: underline;
+        outline: none;
+    }
+}
+
+button.btn.btn-primary.single_add_to_cart_button {
+    background-color: #000;
+    border: solid 2px #000;
+
+    &:hover {
+        background-color: #4D4D4D;
+        border: solid 2px #4D4D4D;
+    }
+
+    &:focus {
+        background-color: #000;
+        border: solid 2px #fff;
+        outline: 2px solid #000;
+    }
+}
