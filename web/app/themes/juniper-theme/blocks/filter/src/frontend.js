@@ -8,6 +8,7 @@ const setupFilters = () => {
     const filterDivs = document.querySelectorAll(".filter-entry");
     filterDivs.forEach(div => {
         let data = JSON.parse(div.dataset.initialData);
+        console.log(data)
         const root = ReactDOM.createRoot(div);
         root.render(<Filter {...data} />);
         div.classList.remove("filter-entry");
