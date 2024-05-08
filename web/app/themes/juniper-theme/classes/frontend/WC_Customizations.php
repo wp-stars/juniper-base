@@ -163,6 +163,10 @@ class WC_Customizations {
             }
         }
 
+        // print the product sku
+        $sku = $product->get_sku();
+        echo $sku ? "<div class='text-black text-xs mb-3.5 uppercase'>Art.-Nr.: $sku</div>" : '';
+
         // print the tags to the template
         if(count($tags) > 0){
             echo '<div class="flex flex-wrap product-categories mb-[13px] gap-3.5">';
