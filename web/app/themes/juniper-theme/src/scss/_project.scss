@@ -252,11 +252,12 @@ table {
     }
 
     li::before {
-        content: "• ";  /* Unicode character for a bullet */
-        padding-right: 5px; /* Optional: Adjusts spacing between the bullet and the list item */
-        font-weight: bold; /* Makes the bullet bolder */
-        font-size: 26px;
-        vertical-align: sub;
+        content: "¯";  /* Unicode character for a bullet */
+        padding-right: 10px; /* Optional: Adjusts spacing between the bullet and the list item */
+        font-size: 1em;
+        line-height: 1em;
+        vertical-align: bottom;
+        font-weight: bold;
     }
 }
 
