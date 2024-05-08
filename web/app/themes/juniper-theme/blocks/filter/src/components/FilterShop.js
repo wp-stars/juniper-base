@@ -4,9 +4,8 @@ import { useMediaQuery } from 'react-responsive'
 import Checkbox from "./Checkbox"
 
 const FilterShop = ( data ) => {
-    console.log(data, "this is the data")
     const [originalDisplayedPosts, setOriginalDisplayedPosts] = useState(
-        data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6)
+        data.posts.filter(post => post.product_type !== "musterbestellung" && post.price > 0).slice(0, 6)
     );
     const [filteredPosts, setFilteredPosts] = useState([]);
 
@@ -30,9 +29,10 @@ const FilterShop = ( data ) => {
         try {
             const response = await axios.get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&page=${pageNum}`);
             if (response.data && response.data.posts.length > 0) {
-                setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...response.data.posts]);
+                const postsWithPrice = response.data.posts.filter(post => post.price > 0);
+                setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...postsWithPrice]);
                 if (pageNum === 1) {
-                    setDisplayedPosts(response.data.posts);
+                    setDisplayedPosts(postsWithPrice);
                 }
             }
             setMaxPages(response.data.maxPages || maxPages);
@@ -75,7 +75,19 @@ const FilterShop = ( data ) => {
         let filtered = originalDisplayedPosts;
     
         if (searchText) {
-            filtered = filtered.filter(post => post.post_title.toLowerCase().includes(searchText));
+            filtered = filtered.filter(post =>
+                post.post_title.toLowerCase().includes(searchText) 
+                ||
+                post.excerpt.toLowerCase().includes(searchText) ||
+                (post.description_text && post.description_text.toLowerCase().includes(searchText)) ||  
+                (post.description_title && post.description_title.toLowerCase().includes(searchText)) || 
+                (post.subheadline && post.subheadline.toLowerCase().includes(searchText)) ||
+                (post.features_text && post.features_text.toLowerCase().includes(searchText)) ||
+                (post.areas_of_application && post.areas_of_application.toLowerCase().includes(searchText)) ||
+                Object.values(post.taxonomies).some(taxonomy => 
+                    taxonomy.some(term => term.name.toLowerCase().includes(searchText))
+                )
+            );
         }
     
         if (purchasability) {
