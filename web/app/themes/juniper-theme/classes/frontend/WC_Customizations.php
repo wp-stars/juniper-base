@@ -80,12 +80,12 @@ class WC_Customizations {
 
         $tagList = array();
         $this->buildDescriptionTagList($tagList, $productID, 'product_cat');
-        $this->buildDescriptionTagList($tagList, $productID, 'product_tag');
         $this->buildDescriptionTagList($tagList, $productID, 'metals-and-accessories');
-        $this->buildDescriptionTagList($tagList, $productID, 'purchasability');
         $this->buildDescriptionTagList($tagList, $productID, 'application');
         $this->buildDescriptionTagList($tagList, $productID, 'color');
         $this->buildDescriptionTagList($tagList, $productID, 'anwendung');
+        //$this->buildDescriptionTagList($tagList, $productID, 'product_tag');
+        //$this->buildDescriptionTagList($tagList, $productID, 'purchasability');
 
         $html .= '<div class="show-list-of-tags-and-categories mb-8 italic">';
         $html .= implode(' | ', array_unique($tagList));
