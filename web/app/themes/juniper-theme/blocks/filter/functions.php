@@ -157,7 +157,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
     foreach ($filter_query->posts as $post) {
 
 
-    // $fields = get_fields($post->ID);
+    $fields = get_fields($post->ID);
 
         $post_obj = new stdClass();
         $post_obj->ID = $post->ID;
