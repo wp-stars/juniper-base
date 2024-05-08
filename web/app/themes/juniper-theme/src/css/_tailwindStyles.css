@@ -1851,10 +1851,6 @@ video {
   border-top-width: 1px;
 }
 
-.border-t-2 {
-  border-top-width: 2px;
-}
-
 .\!border-solid {
   border-style: solid !important;
 }
@@ -2720,10 +2716,6 @@ video {
 
   .sm\:pt-\[15rem\] {
     padding-top: 15rem;
-  }
-
-  .sm\:text-5xl {
-    font-size: 3.052rem;
   }
 
   .sm\:text-sm {
