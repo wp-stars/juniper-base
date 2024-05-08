@@ -87,7 +87,7 @@ class WC_Customizations {
         //$this->buildDescriptionTagList($tagList, $productID, 'product_tag');
         //$this->buildDescriptionTagList($tagList, $productID, 'purchasability');
 
-        $html .= '<div class="show-list-of-tags-and-categories mb-8 italic">';
+        $html .= '<div class="show-list-of-tags-and-categories mb-8 uppercase">';
         $html .= implode(' | ', array_unique($tagList));
         $html .= '</div>';
 
