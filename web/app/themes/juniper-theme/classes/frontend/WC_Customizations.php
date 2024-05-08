@@ -165,7 +165,7 @@ class WC_Customizations {
 
         // print the product sku
         $sku = $product->get_sku();
-        echo $sku ? "<div class='text-black text-xs mb-3.5 uppercase'>Art.-Nr.: $sku</div>" : '';
+        echo $sku ? "<div class='text-black text-xs mb-6 uppercase'>Art.-Nr.: $sku</div>" : '';
 
         // print the tags to the template
         if(count($tags) > 0){
