@@ -113,11 +113,3 @@ class ProductCard {
     }
 }
 ?>
-
-
-<div class="parent">
-    <div class="child-1">
-    </div>
-    <div class="child-2">
-    </div>
-</div>

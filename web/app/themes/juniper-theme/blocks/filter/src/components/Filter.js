@@ -6,7 +6,7 @@ import Checkbox from "./Checkbox"
 const Filter = (data) => {
     console.log(data)
     const [originalDisplayedPosts, setOriginalDisplayedPosts] = useState(
-        data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 9)
+        data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6)
     );
     const [filteredPosts, setFilteredPosts] = useState([]);
 
@@ -34,6 +34,7 @@ const Filter = (data) => {
         if (pageNum > maxPages) return;
         try {
             const response = await axios.get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&page=${pageNum}`);
+            console.log(response.data, "response")
             if (response.data && response.data.posts.length > 0) {
                 setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...response.data.posts]);
                 if (pageNum === 1) {
@@ -54,7 +55,7 @@ const Filter = (data) => {
     }
 
     const loadMorePosts = () => {
-        const nextPostsToShow = filteredPosts.slice(displayedPosts.length, displayedPosts.length + 9);
+        const nextPostsToShow = filteredPosts.slice(displayedPosts.length, displayedPosts.length + 6);
         setDisplayedPosts(displayedPosts.concat(nextPostsToShow));
         eventSlider();
     };
@@ -117,7 +118,7 @@ const Filter = (data) => {
         }
 
         setFilteredPosts(filtered);
-        setDisplayedPosts(filtered.slice(0, 9));
+        setDisplayedPosts(filtered.slice(0, 6));
     };
 
 
@@ -147,8 +148,8 @@ const Filter = (data) => {
 
 
     useEffect(() => {
-        const startIndex = (page - 1) * 9;
-        const endIndex = startIndex + 9;
+        const startIndex = (page - 1) * 6;
+        const endIndex = startIndex + 6;
         setDisplayedPosts(originalDisplayedPosts.slice(startIndex, endIndex));
     }, [page, originalDisplayedPosts]);
 
