@@ -23,7 +23,7 @@ if ( ! empty( $product_tabs ) ) : ?>
         <li class="<?= esc_attr($key); ?>_tab" id="tab-title-<?php echo esc_attr($key); ?>" role="tab"
             aria-controls="tab-<?php echo esc_attr($key); ?>">
             <a href="#tab-<?php echo esc_attr($key); ?>"
-                class="<?= $key === 0 ? 'active' : ''; ?> tab-link text-black py-1 px-6 inline-block border-t-2 border-transparent hover:border-black focus:border-black text-base">
+                class="<?= $key === 0 ? 'active' : ''; ?> tab-link text-black py-1 px-6 inline-block border-transparent hover:border-black focus:border-black text-base" style="border-top-width: 3px;">
                 <?php echo wp_kses_post(apply_filters('woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key)); ?>
             </a>
         </li>

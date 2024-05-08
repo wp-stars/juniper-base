@@ -1140,7 +1140,70 @@ div.woocommerce-Tabs-panel.panel.entry-content.wc-tab {
     max-width: 80%;
 }
 
+
 .product-card-btn:focus{
     box-shadow: 0px 0px 0px 3px #000;
     border: 3px solid #fff;
+
+.gform-theme--framework .gform-field-label>.gfield_required {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+#gform_wrapper_1[data-form-index="0"].gform-theme {
+    --gf-color-primary: #000 !important;
+    --gf-color-primary-rgb: 0, 0, 0 !important;
+    --gf-color-primary-contrast: #fff !important;
+    --gf-color-primary-contrast-rgb: 255, 255, 255 !important;
+    --gf-color-primary-darker: #555 !important;
+    --gf-color-primary-lighter: #555 !important;
+}
+
+.text-headline {
+    font-size: 2.75rem;
+    line-height: 3.4375rem
+}
+
+span.wps-icon-arrow::before {
+    content: "\27F6";
+    vertical-align: super;
+    font-size: 1em;
+}
+
+button.btn.btn-accent.add-to-musterbestellung {
+    border: solid 2px #FFEB00;
+
+    &:hover {
+        border: solid 2px #000;
+    }
+
+    &:focus {
+        border: solid 2px #fff;
+        outline: 2px solid #000;
+    }
+}
+
+button.btn.btn-bordered.product-question-button {
+    &:hover,
+    &:focus{
+        text-decoration: underline;
+        outline: none;
+    }
+}
+
+button.btn.btn-primary.single_add_to_cart_button {
+    background-color: #000;
+    border: solid 2px #000;
+
+    &:hover {
+        background-color: #4D4D4D;
+        border: solid 2px #4D4D4D;
+    }
+
+    &:focus {
+        background-color: #000;
+        border: solid 2px #fff;
+        outline: 2px solid #000;
+    }
+
 }
