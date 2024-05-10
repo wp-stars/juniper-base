@@ -22,15 +22,14 @@ class WC_Customizations {
         add_action( 'woocommerce_admin_process_product_object', array($this, 'save_technical_data_guide_fields_values') );
 
         add_action('woocommerce_before_checkout_form',array($this, 'login_checkout_form'), 1 );
-        add_filter('woocommerce_checkout_registration_enabled', '__return_false');
         add_filter('woocommerce_checkout_must_be_logged_in_message', '__return_empty_string');
+        if (!is_user_logged_in() && is_checkout()) {
+            add_filter('woocommerce_checkout_registration_enabled', '__return_false');
+        }
     }
 
     public function login_checkout_form(){
-
-        // Check if user is not logged in.
         if (!is_user_logged_in() && is_checkout()) {
-            // Include the form-login.php template.
             wc_get_template('myaccount/form-login.php', array(
                 'message' => 'Please login or create an account to proceed.',
                 'redirect' => wc_get_page_permalink('checkout')
