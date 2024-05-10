@@ -1229,3 +1229,53 @@ body.woocommerce-multistep-checkout .woocommerce-checkout-review-order label.woo
 body.woocommerce-multistep-checkout .woocommerce-checkout-review-order  input.woocommerce-form__input.woocommerce-form__input-checkbox.input-checkbox  {
     color: #000;
 }
+
+body.woocommerce-checkout div#customer_login {
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    p.woocommerce-LostPassword.lost_password a {
+        text-decoration: underline;
+    }
+
+    form.woocommerce-form.woocommerce-form-register.register,
+    form.woocommerce-form.woocommerce-form-login.login {
+        border: none !important;
+        padding: 0;
+
+        input {
+            border-radius: 4px;
+        }
+    }
+
+    button,
+    button.woocommerce-Button.woocommerce-button.button.woocommerce-form-register__submit {
+        color: #fff;
+        background-color: #000;
+        text-align: left;
+        border-radius: 4px;
+        border: solid 2px #000;
+        display: inline-flex;
+        padding: 0.625rem 1.5rem;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+
+        &:hover {
+            background-color: #4D4D4D;
+            border: solid 2px #4D4D4D;
+        }
+
+        &:focus {
+            background-color: #000;
+            border: solid 2px #fff;
+            outline: 2px solid #000;
+        }
+    }
+}
