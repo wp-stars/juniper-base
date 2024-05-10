@@ -1210,3 +1210,14 @@ button.btn.btn-primary.single_add_to_cart_button {
     }
 
 }
+
+div#tab-additional_information h2 {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.8rem;
+}
+
+.woocommerce div#tab-additional_information table.shop_attributes td {
+    font-style: normal;
+}
