@@ -449,16 +449,18 @@ form.checkout.woocommerce-checkout {
 
 form.checkout.woocommerce-checkout span.woocommerce-input-wrapper select{
     padding: 10px 15px;
+    border-radius: 4px;
 }
 
 form.checkout.woocommerce-checkout span.woocommerce-input-wrapper input.input-text {
     padding: 10px 15px;
+    border-radius: 4px;
 }
 
 
 
 .select2-container--default .select2-selection--single {
-    border-radius: 0;
+    border-radius: 4px !important;
     padding: 8px 15px;
     height: auto;
     padding-left: 0;
@@ -1102,7 +1104,7 @@ button#place_order.button.alt {
 }
 
 .menu-second-level-container:nth-child(1) a{
-border-color: #898989;
+    border-color: #898989;
 }
 .menu-second-level-container:nth-child(2) a{
     border-color: #8cd6ed;
@@ -1220,4 +1222,13 @@ div#tab-additional_information h2 {
 
 .woocommerce div#tab-additional_information table.shop_attributes td {
     font-style: normal;
+}
+
+
+body.woocommerce-multistep-checkout .woocommerce-checkout-review-order label.woocommerce-form__label.woocommerce-form__label-for-checkbox a {
+    text-decoration: underline;
+}
+
+body.woocommerce-multistep-checkout .woocommerce-checkout-review-order  input.woocommerce-form__input.woocommerce-form__input-checkbox.input-checkbox  {
+    color: #000;
 }
