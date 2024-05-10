@@ -1230,6 +1230,11 @@ body.woocommerce-multistep-checkout .woocommerce-checkout-review-order  input.wo
     color: #000;
 }
 
+body.woocommerce-account div#customer_login {
+    padding-top: 100px;
+}
+
+body.woocommerce-account div#customer_login,
 body.woocommerce-checkout div#customer_login {
 
     h2 {
