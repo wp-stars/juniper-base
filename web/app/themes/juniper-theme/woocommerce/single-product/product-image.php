@@ -7,6 +7,8 @@ if ( ! function_exists( 'wc_get_gallery_image_html' ) ) {
 
 global $product;
 
+add_image_size('custom-size', 800, 800, true);
+
 $columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
 $post_thumbnail_id = $product->get_image_id();
 $wrapper_classes   = apply_filters(
@@ -25,15 +27,14 @@ $wrapper_classes   = apply_filters(
         <?php
         // Display the main product image as the first slide
         if ($post_thumbnail_id) {
-            echo '<div>' . wp_get_attachment_image($post_thumbnail_id, 'custom-size', false, array('class' => 'max-h-[27.5rem] object-cover')) . '</div>';
+            echo '<div>' . wp_get_attachment_image($post_thumbnail_id, 'product-single-page-picture-size', false, array('class' => 'max-h-[27.5rem] object-cover')) . '</div>';
         }
 
         // Display gallery images
         $attachment_ids = $product->get_gallery_image_ids();
         foreach ($attachment_ids as $attachment_id) {
             if ($attachment_id !== $post_thumbnail_id) { // Ensure the main image is not repeated
-                add_image_size('custom-size', 800, 800, true);
-                echo '<div>' . wp_get_attachment_image($attachment_id, 'custom-size', false, array('class' => 'max-h-[27.5rem] object-cover')) . '</div>';
+                echo '<div>' . wp_get_attachment_image($attachment_id, 'product-single-page-picture-size', false, array('class' => 'max-h-[27.5rem] object-cover')) . '</div>';
             }
         }
 
