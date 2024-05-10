@@ -588,3 +588,7 @@ add_action( 'enqueue_block_editor_assets', function(){
     wp_add_inline_script( 'wp-blocks', $script );
 } );
 
+// product-single-page-picture-size
+add_action('after_setup_theme', function(){
+    add_image_size( 'product-single-page-picture-size', 1024, 1024, true );
+});
