@@ -16,12 +16,12 @@ class TransformationVariablesRepository
         'transformation_ag' => 0,
         'transformation_pd' => 0,
         'transformation_rh_schwarz' => 0,
-        'transformation_rhodium' => 0,
-        'transformation_platin' => 0,
-        'transformation_ruthenium' => 0,
-        'transformation_gold' => 0,
-        'transformation_silber' => 0,
-        'transformation_palladium' => 0
+        'price_rhodium' => 0,
+        'price_platin' => 0,
+        'price_ruthenium' => 0,
+        'price_gold' => 0,
+        'price_silber' => 0,
+        'price_palladium' => 0
     ];
 
     public function get(): array

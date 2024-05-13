@@ -51,12 +51,12 @@ class PriceFormulaHandler
         }
 
         if(is_int($post_id) && $post_id > 0){
-            update_post_meta($post_id, 'metalprice_gold', $data['transformation_gold']);
-            update_post_meta($post_id, 'metalprice_silver', $data['transformation_silber']);
-            update_post_meta($post_id, 'metalprice_platin', $data['transformation_platin']);
-            update_post_meta($post_id, 'metalprice_palladium', $data['transformation_palladium']);
-            update_post_meta($post_id, 'metalprice_rhodium', $data['transformation_rhodium']);
-            update_post_meta($post_id, 'metalprice_ruthenium', $data['transformation_ruthenium']);
+            update_post_meta($post_id, 'metalprice_gold', $data['price_gold']);
+            update_post_meta($post_id, 'metalprice_silver', $data['price_silber']);
+            update_post_meta($post_id, 'metalprice_platin', $data['price_platin']);
+            update_post_meta($post_id, 'metalprice_palladium', $data['price_palladium']);
+            update_post_meta($post_id, 'metalprice_rhodium', $data['price_rhodium']);
+            update_post_meta($post_id, 'metalprice_ruthenium', $data['price_ruthenium']);
         }
     }
 
