@@ -158,7 +158,7 @@ return [
     [
         'key' => 'field_65e855f654d0f07',
         'label' => 'Rhodium',
-        'name' => 'transformation_rhodium',
+        'name' => 'price_rhodium',
         'aria-label' => '',
         'type' => 'number',
         'instructions' => '',
@@ -180,7 +180,7 @@ return [
     [
         'key' => 'field_65e855f654d0f08',
         'label' => 'Platin',
-        'name' => 'transformation_platin',
+        'name' => 'price_platin',
         'aria-label' => '',
         'type' => 'number',
         'instructions' => '',
@@ -202,7 +202,7 @@ return [
     [
         'key' => 'field_65e855f654d0f09',
         'label' => 'Ruthenium',
-        'name' => 'transformation_ruthenium',
+        'name' => 'price_ruthenium',
         'aria-label' => '',
         'type' => 'number',
         'instructions' => '',
@@ -224,7 +224,7 @@ return [
     [
         'key' => 'field_65e855f654d0f010',
         'label' => 'Gold',
-        'name' => 'transformation_gold',
+        'name' => 'price_gold',
         'aria-label' => '',
         'type' => 'number',
         'instructions' => '',
@@ -246,7 +246,7 @@ return [
     [
         'key' => 'field_65e855f654d0f011',
         'label' => 'Silber',
-        'name' => 'transformation_silber',
+        'name' => 'price_silber',
         'aria-label' => '',
         'type' => 'number',
         'instructions' => '',
@@ -268,7 +268,7 @@ return [
     [
         'key' => 'field_65e855f654d0f012',
         'label' => 'Palladium',
-        'name' => 'transformation_palladium',
+        'name' => 'price_palladium',
         'aria-label' => '',
         'type' => 'number',
         'instructions' => '',

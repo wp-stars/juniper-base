@@ -34,12 +34,12 @@ class FormulaProduct
 
     private function updateStatus(): void
     {
-        $this->activeRule = get_field('iwg_price_formular_active', $this->id);
+        $this->activeRule = get_field('iwg_price_formular_active', $this->id) ?? false;
     }
 
     private function updateFormula(): void
     {
-        $this->formula = get_field('iwg_price_formular', $this->id);
+        $this->formula = get_field('iwg_price_formular', $this->id) ?? "";
     }
 
     /**
