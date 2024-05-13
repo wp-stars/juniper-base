@@ -3,6 +3,7 @@ let isUpdating = false
 function fetchAndUpdateMusterbestellung(reload = false) {
     showLoading()
     const productIds = JSON.parse(getCookie(cookieName)) || [];
+    toggleMusterbestellungVisibility(productIds.length > 0); // Update visibility based on cookie content
     isUpdating = true
     fetch(`${customMusterbestellungParams.restUrl}wps/v1/musterbestellung/?ids=${productIds.join(',')}`)
         .then(response => response.json())
@@ -32,8 +33,18 @@ const showLoading = () => {
 
 const initializeMusterbestellung = () => {
     let products = customMusterbestellungParams.musterbestellungProducts
-    let productIds = products.map(product => product.id)
-    injectProductsHTML(products, productIds)
+    let productIds = products.map(product => product.id);
+    toggleMusterbestellungVisibility(productIds.length > 0); // Toggle visibility based on product count
+    injectProductsHTML(products, productIds);
+}
+
+const toggleMusterbestellungVisibility = (isVisible) => {
+    const musterbestellungDiv = document.getElementById('musterbestellung');
+    if (isVisible) {
+        musterbestellungDiv.style.display = ''; // Reset to default or use 'block'
+    } else {
+        musterbestellungDiv.style.display = 'none'; // Hide the div
+    }
 }
 
 const injectProductsHTML = (products, productIds) => {

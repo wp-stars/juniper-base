@@ -70,7 +70,6 @@ if ( !!$product->is_purchasable() && $product->is_in_stock() ) : ?>
             </div>
             <?php
             $purchasability_terms = get_the_terms( $product->get_id(), 'purchasability' );
-
             // Check if 'sample available' is one of the terms
             $sample_available = false;
             if ( ! empty( $purchasability_terms ) && ! is_wp_error( $purchasability_terms ) ) {
