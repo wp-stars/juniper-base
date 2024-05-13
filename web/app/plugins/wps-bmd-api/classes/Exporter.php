@@ -35,6 +35,40 @@ class Exporter
         return $this;
     }
 
+    public function getSalutation(): string
+    {
+        global $wpdb;
+
+        $salutation = "";
+        $orderID = (int) sanitize_text_field($this->order->get_id());
+
+        if(!is_int($orderID) && $orderID <= 0){
+            return $salutation;
+        }
+
+        $sql = "SELECT meta_value 
+                FROM {$wpdb->prefix}wc_orders_meta 
+                WHERE order_id = {$orderID} 
+                AND meta_key = '_billing_title' 
+                LIMIT 1";
+
+        $salutation = $wpdb->get_var($sql);
+
+        switch ($salutation){
+            case 1:
+                $salutation = 'Herr';
+                break;
+            case 2:
+                $salutation = 'Frau';
+                break;
+            default:
+                $salutation = '';
+        }
+
+        return $salutation;
+
+    }
+
     /**
      * create an array of order data out of the WooCommerce order for the xml creation
      * @return array
@@ -46,10 +80,7 @@ class Exporter
         $billing_address = $this->order->get_address('billing');
         $vat_id = $billing_address['vat_id'] ?? '';
 
-        $salutation = '';
-        if(method_exists($this->order, 'get_billing_title')){
-            $salutation = $this->order->get_billing_title() ?? '';
-        }
+        $salutation = $this->getSalutation();
 
         // orderingParty address
         $orderingPartyAddress = [];
