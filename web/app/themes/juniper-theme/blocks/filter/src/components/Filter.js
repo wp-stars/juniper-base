@@ -98,7 +98,7 @@ const Filter = (data) => {
         
 
         if (purchasability) {
-            filtered = filtered.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === "sample-available"));
+            filtered = filtered.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === "muster-verfuegbar"));
         }
 
         if (metalsAndAccessories && metalsAndAccessories !== "none") {
