@@ -569,6 +569,20 @@ add_filter('wps_modal_render', function($modal){
     return $modal;
 });
 
+// max number of musterbestellungen in Box
+add_action('init', function(){
+    require_once __DIR__.'/classes/frontend/Modal.php';
+
+    $modal = new \wps\frontend\Modal();
+    $modal->id = 'full-samplebox-modal';
+    $modal->title = __('Die SampleBox ist leider voll.', 'wps');
+    $modal->content = 'Alle verfügbaren Plätze der Musterbox sind belegt. Wenn Sie ein weiteres Muster hinzufügen möchten, müssen Sie manuell einen Platz freimachen mithilfe des Mistkübel Icons.';
+    $modal->variables['form'] = '';
+    $modal->showSubmitButton = false;
+    $modal->showCloseButton = true;
+    $modal->close()->render();
+});
+
 // Woocommerce related hooks
 require_once __DIR__.'/classes/frontend/WC_Customizations.php';
 $woocommerce = new frontend\WC_Customizations();
