@@ -150,8 +150,28 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
     if(count($tax_query)) {
         $args['tax_query'] = $tax_query;
     }
-    
-    $filter_query = new WP_Query($args);
+
+    $cachingToken = 'wps_filter_cache_' . md5(json_encode($args));
+    $cachedData = get_transient($cachingToken);
+    $cacheDuration = HOUR_IN_SECONDS;
+
+    if(isset($_GET['nocache']) && $_GET['nocache'] == 1) {
+        delete_transient($cachingToken);
+    }
+
+    if (false === $cachedData) {
+        $filter_query = new WP_Query($args);
+
+        // check for a valid query result
+        if(!is_wp_error($filter_query) && $filter_query->have_posts()) {
+
+            // set transient for 1 hour
+            set_transient($cachingToken, $filter_query, $cacheDuration);
+        }
+    }else{
+        // use the cached Data if available
+        $filter_query = $cachedData;
+    }
 
     $post_arr = array();
     foreach ($filter_query->posts as $post) {
