@@ -1166,6 +1166,10 @@ video {
   display: grid;
 }
 
+.contents {
+  display: contents;
+}
+
 .hidden {
   display: none;
 }
@@ -1216,10 +1220,6 @@ video {
 
 .h-\[142px\] {
   height: 142px;
-}
-
-.h-\[16rem\] {
-  height: 16rem;
 }
 
 .h-\[2\.5rem\] {
@@ -2251,6 +2251,10 @@ video {
 
 .leading-tight {
   line-height: 1.25;
+}
+
+.leading-normal {
+  line-height: 1.5;
 }
 
 .text-\[\#737373\] {
