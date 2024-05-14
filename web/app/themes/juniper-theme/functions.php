@@ -607,3 +607,42 @@ add_action( 'enqueue_block_editor_assets', function(){
 add_action('after_setup_theme', function(){
     add_image_size( 'product-single-page-picture-size', 1024, 1024, true );
 });
+
+// add company & UID field to the registration process
+add_action( 'woocommerce_register_form_start', function(){
+    ?>
+    <p class="form-row form-row-wide">
+        <label for="billing_company"><?php _e( 'Firma', 'woocommerce' ); ?> <span class="required">*</span></label>
+        <input type="text" class="input-text" name="billing_company" id="billing_company" value="<?php if ( ! empty( $_POST['billing_company'] ) ) esc_attr_e( $_POST['billing_company'] ); ?>" />
+    </p>
+    <p class="form-row form-row-wide">
+        <label for="billing_company"><?php _e( 'UID', 'woocommerce' ); ?> <span class="required">*</span></label>
+        <input type="text" class="input-text" name="billing_vat_id" id="billing_vat_id" value="<?php if ( ! empty( $_POST['billing_vat_id'] ) ) esc_attr_e( $_POST['billing_vat_id'] ); ?>" />
+    </p>
+    <?php
+}, 999);
+
+// Validate Company & UID field during registration
+add_filter( 'woocommerce_registration_errors', function($errors, $username, $email){
+
+    if ( isset( $_POST['billing_company'] ) && empty( $_POST['billing_company'] ) ) {
+        $errors->add( 'billing_company_error', __( 'Das Feld Firma ist ein Pflichtfeld', 'woocommerce' ) );
+    }
+
+    if ( isset( $_POST['billing_vat_id'] ) && empty( $_POST['billing_vat_id'] ) ) {
+        $errors->add( 'billing_vat_id_error', __( 'Das Feld UID ist ein Pflichtfeld', 'woocommerce' ) );
+    }
+
+    return $errors;
+}, 999, 3 );
+
+// Save Company & UID field during registration
+add_action( 'woocommerce_created_customer', function($customer_id){
+    if ( isset( $_POST['billing_company'] ) ) {
+        update_user_meta( $customer_id, 'billing_company', sanitize_text_field( $_POST['billing_company'] ) );
+    }
+
+    if ( isset( $_POST['billing_vat_id'] ) ) {
+        update_user_meta( $customer_id, 'billing_vat_id', sanitize_text_field( $_POST['billing_vat_id'] ) );
+    }
+});
