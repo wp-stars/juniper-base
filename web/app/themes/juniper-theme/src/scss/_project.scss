@@ -180,9 +180,8 @@ table {
     right: 90px;
     position: absolute;
     z-index: 1;
-    left: -130px;
     top: -5px;
-    font-size: 12px;
+    max-width: 250px;
 }
 
 @keyframes spin {
