@@ -21,6 +21,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 
+if(function_exists('get_field')){
+    $bmd_specific_name = get_field('wps_sp_bmd_product_name', $product->get_id());
+    if($bmd_specific_name){
+        echo '<div class="text-xs">' . $bmd_specific_name . '</div>';
+    }
+}
+
 // hide price if the price is zero
 $price = $product->get_price();
 if($price == 0){
