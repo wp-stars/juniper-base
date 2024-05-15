@@ -11,9 +11,6 @@
 
 namespace Limesoda\Astra_Child\Shortcodes\FooterNewsletter;
 
-use const Limesoda\Astra_Child\THEME_DIR;
-use const Limesoda\Astra_Child\THEME_URI;
-
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
@@ -90,6 +87,15 @@ if (!class_exists('FooterNewsletter')) {
          */
         public function enqueue_scripts() {
             global $post;
+
+            if (!defined('THEME_DIR')) {
+                define('THEME_DIR', get_template_directory() . '/');
+            }
+
+            if (!defined('THEME_URI')) {
+                define('THEME_URI', get_template_directory_uri() . '/');
+            }
+
             if (has_shortcode($post->post_content, self::$slug) && !self::$modal_displayed) {
                 $asset_file = include THEME_DIR . 'shortcodes/' . self::$slug . '/index.asset.php';
                 wp_enqueue_style(
