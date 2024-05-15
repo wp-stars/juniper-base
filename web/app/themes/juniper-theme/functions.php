@@ -374,7 +374,7 @@ function wps_add_to_context( $context ) {
     $context['current_language']    = $current_language;
     $context['primary_menu']        = new \Timber\Menu( "primary_menu_$current_language" );
     $context['secondary_menu']      = new \Timber\Menu( "primary_menu_$current_language" );
-    $context['footer_menu']         = new \Timber\Menu( "primary_menu_$current_language" );
+    $context['footer_menu']         = new \Timber\Menu( "footer_menu_$current_language" );
     $context['title']               = \get_the_title();
     $context['jumbotron_bg_image']  = \get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
     $context['home_page_url']       = \home_url();
