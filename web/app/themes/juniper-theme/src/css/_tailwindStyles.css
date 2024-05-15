@@ -1287,6 +1287,14 @@ video {
   height: 100%;
 }
 
+.h-\[3\.5rem\] {
+  height: 3.5rem;
+}
+
+.h-\[0\.5rem\] {
+  height: 0.5rem;
+}
+
 .max-h-\[25rem\] {
   max-height: 25rem;
 }
@@ -2766,6 +2774,10 @@ video {
 
   .md\:hidden {
     display: none;
+  }
+
+  .md\:h-\[4rem\] {
+    height: 4rem;
   }
 
   .md\:w-0 {
