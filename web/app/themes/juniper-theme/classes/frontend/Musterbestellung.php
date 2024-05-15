@@ -258,6 +258,19 @@ function setupMusterbestellungData($product_id) {
 add_filter('woocommerce_get_item_data', 'display_musterbestellung_data_in_cart', 10, 2);
 
 function display_musterbestellung_data_in_cart($item_data, $cart_item) {
+
+    $isMusterbestellungsProduct = false;
+    if(isset($cart_item['product_id'])){
+        $product = wc_get_product($cart_item['product_id']);
+        if(!!$product && !is_wp_error($product)){
+            $isMusterbestellungsProduct = ('musterbestellung' === $product->get_type());
+        }
+    }
+
+    if (!$isMusterbestellungsProduct) {
+        return $item_data;
+    }
+
     if (isset($cart_item['musterbestellung_custom_data'])) {
         foreach ($cart_item['musterbestellung_custom_data'] as $key => $value) {
             $index = $key + 1;
