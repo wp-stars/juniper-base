@@ -1,43 +1,43 @@
 <?php
+
+
+
 // #1 Register the new product type 'Musterbestellung'
-add_filter( 'product_type_selector', 'add_musterbestellung_product_type' );
-  
-function add_musterbestellung_product_type( $types ){
+add_filter( 'product_type_selector', function($types){
     $types['musterbestellung'] = 'Musterbestellung';
     return $types;
-}
+});
 
 // --------------------------
 // #2 Add New Product Type Class
+add_action( 'init', function(){
 
-add_action( 'init', 'create_musterbestellung_product_type' );
-
-function create_musterbestellung_product_type(){
     class WC_Product_Musterbestellung extends WC_Product_Simple {
+
         public function get_type() {
             return 'musterbestellung';
         }
     }
-}
+
+});
 
 // --------------------------
 // #3 Load New Product Type Class
 
-add_filter( 'woocommerce_product_class', 'woocommerce_musterbestellung_product_class', 10, 2 );
+add_filter( 'woocommerce_product_class', function($classname, $product_type){
 
-function woocommerce_musterbestellung_product_class( $classname, $product_type ) {
     if ( 'musterbestellung' === $product_type ) {
         $classname = 'WC_Product_Musterbestellung';
     }
     return $classname;
-}
+
+}, 10, 2 );
+
 
 // --------------------------
 // #4 Show Product Data General Tab Prices
 
-add_action('woocommerce_product_data_panels', 'musterbestellung_product_type_custom_js');
-
-function musterbestellung_product_type_custom_js() {
+add_action('woocommerce_product_data_panels', function(){
     global $product_object;
     if ($product_object && 'musterbestellung' === $product_object->get_type()) {
         wc_enqueue_js("
@@ -50,11 +50,11 @@ function musterbestellung_product_type_custom_js() {
             });
         ");
     }
-}
+});
+
 
 // --------------------------
 // #5 Show Add to Cart Button
-
 add_action( 'woocommerce_musterbestellung_add_to_cart', function() {
     do_action( 'woocommerce_simple_add_to_cart' );
 });
@@ -143,22 +143,22 @@ function enqueue_custom_js_for_musterbestellung() {
     }
 
     wp_enqueue_script('custom-musterbestellung-js', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), '', true);
-    
+
     $products = [];
 
     if (isset($_COOKIE['musterbestellungProducts'])) {
         $musterbestellungProducts = json_decode(stripslashes($_COOKIE['musterbestellungProducts']), true);
         $products = [];
-    
+
         foreach ($musterbestellungProducts as $id) {
             // Assuming getProductImageById is a function that returns an image URL by product ID
             $local_product = new \stdClass();
-    
+
             $local_product->image = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'single-post-thumbnail' );
             $local_product->name = get_the_title( $id );
             $local_product->id = $id;
-            
-            $products[] = $local_product; 
+
+            $products[] = $local_product;
         }
     }
 
@@ -197,7 +197,7 @@ function update_musterbestellung_products(WP_REST_Request $request) {
 
     if($updateCart) {
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
-            if (isset($cart_item['data']) && $cart_item['data']->get_type() === 'musterbestellung') {            
+            if (isset($cart_item['data']) && $cart_item['data']->get_type() === 'musterbestellung') {
                 if (!empty($productIds)) {
                     // Update cart item with custom data
                     WC()->cart->cart_contents[$cart_item_key]['musterbestellung_custom_data'] = array_map('setupMusterbestellungData', $productIds);
@@ -216,7 +216,7 @@ function update_musterbestellung_products(WP_REST_Request $request) {
     }
 
     $products = [];
-    
+
     foreach ($productIds as $id) {
         // Assuming getProductImageById is a function that returns an image URL by product ID
         $product = new \stdClass();
@@ -224,10 +224,10 @@ function update_musterbestellung_products(WP_REST_Request $request) {
         $product->image = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'single-post-thumbnail' );
         $product->name = get_the_title( $id );
         $product->id = $id;
-        
-        $products[] = $product; 
+
+        $products[] = $product;
     }
-    
+
     return new WP_REST_Response($products, 200);
 }
 
@@ -241,7 +241,7 @@ function add_musterbestellung_data_to_cart_item($cart_item_data, $product_id, $v
         if(count($musterbestellungProducts) > 0) {
             $musterbestellungData = array_map('setupMusterbestellungData', $musterbestellungProducts);
             $cart_item_data['musterbestellung_custom_data'] = $musterbestellungData;
-            
+
         }
     }
 
@@ -322,7 +322,7 @@ add_action('woocommerce_after_cart_item_quantity_update', 'check_musterbestellun
 function check_musterbestellung_product_quantity($cart_item_key, $quantity) {
     $cart_item = WC()->cart->get_cart_item($cart_item_key);
     $product = wc_get_product($cart_item['product_id']);
-    
+
     if ($product->get_type() === 'musterbestellung' && $quantity > 1) {
         WC()->cart->set_quantity($cart_item_key, 1); // Set the quantity back to 1 if higher
     }
@@ -357,57 +357,53 @@ add_action( 'wp_loaded', 'maybe_load_cart', 5 );
  * @version 2.0.3
  */
 function maybe_load_cart() {
-	if ( version_compare( WC_VERSION, '3.6.0', '>=' ) && WC()->is_rest_api_request() ) {
-		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
-			return;
-		}
+    if ( version_compare( WC_VERSION, '3.6.0', '>=' ) && WC()->is_rest_api_request() ) {
+        if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+            return;
+        }
 
-		$rest_prefix = 'wps/v1/musterbestellung/';
-		$req_uri     = esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+        $rest_prefix = 'wps/v1/musterbestellung/';
+        $req_uri     = esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) );
 
-		$is_my_endpoint = ( false !== strpos( $req_uri, $rest_prefix ) );
+        $is_my_endpoint = ( false !== strpos( $req_uri, $rest_prefix ) );
 
-		if ( ! $is_my_endpoint ) {
-			return;
-		}
+        if ( ! $is_my_endpoint ) {
+            return;
+        }
 
-		require_once WC_ABSPATH . 'includes/wc-cart-functions.php';
-		require_once WC_ABSPATH . 'includes/wc-notice-functions.php';
+        require_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+        require_once WC_ABSPATH . 'includes/wc-notice-functions.php';
 
-		if ( null === WC()->session ) {
-			$session_class = apply_filters( 'woocommerce_session_handler', 'WC_Session_Handler' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+        if ( null === WC()->session ) {
+            $session_class = apply_filters( 'woocommerce_session_handler', 'WC_Session_Handler' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
-			// Prefix session class with global namespace if not already namespaced
-			if ( false === strpos( $session_class, '\\' ) ) {
-				$session_class = '\\' . $session_class;
-			}
+            // Prefix session class with global namespace if not already namespaced
+            if ( false === strpos( $session_class, '\\' ) ) {
+                $session_class = '\\' . $session_class;
+            }
 
-			WC()->session = new $session_class();
-			WC()->session->init();
-		}
+            WC()->session = new $session_class();
+            WC()->session->init();
+        }
 
-		/**
-		 * For logged in customers, pull data from their account rather than the
-		 * session which may contain incomplete data.
-		 */
-		if ( is_null( WC()->customer ) ) {
-			if ( is_user_logged_in() ) {
-				WC()->customer = new WC_Customer( get_current_user_id() );
-			} else {
-				WC()->customer = new WC_Customer( get_current_user_id(), true );
-			}
+        /**
+         * For logged in customers, pull data from their account rather than the
+         * session which may contain incomplete data.
+         */
+        if ( is_null( WC()->customer ) ) {
+            if ( is_user_logged_in() ) {
+                WC()->customer = new WC_Customer( get_current_user_id() );
+            } else {
+                WC()->customer = new WC_Customer( get_current_user_id(), true );
+            }
 
-			// Customer should be saved during shutdown.
-			add_action( 'shutdown', array( WC()->customer, 'save' ), 10 );
-		}
+            // Customer should be saved during shutdown.
+            add_action( 'shutdown', array( WC()->customer, 'save' ), 10 );
+        }
 
-		// Load Cart.
-		if ( null === WC()->cart ) {
-			WC()->cart = new WC_Cart();
-		}
-	}
+        // Load Cart.
+        if ( null === WC()->cart ) {
+            WC()->cart = new WC_Cart();
+        }
+    }
 }
-
-
-
-
