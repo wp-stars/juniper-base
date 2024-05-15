@@ -43,7 +43,7 @@ class ProductCard {
             <?php
                 $label_new = get_field('label-new', $product->get_id());
                 if ($label_new) { ?>
-                    <span class="absolute top-0 right-0 p-1 bg-accent"><?= __('New', 'wps-juniper'); ?></span>
+                    <span class="absolute top-0 right-0 p-1 bg-accent z-10"><?= __('New', 'wps-juniper'); ?></span>
                 <?php } ?>
 
                 <div class="stretch-this">
