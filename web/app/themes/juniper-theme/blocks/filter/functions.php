@@ -183,7 +183,7 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
         $post_obj->ID = $post->ID;
         // $post_obj->fields = get_fields(json_encode($post));
         $post_obj->excerpt = htmlspecialchars(wp_trim_excerpt('', $post));
-        $post_obj->post_title = htmlspecialchars($post->post_title);
+        $post_obj->post_title = json_encode($post->post_title);
         $post_obj->post_name = htmlspecialchars($post->post_name);
         $post_obj->featured_image = htmlspecialchars(get_the_post_thumbnail_url($post));
         $post_obj->link = htmlspecialchars(get_permalink($post));
@@ -234,5 +234,24 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
    
     return $data_arr;
 }
+
+function display_woocommerce_notices_on_add_to_cart($content) {
+    // Prepend your custom paragraph
+    
+
+    // Ensure WooCommerce notices are displayed on the next page load
+    if (isset($_GET['add-to-cart']) && is_numeric($_GET['add-to-cart'])) {
+        $woocommerce_message = wc_print_notices();
+          // Combine the custom paragraph with the original content
+    $new_content = $woocommerce_message . $content;
+
+    return $new_content;
+    }
+    else{
+        return $content;
+    }
+  
+}
+add_filter('the_content', 'display_woocommerce_notices_on_add_to_cart');
 
 
