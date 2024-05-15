@@ -310,7 +310,11 @@ select::-ms-expand {
 }
 
 .slick-dots{
-    bottom: 5px !important;
+    bottom: -10px !important;
+}
+
+body.single-product .slick-dots{
+    bottom: -40px !important;
 }
 
 .single-product .woocommerce-tabs{
@@ -1282,4 +1286,8 @@ body.woocommerce-checkout div#customer_login {
             outline: 2px solid #000;
         }
     }
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 0px !important;
 }
