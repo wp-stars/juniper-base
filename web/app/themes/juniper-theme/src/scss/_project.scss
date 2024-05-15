@@ -310,6 +310,10 @@ select::-ms-expand {
 }
 
 .slick-dots{
+    bottom: -10px !important;
+}
+
+body.single-product .slick-dots{
     bottom: -40px !important;
 }
 
