@@ -95,7 +95,7 @@ class ProductCard {
                     </h5>
                     <div class="inline-flex justify-between ">
     <?php if ($product->get_price() > 0) : ?>
-        <a href="<?= $product->add_to_cart_url(); ?>" class="product-card-btn btn btn-black text-white w-[100%] text-center font-semibold hover:bg-[#4D4D4D]">
+        <a href="<?= esc_url( $product->add_to_cart_url() ); ?>" class="product-card-btn btn btn-black text-white w-[100%] text-center font-semibold hover:bg-[#4D4D4D]">
             <?= __('In den Warenkorb', 'wps-theme'); ?>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <g xmlns="http://www.w3.org/2000/svg" id="ShoppingCart">
