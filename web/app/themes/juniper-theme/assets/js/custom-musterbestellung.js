@@ -149,22 +149,27 @@ setInterval(() => {
 
 // add to musterbestellung
 function attachAppendEventListeners() {
-
-    let products = customMusterbestellungParams.musterbestellungProducts;
-    let productIds = products.map(product => product.id)
-
     const appendButtons = document.querySelectorAll('.add-to-musterbestellung');
     appendButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const productId = e.currentTarget.getAttribute('data-product-id');
+            let products = JSON.parse(getCookie(cookieName)) || [];
 
-            if(productIds.includes(productId)) {
-                return
+            // Check if there are already 3 products in the list
+            if (products.length >= 3) {
+                openModal('full-samplebox-modal');
+                return;
             }
 
-            productIds.push(productId);
-            setCookie(cookieName, JSON.stringify(productIds));
-            fetchAndUpdateMusterbestellung(true)
+            // Check if the product is already in the list
+            if (products.includes(productId)) {
+                return;
+            }
+
+            // Add the new product and update the cookie
+            products.push(productId);
+            setCookie(cookieName, JSON.stringify(products));
+            fetchAndUpdateMusterbestellung(true);
         });
     });
 }
