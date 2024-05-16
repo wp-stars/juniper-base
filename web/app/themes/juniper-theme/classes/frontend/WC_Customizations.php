@@ -179,8 +179,19 @@ class WC_Customizations {
         }
 
         // print the product sku
+        echo "<div class='text-black text-xs mb-6 uppercase'>";
         $sku = $product->get_sku();
-        echo $sku ? "<div class='text-black text-xs mb-6 uppercase'>Art.-Nr.: $sku</div>" : '';
+        echo $sku ? "Art.-Nr.: $sku" : '';
+
+        if(function_exists('get_field')){
+            $bmd_specific_name = get_field('wps_sp_bmd_product_name', $product->get_id());
+            if($bmd_specific_name){
+                echo $sku ? ' | ' : '';
+                echo $bmd_specific_name;
+            }
+        }
+
+        echo "</div>";
 
         // print the tags to the template
         if(count($tags) > 0){
