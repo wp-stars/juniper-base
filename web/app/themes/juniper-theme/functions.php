@@ -655,7 +655,7 @@ add_action('init', function(){
         $shop_url = get_permalink(wc_get_page_id('shop'));
 
         $site_caption = __('Zurück zur Startseite', 'wps');
-        $shop_caption = __('ZOnline Shop entdecken', 'wps');
+        $shop_caption = __('Online Shop entdecken', 'wps');
 
         ob_start();
         ?>
