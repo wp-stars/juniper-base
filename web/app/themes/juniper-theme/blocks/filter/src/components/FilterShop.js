@@ -61,13 +61,8 @@ const FilterShop = ( data ) => {
         return `${lastPostIndex} of ${totalPosts} products`;
     };
 
-    const handleTaxSelect = (name, e) => {
-        if (name === "purchasability" || name === "metals-and-accessories") {
-            setFilters(prevFilters => ({ ...prevFilters, [name]: !prevFilters[name] }));
-        } else {
-            const selectedValue = e.target.value;
-            setFilters(prevFilters => ({ ...prevFilters, [name]: selectedValue }));
-        }
+    const handleTaxSelect = (name, value) => {
+        setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
     };
 
 
@@ -205,7 +200,11 @@ useEffect(() => {
                                         {/* <label>{filterItem.label}</label> */}
                                         {filterItem.tax_options.map((term, index) => {
                                             return (
-                                                <Checkbox label="Sample Available" term={term} filterItem={filterItem} handleTaxSelect={handleTaxSelect} />
+                                            <Checkbox
+                                                label="Sample Available"
+                                                isChecked={filters.purchasability}
+                                                onChange={(isChecked) => handleTaxSelect('purchasability', isChecked)}
+                                            />                                            
                                             )
                                         })}
                                     </div>
