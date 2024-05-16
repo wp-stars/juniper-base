@@ -117,7 +117,11 @@ function setCookie(name, value) {
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+    if (parts.length === 2) {
+        const cookieValue = parts.pop().split(';').shift();
+        return cookieValue;
+    }
+    return null; // Return null if cookie does not exist
 }
 
 const handleMusterbestellungSelectsUpdate = () => {
