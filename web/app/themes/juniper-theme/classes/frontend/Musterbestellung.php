@@ -180,6 +180,25 @@ add_action('rest_api_init', function () {
     ));
 });
 
+
+/**
+ * Add the Musterbestellung product to the cart if it is not already in the cart.
+ *
+ * @param int $product_id The product ID to add to the cart.
+ */
+function manageMusterboxProductInCart(int $product_id): void
+{
+    $musterboxIsinCart = false;
+
+    if(WC()->cart->find_product_in_cart( WC()->cart->generate_cart_id( $product_id ) ) ) {
+        $musterboxIsinCart = true;
+    }
+
+    if(false === $musterboxIsinCart){
+        WC()->cart->add_to_cart($product_id);
+    }
+}
+
 function update_musterbestellung_products(WP_REST_Request $request) {
     $productIds = explode(',', $request->get_param('ids'));
 
@@ -199,6 +218,9 @@ function update_musterbestellung_products(WP_REST_Request $request) {
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
             if (isset($cart_item['data']) && $cart_item['data']->get_type() === 'musterbestellung') {
                 if (!empty($productIds)) {
+
+                    manageMusterboxProductInCart(12603);
+
                     // Update cart item with custom data
                     WC()->cart->cart_contents[$cart_item_key]['musterbestellung_custom_data'] = array_map('setupMusterbestellungData', $productIds);
                 } else {
