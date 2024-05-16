@@ -2637,19 +2637,11 @@ const FilterShop = data => {
     const lastPostIndex = displayedPosts.length; // The number of posts currently displayed
     return `${lastPostIndex} of ${totalPosts} products`;
   };
-  const handleTaxSelect = (name, e) => {
-    if (name === "purchasability" || name === "metals-and-accessories") {
-      setFilters(prevFilters => ({
-        ...prevFilters,
-        [name]: !prevFilters[name]
-      }));
-    } else {
-      const selectedValue = e.target.value;
-      setFilters(prevFilters => ({
-        ...prevFilters,
-        [name]: selectedValue
-      }));
-    }
+  const handleTaxSelect = (name, value) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [name]: value
+    }));
   };
   const applyFilters = ({
     searchText,
@@ -2790,9 +2782,8 @@ const FilterShop = data => {
       }, filterItem.tax_options.map((term, index) => {
         return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
           label: "Sample Available",
-          term: term,
-          filterItem: filterItem,
-          handleTaxSelect: handleTaxSelect
+          isChecked: filters.purchasability,
+          onChange: isChecked => handleTaxSelect('purchasability', isChecked)
         });
       }));
     }

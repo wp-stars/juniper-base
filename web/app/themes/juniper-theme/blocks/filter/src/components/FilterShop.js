@@ -204,7 +204,8 @@ useEffect(() => {
                                                 label="Sample Available"
                                                 isChecked={filters.purchasability}
                                                 onChange={(isChecked) => handleTaxSelect('purchasability', isChecked)}
-                                            />                                            
+                                            />           
+                                                                             
                                             )
                                         })}
                                     </div>
