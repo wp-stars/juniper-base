@@ -191,3 +191,77 @@ a.borlabs-cookie-preference svg {
             transform: rotate(360deg);
         }
 }
+
+@media screen and (max-width:767px) {
+    .products-mobile{
+        gap: 23px;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 0px;
+    }
+     .products-mobile .product-slot{
+        height: 70px;
+    }
+.products-mobile .product-slot .tooltip{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+.products-mobile .product-slot .product{
+    width: 69px;
+    height: 69px;
+    border-radius: 69px;
+border: 1px solid  #DCDDDE;
+}
+.products-mobile .product-slot .product img{
+    width: 69px;
+    height: 69px;
+    object-fit: cover;
+}
+.products-mobile .product-slot .tooltiptext{
+    position: relative;
+    background-color: transparent;
+    visibility: visible;
+    top: 0px;
+    right: 0px;
+    white-space: normal;
+    font-size: 18px;
+font-style: normal;
+font-weight: 500;
+width: 100%;
+padding-left: 12px;
+}
+
+.products-mobile .product-slot .delete-product{
+    border-radius: 40px;
+border: 1px solid #CC1718;
+
+background: #FEF0EF;
+display: flex;
+width: 31px;
+height: 31px;
+padding: 6px;
+justify-content: center;
+align-items: center;
+margin-left: 25px;
+}
+
+.products-mobile .product-slot .delete-product svg{
+    height: 13px;
+    width: 13px;
+}
+
+.products-mobile .placeholder{
+    position: absolute;
+    height: 69px;
+    width: 69px;
+    left: 20px;
+    border-width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+}

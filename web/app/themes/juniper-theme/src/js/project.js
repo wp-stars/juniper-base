@@ -18,7 +18,21 @@ let navbarToggler = document.querySelector('#navbarToggler')
 navbarToggler.addEventListener('click', () => {
     toggleMenu()
 })
+// Event listener for new navbar toggler with id "musterbestellung-btn-mobile"
+let musterbestellungBtnMobile = document.querySelector('#musterbestellung-btn-mobile');
+if (musterbestellungBtnMobile) {
+    musterbestellungBtnMobile.addEventListener('click', () => {
+        document.querySelector("#musterbestellung-mobile").classList.toggle("hidden");
+    });
+}
 
+// Close button for musterbestellung-mobile
+let musterbestellungClose = document.querySelector('#musterbestellung-close');
+if (musterbestellungClose) {
+    musterbestellungClose.addEventListener('click', () => {
+        document.querySelector("#musterbestellung-mobile").classList.add("hidden");
+    });
+}
 
 // open and close the dialog modal function
 const openModal = (id) => {
