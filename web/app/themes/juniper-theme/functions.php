@@ -659,7 +659,7 @@ add_action('init', function(){
 
         ob_start();
         ?>
-        <div class="flex flex-row gap-8 flex-wrap justify-center">
+        <div class="flex flex-row gap-8 flex-wrap justify-center mb-16">
             <a href="<?php echo $site_url;?>" class="btn btn-black text-white"> <?php echo $site_caption;?></a>
             <a href=""<?php echo $shop_url;?>" class="btn btn-accent font-bold">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
