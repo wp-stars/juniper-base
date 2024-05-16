@@ -1,0 +1,29 @@
+{% import "system/macro/navigation/breadcrumb.html.twig" as breadcrumb %}
+{{ breadcrumb.component({items: [localized.breadcrumb.module]}, localized) }}
+
+{{ messages() | raw }}
+
+<!-- Consent Chart -->
+<div class="bc-w-full">
+    {% include "dashboard/partials/consent-chart.html.twig" %}
+</div>
+
+<div class="md:bc-flex md:bc-space-x-4 bc-mb-3">
+    <div class="bc-w-full md:bc-w-7/12">
+        <!-- News -->
+        {% include "dashboard/partials/news.html.twig" %}
+        <!-- Quick Start -->
+        {% include "dashboard/partials/quick-start.html.twig" %}
+        <!-- Plugin Update -->
+        {% include "dashboard/partials/plugin-update-debugging.html.twig" %}
+        <!-- Improve Borlabs Cookie -->
+        {% include "dashboard/partials/improve-borlabs-cookie.html.twig" %}
+        <!-- Contributors -->
+        {% include "dashboard/partials/contributors.html.twig" %}
+        <!-- Acknowledgement -->
+        {% include "dashboard/partials/acknowledgement.html.twig" %}
+    </div>
+    <div class="bc-w-full md:bc-w-5/12">
+        {{ template.systemCheck | raw }}
+    </div>
+</div>

@@ -1,0 +1,76 @@
+{% embed "system/embed/card/card-with-title.html.twig" with {contentSpacing: false} %}
+    {% import "system/macro/card/card-heading.html.twig" as card_heading %}
+    {% import "system/macro/icons/heart.html.twig" as heart_icon %}
+    {% import "system/macro/row/save.html.twig" as row_save %}
+    {% import "system/macro/row/switch-button.html.twig" as row_switch_button %}
+
+    {% block header %}
+        {{ card_heading.component({
+            title: localized.headline.improveBorlabsCookie,
+        }) }}
+    {% endblock %}
+    {% block content %}
+        <form action="{{ "?page=#{controllerId}&action=switch-telemetry-status" }}" method="post" class="needs-validation bc-group/form" novalidate>
+            <div class="bc-flex bc-items-center bc-py-2.5 odd:bc-bg-white even:bc-bg-gray-50 bc-px-5 last:bc-rounded-b-md">
+                <div class="bc-w-full">
+                    <p>{{ localized.text.improveBorlabsCookieA | raw }}</p>
+                    <p>{{ localized.text.improveBorlabsCookieB | format(localized.url.improveBorlabsCookie) | raw }}</p>
+                </div>
+            </div>
+
+            {{ row_switch_button.component({
+                id: 'telemetryStatus',
+                label: localized.field.improveBorlabsCookie,
+                value: data.telemetryStatus,
+            }) }}
+
+            {% if data.telemetryStatus is not empty %}
+                <div class="bc-flex bc-items-center bc-py-2.5 odd:bc-bg-white even:bc-bg-gray-50  bc-px-5 last:bc-rounded-b-md">
+                    <div class="bc-flex bc-justify-center bc-items-center bc-gap-x-1 bc-w-full">
+                        <span>{{ heart_icon.component({}) }}</span>
+                        <span>{{ localized.text.thankYou | raw }}</span>
+                    </div>
+                </div>
+            {% endif %}
+
+            {{ row_save.component({
+                action: 'switch-telemetry-status',
+                nonce: wpNonceField("#{controllerId}-switch-telemetry-status")
+            }, localized) }}
+        </form>
+
+        {% embed "system/embed/modal/modal.html.twig" with {
+            action: wpNonceUrl("?page=#{controllerId}&action=switch-telemetry-status&telemetryStatus=1", "#{controllerId}-switch-telemetry-status"),
+            closeButtonText: localized.button.improveBorlabsCookieClickedTheWrongButton,
+            id: 'borlabsModalImproveBorlabsCookie',
+            showModal: data.displayTelemetryModal,
+            title: localized.headline.improveBorlabsCookie,
+        } %}
+            {% block icon %}
+                <div class="bc-mx-auto bc-flex bc-h-12 bc-w-12 bc-flex-shrink-0 bc-items-center bc-justify-center bc-rounded-full bc-bg-red-500 sm:bc-mx-0 sm:bc-h-10 sm:bc-w-10">
+                    {% import "system/macro/icons/heart.html.twig" as heart_icon %}
+                    <span class="bc-text-white">{{ heart_icon.component({}) }}</span>
+                </div>
+            {% endblock %}
+
+            {% block actionButton %}
+                <button
+                    data-brlbs-modal-confirm-button type="submit"
+                    class="bc-inline-flex bc-w-full bc-justify-center bc-items-center bc-gap-x-1 bc-rounded-md bc-border bc-border-transparent bc-bg-blue-600 bc-px-4 bc-py-2 bc-text-base bc-font-medium bc-text-white bc-shadow-sm hover:bc-bg-blue-700 focus:bc-outline-none focus:bc-ring-2 focus:bc-ring-blue-500 focus:bc-ring-offset-2 sm:bc-ml-3 sm:bc-w-auto sm:bc-text-sm"
+                >{{ localized.button.improveBorlabsCookieGoodHuman | raw }}</button>
+            {% endblock %}
+
+            {% block description %}
+                <div class="md:bc-flex md:bc-items-center md:bc-space-x-4">
+                    <div class="bc-w-full md:bc-w-4/12">
+                        <img src="{{ imageUrl('the-telemetry-octopus-that-everybody-loves-with-cookie.png') }}" alt="">
+                    </div>
+                    <div class="bc-w-full md:bc-w-8/12">
+                        <p class="bc-mb-4">{{ localized.text.improveBorlabsCookieA | raw }}</p>
+                        <p>{{ localized.text.improveBorlabsCookieB | format(localized.url.improveBorlabsCookie) | raw }}</p>
+                    </div>
+                </div>
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+{% endembed %}

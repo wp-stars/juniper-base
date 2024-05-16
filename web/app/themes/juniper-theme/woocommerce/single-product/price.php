@@ -1,0 +1,40 @@
+<?php
+/**
+ * Single Product Price
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product/price.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see     https://woo.com/document/template-structure/
+ * @package WooCommerce\Templates
+ * @version 3.0.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
+
+global $product;
+
+if(function_exists('get_field')){
+    $bmd_specific_name = get_field('wps_sp_bmd_product_name', $product->get_id());
+    if($bmd_specific_name){
+        echo '<div class="text-xs">' . $bmd_specific_name . '</div>';
+    }
+}
+
+// hide price if the price is zero
+$price = $product->get_price();
+if($price == 0){
+    echo '<h5 class="' . esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ) . ' mb-5"></h5>';
+    return;
+}
+
+
+?>
+<h5 class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?> mb-5"><?php echo $product->get_price_html(); ?></h5>

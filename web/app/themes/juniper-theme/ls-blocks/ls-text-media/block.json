@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "ls/text-media",
+	"version": "0.1.0",
+	"title": "LS Bild & Text",
+	"category": "ls",
+	"icon": "analytics",
+	"description": "Image and custom content in two columns.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "iwgplating",
+	"attributes": {
+		"content": {
+			"type": "string",
+			"default": "Text Media"
+		},
+		"mediaPosition": {
+			"type": "string",
+			"default": "left"
+		},
+		"mediaType": {
+			"type": "string",
+			"default": "image"
+		},
+		"isChecked": {
+			"type": "boolean",
+			"default": false
+		}
+	}
+}

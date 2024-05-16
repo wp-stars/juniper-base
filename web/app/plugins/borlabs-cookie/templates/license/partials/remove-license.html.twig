@@ -1,0 +1,12 @@
+{% import "system/macro/form/confirmation.html.twig" as form_confirmation %}
+
+{% if data.licenseKey is not empty %}
+    {{ form_confirmation.component({
+        action: 'remove',
+        button: localized.button.removeLicense,
+        headline: localized.headline.removeLicense,
+        hint: localized.hint.removeLicense,
+        nonce: wpNonceField("#{controllerId}-remove"),
+        route: "?page=#{controllerId}",
+    }, localized) }}
+{% endif %}

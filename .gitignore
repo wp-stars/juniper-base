@@ -7,7 +7,7 @@ web/app/uploads/*
 !web/app/uploads/.gitkeep
 
 # WordPress
-web/wp
+#web/wp
 web/.htaccess
 
 # Logs
@@ -19,7 +19,8 @@ web/.htaccess
 !.env.example
 
 # Composer
-/vendor
+# /vendor/
+# !/web/app/plugins/*/vendor/
 
 # WP-CLI
 wp-cli.local.yml
@@ -29,11 +30,12 @@ wp-cli.local.yml
 
 *.lock
 *-lock.json
-vendor/
-node_modules
+node_modules/
 
 web/app/advanced-cache.php
 web/app/cache
 web/app/w3tc-config
 
 # !web/.htaccess
+
+web/wp/bmd-exports/

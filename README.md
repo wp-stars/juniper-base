@@ -1,3 +1,5 @@
+# IWG Codebase
+
 <p align="center">
   <a href="https://wp-stars.com">
     <img alt="Juniper" src="https://5924544.fs1.hubspotusercontent-na1.net/hubfs/5924544/juniper-base/398672602-juniper-logo-01.png" height="300">
@@ -58,7 +60,8 @@ Clone repo
 
 Run bash start.sh
 
-Put this .htaccess in the public_html folder
+Put this .htaccess in the public_html folder, you can also configure the document root accordingly if you have access to that. This is a matter of preference.
+
 ```
 <IfModule mod_rewrite.c>
 RewriteEngine on
@@ -113,4 +116,69 @@ Other scripts worth mentioning are:
 
 3) taxonomy.sh - similarly to the antecedent case, the answer to questions posed by a series of commands allows you to expeditiously create a taxonomy assigned to a given type of post.
 
-## 
+# Modals
+
+To create a new modal, you can insert it via php, maybe in the functions.php file with this code:
+
+```php
+    use \wps\frontend\Modal;
+    require_once __DIR__.'/classes/frontend/Modal.php';
+    $modal = new Modal();
+    
+    // every modal needs to have an id, title and content
+    $modal->id = 'sample-box-full';
+    $modal->title = __('Sample Box is full', 'wps');
+    $modal->content = __('You can only order 3 samples at a time. Please remove one of the samples from your cart to add a new one.', 'wps');
+    // you can also add a submit button and a close button
+    $modal->showSubmitButton = true;
+    $modal->showCloseButton = true;
+    
+    // you can select another modal template (twigfile) or use the default one
+    // you will find the twig files in your theme under view/modals
+    $modal->template = 'modal.twig';
+    
+    // you can open oder close the modal on pageload
+    $modal->close();
+    $modal->open();
+    
+    // you need to render the function to display the modal
+    // the output will be a div in the footer with the modal content
+    $modal->render();
+
+```
+
+The close button works automatically, you can also open and close the modal with the javascript functions:
+```js
+    openModal('sample-box-full');
+    closeModal('sample-box-full');
+```
+
+You can also change the model with our pre render filter - so here you can do 
+some validation or ajax requests and then update the content of the Modal:
+
+```php
+   add_filter('wps_modal_render', function($modal){
+      if(isset($_POST['action']) && $_POST['action'] === 'sample-box-full'){
+         $modal->title = 'Vielen Dank für Ihre Anfrage';
+         $modal->content = 'Bis zum nächsten Einkauf';
+         $modal->open();
+      }
+      return $modal;
+   });
+```
+
+# BMD Export
+
+The Plugin 'wps-bmd-api' handles the order export for bmd.
+When the 'woocommerce_thankyou' is triggered, it will create a new xml file and persits it into the upload directory:
+
+```console
+/iwg/web/wp/bmd-exports/
+```
+
+You can test this export for every order. Use the tool in 'Werkzeuge/BMD API Export' - enter the order id, click on "testen" and your are able to get all the data and the xml file.
+
+# Borlabs & WP Rocket
+
+Both of these plugins need to be installed via composer when the project is finished. Each has a self hosted composer package, and should be included in package.json, if it isn't already. Once it is installed via composer, it can be safely activated. 
+

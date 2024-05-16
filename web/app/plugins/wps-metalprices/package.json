@@ -1,0 +1,39 @@
+{
+  "name": "reactwithwp",
+  "version": "1.0.0",
+  "description": "React with WP plugin",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbaxterh/ReactWithWP.git"
+  },
+  "keywords": [
+    "Wordpress",
+    "React"
+  ],
+  "author": "Wes Huber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wbaxterh/ReactWithWP/issues"
+  },
+  "homepage": "https://github.com/wbaxterh/ReactWithWP#readme",
+  "devDependencies": {
+    "@wordpress/scripts": "^24.1.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.6",
+    "@mui/styled-engine": "^5.13.2",
+    "@mui/x-date-pickers": "^6.9.0",
+    "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.8",
+    "recharts": "^2.7.2"
+  }
+}

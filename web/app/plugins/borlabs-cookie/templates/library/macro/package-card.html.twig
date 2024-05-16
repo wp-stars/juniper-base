@@ -1,0 +1,67 @@
+{% macro component(config, localized) %}
+    {% set updateAvailable = false %}
+
+    {% if isVersionGreater(config.package.borlabsServicePackageVersion, config.package.version) %}
+        {% set updateAvailable = true %}
+    {% endif %}
+
+    {% set formAction = wpNonceUrl("?page=borlabs-cookie-library&action=details&id=#{config.package.id}", "#{config.controllerId}-#{config.package.id}-details") %}
+
+    {% if config.formAction is not empty %}
+        {% set formAction = config.formAction %}
+    {% endif %}
+
+    {% import "system/macro/form-component/button.html.twig" as button %}
+
+    <div class="bc-shadow-md bc-bg-white bc-rounded-md">
+        <div class="bc-relative">
+            <a id="package-{{ config.package.borlabsServicePackageKey }}"></a>
+            {% if config.package.isFeatured %}
+                <span class="bc-absolute bc-top-2 bc-left-2 bc-px-3 bc-py-1.5 bc-rounded-md bc-bg-amber-500 bc-text-white bc-text-xxs bc-font-semibold bc-uppercase"
+                    >{{ localized.text.recommended }}</span>
+            {% endif %}
+            {% if config.package.thumbnail is not empty %}
+                <img class="bc-w-full bc-rounded-t-md" src="{{ config.package.thumbnail | raw }}" alt="{{ config.package.name | raw }}">
+            {% else %}
+                <img class="bc-w-full bc-rounded-t-md" src="{{ imageUrl('borlabs-default-package.png') | raw }}" alt="{{ config.package.name | raw }}">
+            {% endif %}
+            <div class="bc-p-3">
+                <h2 class="bc-text-base bc-font-medium">{{ config.package.name | raw }}</h2>
+                <p class="bc-text-xs">{{ config.package.translations.list.de.description | raw }}</p>
+            </div>
+            <div class="bc-border-t bc-border-solid bc-border-gray-200 bc-text-center">
+                <dl class="bc-grid bc-grid-cols-2 bc-m-0 bc-text-xxs">
+                    <div class="bc-col-span-1 bc-p-3">
+                        <dt class="bc-m-0 bc-mb-1 bc-font-semibold">{{ localized.descriptionList.type }}</dt>
+                        <dd class="bc-m-0">{{ config.componentTypes[config.package.type.value] | raw }}</dd>
+                    </div>
+                    <div class="bc-col-span-1 bc-p-3">
+                        {% if updateAvailable == true %}
+                            <dt class="bc-m-0 bc-mb-1 bc-font-semibold bc-text-purple-600">{{ localized.descriptionList.updateAvailable }}</dt>
+                            <dd class="bc-m-0 bc-text-purple-600">{{ versionNumber(config.package.borlabsServicePackageVersion) | raw }}</dd>
+                        {% elseif config.package.installedAt is not empty %}
+                            <dt class="bc-m-0 bc-mb-1 bc-font-semibold bc-text-blue-600">{{ localized.descriptionList.installedVersion }}</dt>
+                            <dd class="bc-m-0 bc-text-blue-600">{{ versionNumber(config.package.version) | raw }}</dd>
+                        {% else %}
+                            <dt class="bc-m-0 bc-mb-1 bc-font-semibold">{{ localized.descriptionList.version }}</dt>
+                            <dd class="bc-m-0">{{ versionNumber(config.package.version) | raw }}</dd>
+                        {% endif %}
+                    </div>
+                </dl>
+            </div>
+        </div>
+        <div class="bc-flex bc-justify-between">
+            <form class="bc-w-full" action="{{ formAction | raw }}" method="post">
+                <input type="hidden" name="id" value="{{ config.package.id }}">
+                <input type="hidden" name="action" value="details">
+                {{ button.component({
+                    backgroundColor: updateAvailable == true ? 'bc-bg-purple-600' : 'bc-bg-blue-600',
+                    backgroundColorHover: updateAvailable == true ? 'enabled:hover:bc-bg-purple-700' : 'enabled:hover:bc-bg-blue-700',
+                    button: localized.button.details,
+                    radius: 'bc-rounded-b-md',
+                    width: 'bc-w-full'
+                }, localized) }}
+            </form>
+        </div>
+    </div>
+{% endmacro %}

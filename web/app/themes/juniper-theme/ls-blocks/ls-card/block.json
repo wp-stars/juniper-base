@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "ls/card",
+	"version": "0.1.0",
+	"title": "LS Card Block",
+	"category": "ls",
+	"icon": "admin-page",
+	"description": "LS Card Block",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "iwgplating",
+	"attributes": {
+		"contentType": {
+			"type": "string",
+			"default": "card-image-heading-description"
+		},
+		"link": {
+			"type": "string",
+			"default": ""
+		},
+		"linkText": {
+			"type": "string",
+			"default": "Produkte entdecken"
+		}
+	}
+}

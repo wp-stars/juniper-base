@@ -2,7 +2,7 @@
 <ul class="py-2 text-sm text-[var(--neutral-100)] bg-[var(--neutral-10)] w-44 divide-y divide-gray-100 rounded-lg shadow " aria-labelledby="dropdownLargeButton">
 	{% for item in items %}
 		<li class="{{ item.classes | join(' ') }}">
-			<a class="block px-4 py-2 hover:bg-[var(--neutral-40)] " target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+			<a class="block px-4 py-2 hover:bg-[var(--neutral-40)] text-red-700" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 		</li>
 	{% endfor %}
 </ul>
