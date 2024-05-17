@@ -188,14 +188,34 @@ add_action('rest_api_init', function () {
  */
 function manageMusterboxProductInCart(int $product_id): void
 {
+    $cart = WC()->cart->get_cart();
     $musterboxIsinCart = false;
+    $musterProductsSelected = 0;
+    $cart_item_key_musterproduct = null;
 
-    if(WC()->cart->find_product_in_cart( WC()->cart->generate_cart_id( $product_id ) ) ) {
-        $musterboxIsinCart = true;
+    // get amount of samples inside the musterbox widget (cookie)
+    if (isset($_COOKIE['musterbestellungProducts'])) {
+        $musterbestellungProducts = json_decode(stripslashes($_COOKIE['musterbestellungProducts']), true);
+        $musterProductsSelected = count($musterbestellungProducts);
+    }
+
+    // Check if the product is already in the cart and store its key
+    foreach ( $cart as $cart_item_key => $cart_item ) {
+        if ( $cart_item['product_id'] == $product_id ) {
+            $musterboxIsinCart = true;
+            $cart_item_key_musterproduct = $cart_item_key;
+            break;
+        }
     }
 
     if(false === $musterboxIsinCart){
-        WC()->cart->add_to_cart($product_id);
+        if($musterProductsSelected > 0){
+            WC()->cart->add_to_cart($product_id);
+        }
+    }else{
+        if($musterProductsSelected === 0 && !!$cart_item_key_musterproduct){
+            WC()->cart->remove_cart_item($cart_item_key_musterproduct);
+        }
     }
 }
 
@@ -213,6 +233,9 @@ function update_musterbestellung_products(WP_REST_Request $request) {
             $updateCart = false;
         }
     }
+
+    // 12603 product ID of the Musterbestellung product
+    manageMusterboxProductInCart(12603);
 
     if($updateCart) {
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
