@@ -674,3 +674,13 @@ add_action('init', function(){
         return ob_get_clean();
     });
 });
+
+// replace "<sup>®</sup>" and "®" with "&reg;"
+add_filter('woocommerce_product_title', function($title, $product){
+
+    $title = preg_replace('/<sup>®<\/sup>/', '&reg;', $title);
+    $title = preg_replace('/®/', '&reg;', $title);
+
+    return $title;
+
+}, 9999, 2);
