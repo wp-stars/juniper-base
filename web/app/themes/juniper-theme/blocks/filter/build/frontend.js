@@ -2591,13 +2591,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const FilterShop = data => {
-  const [originalDisplayedPosts, setOriginalDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.filter(post => post.product_type !== "musterbestellung" && post.price > 0).slice(0, 6));
-  const [filteredPosts, setFilteredPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [displayedPosts, setDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(originalDisplayedPosts);
+  const initialPosts = data.posts.filter(post => post.price > 0);
+  const [originalDisplayedPosts, setOriginalDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialPosts.slice(0, 6));
+  const [filteredPosts, setFilteredPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialPosts);
+  const [displayedPosts, setDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialPosts.slice(0, 6));
   const [filters, setFilters] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     searchText: "",
     purchasability: false,
-    metalsAndAccessories: undefined
+    metals_and_accessories: 'none'
   });
   const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
@@ -2608,45 +2609,49 @@ const FilterShop = data => {
   });
   const searchPosts = async pageNum => {
     if (pageNum > maxPages) return;
+    if (pageNum === 1) setLoading(true);
     try {
-      const response = await axios__WEBPACK_IMPORTED_MODULE_1___default().get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&page=${pageNum}`);
+      const response = await axios__WEBPACK_IMPORTED_MODULE_1___default().get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&page=${pageNum}&min_price=0.01`);
       if (response.data && response.data.posts.length > 0) {
-        const postsWithPrice = response.data.posts.filter(post => post.price > 0);
-        setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...postsWithPrice]);
+        setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...response.data.posts]);
         if (pageNum === 1) {
-          setDisplayedPosts(postsWithPrice);
+          setDisplayedPosts(response.data.posts.slice(0, 6));
         }
       }
       setMaxPages(response.data.maxPages || maxPages);
     } catch (error) {
       console.error(error);
+    } finally {
+      if (pageNum === maxPages) {
+        setLoading(false);
+      }
     }
   };
   const toggleFilterOpen = e => {
     e.preventDefault();
     setShowFilterItems(!showFilterItems);
-    if (!showFilterItems) {}
   };
   const loadMorePosts = () => {
-    const nextPostsToShow = filteredPosts.slice(displayedPosts.length, displayedPosts.length + 6);
-    setDisplayedPosts(displayedPosts.concat(nextPostsToShow));
-    eventSlider();
+    const currentLength = displayedPosts.length;
+    const morePosts = filteredPosts.slice(currentLength, currentLength + 6);
+    setDisplayedPosts(displayedPosts.concat(morePosts));
   };
   const calculateDisplayedRange = () => {
-    const totalPosts = filteredPosts.length; // Total posts after filtering
-    const lastPostIndex = displayedPosts.length; // The number of posts currently displayed
+    const totalPosts = filteredPosts.length;
+    const lastPostIndex = displayedPosts.length;
     return `${lastPostIndex} of ${totalPosts} products`;
   };
-  const handleTaxSelect = (name, value) => {
+  const handleTaxSelect = (name, e) => {
+    const selectedValue = e.target.value;
     setFilters(prevFilters => ({
       ...prevFilters,
-      [name]: value
+      [name]: selectedValue
     }));
   };
   const applyFilters = ({
     searchText,
     purchasability,
-    metalsAndAccessories
+    metals_and_accessories
   }) => {
     let filtered = originalDisplayedPosts;
     if (searchText) {
@@ -2655,29 +2660,58 @@ const FilterShop = data => {
     if (purchasability) {
       filtered = filtered.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === "muster-verfuegbar"));
     }
-    if (metalsAndAccessories && metalsAndAccessories !== "none") {
-      filtered = filtered.filter(post => post.taxonomies["metals-and-accessories"]?.some(term => term.term_id === parseInt(metalsAndAccessories)));
+    if (metals_and_accessories && metals_and_accessories !== "none") {
+      filtered = filtered.filter(post => post.taxonomies["metals-and-accessories"]?.some(term => term.term_id === parseInt(metals_and_accessories)));
     }
-    setFilteredPosts(filtered); // Store all filtered posts
-    setDisplayedPosts(filtered.slice(0, 6)); // Show only the first 6
+    setFilteredPosts(filtered);
+    setDisplayedPosts(filtered.slice(0, 6));
+  };
+  const resetFilters = () => {
+    setFilters({
+      searchText: "",
+      purchasability: false,
+      metals_and_accessories: 'none'
+    });
   };
   const eventSlider = () => {
     const event = new Event('filterRenderingDone');
     document.dispatchEvent(event);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const params = new URLSearchParams(window.location.search);
+    const findTaxonomyIdBySlug = (taxSlug, filterItemOptions) => {
+      const foundItem = filterItemOptions.find(item => item.slug.toLowerCase() === taxSlug.toLowerCase());
+      return foundItem ? foundItem.term_id : 'none';
+    };
+    const initialFilters = {
+      searchText: params.get('text') || "",
+      purchasability: params.get('purchasability') === 'true'
+    };
+    data.filterOptions.forEach(filterItem => {
+      if (filterItem.name === "metals-and-accessories") {
+        const paramName = params.get(filterItem.name);
+        if (paramName) {
+          initialFilters[filterItem.name] = findTaxonomyIdBySlug(paramName, filterItem.tax_options);
+        } else {
+          initialFilters[filterItem.name] = 'none';
+        }
+      }
+    });
+    setFilters(initialFilters);
+    applyFilters(initialFilters);
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     applyFilters(filters);
   }, [filters, originalDisplayedPosts]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const startIndex = (page - 1) * 6;
-    const endIndex = startIndex + 6;
-    setDisplayedPosts(originalDisplayedPosts.slice(startIndex, endIndex));
-  }, [page, originalDisplayedPosts]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (data.posts.length && maxPages > 1) {
-      for (let i = 2; i <= maxPages; i++) {
-        searchPosts(i);
-      }
+    if (maxPages > 1) {
+      setLoading(true);
+      const fetchAllPages = async () => {
+        for (let i = 2; i <= maxPages; i++) {
+          await searchPosts(i);
+        }
+      };
+      fetchAllPages().then(() => setLoading(false));
     }
   }, [maxPages]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -2687,15 +2721,15 @@ const FilterShop = data => {
     eventSlider();
   }, [originalDisplayedPosts, displayedPosts]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full "
+    className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: " mb-0 sm:mb-[30px]"
+    className: "mb-0 sm:mb-[30px]"
   }, data.title)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto"
   }, isMobile ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full flex justify-end items-center mt-[-55px]"
+    className: "w-full flex justify-end items-center mt-3 sm:mt-[-55px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
     className: `filter-toggle inline-flex items-center p-2 justify-center text-sm ml-4 ${showFilterItems ? 'open' : 'closed'}`,
@@ -2750,65 +2784,68 @@ const FilterShop = data => {
     type: "text",
     placeholder: translation.product_search,
     "aria-label": "product search",
+    value: filters.searchText // Bind input value to state
+    ,
     onChange: e => setFilters({
       ...filters,
       searchText: e.target.value.trim().toLowerCase()
     })
-  })), data.filterOptions.map((filterItem, key) => {
-    if (filterItem.type === "dropdown") {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col sm:flex-row col-span-12 gap-[1.25rem]"
+  }, data.filterOptions.map((filterItem, key) => {
+    if (filterItem.name === "metals-and-accessories") {
+      const filterName = filterItem.name;
+      const stateKey = "metals_and_accessories";
+      const translationKey = translation.metals_accessories;
       return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         key: key,
-        className: "col-span-12 relative w-full max-w-full sm:max-w-64 mb-8"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, translation.metals_accessories), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-        onChange: e => handleTaxSelect("metalsAndAccessories", e),
+        className: "col-span-12 relative w-full max-w-full sm:max-w-64 mb-2.5"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, translationKey), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        value: filters[stateKey] !== "none" ? filters[stateKey] : "none",
+        onChange: e => handleTaxSelect(stateKey, e),
         className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-        value: "",
-        disabled: true,
-        selected: true
-      }, "Select metals & accessories"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
         value: "none"
-      }, "All"), filterItem.tax_options.map((term, index) => {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-          key: index,
-          value: term.term_id
-        }, term.name);
-      })));
-    }
-    if (filterItem.type === "checkbox") {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        key: key,
-        className: "col-span-12 block mb-8"
-      }, filterItem.tax_options.map((term, index) => {
-        return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          label: "Sample Available",
-          isChecked: filters.purchasability,
-          onChange: isChecked => handleTaxSelect('purchasability', isChecked)
-        });
-      }));
+      }, "Select ", translationKey), filterItem.tax_options.map(term => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+        key: term.term_id,
+        value: term.term_id
+      }, term.name))));
     }
     return null;
-  })) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "container mb-5 col-span-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "button",
+    onClick: resetFilters,
+    className: "text-black text-xs font-normal leading-tight"
+  }, "Delete All Filters")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-row gap-[1.25rem] col-span-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    label: "Sample Available",
+    isChecked: filters.purchasability,
+    onChange: isChecked => setFilters(prevFilters => ({
+      ...prevFilters,
+      purchasability: isChecked
+    }))
+  })))) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mt-[54px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid"
-  }, !loading ? originalDisplayedPosts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, displayedPosts.map((post, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      key: index,
-      className: "flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0",
-      dangerouslySetInnerHTML: {
-        __html: atob(post.html)
-      }
-    });
+    className: "grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid flex flex-wrap"
+  }, displayedPosts.length ? displayedPosts.map((post, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: index,
+    className: "flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow",
+    dangerouslySetInnerHTML: {
+      __html: atob(post.html)
+    }
   })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full text-center"
-  }, translation.no_results) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "container flex justify-center"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, translation.loading)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, translation.no_results))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container flex justify-center items-center my-24 flex-col gap-y-6"
-  }, page < maxPages && displayedPosts.length < filteredPosts.length ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    onClick: () => loadMorePosts(),
-    disabled: displayedPosts.length >= originalDisplayedPosts.length,
+  }, loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "loading-spinner"
+  }) : !loading && displayedPosts.length < filteredPosts.length && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    onClick: loadMorePosts,
+    disabled: displayedPosts.length >= filteredPosts.length,
     className: "inline-flex items-center gap-x-2.5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -2819,8 +2856,8 @@ const FilterShop = data => {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M25 4.6875C20.9826 4.6875 17.0554 5.87881 13.715 8.11077C10.3746 10.3427 7.77111 13.5151 6.23371 17.2267C4.6963 20.9384 4.29405 25.0225 5.07781 28.9628C5.86157 32.903 7.79615 36.5224 10.6369 39.3631C13.4777 42.2039 17.097 44.1384 21.0372 44.9222C24.9775 45.706 29.0616 45.3037 32.7733 43.7663C36.4849 42.2289 39.6573 39.6254 41.8892 36.285C44.1212 32.9446 45.3125 29.0174 45.3125 25C45.3068 19.6145 43.1649 14.4513 39.3568 10.6432C35.5487 6.83507 30.3855 4.69319 25 4.6875ZM25 42.1875C21.6006 42.1875 18.2776 41.1795 15.4511 39.2909C12.6247 37.4023 10.4217 34.718 9.12083 31.5774C7.81995 28.4368 7.47958 24.9809 8.14276 21.6469C8.80595 18.3128 10.4429 15.2503 12.8466 12.8466C15.2503 10.4429 18.3128 8.80594 21.6469 8.14275C24.9809 7.47957 28.4368 7.81994 31.5774 9.12082C34.718 10.4217 37.4023 12.6247 39.2909 15.4511C41.1795 18.2776 42.1875 21.6006 42.1875 25C42.1823 29.5568 40.3699 33.9255 37.1477 37.1477C33.9255 40.3699 29.5568 42.1823 25 42.1875ZM34.375 25C34.375 25.4144 34.2104 25.8118 33.9174 26.1049C33.6243 26.3979 33.2269 26.5625 32.8125 26.5625H26.5625V32.8125C26.5625 33.2269 26.3979 33.6243 26.1049 33.9174C25.8118 34.2104 25.4144 34.375 25 34.375C24.5856 34.375 24.1882 34.2104 23.8952 33.9174C23.6021 33.6243 23.4375 33.2269 23.4375 32.8125V26.5625H17.1875C16.7731 26.5625 16.3757 26.3979 16.0827 26.1049C15.7896 25.8118 15.625 25.4144 15.625 25C15.625 24.5856 15.7896 24.1882 16.0827 23.8951C16.3757 23.6021 16.7731 23.4375 17.1875 23.4375H23.4375V17.1875C23.4375 16.7731 23.6021 16.3757 23.8952 16.0826C24.1882 15.7896 24.5856 15.625 25 15.625C25.4144 15.625 25.8118 15.7896 26.1049 16.0826C26.3979 16.3757 26.5625 16.7731 26.5625 17.1875V23.4375H32.8125C33.2269 23.4375 33.6243 23.6021 33.9174 23.8951C34.2104 24.1882 34.375 24.5856 34.375 25Z",
     fill: "black"
-  })), translation.load_more) : null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    class: "text-base laeding-normal italic"
+  })), translation.load_more), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "text-base leading-normal italic"
   }, calculateDisplayedRange())));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FilterShop);
