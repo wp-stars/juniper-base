@@ -25,6 +25,12 @@ if (musterbestellungBtnMobile) {
         document.querySelector("#musterbestellung-mobile").classList.toggle("hidden");
     });
 }
+let toggleMusterbestellungMobile = document.querySelector('#musterbestellung-floating');
+if (toggleMusterbestellungMobile) {
+    toggleMusterbestellungMobile.addEventListener('click', () => {
+        document.querySelector("#musterbestellung-mobile").classList.toggle("hidden");
+    });
+}
 
 // Close button for musterbestellung-mobile
 let musterbestellungClose = document.querySelector('#musterbestellung-close');
