@@ -78,7 +78,7 @@ if (!class_exists('Productslider')) {
 			$excluded_product_id = $excluded_product ? $excluded_product->ID : 0;
 
 			$html = '<div class="ls-shortcode-product-grid container my-8">';
-			$html .= '<div class="grid grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid flex flex-wrap">';
+			$html .= '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid flex flex-wrap">';
 
 			$query = new \WP_Query([
 				'post_type' => 'product',
