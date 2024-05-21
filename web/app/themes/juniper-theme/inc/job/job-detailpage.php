@@ -11,14 +11,19 @@
 
 namespace Limesoda\Astra_Child\Job\Detailpage;
 
-use const Limesoda\Astra_Child\THEME_URI;
-use const Limesoda\Astra_Child\THEME_DIR;
-
 /** Enqueue Job Detail Page Styles and Scripts */
 function enqueue_job_assets() {
 	if (!is_singular('jobs')) {
 		return;
 	}
+
+    if (!defined('THEME_DIR')) {
+        define('THEME_DIR', get_template_directory() . '/');
+    }
+
+    if (!defined('THEME_URI')) {
+        define('THEME_URI', get_template_directory_uri() . '/');
+    }
 
 	wp_enqueue_style(
 		'job-detailpage-styles',
