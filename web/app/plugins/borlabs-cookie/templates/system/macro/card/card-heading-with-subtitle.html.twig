@@ -1,0 +1,13 @@
+{% macro component(config) %}
+    {% import "system/macro/anchor-button.html.twig" as anchor_button %}
+    <div
+        class="bc-flex bc-justify-between bc-items-center">
+        <h3 class="bc-text-lg bc-font-medium bc-leading-6 bc-text-gray-900 bc-mb-0">
+            <span class="bc-text-sm bc-font-normal bc-text-gray-400">{{ config.title | raw }}</span>
+            <br>{{ config.subtitle | raw }}
+        </h3>
+        {% if config.buttonLink is not empty and config.buttonText is not empty %}
+            {{ anchor_button.component({ href: config.buttonLink, linkText: config.buttonText }) }}
+        {% endif %}
+    </div>
+{% endmacro %}

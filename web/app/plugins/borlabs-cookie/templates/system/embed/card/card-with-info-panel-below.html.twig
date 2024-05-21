@@ -1,0 +1,22 @@
+{% extends "system/embed/card/card.html.twig" %}
+
+{% block cardContent %}
+    <div>
+        <div class="bc-w-full">
+            <div class="bc-px-5 bc-py-3">
+                {% block mainHeader %}{% endblock %}
+            </div>
+            <div>
+                {% block mainContent %}{% endblock %}
+            </div>
+        </div>
+        <div class="bc-w-full bc-rounded-b-md bc-bg-gradient-to-tr bc-from-[#667eea] bc-to-[#764ba2] bc-text-white">
+            <div class="bc-border-b bc-border-solid bc-border-white/50 bc-px-5 bc-py-3">
+                <h3 class="bc-text-lg bc-font-medium bc-leading-6 bc-text-white bc-mb-0">{% block infoPanelHeader %}{% endblock %}</h3>
+            </div>
+            <div class="bc-px-3 bc-pb-5 bc-pt-2">
+                {% block infoPanelContent %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

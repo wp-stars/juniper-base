@@ -1,0 +1,25 @@
+{% extends "system/embed/card/card.html.twig" %}
+
+{% block cardContent %}
+    {% if infoPanelGradient is empty %}
+        {% set infoPanelGradient = ['bc-bg-gradient-to-tr bc-from-[#667eea] bc-to-[#764ba2] bc-text-white'] %}
+    {% endif %}
+    <div class="md:bc-flex">
+        <div class="md:bc-w-2/3">
+            <div class="bc-border-b bc-border-solid bc-border-gray-200 bc-px-5 bc-py-3">
+                {% block mainHeader %}{% endblock %}
+            </div>
+            <div class="bc-w-full">
+                {% block mainContent %}{% endblock %}
+            </div>
+        </div>
+        <div class="md:bc-w-1/3 {{ infoPanelGradient | join (' ') }} bc-rounded-br-md bc-rounded-bl-md md:bc-rounded-bl-none bc-rounded-tr-none md:bc-rounded-tr-md">
+            <div class="bc-border-b bc-border-solid bc-border-white/50 bc-px-5 bc-py-3">
+                <h3 class="bc-text-lg bc-font-medium bc-leading-6 bc-text-white bc-mb-0">{% block infoPanelHeader %}{% endblock %}</h3>
+            </div>
+            <div class="bc-px-3 bc-pb-5 bc-pt-2">
+                {% block infoPanelContent %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

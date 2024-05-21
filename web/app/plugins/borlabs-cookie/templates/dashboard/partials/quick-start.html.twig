@@ -1,0 +1,209 @@
+{% embed "system/embed/card/card-with-title.html.twig" %}
+    {% import "system/macro/card/card-heading.html.twig" as card_heading %}
+    {% block header %}
+        {{ card_heading.component({
+            title: localized.headline.quickStart,
+        }) }}
+    {% endblock %}
+    {% block content %}
+        <div class="bc-flow-root brlbs-cmpnt-text">
+            <video class="bc-w-full bc-py-2.5 bc-px-5" controls>
+                <source src="{{ localized.url.quickStartVideo }}">
+            </video>
+            <ul role="list" class="bc-py-2.5 bc-px-5">
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                1
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepA | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                2
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepB | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                3
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepC | raw }}</span>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                4
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepD | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                5
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepE | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                6
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepF | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                7
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepG | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                8
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepH | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative bc-pb-2">
+                        <span class="bc-absolute bc-top-4 bc-left-4 bc--ml-px bc-h-full bc-w-0.5 bc-bg-gray-200" aria-hidden="true"></span>
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-blue-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-medium">
+                                9
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartStepI | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="bc-relative">
+                        <div class="bc-relative bc-flex bc-space-x-4 bc-items-center">
+                            <div>
+                                <span class="bc-ml-0.5 bc-h-7 bc-w-7 bc-rounded-full bc-bg-green-500 bc-flex bc-items-center bc-justify-center bc-ring-4 bc-ring-white bc-text-white bc-font-bold">
+                                    <svg class="bc-h-3.5 bc-w-3.5 bc-text-white" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.6018 0.383716C15.5885 0.395904 15.5759 0.408877 15.5643 0.422556L6.29429 11.7654L2.3668 8.06861C2.10001 7.83473 1.74714 7.7074 1.38254 7.71345C1.01794 7.71951 0.670062 7.85846 0.412208 8.10106C0.154354 8.34365 0.00665227 8.67093 0.000219263 9.01396C-0.00621375 9.35698 0.129124 9.68896 0.377721 9.93996L5.34291 14.613C5.47667 14.7387 5.63595 14.8376 5.81125 14.9041C5.98655 14.9705 6.17428 15.0031 6.36324 14.9998C6.5522 14.9965 6.73852 14.9574 6.91109 14.8849C7.08365 14.8124 7.23892 14.7079 7.36764 14.5777L17.6116 2.23741C17.8666 1.98554 18.0061 1.64934 17.9998 1.3015C17.9935 0.953666 17.8419 0.622134 17.5779 0.378587C17.3138 0.135039 16.9585 -0.000954777 16.5888 5.04636e-06C16.219 0.00096487 15.8645 0.138802 15.6018 0.383716Z" fill="currentColor"/>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="bc-flex bc-min-w-0 bc-flex-1 bc-justify-between bc-space-x-4 bc-py-0.5 bc-max-w-xl">
+                                <div>
+                                    <p class="bc-text-sm bc-text-gray-700">
+                                        <span>{{ localized.text.quickStartDone | format(localized.url.knowledgeBase) | raw }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    {% endblock %}
+{% endembed %}

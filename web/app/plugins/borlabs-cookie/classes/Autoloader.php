@@ -1,44 +1,37 @@
 <?php
 /*
- * ----------------------------------------------------------------------
+ *  Copyright (c) 2024 Borlabs GmbH. All rights reserved.
+ *  This file may not be redistributed in whole or significant part.
+ *  Content of this file is protected by international copyright laws.
  *
- *                          Borlabs Cookie
- *                    developed by Borlabs GmbH
+ *  ----------------- Borlabs Cookie IS NOT FREE SOFTWARE -----------------
  *
- * ----------------------------------------------------------------------
- *
- * Copyright 2018-2022 Borlabs GmbH. All rights reserved.
- * This file may not be redistributed in whole or significant part.
- * Content of this file is protected by international copyright laws.
- *
- * ----------------- Borlabs Cookie IS NOT FREE SOFTWARE -----------------
- *
- * @copyright Borlabs GmbH, https://borlabs.io
- * @author Benjamin A. Bornschein
- *
+ *  @copyright Borlabs GmbH, https://borlabs.io
  */
 
-namespace BorlabsCookie;
+declare(strict_types=1);
 
-class Autoloader
+namespace Borlabs;
+
+final class Autoloader
 {
-    /**
-     * prefixes.
-     *
-     * (default value: [])
-     *
-     * @var mixed
-     */
-    protected $prefixes = [];
+    private static $instance;
+
+    public static function getInstance(): Autoloader
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
 
     /**
-     * addNamespace function.
-     *
-     * @param mixed $prefix
-     * @param mixed $baseDir
-     * @param bool  $prepend (default: false)
+     * @var array<string>
      */
-    public function addNamespace($prefix, $baseDir, $prepend = false)
+    private $prefixes = [];
+
+    public function addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
     {
         $prefix = trim($prefix, '\\') . '\\';
 
@@ -48,19 +41,14 @@ class Autoloader
             $this->prefixes[$prefix] = [];
         }
 
-        if ($prepend == false) {
+        if ($prepend === false) {
             array_push($this->prefixes[$prefix], $baseDir);
         } else {
             array_unshift($this->prefixes[$prefix], $baseDir);
         }
     }
 
-    /**
-     * loadClass function.
-     *
-     * @param mixed $class
-     */
-    public function loadClass($class)
+    public function loadClass(string $class): bool
     {
         $prefix = $class;
 
@@ -72,20 +60,16 @@ class Autoloader
             $fileLoaded = $this->loadFile($prefix, $relativeClass);
 
             if ($fileLoaded) {
-                return $fileLoaded;
+                return true;
             }
 
             $prefix = rtrim($prefix, '\\');
         }
+
+        return false;
     }
 
-    /**
-     * loadFile function.
-     *
-     * @param mixed $prefix
-     * @param mixed $relativeClass
-     */
-    public function loadFile($prefix, $relativeClass)
+    public function loadFile(string $prefix, string $relativeClass): bool
     {
         if (isset($this->prefixes[$prefix]) === false) {
             return false;
@@ -104,20 +88,12 @@ class Autoloader
         return false;
     }
 
-    /**
-     * register function.
-     */
-    public function register()
+    public function register(): void
     {
         spl_autoload_register([$this, 'loadClass']);
     }
 
-    /**
-     * requireFile function.
-     *
-     * @param mixed $file
-     */
-    public function requireFile($file)
+    public function requireFile(string $file): bool
     {
         if (file_exists($file)) {
             require $file;

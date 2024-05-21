@@ -1,0 +1,44 @@
+{% if menu %}
+	<ul class="flex flex-col {% if name == 'primary-menu' %}{% else %}lg:gap-5{% endif %} items-center font-medium py-4 lg:p-0 mt-4 lg:flex-row lg:mt-0 border-0 w-full lg:w-fit gap-[16px] {{ name }}">
+		{% for key, item in items %}
+
+			<li class="group dropdown {{ item.classes | join(' ') }} rounded-md whitespace-nowrap">
+				<a class="block px-[15px] leading-8 text-sm font-normal text-center" target="{{ item.target }}" href="{{ item.link }}">
+					<span>{{ item.title }}</span>
+					{% if item.children %}
+					   <button class="dropdown-toggle ml-2 absolute right-6" aria-expanded="false">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none" class="inline ml-1">
+							<path d="M14.9133 2.16328L8.66331 8.41328C8.57621 8.50068 8.47272 8.57003 8.35876 8.61734C8.24481 8.66466 8.12263 8.68902 7.99925 8.68902C7.87586 8.68902 7.75368 8.66466 7.63973 8.61734C7.52577 8.57003 7.42228 8.50068 7.33518 8.41328L1.08518 2.16328C0.909063 1.98716 0.81012 1.74829 0.81012 1.49922C0.81012 1.25015 0.909063 1.01128 1.08518 0.835156C1.2613 0.659036 1.50017 0.560092 1.74925 0.560092C1.99832 0.560092 2.23719 0.659036 2.41331 0.835156L8.00003 6.42187L13.5867 0.834375C13.7629 0.658255 14.0017 0.559311 14.2508 0.559311C14.4999 0.559311 14.7387 0.658255 14.9149 0.834375C15.091 1.0105 15.1899 1.24937 15.1899 1.49844C15.1899 1.74751 15.091 1.98638 14.9149 2.1625L14.9133 2.16328Z" fill="black"/>
+						</svg>
+						</button>
+					{% endif %}
+				</a>
+
+				{% if item.children %}
+					<div id="submenu-{{ item.id }}" class="z-50 dropdown-menu absolute hidden h-auto rounded pb-[1rem] relative top-4 ">
+						{% set has_subchildren = false %}
+						{% for child in item.children %}
+							{% if child.children %}
+								{% set has_subchildren = true %}
+							{% endif %}
+						{% endfor %}
+						<div class="menu-second-level grid grid-cols-3 gap-[16px] w-[50vw] {{ has_subchildren ? 'wide-width' : 'narrow-width' }}">
+							{% for child in item.children %}
+								{% if child.children %}
+									<div class="menu-second-level-container col-span-3 flex flex-col items-center text-xs special-style">
+										<a class="child-parent border-b border-gray-400 rounded mb-2 uppercase px-[5px] py-[5px] align-center" href="{{ child.link }}">{{ child.title }}</a>
+										{% for subchild in child.children %}
+											<a class="text-wrap font-normal text-xs px-[5px] py-[5px] text-center" href="{{ subchild.link }}">{{ subchild.title }}</a>
+										{% endfor %}
+									</div>
+								{% else %}
+									<a class="col-span-3 font-normal text-wrap text-xs px-[5px] py-[5px] text-center" href="{{ child.link }}">{{ child.title }}</a>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

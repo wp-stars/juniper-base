@@ -1,13 +1,9 @@
 .breadcrumbs .page {
-    padding: 0.31rem;
-    color: var(--greyscale-black, #1E1E1E);
-    font-family: "Red Hat Mono";
-    font-size: 1.125rem;
+    color: #737373;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 500;
-    line-height: 1.875rem;
-    text-transform: uppercase;
-    position: relative;
+    font-weight: 400;
+    line-height: 20px;
 }
 
 
@@ -16,26 +12,6 @@
     max-width: 100%;
 }
 
-.breadcrumbs .divider {
-    height: 30px;
-    width: 1px;
-    margin: auto 0.69rem;
-    background-color: #1e1e1e;
-}
-
-.breadcrumbs .page.current {
-    font-weight: 700;
-}
-
-.breadcrumbs .page.current::after {
-    content: "";
-    height: 4px;
-    width: 100%;
-    position: absolute;
-    border-bottom: 4px solid var(--primary-petrol-dark, #093642);
-    left: 0;
-    bottom: 0;
-}
 
 @media screen and (max-width: 640px) {
     .breadcrumbs .page {

@@ -1,0 +1,41 @@
+{% if menu %}
+	<ul class="flex flex-col {% if name == 'primary-menu' %}{% else %}lg:gap-5{% endif %} items-center font-medium py-4 lg:p-0 mt-4 lg:flex-row lg:mt-0 border-0 w-full lg:w-fit {{ name }}">
+		{% for key,item in items %}
+
+			<li class="group dropdown {{ item.classes | join(' ') }} rounded-md hover:bg-[#f3f0f0] whitespace-nowrap">
+
+				<a class="block px-[15px] leading-8 text-sm font-normal " target="{{ item.target }}" href="{{ item.link }}">
+					{{ item.title }}
+				</a>
+
+				{% if item.children %}
+					{% set has_subchildren = false %}
+					{% for child in item.children %}
+						{% if child.children %}
+							{% set has_subchildren = true %}
+						{% endif %}
+					{% endfor %}
+
+					<div id="submenu-{{ item.id }}" class="z-50 group-hover:block dropdown-menu absolute hidden h-auto ">
+						<div class="menu-second-level grid grid-cols-3 bg-[#f9f9f9] shadow-[0_4px_20px_4px_#89898933] rounded p-8 relative top-4 max-w-[650px]{{ has_subchildren ? 'wide-width' : 'narrow-width' }}">
+							{% for child in item.children %}
+								{% if child.children %}
+									<div class="menu-second-level-container col-span-1 flex flex-col text-xs pr-4 special-style ">
+										<a class="child-parent border-b border-gray-400 rounded mb-2 uppercase px-[5px] py-[5px]" href="{{ child.link }}">{{ child.title }}</a>
+										{% for subchild in child.children %}
+											<a class="child-link text-wrap font-normal text-xs px-[5px] py-[5px]" href="{{ subchild.link }}">{{ subchild.title }}</a>
+										{% endfor %}
+									</div>
+								{% else %}
+									<div class="col-span-3 flex flex-col text-xs pr-4 w-[240px] w-[100%]">
+										<a class="child-link font-normal text-wrap text-xs" href="{{ child.link }}">{{ child.title }}</a>
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
