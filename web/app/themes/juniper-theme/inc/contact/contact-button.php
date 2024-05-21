@@ -10,11 +10,17 @@
 
 namespace WPS\Contact\WPS_Contact_Button;
 
-use const WPS\THEME_URI;
-use const WPS\THEME_DIR;
-
 /** Enqueue Job Detail Page Styles and Scripts */
 function enqueue_contact_assets() {
+
+    if (!defined('THEME_DIR')) {
+        define('THEME_DIR', get_template_directory() . '/');
+    }
+
+    if (!defined('THEME_URI')) {
+        define('THEME_URI', get_template_directory_uri() . '/');
+    }
+
 	wp_enqueue_style(
 		'contact-button-styles',
 		THEME_URI . 'assets/css/contact-button.css',
