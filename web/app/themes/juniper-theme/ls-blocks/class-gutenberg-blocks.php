@@ -11,12 +11,18 @@
 
 namespace WPS\Blocks;
 
-use const WPS\THEME_DIR;
-use const WPS\THEME_URI;
 use WP_Block_Type_Registry;
 
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
+}
+
+if (!defined('THEME_DIR')) {
+    define('THEME_DIR', get_template_directory() . '/');
+}
+
+if (!defined('THEME_URI')) {
+    define('THEME_URI', get_template_directory_uri() . '/');
 }
 
 /**

@@ -11,14 +11,19 @@
 
 namespace WPS\News\Detailpage;
 
-use const WPS\THEME_URI;
-use const WPS\THEME_DIR;
-
 /** Enqueue News Detail Page Styles and Scripts */
 function enqueue_post_assets() {
 	if (!is_singular('post')) {
 		return;
 	}
+
+    if (!defined('THEME_DIR')) {
+        define('THEME_DIR', get_template_directory() . '/');
+    }
+
+    if (!defined('THEME_URI')) {
+        define('THEME_URI', get_template_directory_uri() . '/');
+    }
 
 	wp_enqueue_style(
 		'news-detailpage-styles',
