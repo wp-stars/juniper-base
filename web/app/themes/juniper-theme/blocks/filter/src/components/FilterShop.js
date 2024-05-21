@@ -27,11 +27,12 @@ const FilterShop = (data) => {
 
         try {
             const response = await axios.get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&page=${pageNum}&min_price=0.01`);
-            
+            console.log(response)
             if (response.data && response.data.posts.length > 0) {
-                setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...response.data.posts]);
+                const newPosts = response.data.posts.filter(post => post.price > 0);
+                setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...newPosts]);
                 if (pageNum === 1) {
-                    setDisplayedPosts(response.data.posts.slice(0, 6));
+                    setDisplayedPosts(newPosts.slice(0, 6));
                 }
             }
             setMaxPages(response.data.maxPages || maxPages);
@@ -67,7 +68,7 @@ const FilterShop = (data) => {
     };
 
     const applyFilters = ({ searchText, purchasability, metals_and_accessories }) => {
-        let filtered = originalDisplayedPosts;
+        let filtered = originalDisplayedPosts.filter(post => post.price > 0);
 
         if (searchText) {
             filtered = filtered.filter(post =>
