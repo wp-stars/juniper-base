@@ -27,7 +27,7 @@ const FilterShop = (data) => {
 
         try {
             const response = await axios.get(`${data.restUrl}wps/v1/data?post_type=${data.postType}&page=${pageNum}&min_price=0.01`);
-            console.log(response)
+           
             if (response.data && response.data.posts.length > 0) {
                 const newPosts = response.data.posts.filter(post => post.price > 0);
                 setOriginalDisplayedPosts(prevPosts => [...prevPosts, ...newPosts]);
