@@ -110,7 +110,7 @@ function disable_the_content($the_content) {
 			$html .= $category->name . ' ';
 		}
 		$html .= '</p></div>';
-		$html .= '<h1 class="ls-newsdetail_header__headline">' . $title . '</h1>';
+		$html .= '<h1 class="ls-newsdetail_header__headline mb-12">' . $title . '</h1>';
 		$html .= '<div class="ls-newsdetail_header__heading">';
 		$html .= '<div class="ls-newsdetail_header__image">' . $image . '</div>';
 		if (isset($categories) && count($categories) > 0 ) {
