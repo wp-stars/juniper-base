@@ -211,12 +211,16 @@ a.borlabs-cookie-preference svg {
 .products-mobile .product-slot .product{
     width: 69px;
     height: 69px;
+    min-width: 69px;
+    min-height: 69px;
     border-radius: 69px;
 border: 1px solid  #DCDDDE;
 }
 .products-mobile .product-slot .product img{
     width: 69px;
     height: 69px;
+    min-width: 69px;
+    min-height: 69px;
     object-fit: cover;
 }
 .products-mobile .product-slot .tooltiptext{
