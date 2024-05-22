@@ -107,7 +107,7 @@ add_action('init', function(){
             ob_start();
 
             ?>
-            <section class="ls-jobdetail">
+            <section class="ls-jobdetail container mb-12">
                 <div class="ls-jobdetail_main">
                     <div class="ls-jobdetail_header">
                         <div class="ls-jobdetail_header__category">

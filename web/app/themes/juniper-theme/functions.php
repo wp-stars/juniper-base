@@ -411,7 +411,7 @@ function wps_add_to_context( $context ) {
         }
 
         if($post_type === "jobs") {
-            $context['single_job_content'] = do_shortcode('single-job-content');
+            $context['single_job_content'] = do_shortcode('[single-job-content]');
         }
     }
 
