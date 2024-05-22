@@ -1334,3 +1334,18 @@ body.woocommerce-checkout div#customer_login {
         }
     }
 }
+
+div.ls-jobdetail_main div.ls-jobdetail_content {
+
+    p {margin-bottom: 1.5em;}
+
+    strong {
+        font-weight: bold;
+    }
+
+    ul {
+        list-style: outside;
+        margin-bottom: 1.5em;
+        margin-left: 1em;
+    }
+}
