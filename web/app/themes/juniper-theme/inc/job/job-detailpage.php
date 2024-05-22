@@ -107,9 +107,9 @@ add_action('init', function(){
             ob_start();
 
             ?>
-            <section class="ls-jobdetail">
+            <section class="ls-jobdetail container mb-12">
                 <div class="ls-jobdetail_main">
-                    <div class="ls-jobdetail_header">
+                    <div class="ls-jobdetail_header mb-12">
                         <div class="ls-jobdetail_header__category">
                             <?php if ($job_cat && count($job_cat) > 0 ) :
                                 foreach ($job_cat as $cat) : ?>
@@ -144,7 +144,7 @@ add_action('init', function(){
                         <?php endif; ?>
                     </div>
 
-                    <div class="ls-jobdetail_content">
+                    <div class="ls-jobdetail_content mb-12">
                         <?php echo $description; ?>
                     </div>
                 </div>
