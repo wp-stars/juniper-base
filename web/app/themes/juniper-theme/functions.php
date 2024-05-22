@@ -409,6 +409,10 @@ function wps_add_to_context( $context ) {
                 $context['jumbotron_bg_image'] = $post_thumbnail;
             }
         }
+
+        if($post_type === "job") {
+            $context['single_job_content'] = do_shortcode('single-job-content');
+        }
     }
 
     if( \is_product() ) {
