@@ -390,6 +390,13 @@ function wps_add_to_context( $context ) {
     $context['cart_url']            = \wc_get_cart_url();
     $context['parent_page_title']   = '';
     $context['parent_page_url']     = '';
+
+    if($current_language === 'de'){
+        $context['page_banner']     = 'Entdecken Sie unseren neuen Galvano Online-Shop';
+    }else{
+        $context['page_banner']     = 'Discover our new Galvano Online Shop';
+    }
+
     if(WC()->cart) {
         $context['cart_count']      = \WC()->cart->get_cart_contents_count();
     }
