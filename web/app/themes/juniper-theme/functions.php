@@ -125,7 +125,10 @@ function juniper_theme_enqueue() {
     // wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'nav-js', get_template_directory_uri() . '/src/js/nav.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', array(), $refresh_cache_time, true );
-    wp_localize_script('project-js', 'scriptData', array('shopUrl' => home_url()));
+
+    $shop_url = rtrim(home_url(), '/');
+    wp_localize_script('project-js', 'scriptData', array('shopUrl' => $shop_url));
+   
     wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', array(), $refresh_cache_time );
 
     check_for_recompile( __DIR__ . '/src/scss/_project.scss', true, __DIR__ . '/src/scss/_project.scss');
