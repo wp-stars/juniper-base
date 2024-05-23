@@ -375,8 +375,14 @@ function wps_add_to_context( $context ) {
     $current_language               = \apply_filters( 'wpml_current_language', NULL );
     $context['languages']           = $languages;
     $context['current_language']    = $current_language;
-    $context['primary_menu']        = new \Timber\Menu( "primary_menu_$current_language" );
-    $context['secondary_menu']      = new \Timber\Menu( "primary_menu_$current_language" );
+
+    //$context['primary_menu']        = new \Timber\Menu( "primary_menu_$current_language" );
+    //$context['secondary_menu']      = new \Timber\Menu( "primary_menu_$current_language" );
+
+    // use the german menu and translate it with wpml navigation syncronization
+    $context['primary_menu']        = new \Timber\Menu( "primary_menu_de" );
+    $context['secondary_menu']      = new \Timber\Menu( "primary_menu_de" );
+
     $context['footer_menu']         = new \Timber\Menu( "footer_menu_$current_language" );
     $context['title']               = \get_the_title();
     $context['jumbotron_bg_image']  = \get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
