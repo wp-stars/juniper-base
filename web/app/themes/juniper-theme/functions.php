@@ -324,7 +324,7 @@ $site = new \StarterSite();
 
 function juniper_customizer_setting($wp_customize) {
     $wp_customize->add_setting('footer_logo');
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'footer_logo', array(
+    $wp_customize->add_control(new \WP_Customize_Image_Control($wp_customize, 'footer_logo', array(
         'label' => 'Upload Footer Logo',
         'section' => 'title_tagline', //this is the section where the custom-logo from WordPress is
         'settings' => 'footer_logo',
