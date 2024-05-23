@@ -164,6 +164,7 @@ const Filter = (data) => {
             searchText: params.get('text') || "",
             purchasability: params.get('purchasability') === 'true',
             onlineAvailable: params.get('onlineavailable') === 'true',
+            metals_and_accessories: params.get('metals-and-accessories') ?? 'none'
         };
 
         // Loop through each filter option to handle dropdowns specifically
