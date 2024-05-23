@@ -1,6 +1,9 @@
 {% extends "base.twig" %}
 
 {% block content %}
+
+	{% do action('wps_before_content') %}
+
 	<div class="entry-content">
 		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
 			<section class="article-content">
