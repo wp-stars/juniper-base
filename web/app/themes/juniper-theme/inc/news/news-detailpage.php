@@ -11,14 +11,19 @@
 
 namespace WPS\News\Detailpage;
 
-use const WPS\THEME_URI;
-use const WPS\THEME_DIR;
-
 /** Enqueue News Detail Page Styles and Scripts */
 function enqueue_post_assets() {
 	if (!is_singular('post')) {
 		return;
 	}
+
+    if (!defined('THEME_DIR')) {
+        define('THEME_DIR', get_template_directory() . '/');
+    }
+
+    if (!defined('THEME_URI')) {
+        define('THEME_URI', get_template_directory_uri() . '/');
+    }
 
 	wp_enqueue_style(
 		'news-detailpage-styles',
@@ -105,7 +110,7 @@ function disable_the_content($the_content) {
 			$html .= $category->name . ' ';
 		}
 		$html .= '</p></div>';
-		$html .= '<h1 class="ls-newsdetail_header__headline">' . $title . '</h1>';
+		$html .= '<h1 class="ls-newsdetail_header__headline mb-12">' . $title . '</h1>';
 		$html .= '<div class="ls-newsdetail_header__heading">';
 		$html .= '<div class="ls-newsdetail_header__image">' . $image . '</div>';
 		if (isset($categories) && count($categories) > 0 ) {

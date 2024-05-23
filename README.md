@@ -42,7 +42,7 @@ With this approach you can create theme code with logic files separated from fro
    and follow the instructions in the console.
    Type in details from step 1 and 2. .env file will
    be crated for you (all DB and site details sits there)
-4. Local url should be localhost:8888/juniper-base/web
+4. Local url should be localhost:8888/iwg/web
 5. Fill correct domain details in .htaccess in main catalogue.
 6. Check if /web/ directory has .htaccess file with default WP entries.
 7. Run 

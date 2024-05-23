@@ -150,8 +150,28 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
     if(count($tax_query)) {
         $args['tax_query'] = $tax_query;
     }
-    
-    $filter_query = new WP_Query($args);
+
+    $cachingToken = 'wps_filter_cache_' . md5(json_encode($args));
+    $cachedData = get_transient($cachingToken);
+    $cacheDuration = HOUR_IN_SECONDS;
+
+    if(isset($_GET['nocache']) && $_GET['nocache'] == 1) {
+        delete_transient($cachingToken);
+    }
+
+    if (false === $cachedData) {
+        $filter_query = new WP_Query($args);
+
+        // check for a valid query result
+        if(!is_wp_error($filter_query) && $filter_query->have_posts()) {
+
+            // set transient for 1 hour
+            set_transient($cachingToken, $filter_query, $cacheDuration);
+        }
+    }else{
+        // use the cached Data if available
+        $filter_query = $cachedData;
+    }
 
     $post_arr = array();
     foreach ($filter_query->posts as $post) {
@@ -214,5 +234,24 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
    
     return $data_arr;
 }
+
+function display_woocommerce_notices_on_add_to_cart($content) {
+    // Prepend your custom paragraph
+    
+
+    // Ensure WooCommerce notices are displayed on the next page load
+    if (isset($_GET['add-to-cart']) && is_numeric($_GET['add-to-cart'])) {
+        $woocommerce_message = wc_print_notices();
+          // Combine the custom paragraph with the original content
+    $new_content = $woocommerce_message . $content;
+
+    return $new_content;
+    }
+    else{
+        return $content;
+    }
+  
+}
+add_filter('the_content', 'display_woocommerce_notices_on_add_to_cart');
 
 

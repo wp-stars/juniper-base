@@ -10,9 +10,6 @@
 
 namespace WPS\Cover\LS_Cover_Slider;
 
-use const WPS\THEME_URI;
-use const WPS\THEME_DIR;
-
 /**
  * Add Custom Fields
  */
@@ -313,6 +310,15 @@ add_action('wp', function () {
  * @return void
  */
 function enqueue_cover_assets() {
+
+    if (!defined('THEME_DIR')) {
+        define('THEME_DIR', get_template_directory() . '/');
+    }
+
+    if (!defined('THEME_URI')) {
+        define('THEME_URI', get_template_directory_uri() . '/');
+    }
+
     wp_enqueue_style(
         'cover-slider-styles',
         THEME_URI . 'assets/css/cover-slider.css',

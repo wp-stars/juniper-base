@@ -93,7 +93,7 @@ class Plugin
         if (function_exists('acf_add_local_field_group')){
             acf_add_local_field_group([
                 'key' => 'group_65e869a87e0e5',
-                'title' => 'IGW Preis Formel',
+                'title' => 'IWG Preis Formel',
                 'fields' => include $this->fieldgroupDir . 'product-group.php',
                 'location' => [[[
                     'param' => 'post_type',

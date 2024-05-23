@@ -10,9 +10,6 @@
 
 namespace Limesoda\Astra_Child\Shortcodes\SampleWishlist;
 
-use const Limesoda\Astra_Child\THEME_DIR;
-use const Limesoda\Astra_Child\THEME_URI;
-
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
@@ -81,6 +78,15 @@ if (!class_exists('SampleWishlist')) {
 		 */
 		public function enqueue_scripts() {
 			global $post;
+
+            if (!defined('THEME_DIR')) {
+                define('THEME_DIR', get_template_directory() . '/');
+            }
+
+            if (!defined('THEME_URI')) {
+                define('THEME_URI', get_template_directory_uri() . '/');
+            }
+
 			if ((is_singular('post')) || (has_shortcode($post->post_content, self::$slug))) {
 				$asset_file = include THEME_DIR . 'shortcodes/' . self::$slug . '/index.asset.php';
 				wp_enqueue_style(

@@ -9,9 +9,6 @@
 
 namespace Limesoda\Astra_Child\Shortcodes\Metalprices;
 
-use const Limesoda\Astra_Child\THEME_DIR;
-use const Limesoda\Astra_Child\THEME_URI;
-
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
@@ -90,6 +87,15 @@ if (!class_exists('Metalprices')) {
 		 */
 		public function enqueue_scripts() {
 			global $post;
+
+            if (!defined('THEME_DIR')) {
+                define('THEME_DIR', get_template_directory() . '/');
+            }
+
+            if (!defined('THEME_URI')) {
+                define('THEME_URI', get_template_directory_uri() . '/');
+            }
+
 			if (has_shortcode($post->post_content, self::$slug)) {
 
 				$asset_file = include THEME_DIR . 'shortcodes/' . self::$slug . '/index.asset.php';
@@ -107,9 +113,6 @@ if (!class_exists('Metalprices')) {
 					true
 				);
 
-                if($_SERVER['REMOTE_ADDR'] === "84.113.208.250") {
-                    var_dump('Metalprices on page');
-                }
 				$wp_vars = [
 					'metals' => [
 						['key' => 'gold', 'label' => __('Gold', 'iwgplating'), 'number' => 79, 'short' => 'Au', 'unit' => '€/g'],

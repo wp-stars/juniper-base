@@ -2,9 +2,9 @@
 
 {% block content %}
 
-	{% block jumbotron %}
+	{# {% block jumbotron %}
 		{% include "blocks/jumbotron.twig" %}
-	{% endblock %}
+	{% endblock %} #]
     {# <section class="jumbotron-section bg-center bg-no-repeat bg-blend-multiply angled-bottom h-[552px] sm:h-auto relative" style="background-image: url('{{ default_bg_image }}'); background-size: cover;">
 		<div class="jumbotron-shape-left">
 			<svg xmlns="http://www.w3.org/2000/svg" width="91" height="475" viewBox="0 0 91 475" fill="none">
@@ -28,7 +28,7 @@
 	<div class="content-wrapper">
 		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
 				<div class="article-body">
-					{{post.content}}
+					{{  single_job_content }}
 				</div>
 			</section>
 		</article>

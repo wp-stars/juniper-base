@@ -125,7 +125,10 @@ function juniper_theme_enqueue() {
     // wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'nav-js', get_template_directory_uri() . '/src/js/nav.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', array(), $refresh_cache_time, true );
-    wp_localize_script('project-js', 'scriptData', array('shopUrl' => wc_get_page_permalink('shop')));
+
+    $shop_url = rtrim(home_url(), '/');
+    wp_localize_script('project-js', 'scriptData', array('shopUrl' => $shop_url));
+   
     wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', array(), $refresh_cache_time );
 
     check_for_recompile( __DIR__ . '/src/scss/_project.scss', true, __DIR__ . '/src/scss/_project.scss');
@@ -371,9 +374,15 @@ function wps_add_to_context( $context ) {
     $current_language               = \apply_filters( 'wpml_current_language', NULL );
     $context['languages']           = $languages;
     $context['current_language']    = $current_language;
-    $context['primary_menu']        = new \Timber\Menu( "primary_menu_$current_language" );
-    $context['secondary_menu']      = new \Timber\Menu( "primary_menu_$current_language" );
-    $context['footer_menu']         = new \Timber\Menu( "primary_menu_$current_language" );
+
+    //$context['primary_menu']        = new \Timber\Menu( "primary_menu_$current_language" );
+    //$context['secondary_menu']      = new \Timber\Menu( "primary_menu_$current_language" );
+
+    // use the german menu and translate it with wpml navigation syncronization
+    $context['primary_menu']        = new \Timber\Menu( "primary_menu_de" );
+    $context['secondary_menu']      = new \Timber\Menu( "primary_menu_de" );
+
+    $context['footer_menu']         = new \Timber\Menu( "footer_menu_$current_language" );
     $context['title']               = \get_the_title();
     $context['jumbotron_bg_image']  = \get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
     $context['home_page_url']       = \home_url();
@@ -381,11 +390,18 @@ function wps_add_to_context( $context ) {
     $home_page_url                  = \home_url();
     $context['home_page_url']       = $home_page_url;
     $context['shop_url']            = \get_permalink(\wc_get_page_id('shop'));
-    $context['products_url'] = get_permalink(get_page_by_path('products'));
+    $context['products_url'] = get_permalink(get_page_by_path('productfinder'));
     $context['account_url']         = \wc_get_page_permalink( 'myaccount' );
     $context['cart_url']            = \wc_get_cart_url();
     $context['parent_page_title']   = '';
     $context['parent_page_url']     = '';
+
+    if($current_language === 'de'){
+        $context['page_banner']     = 'Entdecken Sie unseren neuen Galvano Online-Shop';
+    }else{
+        $context['page_banner']     = 'Discover our new Galvano Online Shop';
+    }
+
     if(WC()->cart) {
         $context['cart_count']      = \WC()->cart->get_cart_contents_count();
     }
@@ -404,6 +420,10 @@ function wps_add_to_context( $context ) {
             if($post_thumbnail = \get_the_post_thumbnail_url( $post, 'full' )) {
                 $context['jumbotron_bg_image'] = $post_thumbnail;
             }
+        }
+
+        if($post_type === "jobs") {
+            $context['single_job_content'] = do_shortcode('[single-job-content]');
         }
     }
 
@@ -441,7 +461,7 @@ function wps_juniper_add_class_to_list_block( $block_content, $block ) {
     if ( 'core/group' === $block['blockName'] ) {
         $block_content = new \WP_HTML_Tag_Processor( $block_content );
         $block_content->next_tag( 'div' );
-        $block_content->add_class( 'container' );
+        //$block_content->add_class( 'container' );
         $block_content->add_class( 'wps-content' );
         $block_content->get_updated_html();
     }
@@ -568,6 +588,20 @@ add_filter('wps_modal_render', function($modal){
     return $modal;
 });
 
+// max number of musterbestellungen in Box
+add_action('init', function(){
+    require_once __DIR__.'/classes/frontend/Modal.php';
+
+    $modal = new \wps\frontend\Modal();
+    $modal->id = 'full-samplebox-modal';
+    $modal->title = __('Die SampleBox ist leider voll.', 'wps');
+    $modal->content = 'Alle verfügbaren Plätze der Musterbox sind belegt. Wenn Sie ein weiteres Muster hinzufügen möchten, müssen Sie manuell einen Platz freimachen mithilfe des Mistkübel Icons.';
+    $modal->variables['form'] = '';
+    $modal->showSubmitButton = false;
+    $modal->showCloseButton = true;
+    $modal->close()->render();
+});
+
 // Woocommerce related hooks
 require_once __DIR__.'/classes/frontend/WC_Customizations.php';
 $woocommerce = new frontend\WC_Customizations();
@@ -592,3 +626,80 @@ add_action( 'enqueue_block_editor_assets', function(){
 add_action('after_setup_theme', function(){
     add_image_size( 'product-single-page-picture-size', 1024, 1024, true );
 });
+
+// add company & UID field to the registration process
+add_action( 'woocommerce_register_form_start', function(){
+    ?>
+    <p class="form-row form-row-wide">
+        <label for="billing_company"><?php _e( 'Firma', 'woocommerce' ); ?> <span class="required">*</span></label>
+        <input type="text" class="input-text" name="billing_company" id="billing_company" value="<?php if ( ! empty( $_POST['billing_company'] ) ) esc_attr_e( $_POST['billing_company'] ); ?>" />
+    </p>
+    <p class="form-row form-row-wide">
+        <label for="billing_company"><?php _e( 'UID', 'woocommerce' ); ?> <span class="required">*</span></label>
+        <input type="text" class="input-text" name="billing_vat_id" id="billing_vat_id" value="<?php if ( ! empty( $_POST['billing_vat_id'] ) ) esc_attr_e( $_POST['billing_vat_id'] ); ?>" />
+    </p>
+    <?php
+}, 999);
+
+// Validate Company & UID field during registration
+add_filter( 'woocommerce_registration_errors', function($errors, $username, $email){
+
+    if ( isset( $_POST['billing_company'] ) && empty( $_POST['billing_company'] ) ) {
+        $errors->add( 'billing_company_error', __( 'Das Feld Firma ist ein Pflichtfeld', 'woocommerce' ) );
+    }
+
+    if ( isset( $_POST['billing_vat_id'] ) && empty( $_POST['billing_vat_id'] ) ) {
+        $errors->add( 'billing_vat_id_error', __( 'Das Feld UID ist ein Pflichtfeld', 'woocommerce' ) );
+    }
+
+    return $errors;
+}, 999, 3 );
+
+// Save Company & UID field during registration
+add_action( 'woocommerce_created_customer', function($customer_id){
+    if ( isset( $_POST['billing_company'] ) ) {
+        update_user_meta( $customer_id, 'billing_company', sanitize_text_field( $_POST['billing_company'] ) );
+    }
+
+    if ( isset( $_POST['billing_vat_id'] ) ) {
+        update_user_meta( $customer_id, 'billing_vat_id', sanitize_text_field( $_POST['billing_vat_id'] ) );
+    }
+});
+
+// shortcode to render buttons like on the 404 Seite
+add_action('init', function(){
+    add_shortcode('wps-orientation-buttons', function(){
+
+        $site_url = '/';
+        $shop_url = get_permalink(wc_get_page_id('shop'));
+
+        $site_caption = __('Zurück zur Startseite', 'wps');
+        $shop_caption = __('Online Shop entdecken', 'wps');
+
+        ob_start();
+        ?>
+
+        <div class="flex flex-row gap-8 flex-wrap justify-center mb-16">
+            <a href="<?php echo $site_url;?>" class="btn btn-black text-white"> <?php echo $site_caption;?></a>
+            <a href="<?php echo $shop_url;?>" class="btn btn-accent add-to-musterbestellung">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                    <path d="M7.20484 16.5967C6.51445 16.5967 5.95801 17.1531 5.95801 17.8435C5.95801 18.5339 6.52475 19.0903 7.20484 19.0903C7.89523 19.0903 8.45167 18.5236 8.45167 17.8435C8.45167 17.1531 7.89523 16.5967 7.20484 16.5967ZM7.20484 18.3793C6.90601 18.3793 6.66901 18.1423 6.66901 17.8435C6.66901 17.5447 6.90601 17.3077 7.20484 17.3077C7.50367 17.3077 7.74067 17.5447 7.74067 17.8435C7.74067 18.1423 7.50367 18.3793 7.20484 18.3793Z" fill="black"/>
+                    <path d="M20.8583 11.1251L20.1782 10.1771C20.0648 10.0122 19.8382 9.98132 19.6836 10.0947C19.5187 10.208 19.4878 10.4347 19.6012 10.5893L20.2812 11.5373C20.3018 11.5682 20.3018 11.6197 20.2606 11.6403L18.0761 13.2169L15.2733 9.29093L15.5309 8.78602L17.3033 7.51858C17.3342 7.48766 17.3857 7.49797 17.4063 7.53918L17.9318 8.2811C18.0452 8.44597 18.2719 8.47688 18.4265 8.36353C18.5913 8.25019 18.6222 8.0338 18.5089 7.86893L17.9834 7.12701C17.7361 6.77666 17.2414 6.69423 16.8808 6.94153L16.2316 7.39492L16.5923 6.69422C16.685 6.50874 16.7056 6.29235 16.6438 6.09657C16.582 5.90079 16.448 5.73592 16.2522 5.63287L11.8729 3.37621C11.6874 3.28347 11.471 3.26286 11.2752 3.32469C11.0794 3.38652 10.9146 3.53078 10.8115 3.71626L10.4509 4.41695V3.62352C10.4509 3.19073 10.0902 2.83008 9.65741 2.83008H4.73192C4.29913 2.83008 3.93848 3.18043 3.93848 3.62352V17.8436C3.93848 19.6365 5.4017 21.0998 7.19466 21.0998C7.89536 21.0998 8.55484 20.8731 9.09067 20.4918C9.10098 20.4815 9.11128 20.4815 9.12159 20.4712L12.5426 18.0291L15.366 16.0094L20.6625 12.2277C21.0232 11.9804 21.1056 11.4858 20.8583 11.1251ZM17.4888 13.6291L15.2424 15.2263L13.4803 12.7532L14.9023 9.99163L17.4888 13.6291ZM12.419 17.2459L11.6977 16.2361L13.1197 13.4745L14.6757 15.6487L12.419 17.2459ZM11.5637 14.9171L10.4612 14.3504V11.2488L12.8312 12.4647L12.7487 12.6192L12.7384 12.6296L11.5637 14.9171ZM13.1609 11.8361L10.4612 10.445V7.3434L14.418 9.38367L13.1609 11.8361ZM9.75015 9.77524H4.67009V7.01366H9.75015V9.77524ZM4.65978 10.4965H9.73985V13.2581H4.65978V10.4965ZM10.4612 15.1541L11.2443 15.556L10.4612 17.0707V15.1541ZM11.3267 16.9471L11.8316 17.6581L10.4509 18.6473L11.3267 16.9471ZM11.4504 4.03569C11.4607 4.01508 11.4813 4.00478 11.5019 3.99447C11.5122 3.98417 11.5328 3.98417 11.5637 4.00478L15.9431 6.26144C15.9637 6.27174 15.974 6.29235 15.9843 6.30266C15.9946 6.32327 15.9946 6.34388 15.974 6.36448L14.7478 8.7448L10.4612 6.53966V5.97292L11.4504 4.03569ZM4.74222 3.54108H9.66772C9.70894 3.54108 9.75015 3.57199 9.75015 3.61321V6.29235H4.67009V3.61321C4.65978 3.5823 4.6907 3.54108 4.74222 3.54108ZM7.20497 20.3888C5.80357 20.3888 4.65978 19.245 4.65978 17.8436V13.9691H9.73985V17.8436C9.75015 19.245 8.60637 20.3888 7.20497 20.3888Z" fill="black"/>
+                    <path d="M19.0657 9.58967C19.2615 9.58967 19.4161 9.42479 19.4161 9.23932C19.4161 9.04353 19.2512 8.87866 19.0657 8.87866C18.8699 8.87866 18.7051 9.04353 18.7051 9.23932C18.7051 9.42479 18.8596 9.58967 19.0657 9.58967Z" fill="black"/>
+                </svg> <?php echo $shop_caption;?>
+            </a>
+        </div>
+        <?php
+        return ob_get_clean();
+    });
+});
+
+// replace "<sup>®</sup>" and "®" with "&reg;"
+add_filter('woocommerce_product_title', function($title, $product){
+
+    $title = preg_replace('/<sup>®<\/sup>/', '&reg;', $title);
+    $title = preg_replace('/®/', '&reg;', $title);
+
+    return $title;
+
+}, 9999, 2);

@@ -4,9 +4,9 @@
 
 {% block content %}
 
-	{% block jumbotron %}
+	{# {% block jumbotron %}
 		{% include "blocks/jumbotron.twig" %}
-	{% endblock %}
+	{% endblock %}#}
 	
 	{% block breadcrumbs %}
     	{% include "blocks/breadcrumbs.twig" with {'home_page_url': home_page_url, 'parent_page_title': parent_page_title, 'parent_page_url': parent_page_url, 'page_title': page_title, 'page_url': page_url} %}
@@ -14,7 +14,7 @@
 
 	<div class="content-wrapper">
 		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
-				<div class="article-body">
+				<div class="article-body container mb-12">
 					{{post.content}}
 				</div>
 			</section>

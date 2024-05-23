@@ -180,9 +180,8 @@ table {
     right: 90px;
     position: absolute;
     z-index: 1;
-    left: -130px;
     top: -5px;
-    font-size: 12px;
+    max-width: 250px;
 }
 
 @keyframes spin {
@@ -311,7 +310,11 @@ select::-ms-expand {
 }
 
 .slick-dots{
-    bottom: 5px !important;
+    bottom: -10px !important;
+}
+
+body.single-product .slick-dots{
+    bottom: -40px !important;
 }
 
 .single-product .woocommerce-tabs{
@@ -1192,7 +1195,7 @@ button.btn.btn-bordered.product-question-button {
         outline: none;
     }
 }
-
+a.btn.btn-primary.single_add_to_cart_button,
 button.btn.btn-primary.single_add_to_cart_button {
     background-color: #000;
     border: solid 2px #000;
@@ -1282,5 +1285,68 @@ body.woocommerce-checkout div#customer_login {
             border: solid 2px #fff;
             outline: 2px solid #000;
         }
+    }
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 0px !important;
+}
+
+.ls-newsdetail_header__heading .ls-newsdetail_header__image {
+    margin-left: unset;
+    margin-right: unset;
+    background: #f6f3f3;
+
+    img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.ls-newsdetail_content div.wp-block-button{
+    margin-bottom: 3rem;
+    margin-top: 1.5rem;
+
+    .wp-element-button {
+        color: #fff;
+        background-color: #000;
+        text-align: left;
+        border-radius: 4px;
+        border: solid 2px #000;
+        display: inline-flex;
+        padding: 0.625rem 1.5rem;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+
+        &:hover {
+            background-color: #4D4D4D;
+            border: solid 2px #4D4D4D;
+        }
+
+        &:focus {
+            background-color: #000;
+            border: solid 2px #fff;
+            outline: 2px solid #000;
+        }
+    }
+}
+
+div.ls-newsdetail_content,
+div.ls-jobdetail_main div.ls-jobdetail_content {
+
+    p {margin-bottom: 1.5em;}
+
+    strong {
+        font-weight: bold;
+    }
+
+    ul {
+        list-style: outside;
+        margin-bottom: 1.5em;
+        margin-left: 1em;
     }
 }
