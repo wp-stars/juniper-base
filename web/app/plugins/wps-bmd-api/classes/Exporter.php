@@ -139,6 +139,7 @@ class Exporter
         foreach ($this->order->get_items() as $item_id => $item) {
             $itemPos++;
 
+            // get product name for bmd
             $itemName = $item->get_name();
             if(function_exists('get_field')){
                 $bmdArticleName = get_field('wps_sp_bmd_product_name', $item->get_product_id()) ?? '';
@@ -147,9 +148,12 @@ class Exporter
                 }
             }
 
+            // get sku if available
+            $sku = $item->get_product()->get_sku() ?? $item->get_product_id() ?? '';
+
             $itemList[] = [
                 'n1:OrderPosNumber' => $itemPos,
-                'n1:DistributorsArticleNo' => $item->get_product_id(),
+                'n1:DistributorsArticleNo' => $sku,
                 'n1:DistributorsArticleName' => $itemName,
                 'n1:OrderQuantity' => $item->get_quantity(),
                 'n1:Price' => $item->get_total(),
