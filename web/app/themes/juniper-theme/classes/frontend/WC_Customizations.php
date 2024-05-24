@@ -39,13 +39,13 @@ class WC_Customizations {
 
     public function add_product_tabs($tabs) {
         $tabs['description'] = array(
-            'title' => __( 'Beschreibung', 'wps-juniper' ), // TAB TITLE
+            'title' => __( 'Description', 'wps-juniper' ), // TAB TITLE
             'priority' => 50,
             'callback' => array($this, 'product_description_tab'), // TAB CONTENT CALLBACK
         );
 
         $tabs['technical_data_guide'] = array(
-            'title' => __( 'Technische Daten', 'wps-juniper' ),
+            'title' => __( 'Technical Data', 'wps-juniper' ),
             // 'target' => 'technical_data_product_data',
             // 'class' => array( 'show_if_simple', 'show_if_variable' ),
             'priority' => 50,
@@ -117,14 +117,14 @@ class WC_Customizations {
 
         if(!!$featureText){
             $html .= '<div class="mb-10">';
-            $html .= '<h3 class="mb-4">'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
+            $html .= '<h3 class="mb-4">'.__('Features & Benefits', 'wps-juniper').'</h3>';
             $html .= $featureText;
             $html .= '</div>';
         }
 
         if(!!$applicationText){
             $html .= '<div class="mb-10">';
-            $html .= '<h3 class="mb-4">' . __('Anwendung', 'wps-juniper') . '</h3>';
+            $html .= '<h3 class="mb-4">' . __('Application', 'wps-juniper') . '</h3>';
             $html .= $applicationText;
             $html .= '</div>';
         }
@@ -158,7 +158,7 @@ class WC_Customizations {
         // add the new tag to the tags array
         if($isNew){
             $tags[] = [
-                'label' => __('Neu', 'wps'),
+                'label' => __('New', 'wps'),
                 'color' => '#FFEB00',
                 'class' => 'font-bold'
             ];
