@@ -39,13 +39,13 @@ class WC_Customizations {
 
     public function add_product_tabs($tabs) {
         $tabs['description'] = array(
-            'title' => __( 'Beschreibung', 'wps-juniper' ), // TAB TITLE
+            'title' => __( 'Description', 'wps-juniper' ), // TAB TITLE
             'priority' => 50,
             'callback' => array($this, 'product_description_tab'), // TAB CONTENT CALLBACK
         );
 
         $tabs['technical_data_guide'] = array(
-            'title' => __( 'Technische Daten', 'wps-juniper' ),
+            'title' => __( 'Technical Data', 'wps-juniper' ),
             // 'target' => 'technical_data_product_data',
             // 'class' => array( 'show_if_simple', 'show_if_variable' ),
             'priority' => 50,
