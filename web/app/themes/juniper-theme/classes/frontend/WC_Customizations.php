@@ -117,14 +117,14 @@ class WC_Customizations {
 
         if(!!$featureText){
             $html .= '<div class="mb-10">';
-            $html .= '<h3 class="mb-4">'.__('Eigenschaften & Vorteile', 'wps-juniper').'</h3>';
+            $html .= '<h3 class="mb-4">'.__('Features & Benefits', 'wps-juniper').'</h3>';
             $html .= $featureText;
             $html .= '</div>';
         }
 
         if(!!$applicationText){
             $html .= '<div class="mb-10">';
-            $html .= '<h3 class="mb-4">' . __('Anwendung', 'wps-juniper') . '</h3>';
+            $html .= '<h3 class="mb-4">' . __('Application', 'wps-juniper') . '</h3>';
             $html .= $applicationText;
             $html .= '</div>';
         }
@@ -158,7 +158,7 @@ class WC_Customizations {
         // add the new tag to the tags array
         if($isNew){
             $tags[] = [
-                'label' => __('Neu', 'wps'),
+                'label' => __('New', 'wps'),
                 'color' => '#FFEB00',
                 'class' => 'font-bold'
             ];
