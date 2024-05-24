@@ -271,9 +271,9 @@ function enqueue_ls_scripts() {
         'checkbox' => __('Muster erhältlich', 'text-domain'),
         'product_search' => __('Suche Produkte...', 'text-domain'),
         'load_more' => __('mehr laden', 'text-domain'),
-        'filter_delete_button' => __('Alle Filter zurücksetzten', 'text-domain'),
-        'filter_sample_available' => __('Muster verfügbar', 'text-domain'),
-        'filter_online_available' => __('Online verfügbar', 'text-domain'),
+	      'filter_delete_button' => __('Alle Filter zurücksetzten', 'text-domain'),
+	      'filter_sample_available' => __('Muster verfügbar', 'text-domain'),
+	      'filter_online_available' => __('Online verfügbar', 'text-domain'),
     );
 
     wp_localize_script( 'filter-js', 'translation', $translation_array );

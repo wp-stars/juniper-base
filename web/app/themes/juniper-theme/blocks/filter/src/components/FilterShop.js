@@ -234,7 +234,7 @@ const FilterShop = (data) => {
                                 onClick={resetFilters}
                                 className="text-black text-xs font-normal leading-tight"
                             >
-                                Delete All Filters
+                                {translation.filter_delete_button}
                             </button>
                         </div>
 
