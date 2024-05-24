@@ -705,3 +705,12 @@ add_filter('woocommerce_product_title', function($title, $product){
     return $title;
 
 }, 9999, 2);
+
+add_filter('woocommerce_checkout_fields', function($fields){
+
+    if (isset($fields['billing']['billing_company'])) {
+        $fields['billing']['billing_company']['required'] = true;
+    }
+    return $fields;
+
+});
