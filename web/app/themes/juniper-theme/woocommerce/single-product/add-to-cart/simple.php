@@ -74,7 +74,7 @@ if ( !!$product->is_purchasable() && $product->is_in_stock() ) : ?>
             $sample_available = false;
             if ( ! empty( $purchasability_terms ) && ! is_wp_error( $purchasability_terms ) ) {
                 foreach ( $purchasability_terms as $term ) {
-                    if ( $term->slug == 'muster-verfuegbar' ) {
+                    if ( $term->slug === 'muster-verfuegbar' || $term->slug === 'sample-available-en' ) {
                         $sample_available = true;
                         break;
                     }
@@ -90,12 +90,12 @@ if ( !!$product->is_purchasable() && $product->is_in_stock() ) : ?>
                         <path d="M19.0651 9.58967C19.2609 9.58967 19.4155 9.42479 19.4155 9.23932C19.4155 9.04353 19.2506 8.87866 19.0651 8.87866C18.8693 8.87866 18.7045 9.04353 18.7045 9.23932C18.7045 9.42479 18.859 9.58967 19.0651 9.58967Z" fill="black"/>
                     </svg>
                     <!-- Button content here -->
-                    <?= __('Muster bestellen', 'wps-juniper'); ?>
+                    <?= __('Order a sample', 'wps-juniper'); ?>
                 </button>
             <?php endif; ?>
 
             <button class="btn btn-bordered product-question-button font-semibold w-full sm:w-auto" onclick="openModal('product-request-modal');" data-id="<?php echo $product->get_id();?>" type="button">
-                <?= __('Fragen zum Produkt?', 'wps-juniper'); ?>
+                <?= __('Questions about the product?', 'wps-juniper'); ?>
             </button>
         </div>
 
@@ -114,7 +114,7 @@ if ( !!$product->is_purchasable() && $product->is_in_stock() ) : ?>
         $sample_available = false;
         if ( ! empty( $purchasability_terms ) && ! is_wp_error( $purchasability_terms ) ) {
             foreach ( $purchasability_terms as $term ) {
-                if ( $term->slug == 'muster-verfuegbar' ) {
+                if ( $term->slug === 'muster-verfuegbar' || $term->slug === 'sample-available-en' ) {
                     $sample_available = true;
                     break;
                 }
@@ -130,12 +130,12 @@ if ( !!$product->is_purchasable() && $product->is_in_stock() ) : ?>
                     <path d="M19.0651 9.58967C19.2609 9.58967 19.4155 9.42479 19.4155 9.23932C19.4155 9.04353 19.2506 8.87866 19.0651 8.87866C18.8693 8.87866 18.7045 9.04353 18.7045 9.23932C18.7045 9.42479 18.859 9.58967 19.0651 9.58967Z" fill="black"/>
                 </svg>
                 <!-- Button content here -->
-                <?= __('Muster bestellen', 'wps-juniper'); ?>
+                <?= __('Order a sample', 'wps-juniper'); ?>
             </button>
         <?php endif; ?>
 
         <button class="btn btn-bordered product-question-button font-semibold w-full sm:w-auto" onclick="openModal('product-request-modal');" data-id="<?php echo $product->get_id();?>" type="button">
-            <?= __('Fragen zum Produkt?', 'wps-juniper'); ?>
+            <?= __('Questions about the product?', 'wps-juniper'); ?>
         </button>
     </div>
 <?php endif; ?>
