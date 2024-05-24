@@ -382,7 +382,9 @@ function wps_add_to_context( $context ) {
     $context['primary_menu']        = new \Timber\Menu( "primary_menu_de" );
     $context['secondary_menu']      = new \Timber\Menu( "primary_menu_de" );
 
-    $context['footer_menu']         = new \Timber\Menu( "footer_menu_$current_language" );
+    //$context['footer_menu']         = new \Timber\Menu( "footer_menu_$current_language" );
+    $context['footer_menu']         = new \Timber\Menu( "footer_menu_de" );
+
     $context['title']               = \get_the_title();
     $context['jumbotron_bg_image']  = \get_stylesheet_directory_uri() . '/assets/img/default_bg_image.png';
     $context['home_page_url']       = \home_url();
@@ -703,3 +705,12 @@ add_filter('woocommerce_product_title', function($title, $product){
     return $title;
 
 }, 9999, 2);
+
+add_filter('woocommerce_checkout_fields', function($fields){
+
+    if (isset($fields['billing']['billing_company'])) {
+        $fields['billing']['billing_company']['required'] = true;
+    }
+    return $fields;
+
+});
