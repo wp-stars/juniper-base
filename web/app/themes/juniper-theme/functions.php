@@ -128,7 +128,7 @@ function juniper_theme_enqueue() {
 
     $shop_url = rtrim(home_url(), '/');
     wp_localize_script('project-js', 'scriptData', array('shopUrl' => $shop_url));
-   
+
     wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', array(), $refresh_cache_time );
 
     check_for_recompile( __DIR__ . '/src/scss/_project.scss', true, __DIR__ . '/src/scss/_project.scss');
@@ -261,7 +261,6 @@ function enqueue_ls_scripts() {
         'wps-scripts'
     );
 
-
     $translation_array = array(
         'loading' => __('Laden...', 'text-domain'),
         'no_results' => __('Keine Ergebnise.', 'text-domain'),
@@ -272,12 +271,12 @@ function enqueue_ls_scripts() {
         'checkbox' => __('Muster erhältlich', 'text-domain'),
         'product_search' => __('Suche Produkte...', 'text-domain'),
         'load_more' => __('mehr laden', 'text-domain'),
+        'filter_delete_button' => __('Alle Filter zurücksetzten', 'text-domain'),
+        'filter_sample_available' => __('Muster verfügbar', 'text-domain'),
+        'filter_online_available' => __('Online verfügbar', 'text-domain'),
     );
 
-
     wp_localize_script( 'filter-js', 'translation', $translation_array );
-
-
 }
 
 \add_action('wp_enqueue_scripts', '\WPS\enqueue_ls_scripts');
@@ -555,7 +554,7 @@ add_action('init', function(){
     $modal = new \wps\frontend\Modal();
     $modal->id = 'product-request-modal';
     $modal->view = 'productRequestModal.twig';
-    $modal->title = __('Produktanfrage', 'wps');
+    $modal->title = __('Product enquiry', 'wps-modal'); // Produktanfrage
     $modal->content = '';
     $modal->variables['form'] = '';
     $modal->showSubmitButton = false;
@@ -581,9 +580,9 @@ add_filter('wps_modal_render', function($modal){
     }
 
     if(isset($_POST['action']) && $_POST['action'] === 'sample-box-full'){
-        $modal->title = 'Vielen Dank für Ihre Anfrage';
-        $modal->content = 'Bis zum nächsten Einkauf';
-        $modal->open();
+        //$modal->title = __('thank you for your enquiry', 'wps-modal'); //'Vielen Dank für Ihre Anfrage';
+        //$modal->content = __('thank you for your enquiry', 'wps-modal'); //'Bis zum nächsten Einkauf';
+        //$modal->open();
     }
 
     return $modal;
@@ -595,8 +594,8 @@ add_action('init', function(){
 
     $modal = new \wps\frontend\Modal();
     $modal->id = 'full-samplebox-modal';
-    $modal->title = __('Die SampleBox ist leider voll.', 'wps');
-    $modal->content = 'Alle verfügbaren Plätze der Musterbox sind belegt. Wenn Sie ein weiteres Muster hinzufügen möchten, müssen Sie manuell einen Platz freimachen mithilfe des Mistkübel Icons.';
+    $modal->title = __('Unfortunately the SampleBox is full.', 'wps-modal'); // Die SampleBox ist leider voll.
+    $modal->content = __('All available spaces in the sample box are occupied. If you want to add another pattern, you have to manually clear a space using the trash can icon.','wps-modal'); // Alle verfügbaren Plätze der Musterbox sind belegt. Wenn Sie ein weiteres Muster hinzufügen möchten, müssen Sie manuell einen Platz freimachen mithilfe des Mistkübel Icons.
     $modal->variables['form'] = '';
     $modal->showSubmitButton = false;
     $modal->showCloseButton = true;
