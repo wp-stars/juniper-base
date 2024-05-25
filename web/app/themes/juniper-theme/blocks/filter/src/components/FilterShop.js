@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 import Checkbox from "./Checkbox";
+import {isIterable} from "../utils";
 
 const FilterShop = (data) => {
     const initialPosts = data.posts.filter(post => post.price > 0);
     const [originalDisplayedPosts, setOriginalDisplayedPosts] = useState(initialPosts.slice(0, 6));
-    const [filteredPosts, setFilteredPosts] = useState(initialPosts);
+    
+	const [filteredPosts, setFilteredPosts] = useState(initialPosts);
     const [displayedPosts, setDisplayedPosts] = useState(initialPosts.slice(0, 6));
-    const [filters, setFilters] = useState({
+    
+	const [filters, setFilters] = useState({
         searchText: "",
         purchasability: false,
         metals_and_accessories: 'none'
@@ -18,7 +21,8 @@ const FilterShop = (data) => {
     const [loading, setLoading] = useState(false);
     const [maxPages, setMaxPages] = useState(data.maxNumPages);
     const [showFilterItems, setShowFilterItems] = useState(false);
-    const isMobile = useMediaQuery({ query: `(max-width: 640px)` });
+    
+	const isMobile = useMediaQuery({ query: `(max-width: 640px)` });
 
     const searchPosts = async (pageNum) => {
         if (pageNum > maxPages) return;
@@ -123,9 +127,14 @@ const FilterShop = (data) => {
             purchasability: params.get('purchasability') === 'true'
         };
 
-        data.filterOptions.forEach(filterItem => {
+        const filterOptions = isIterable(data.filterOptions) ? data.filterOptions : [] ;
+
+        console.log(filterOptions)
+
+        filterOptions.forEach(filterItem => {
             if (filterItem.name === "metals-and-accessories") {
                 const paramName = params.get(filterItem.name);
+
                 if (paramName) {
                     initialFilters[filterItem.name] = findTaxonomyIdBySlug(paramName, filterItem.tax_options);
                 } else {
@@ -186,7 +195,7 @@ const FilterShop = (data) => {
                         </button>
                     </div>
                     : null}
-                {showFilterItems ?  
+                {showFilterItems ?
                     <div id="filter-items" className="grid grid-cols-12 justify-start mt-[30px] sm:mt-0">
                         <div className="flex items-center border-b py-2 col-span-12 max-w-96 mb-7 focus-visible:border-0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -202,9 +211,11 @@ const FilterShop = (data) => {
                             />
                         </div>
                         <div className="flex flex-col sm:flex-row col-span-12 gap-[1.25rem]">
-                            {data.filterOptions.map((filterItem, key) => {
+                            {(isIterable(data.filterOptions) ? data.filterOptions : [] ).map((filterItem, key) => {
+                                // set specifics form metals and accessories
                                 if (filterItem.name === "metals-and-accessories") {
                                     const filterName = filterItem.name;
+                                    
                                     const stateKey = "metals_and_accessories";
                                     const translationKey = translation.metals_accessories;
 
