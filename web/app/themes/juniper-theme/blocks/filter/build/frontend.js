@@ -2974,10 +2974,12 @@ const FilterNew = data => {
     setFilteredPosts(toFilterData);
   }
   function applyValueToFilter(filterKey, filterValue) {
-    setFilterSelected(prevFilter => ({
-      ...prevFilter,
-      [filterKey]: filterValue
-    }));
+    setFilterSelected(prevFilter => {
+      return {
+        ...prevFilter,
+        [filterKey]: filterValue
+      };
+    });
   }
   function setUpFilters() {
     var _data$filterOptions;
@@ -3203,10 +3205,9 @@ const FilterDropdown = data => {
   }, [value]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const preSelectedOption = options.find(element => {
-      console.log((0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam));
       return element.slug === (0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam);
     });
-    setValue(preSelectedOption?.term_id);
+    setValue(preSelectedOption ? preSelectedOption.term_id : '');
   }, []);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: key,

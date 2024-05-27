@@ -23,11 +23,10 @@ const FilterDropdown = (data) => {
 
 	useEffect(() => {
 		const preSelectedOption = options.find((element) => {
-			console.log(getUrlParamValue(urlParam))
 			return element.slug === getUrlParamValue(urlParam)
 		})
 
-		setValue(preSelectedOption?.term_id)
+		setValue(preSelectedOption ? preSelectedOption.term_id : '')
 	}, [])
 
 	return <div key={key} className="relative w-full max-w-full mb-2.5">

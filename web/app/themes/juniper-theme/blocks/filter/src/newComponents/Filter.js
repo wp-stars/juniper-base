@@ -103,10 +103,12 @@ const FilterNew = (data) => {
     }
 
     function applyValueToFilter(filterKey, filterValue) {
-        setFilterSelected((prevFilter) => ({
-            ...prevFilter,
-            [filterKey]: filterValue
-        }))
+        setFilterSelected((prevFilter) => {
+            return {
+                ...prevFilter,
+                [filterKey]: filterValue
+            }
+        })
     }
 
     function setUpFilters() {
@@ -187,17 +189,17 @@ const FilterNew = (data) => {
                             </div>
                             <div className="col-span-12 block mb-8">
                                 {!data.shop && (
-                                <FilterCheckbox
-                                    key={'onlineAvailable'}
-                                    name={'onlineAvailable'}
-                                    label={translation.filter_online_available}
-                                    url={'online-available'}
-                                    isChecked={filterSelected.onlineAvailable}
-                                    onChange={(isChecked) => setFilterSelected(prevFilters => ({
-                                        ...prevFilters,
-                                        onlineAvailable: isChecked
-                                    }))}
-                                />)}
+                                    <FilterCheckbox
+                                        key={'onlineAvailable'}
+                                        name={'onlineAvailable'}
+                                        label={translation.filter_online_available}
+                                        url={'online-available'}
+                                        isChecked={filterSelected.onlineAvailable}
+                                        onChange={(isChecked) => setFilterSelected(prevFilters => ({
+                                            ...prevFilters,
+                                            onlineAvailable: isChecked
+                                        }))}
+                                    />)}
                             </div>
                         </div>
                     </>
@@ -226,7 +228,7 @@ const FilterNew = (data) => {
                 )
                 }
                 <p className={'text-base leading-normal italic'}>
-                {postsToDisplay.length} von {allPosts.length} Produkten
+                    {postsToDisplay.length} von {allPosts.length} Produkten
                 </p>
             </div>
         </div>
