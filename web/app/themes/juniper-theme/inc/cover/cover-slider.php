@@ -300,7 +300,8 @@ add_action('wp', function () {
     $cover_slider = get_field('activate_cover_slider');
     if ($cover_slider && $cover_slider[0] === 'true') {
         add_action('wp_enqueue_scripts', '\WPS\Cover\LS_Cover_Slider\enqueue_cover_assets');
-        add_action('astra_content_before', '\WPS\Cover\LS_Cover_Slider\add_cover_slider_markup');
+        //add_action('astra_content_before', '\WPS\Cover\LS_Cover_Slider\add_cover_slider_markup');
+        add_action('wps_before_content', '\WPS\Cover\LS_Cover_Slider\add_cover_slider_markup');
     }
 });
 
