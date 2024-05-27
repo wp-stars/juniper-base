@@ -2919,6 +2919,7 @@ const FilterNew = data => {
     checkbox: '',
     product_search: '',
     load_more: '',
+    choose: '',
     filter_delete_button: '',
     filter_sample_available: '',
     filter_online_available: ''
@@ -3006,6 +3007,8 @@ const FilterNew = data => {
       filterOption.onChange = selected => {
         applyValueToFilter(filterOption.filter_choices, selected);
       };
+      filterOption.chooseTag = translationObject.choose;
+      filterOption.label = translationObject[filterOption.name] ? translationObject[filterOption.name] : filterOption.label;
       filterOption.url = filterOption.filter_choices.replaceAll('_', '-');
       return filterOption;
     });
@@ -3213,6 +3216,7 @@ const FilterDropdown = data => {
   const key = data.key;
   const label = data.label;
   const name = data.name;
+  const chooseTag = data.chooseTag;
   const [options, setOptions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((_data$tax_options = data.tax_options) !== null && _data$tax_options !== void 0 ? _data$tax_options : []);
   const urlParam = (_data$url = data.url) !== null && _data$url !== void 0 ? _data$url : '';
   const onChange = data.onChange;
@@ -3239,7 +3243,7 @@ const FilterDropdown = data => {
     className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
-  }, "W\xE4hle ", label), options.map(term => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  }, chooseTag, " ", label), options.map(term => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     key: term.term_id,
     value: term.term_id
   }, term.name))));

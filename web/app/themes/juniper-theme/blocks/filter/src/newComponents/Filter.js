@@ -29,6 +29,7 @@ const FilterNew = (data) => {
         checkbox: '',
         product_search: '',
         load_more: '',
+        choose: '',
         filter_delete_button: '',
         filter_sample_available: '',
         filter_online_available: '',
@@ -136,6 +137,10 @@ const FilterNew = (data) => {
             filterOption.onChange = (selected) => {
                 applyValueToFilter(filterOption.filter_choices, selected)
             }
+
+            filterOption.chooseTag = translationObject.choose
+
+            filterOption.label = translationObject[filterOption.name] ?  translationObject[filterOption.name] : filterOption.label
 
             filterOption.url = filterOption.filter_choices.replaceAll('_', '-')
 

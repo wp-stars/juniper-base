@@ -7,7 +7,10 @@ const FilterDropdown = (data) => {
 
 	const key = data.key
 	const label = data.label
+
 	const name = data.name
+
+	const chooseTag = data.chooseTag
 
 	const [options, setOptions] = useState(data.tax_options ?? []);
 
@@ -39,7 +42,7 @@ const FilterDropdown = (data) => {
 			}}
 			className="select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
 		>
-			<option value="">Wähle {label}</option>
+			<option value="">{chooseTag} {label}</option>
 			{options.map((term) => (
 				<option key={term.term_id}
 						value={term.term_id}>{term.name}</option>
