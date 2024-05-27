@@ -3003,6 +3003,7 @@ const FilterNew = data => {
   function setUpFilters() {
     var _data$filterOptions;
     const filterOptions = (_data$filterOptions = data.filterOptions) !== null && _data$filterOptions !== void 0 ? _data$filterOptions : [];
+    console.log(filterOptions);
     const preparedOptions = filterOptions.map(filterOption => {
       filterOption.onChange = selected => {
         applyValueToFilter(filterOption.filter_choices, selected);
