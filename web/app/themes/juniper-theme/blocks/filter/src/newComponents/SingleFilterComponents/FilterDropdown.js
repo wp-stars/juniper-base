@@ -9,7 +9,7 @@ const FilterDropdown = (data) => {
 	const label = data.label
 	const name = data.name
 
-	const options = data.tax_options ?? []
+	const [options, setOptions] = useState(data.tax_options ?? []);
 
 	const urlParam = data.url ?? ''
 

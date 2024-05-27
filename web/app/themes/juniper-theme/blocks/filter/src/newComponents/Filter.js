@@ -3,7 +3,7 @@ import {useMediaQuery} from "react-responsive";
 import MobileFilter from "./SingleFilterComponents/MobileFilter";
 import {
     filterOptionToElement,
-    loadInPostsFromPage, postApplysToTax, postInSelection,
+    loadInPostsFromPage, postApplysToTax, postInSelection, postInTextSelection,
     renderPost,
     rerenderSlick
 } from "../utils";
@@ -95,8 +95,26 @@ const FilterNew = (data) => {
 
         let toFilterData = allPosts
 
+        if(data.shop) {
+            filterOptions.push(['onlineAvailable', true])
+        }
+
         for (const filterValue of filterOptions) {
-            toFilterData = toFilterData.filter((post) => postInSelection(filterValue, post))
+            switch (filterValue[0]) {
+                case 'searchText':
+                    toFilterData = toFilterData.filter((post) => postInTextSelection(filterValue[1].toLowerCase().trim(), post))
+                    break
+                case 'purchasability':
+                    toFilterData = toFilterData.filter((post) => post.taxonomies["purchasability"]?.some(term => term.slug === filterValue[1]))
+                    break
+                case 'onlineAvailable':
+                    if(!filterValue[1]) { continue }
+                    toFilterData = toFilterData.filter((post) => post.price != null && post.price > 0)
+                    break
+                default:
+                    toFilterData = toFilterData.filter((post) => postInSelection(filterValue, post))
+            }
+
         }
 
         setFilteredPosts(toFilterData)
@@ -166,8 +184,8 @@ const FilterNew = (data) => {
                                 name={'Product Search'}
                                 url={'text'}
                                 placeholder={translationObject.product_search}
-                                onChange={(newValue) => null
-                                    // applyValueToFilter('searchText', newValue.trim().toLowerCase())
+                                onChange={(newValue) =>
+                                    applyValueToFilter('searchText', newValue.trim().toLowerCase())
                                 }
                             />
                         </div>
@@ -228,7 +246,7 @@ const FilterNew = (data) => {
                 )
                 }
                 <p className={'text-base leading-normal italic'}>
-                    {postsToDisplay.length} von {allPosts.length} Produkten
+                    {postsToDisplay.length} von {filteredPosts.length} Produkten
                 </p>
             </div>
         </div>

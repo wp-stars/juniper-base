@@ -85,3 +85,15 @@ export function postInSelection(filterSelection, post) {
 
     return postApplysToTax(post, taxonomyName, taxonomyValue)
 }
+
+export function postInTextSelection(text, post) {
+
+    return post.post_title.toLowerCase().includes(text)
+        || post.excerpt.toLowerCase().includes(text)
+        || post.description_text && post.description_text.toLowerCase().includes(text)
+        || post.description_title && post.description_title.toLowerCase().includes(text)
+        || post.subheadline && post.subheadline.toLowerCase().includes(text)
+        || post.features_text && post.features_text.toLowerCase().includes(text)
+        || post.areas_of_application && post.areas_of_application.toLowerCase().includes(text)
+        || Object.values(post.taxonomies).some(taxonomy => taxonomy.some(term => term.name.toLowerCase().includes(text)))
+}

@@ -2968,8 +2968,26 @@ const FilterNew = data => {
   function applyFilter(filter) {
     const filterOptions = Object.entries(filter).filter(keyValue => keyValue[1] !== '');
     let toFilterData = allPosts;
+    if (data.shop) {
+      filterOptions.push(['onlineAvailable', true]);
+    }
     for (const filterValue of filterOptions) {
-      toFilterData = toFilterData.filter(post => (0,_utils__WEBPACK_IMPORTED_MODULE_2__.postInSelection)(filterValue, post));
+      switch (filterValue[0]) {
+        case 'searchText':
+          toFilterData = toFilterData.filter(post => (0,_utils__WEBPACK_IMPORTED_MODULE_2__.postInTextSelection)(filterValue[1].toLowerCase().trim(), post));
+          break;
+        case 'purchasability':
+          toFilterData = toFilterData.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === filterValue[1]));
+          break;
+        case 'onlineAvailable':
+          if (!filterValue[1]) {
+            continue;
+          }
+          toFilterData = toFilterData.filter(post => post.price != null && post.price > 0);
+          break;
+        default:
+          toFilterData = toFilterData.filter(post => (0,_utils__WEBPACK_IMPORTED_MODULE_2__.postInSelection)(filterValue, post));
+      }
     }
     setFilteredPosts(toFilterData);
   }
@@ -3031,8 +3049,7 @@ const FilterNew = data => {
     name: 'Product Search',
     url: 'text',
     placeholder: translationObject.product_search,
-    onChange: newValue => null
-    // applyValueToFilter('searchText', newValue.trim().toLowerCase())
+    onChange: newValue => applyValueToFilter('searchText', newValue.trim().toLowerCase())
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'grid grid-cols-3 gap-y-14 sm:gap-7 mt-6 sm:mt-0'
   }, filterOptions.map(_utils__WEBPACK_IMPORTED_MODULE_2__.filterOptionToElement)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3076,7 +3093,7 @@ const FilterNew = data => {
     className: "inline-flex items-center gap-x-2.5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icons__WEBPACK_IMPORTED_MODULE_3__.PlusButtonIcon, null), translationObject.load_more), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: 'text-base leading-normal italic'
-  }, postsToDisplay.length, " von ", allPosts.length, " Produkten")));
+  }, postsToDisplay.length, " von ", filteredPosts.length, " Produkten")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FilterNew);
 
@@ -3196,7 +3213,7 @@ const FilterDropdown = data => {
   const key = data.key;
   const label = data.label;
   const name = data.name;
-  const options = (_data$tax_options = data.tax_options) !== null && _data$tax_options !== void 0 ? _data$tax_options : [];
+  const [options, setOptions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((_data$tax_options = data.tax_options) !== null && _data$tax_options !== void 0 ? _data$tax_options : []);
   const urlParam = (_data$url = data.url) !== null && _data$url !== void 0 ? _data$url : '';
   const onChange = data.onChange;
   const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
@@ -3318,6 +3335,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   loadInPostsFromPage: () => (/* binding */ loadInPostsFromPage),
 /* harmony export */   postApplysToTax: () => (/* binding */ postApplysToTax),
 /* harmony export */   postInSelection: () => (/* binding */ postInSelection),
+/* harmony export */   postInTextSelection: () => (/* binding */ postInTextSelection),
 /* harmony export */   renderPost: () => (/* binding */ renderPost),
 /* harmony export */   rerenderSlick: () => (/* binding */ rerenderSlick)
 /* harmony export */ });
@@ -3406,6 +3424,9 @@ function postInSelection(filterSelection, post) {
   // noinspection JSCheckFunctionSignatures
   const taxonomyValue = parseInt(filterSelection[1]);
   return postApplysToTax(post, taxonomyName, taxonomyValue);
+}
+function postInTextSelection(text, post) {
+  return post.post_title.toLowerCase().includes(text) || post.excerpt.toLowerCase().includes(text) || post.description_text && post.description_text.toLowerCase().includes(text) || post.description_title && post.description_title.toLowerCase().includes(text) || post.subheadline && post.subheadline.toLowerCase().includes(text) || post.features_text && post.features_text.toLowerCase().includes(text) || post.areas_of_application && post.areas_of_application.toLowerCase().includes(text) || Object.values(post.taxonomies).some(taxonomy => taxonomy.some(term => term.name.toLowerCase().includes(text)));
 }
 
 /***/ }),
