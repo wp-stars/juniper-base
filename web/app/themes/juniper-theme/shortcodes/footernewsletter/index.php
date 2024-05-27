@@ -118,7 +118,12 @@ if (!class_exists('FooterNewsletter')) {
          * @return string html markup
          */
         public function shortcode_markup($attributes = []): string {
-            
+
+            echo '<p class="font-bold leading-6 pb-2">' . __('Newsletter','wps-juniper') . '</p>';
+
+            $privacyPageUrl = (get_locale() === "de_DE") ? '/datenschutz' : '/en/privacy-policy/';
+            echo '<p class="mb-7" >' . sprintf(__('Register now and always be well informed! Here you will find information about our <a class="underline hover:no-underline" target="_blank" href="%s">privacy delaration</a>.','wps-juniper'), $privacyPageUrl) . '</p>';
+
             if (self::$modal_displayed) {
                 return ''; // Return empty string if modal has already been displayed
             }
@@ -132,20 +137,19 @@ if (!class_exists('FooterNewsletter')) {
             }
 
             ob_start();
-            // echo do_shortcode("[borlabs-cookie id=\"hubspot\" type=\"content-blocker\"]
-                 
-            //     <script>
-            //         window.BorlabsCookie.callWhenLoaded('hbspt', function () { 
-            //             window.setTimeout(function () { 
-            //                 hbspt.forms.create({ 
-            //                     portalId: '25864699', 
-            //                     formId: '$formId', 
-            //                     target: '.newsletter-wrapper-$form_id'
-            //                 });
-            //             }, 3000);
-            //         });
-            //     </script>
-            // [/borlabs-cookie]");
+            echo do_shortcode("[borlabs-cookie id=\"hubspot\" type=\"content-blocker\"]
+                 <script>
+                     //window.BorlabsCookie.callWhenLoaded('hbspt', function () { 
+                         window.setTimeout(function () { 
+                             hbspt.forms.create({ 
+                                 portalId: '25864699', 
+                                 formId: '$formId', 
+                                 target: '.newsletter-wrapper-$form_id'
+                             });
+                         }, 3000);
+                     //});
+                 </script>
+            [/borlabs-cookie]");
             $newsletterForm = ob_get_contents();
             ob_get_clean();
 
