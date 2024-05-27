@@ -265,15 +265,16 @@ function enqueue_ls_scripts() {
         'loading' => __('Laden...', 'text-domain'),
         'no_results' => __('Keine Ergebnise.', 'text-domain'),
         'open_filter' => __('Filter öffnen', 'text-domain'),
-        'metals_accessories' => __(' Metalle und Zubehör', 'text-domain'),
-        'colors' => __(' Farben', 'text-domain'),
-        'product_category' => __(' Kategorien', 'text-domain'),
+        'metals-and-accessories' => __(' Metalle und Zubehör', 'text-domain'),
+        'color' => __(' Farben', 'text-domain'),
+        'product_cat' => __(' Kategorien', 'text-domain'),
         'checkbox' => __('Muster erhältlich', 'text-domain'),
         'product_search' => __('Suche Produkte...', 'text-domain'),
         'load_more' => __('mehr laden', 'text-domain'),
-	      'filter_delete_button' => __('Alle Filter zurücksetzten', 'text-domain'),
-	      'filter_sample_available' => __('Muster verfügbar', 'text-domain'),
-	      'filter_online_available' => __('Online verfügbar', 'text-domain'),
+		'choose' => __('Wähle', 'text-domain'),
+	    'filter_delete_button' => __('Alle Filter zurücksetzten', 'text-domain'),
+	    'filter_sample_available' => __('Muster verfügbar', 'text-domain'),
+		'filter_online_available' => __('Online verfügbar', 'text-domain'),
     );
 
     wp_localize_script( 'filter-js', 'translation', $translation_array );
