@@ -133,6 +133,8 @@ const FilterNew = (data) => {
     function setUpFilters() {
         const filterOptions = data.filterOptions ?? []
 
+        console.log(filterOptions)
+
         const preparedOptions = filterOptions.map((filterOption) => {
             filterOption.onChange = (selected) => {
                 applyValueToFilter(filterOption.filter_choices, selected)

@@ -25,40 +25,52 @@ add_action(
 }
 );
 
-add_filter( 'timber/acf-gutenberg-blocks-data/filter',
-	function ( $context ) {
-		$post_type = $context['fields']['post_type'];
+add_filter( 'timber/acf-gutenberg-blocks-data/filter', function ( $context ) {
+	$post_type = $context['fields']['post_type'];
 
-		$filter_options = $context['fields']['filter_options'] ?: [];
+	$filter_options = $context['fields']['filter_options'] ?: [];
 
-		foreach ( $filter_options as $key => $option ) {
-			$tax                                                  = get_taxonomy( $option['filter_choices'] );
-			$context['fields']['filter_options'][ $key ]['label'] = $tax->label;
-			$context['fields']['filter_options'][ $key ]['name']  = $tax->name;
+	$current_language = apply_filters( 'wpml_current_language', null );
 
-			$terms = get_terms( [
-				                    'taxonomy'   => $option['filter_choices'],
-				                    'hide_empty' => false, // Set to true if you want to exclude terms with no posts.
-			                    ] );
+	foreach ( $filter_options as $key => $option ) {
+		$tax                                                  = get_taxonomy( $option['filter_choices'] );
+		$context['fields']['filter_options'][ $key ]['label'] = $tax->label;
+		$context['fields']['filter_options'][ $key ]['name']  = $tax->name;
 
-			$context['fields']['filter_options'][ $key ]['tax_options'] = $terms;
+		$terms = get_terms( [
+			                    'taxonomy'   => $option['filter_choices'],
+			                    'hide_empty' => false, // Set to true if you want to exclude terms with no posts.
+		                    ] );
+
+		$translated_term_ids = [];
+
+		foreach ( $terms as $term ) {
+			$translated_term_ids[] = apply_filters( 'wpml_object_id', $term->term_id, $tax, false, $current_language );
 		}
 
-		$data_arr = wps_get_filter_posts( $post_type, $taxonomies = [], 1, '' );
+		$terms = array_filter($terms, function($term) use ($translated_term_ids) {
+			return in_array( $term->term_id, $translated_term_ids);
+		});
 
-		$post_type                 = get_post_type_object( $context['fields']['post_type'] );
-		$data_arr['postName']      = $post_type->labels->name;
-		$data_arr['postType']      = $context['fields']['post_type'];
-		$data_arr['restUrl']       = get_rest_url();
-		$data_arr['filterOptions'] = $context['fields']['filter_options'];
-		$data_arr['title']         = $context['fields']['title'];
-
-		$data_arr['shop'] = $context['fields']['shop'];
-
-		$context['data'] = json_encode( $data_arr );
-
-		return $context;
+		$context['fields']['filter_options'][ $key ]['tax_options'] = $terms;
+		$context['fields']['filter_options'][ $key ]['tax_options_translation_ids'] = $translated_term_ids;
 	}
+
+	$data_arr = wps_get_filter_posts( $post_type, $taxonomies = [], 1, '' );
+
+	$post_type                 = get_post_type_object( $context['fields']['post_type'] );
+	$data_arr['postName']      = $post_type->labels->name;
+	$data_arr['postType']      = $context['fields']['post_type'];
+	$data_arr['restUrl']       = get_rest_url();
+	$data_arr['filterOptions'] = $context['fields']['filter_options'];
+	$data_arr['title']         = $context['fields']['title'];
+
+	$data_arr['shop'] = $context['fields']['shop'];
+
+	$context['data'] = json_encode( $data_arr );
+
+	return $context;
+}
 );
 
 function juniper_excerpt_length( $length ) {
@@ -123,16 +135,16 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 
 	$data_arr  = [];
 	$tax_query = [];
-	if ( count( $taxonomies ) ) {
-		foreach ( $taxonomies as $key => $taxonomy ) {
-			$tax_query[] = [
-				'taxonomy' => $taxonomy->name,
-				'field'    => 'term_id',
-				'terms'    => array_map( function ( $val ) { return intval( $val ); }, $taxonomy->value ),
-				'operator' => 'IN'
-			];
-		}
+
+	foreach ( $taxonomies as $taxonomy ) {
+		$tax_query[] = [
+			'taxonomy' => $taxonomy->name,
+			'field'    => 'term_id',
+			'terms'    => array_map( function ( $val ) { return intval( $val ); }, $taxonomy->value ),
+			'operator' => 'IN'
+		];
 	}
+
 
 	$args = [
 		'post_type' => $post_type,
