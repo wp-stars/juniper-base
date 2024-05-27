@@ -7,7 +7,10 @@ const Filter = (data) => {
     const [originalDisplayedPosts, setOriginalDisplayedPosts] = useState(
         data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6)
     );
+	
     const [filteredPosts, setFilteredPosts] = useState([]);
+
+	const [filterOptions, setFilterOptions] = useState(data.filterOptions);
 
     const [displayedPosts, setDisplayedPosts] = useState(originalDisplayedPosts);
     const [filters, setFilters] = useState({
@@ -23,9 +26,9 @@ const Filter = (data) => {
     const [loading, setLoading] = useState(false)
     const [maxPages, setMaxPages] = useState(data.maxNumPages)
     const [showFilterItems, setShowFilterItems] = useState(false)
-    const isMobile = useMediaQuery({query: `(max-width: 640px)`})
+    
+	const isMobile = useMediaQuery({query: `(max-width: 640px)`})
 
-    // TODO: pulls the first 10(?) and then pulls the rest in the background
     const searchPosts = async (pageNum) => {
         if (pageNum > maxPages) return;
 
@@ -41,7 +44,9 @@ const Filter = (data) => {
                     setDisplayedPosts(response.data.posts.slice(0, 6));  // Ensure only the first 6 are set initially
                 }
             }
+            
             setMaxPages(response.data.maxPages || maxPages);
+
         } catch (error) {
             console.error(error);
         } finally {
@@ -92,9 +97,7 @@ const Filter = (data) => {
         let filtered = originalDisplayedPosts;
 
         if (searchText) {
-            filtered = filtered.filter(post =>
-                post.post_title.toLowerCase().includes(searchText)
-                ||
+            filtered = filtered.filter(post => post.post_title.toLowerCase().includes(searchText) ||
                 post.excerpt.toLowerCase().includes(searchText) ||
                 (post.description_text && post.description_text.toLowerCase().includes(searchText)) ||
                 (post.description_title && post.description_title.toLowerCase().includes(searchText)) ||
@@ -106,7 +109,6 @@ const Filter = (data) => {
                 )
             );
         }
-
 
         if (purchasability) {
             filtered = filtered.filter(post => post.taxonomies["purchasability"]?.some(term => term.slug === "muster-verfuegbar"));
@@ -166,10 +168,9 @@ const Filter = (data) => {
             onlineAvailable: params.get('onlineavailable') === 'true',
             metals_and_accessories: params.get('metals-and-accessories') ?? 'none'
         };
-
+		
         // Loop through each filter option to handle dropdowns specifically
-        data.filterOptions.forEach(filterItem => {
-
+        filterOptions.forEach(filterItem => {
             if (filterItem.type === "dropdown") {
                 const paramName = params.get(filterItem.name);
                 if (paramName) {
@@ -181,7 +182,6 @@ const Filter = (data) => {
         });
         setFilters(initialFilters);
         applyFilters(initialFilters);
-
     }, []);
 
     useEffect(() => {
@@ -240,7 +240,6 @@ const Filter = (data) => {
                     </div>
                     : null}
                 {showFilterItems ?
-
                     <div id="filter-items" className="grid grid-cols-12 justify-start mt-[30px] sm:mt-0">
                         <div
                             className="flex items-center border-b py-2 col-span-12 max-w-96 mb-7 focus-visible:border-0">
@@ -263,7 +262,7 @@ const Filter = (data) => {
                             />
                         </div>
                         <div className="flex flex-col sm:flex-row col-span-12 gap-[1.25rem]">
-                            {data.filterOptions.map((filterItem, key) => {
+                            {filterOptions.map((filterItem, key) => {
                                 if (filterItem.type === "dropdown") {
                                     const filterName = filterItem.name;
                                     let stateKey;
@@ -310,9 +309,7 @@ const Filter = (data) => {
                                     }
                                 }
                             })}
-
                         </div>
-
 
                         <div className="container mb-5 col-span-12">
                             <button
@@ -324,7 +321,7 @@ const Filter = (data) => {
                             </button>
                         </div>
 
-                        <div className="flex flex-row gap-[1.25rem] col-span-12">
+                        <div className="flex flex-row gap-5 col-span-12">
                             <div>
                                 <Checkbox
                                     label={translation.filter_sample_available}
@@ -369,7 +366,7 @@ const Filter = (data) => {
             </div>
 
             <div className="container flex justify-center items-center my-24 flex-col gap-y-6">
-                {loading ? <span class="loading-spinner"></span>
+                {loading ? <span className="loading-spinner"></span>
                     :
                     !loading && displayedPosts.length < filteredPosts.length && (
                         <button onClick={loadMorePosts} disabled={displayedPosts.length >= filteredPosts.length}
