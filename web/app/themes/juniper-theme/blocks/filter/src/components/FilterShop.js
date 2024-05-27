@@ -129,8 +129,6 @@ const FilterShop = (data) => {
 
         const filterOptions = isIterable(data.filterOptions) ? data.filterOptions : [] ;
 
-        console.log(filterOptions)
-
         filterOptions.forEach(filterItem => {
             if (filterItem.name === "metals-and-accessories") {
                 const paramName = params.get(filterItem.name);

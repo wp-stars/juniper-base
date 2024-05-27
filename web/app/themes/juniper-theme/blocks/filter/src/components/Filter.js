@@ -11,9 +11,7 @@ const Filter = (data) => {
     const [filteredPosts, setFilteredPosts] = useState([]);
 
 	const [filterOptions, setFilterOptions] = useState(data.filterOptions);
-	
-	console.log(filterOptions)
-	
+
     const [displayedPosts, setDisplayedPosts] = useState(originalDisplayedPosts);
     const [filters, setFilters] = useState({
         searchText: "",
@@ -48,6 +46,7 @@ const Filter = (data) => {
             }
             
             setMaxPages(response.data.maxPages || maxPages);
+
         } catch (error) {
             console.error(error);
         } finally {
@@ -310,9 +309,7 @@ const Filter = (data) => {
                                     }
                                 }
                             })}
-
                         </div>
-
 
                         <div className="container mb-5 col-span-12">
                             <button
@@ -324,7 +321,7 @@ const Filter = (data) => {
                             </button>
                         </div>
 
-                        <div className="flex flex-row gap-[1.25rem] col-span-12">
+                        <div className="flex flex-row gap-5 col-span-12">
                             <div>
                                 <Checkbox
                                     label={translation.filter_sample_available}

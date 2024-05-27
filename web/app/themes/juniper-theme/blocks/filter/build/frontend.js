@@ -2234,7 +2234,6 @@ const Filter = data => {
   const [originalDisplayedPosts, setOriginalDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.filter(post => post.product_type !== "musterbestellung").slice(0, 6));
   const [filteredPosts, setFilteredPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [filterOptions, setFilterOptions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.filterOptions);
-  console.log(filterOptions);
   const [displayedPosts, setDisplayedPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(originalDisplayedPosts);
   const [filters, setFilters] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     searchText: "",
@@ -2519,7 +2518,7 @@ const Filter = data => {
     onClick: resetFilters,
     className: "text-black text-xs font-normal leading-tight"
   }, translation.filter_delete_button)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex flex-row gap-[1.25rem] col-span-12"
+    className: "flex flex-row gap-5 col-span-12"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"], {
     label: translation.filter_sample_available,
     isChecked: filters.purchasability,
@@ -2697,7 +2696,6 @@ const FilterShop = data => {
       purchasability: params.get('purchasability') === 'true'
     };
     const filterOptions = (0,_utils__WEBPACK_IMPORTED_MODULE_3__.isIterable)(data.filterOptions) ? data.filterOptions : [];
-    console.log(filterOptions);
     filterOptions.forEach(filterItem => {
       if (filterItem.name === "metals-and-accessories") {
         const paramName = params.get(filterItem.name);
@@ -2889,14 +2887,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
 /* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _SingleFilterComponents_MobileFilter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SingleFilterComponents/MobileFilter */ "./src/newComponents/SingleFilterComponents/MobileFilter.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils */ "./src/utils.js");
-/* harmony import */ var _Icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Icons */ "./src/newComponents/Icons.js");
-/* harmony import */ var _SingleFilterComponents_FilterTextSearch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SingleFilterComponents/FilterTextSearch */ "./src/newComponents/SingleFilterComponents/FilterTextSearch.js");
+/* harmony import */ var _SingleFilterComponents_MobileFilter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SingleFilterComponents/MobileFilter */ "./src/newComponents/SingleFilterComponents/MobileFilter.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./src/utils.js");
+/* harmony import */ var _Icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Icons */ "./src/newComponents/Icons.js");
+/* harmony import */ var _SingleFilterComponents_FilterTextSearch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SingleFilterComponents/FilterTextSearch */ "./src/newComponents/SingleFilterComponents/FilterTextSearch.js");
+/* harmony import */ var _SingleFilterComponents_FilterCheckbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SingleFilterComponents/FilterCheckbox */ "./src/newComponents/SingleFilterComponents/FilterCheckbox.js");
 
 
 
@@ -2927,11 +2924,19 @@ const FilterNew = data => {
     filter_online_available: ''
   };
   const postsPerPage = 6;
+  const [numberOfPostsVisible, setNumberOfPostsVisible] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(postsPerPage);
+
+  // filter options that get displayed
   const [filterOptions, setFilterOptions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  // selection of the filter (what to filter for)
   const [filterSelected, setFilterSelected] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [shouldShowFilterItems, showFilterItems] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+
+  // all posts that exist
   const [allPosts, setAllPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts);
+  // posts after being run through the filter
   const [filteredPosts, setFilteredPosts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts);
+  // posts that get displayed
   const [postsToDisplay, setPostsToDisplay] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.slice(0, postsPerPage));
   const [isCurrentlyLoading, currentlyLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const currentlyMobile = (0,react_responsive__WEBPACK_IMPORTED_MODULE_6__.useMediaQuery)({
@@ -2941,16 +2946,17 @@ const FilterNew = data => {
     return postsToDisplay.length < filteredPosts.length;
   }
   function showMore() {
-    var _postsToDisplay$lengt;
-    const current = (_postsToDisplay$lengt = postsToDisplay.length) !== null && _postsToDisplay$lengt !== void 0 ? _postsToDisplay$lengt : 0;
+    const current = numberOfPostsVisible !== null && numberOfPostsVisible !== void 0 ? numberOfPostsVisible : 0;
     const nextPosts = filteredPosts.slice(current, postsPerPage + current);
     setPostsToDisplay(postsToDisplay.concat(nextPosts));
+    setNumberOfPostsVisible(postsToDisplay.length);
   }
   function loadPosts(lastAdded = 1, currentPage = 0, postsPulled = []) {
     if (lastAdded <= 0) {
+      currentlyLoading(false);
       return;
     }
-    const nextPostsPromise = (0,_utils__WEBPACK_IMPORTED_MODULE_3__.loadInPostsFromPage)(resturl, postType, currentPage);
+    const nextPostsPromise = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.loadInPostsFromPage)(resturl, postType, currentPage);
     nextPostsPromise.then(nextPosts => {
       const postsAdded = nextPosts.length;
       const allPostsPulled = postsPulled.concat(nextPosts);
@@ -2959,35 +2965,12 @@ const FilterNew = data => {
       loadPosts(postsAdded, currentPage, allPostsPulled);
     });
   }
-
-  /**
-   * @param filter {Object}
-   */
   function applyFilter(filter) {
-    const filterOptions = Object.entries(filter);
-
-    // TODO: implement filtering of taxonomies
-    // one filter key exquals to one taxonomy to search for
-    // the filter value is the value to filter
-    console.log(allPosts);
+    const filterOptions = Object.entries(filter).filter(keyValue => keyValue[1] !== '');
     let toFilterData = allPosts;
-    filterOptions.forEach(tupel => {
-      const taxonomy = tupel[0];
-      const value = tupel[1];
-
-      //TODO: ain't filering right, probably .find issue
-      toFilterData = toFilterData.filter(element => {
-        const objTaxonomy = element.taxonomies[taxonomy];
-        if (objTaxonomy === undefined) {
-          return false;
-        }
-        return objTaxonomy.find(taxEntry => {
-          console.log(taxEntry.term_id);
-          console.log(value);
-          return taxEntry.term_id === value;
-        });
-      });
-    });
+    for (const filterValue of filterOptions) {
+      toFilterData = toFilterData.filter(post => (0,_utils__WEBPACK_IMPORTED_MODULE_2__.postInSelection)(filterValue, post));
+    }
     setFilteredPosts(toFilterData);
   }
   function applyValueToFilter(filterKey, filterValue) {
@@ -3003,6 +2986,7 @@ const FilterNew = data => {
       filterOption.onChange = selected => {
         applyValueToFilter(filterOption.filter_choices, selected);
       };
+      filterOption.url = filterOption.filter_choices.replaceAll('_', '-');
       return filterOption;
     });
 
@@ -3013,20 +2997,20 @@ const FilterNew = data => {
     setFilterOptions(preparedOptions);
   }
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    setFilteredPosts(allPosts);
-  }, [allPosts]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     applyFilter(filterSelected);
   }, [filterSelected]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const currentAmontShown = postsToDisplay.length;
-    setPostsToDisplay(filteredPosts.slice(0, currentAmontShown));
+    applyFilter(filterSelected);
+  }, [allPosts]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setPostsToDisplay(filteredPosts.slice(0, numberOfPostsVisible));
   }, [filteredPosts]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    loadPosts();
+    currentlyLoading(true);
     setUpFilters();
+    loadPosts();
   }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(_utils__WEBPACK_IMPORTED_MODULE_3__.rerenderSlick, [postsToDisplay]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(_utils__WEBPACK_IMPORTED_MODULE_2__.rerenderSlick, [postsToDisplay]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3035,12 +3019,12 @@ const FilterNew = data => {
     className: "mb-0 sm:mb-6"
   }, title)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container mx-auto"
-  }, currentlyMobile ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_MobileFilter__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, currentlyMobile ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_MobileFilter__WEBPACK_IMPORTED_MODULE_1__["default"], {
     data: data
   }) : null, shouldShowFilterItems ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: 'filter-items',
     className: 'grid grid-cols-12 justify-start mt-6 sm:mt-0'
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_FilterTextSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_FilterTextSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
     label: 'Product Search',
     name: 'Product Search',
     url: 'text',
@@ -3049,12 +3033,35 @@ const FilterNew = data => {
     // applyValueToFilter('searchText', newValue.trim().toLowerCase())
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'grid grid-cols-3 gap-y-14 sm:gap-7 mt-6 sm:mt-0'
-  }, filterOptions.map(_utils__WEBPACK_IMPORTED_MODULE_3__.filterOptionToElement))) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, filterOptions.map(_utils__WEBPACK_IMPORTED_MODULE_2__.filterOptionToElement)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-row gap-5 col-span-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_FilterCheckbox__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    key: 'sampleAvailable',
+    name: 'sampleAvailable',
+    label: translation.filter_sample_available,
+    url: 'purchasability',
+    onChange: isChecked => setFilterSelected(prevFilters => ({
+      ...prevFilters,
+      purchasability: isChecked ? 'muster-verfuegbar' : ''
+    }))
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "col-span-12 block mb-8"
+  }, !data.shop && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_FilterCheckbox__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    key: 'onlineAvailable',
+    name: 'onlineAvailable',
+    label: translation.filter_online_available,
+    url: 'online-available',
+    isChecked: filterSelected.onlineAvailable,
+    onChange: isChecked => setFilterSelected(prevFilters => ({
+      ...prevFilters,
+      onlineAvailable: isChecked
+    }))
+  })))) : null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'container mt-5'
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-3 mb-10 gap-y-14 sm:gap-7 filter-grid flex flex-wrap"
   }, postsToDisplay.length ? postsToDisplay.map((post, index) => {
-    return (0,_utils__WEBPACK_IMPORTED_MODULE_3__.renderPost)(post, index);
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_2__.renderPost)(post, index);
   }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'w-full text-center'
   }, translationObject.no_results))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3065,9 +3072,9 @@ const FilterNew = data => {
     onClick: showMore,
     disabled: !morePostsToDisplay(),
     className: "inline-flex items-center gap-x-2.5"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icons__WEBPACK_IMPORTED_MODULE_4__.PlusButtonIcon, null), translationObject.load_more), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icons__WEBPACK_IMPORTED_MODULE_3__.PlusButtonIcon, null), translationObject.load_more), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: 'text-base leading-normal italic'
-  }, postsToDisplay.length, " von ", filteredPosts.length, " Produkten")));
+  }, postsToDisplay.length, " von ", allPosts.length, " Produkten")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FilterNew);
 
@@ -3134,12 +3141,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const FilterCheckbox = data => {
-  data = data.data;
-  console.log(data);
+  data = data.data ? data.data : data;
   const key = data.key;
   const label = data.label;
   const name = data.name;
-  const urlParam = name;
+  const urlParam = data.url;
   const onChange = data.onChange;
   const [isChecked, setIsChecked] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(!!(0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam));
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3183,15 +3189,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const FilterDropdown = data => {
-  var _data$tax_options, _data$url, _getUrlParamValue;
-  data = data.data;
+  var _data$tax_options, _data$url;
+  data = data.data ? data.data : data;
   const key = data.key;
   const label = data.label;
   const name = data.name;
   const options = (_data$tax_options = data.tax_options) !== null && _data$tax_options !== void 0 ? _data$tax_options : [];
   const urlParam = (_data$url = data.url) !== null && _data$url !== void 0 ? _data$url : '';
   const onChange = data.onChange;
-  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((_getUrlParamValue = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam)) !== null && _getUrlParamValue !== void 0 ? _getUrlParamValue : 'none');
+  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    onChange(value);
+  }, [value]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const preSelectedOption = options.find(element => {
+      console.log((0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam));
+      return element.slug === (0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam);
+    });
+    setValue(preSelectedOption?.term_id);
+  }, []);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: key,
     className: "relative w-full max-w-full mb-2.5"
@@ -3201,12 +3217,11 @@ const FilterDropdown = data => {
     onChange: event => {
       const selected = event.target.value;
       setValue(selected);
-      onChange(selected);
     },
     className: "select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    value: "none"
-  }, "Select ", label), options.map(term => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: ""
+  }, "W\xE4hle ", label), options.map(term => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     key: term.term_id,
     value: term.term_id
   }, term.name))));
@@ -3300,6 +3315,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getUrlParamValue: () => (/* binding */ getUrlParamValue),
 /* harmony export */   isIterable: () => (/* binding */ isIterable),
 /* harmony export */   loadInPostsFromPage: () => (/* binding */ loadInPostsFromPage),
+/* harmony export */   postApplysToTax: () => (/* binding */ postApplysToTax),
+/* harmony export */   postInSelection: () => (/* binding */ postInSelection),
 /* harmony export */   renderPost: () => (/* binding */ renderPost),
 /* harmony export */   rerenderSlick: () => (/* binding */ rerenderSlick)
 /* harmony export */ });
@@ -3371,6 +3388,23 @@ function filterOptionToElement(filterOption) {
     default:
       return 'hello';
   }
+}
+function postApplysToTax(post, tax, value) {
+  const taxonomies = post.taxonomies;
+  const taxonomyToChecExists = taxonomies[tax] !== undefined;
+  if (!taxonomyToChecExists) {
+    return false;
+  }
+  const taxonomyToCheck = taxonomies[tax];
+  return taxonomyToCheck.findIndex(taxObj => {
+    return taxObj.term_id === value;
+  }) !== -1;
+}
+function postInSelection(filterSelection, post) {
+  const taxonomyName = filterSelection[0];
+  // noinspection JSCheckFunctionSignatures
+  const taxonomyValue = parseInt(filterSelection[1]);
+  return postApplysToTax(post, taxonomyName, taxonomyValue);
 }
 
 /***/ }),
@@ -5363,16 +5397,6 @@ const setupFilters = () => {
   //     div.classList.remove("filter-entry");
   // });
 
-  // Handle FilterShop entries
-  const filterShopDivs = document.querySelectorAll(".filter-entry-shop");
-  filterShopDivs.forEach(div => {
-    let data = JSON.parse(div.dataset.initialData);
-    const root = react_dom__WEBPACK_IMPORTED_MODULE_1___default().createRoot(div);
-    root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_FilterShop__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      ...data
-    }));
-    div.classList.remove("filter-entry-shop");
-  });
   const filterNew = document.querySelectorAll('.filter-entry');
   filterNew.forEach(div => {
     let data = JSON.parse(div.dataset.initialData);

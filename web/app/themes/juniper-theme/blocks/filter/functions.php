@@ -52,7 +52,8 @@ add_filter( 'timber/acf-gutenberg-blocks-data/filter',
 		$data_arr['restUrl']       = get_rest_url();
 		$data_arr['filterOptions'] = $context['fields']['filter_options'];
 		$data_arr['title']         = $context['fields']['title'];
-		$data_arr['shop']          = $context['fields']['shop'];
+
+		$data_arr['shop'] = $context['fields']['shop'];
 
 		$context['data'] = json_encode( $data_arr );
 
@@ -167,8 +168,6 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 
 	$post_arr = [];
 	foreach ( $filter_query->posts as $post ) {
-
-
 		$fields = get_fields( $post->ID );
 
 		$post_obj     = new stdClass();
@@ -185,7 +184,6 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 		$post_obj->description_text     = htmlspecialchars( $fields['wps_sp_description_text'] ?? '' );
 		$post_obj->features_text        = htmlspecialchars( $fields['wps_sp_features_text'] ?? '' );
 		$post_obj->areas_of_application = htmlspecialchars( $fields['wps_sp_areas_of_application_text'] ?? '' );
-
 
 		$taxonomies = get_post_taxonomies( $post );
 
@@ -206,11 +204,11 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 		$post_obj->taxonomies = $taxonomy_data;
 
 
-		$product_type = '';
 		$terms        = get_the_terms( $post, 'product_type' );
-		if ( $terms && ! is_wp_error( $terms ) ) {
-			$product_type = $terms[0]->name;
-		}
+		$product_type = $terms && ! is_wp_error( $terms )
+			? $terms[0]->name
+			: '';
+
 		$post_obj->product_type = $product_type;
 
 		$encodedHtml = base64_encode( do_shortcode( "[wps_get_product_card product_id='{$post->ID}']" ) );
@@ -219,7 +217,6 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 
 		$post_arr[] = $post_obj;
 	}
-
 
 	$data_arr['posts']       = $post_arr;
 	$data_arr['maxNumPages'] = $filter_query->max_num_pages;

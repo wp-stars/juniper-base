@@ -61,3 +61,27 @@ export function filterOptionToElement(filterOption) {
             return 'hello'
     }
 }
+
+export function postApplysToTax(post, tax, value) {
+    const taxonomies = post.taxonomies
+
+    const taxonomyToChecExists = taxonomies[tax] !== undefined
+
+    if(!taxonomyToChecExists) {
+        return false
+    }
+
+    const taxonomyToCheck = taxonomies[tax]
+
+    return taxonomyToCheck.findIndex((taxObj) => {
+        return taxObj.term_id === value
+    }) !== -1
+}
+
+export function postInSelection(filterSelection, post) {
+    const taxonomyName = filterSelection[0]
+    // noinspection JSCheckFunctionSignatures
+    const taxonomyValue = parseInt(filterSelection[1])
+
+    return postApplysToTax(post, taxonomyName, taxonomyValue)
+}

@@ -3,15 +3,13 @@ import {getUrlParamValue} from "../../utils";
 
 const FilterCheckbox = (data) => {
 
-	data = data.data
-
-	console.log(data)
+	data = data.data ? data.data : data
 
 	const key = data.key
 	const label = data.label
 	const name = data.name
 
-	const urlParam = name
+	const urlParam = data.url
 
 	const onChange = data.onChange
 
