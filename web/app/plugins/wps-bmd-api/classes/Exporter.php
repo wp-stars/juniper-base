@@ -276,12 +276,12 @@ class Exporter
 
             // quantitiy
             $quantity = $line_item->addChild('n1:OrderQuantity', $lineItem['n1:OrderQuantity']);
-            $quantity->addAttribute('bmd:Unit', 'Stk');
+            $quantity->addAttribute('bmd:Unit', '');
 
             // price
             $price = $line_item->addChild('n1:Price', $lineItem['n1:Price']);
             $price->addAttribute('bmd:PricePer', $lineItem['n1:OrderQuantity']);
-            $price->addAttribute('bmd:Unit', 'Stk');
+            $price->addAttribute('bmd:Unit', '');
             $price->addAttribute('bmd:Currency', 'EUR');
 
             $line_item->addChild('n1:DiscountAmount', $lineItem['n1:DiscountAmount']);
