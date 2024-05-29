@@ -30,4 +30,7 @@ if($price == 0){
 
 
 ?>
-<h5 class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?> mb-5"><?php echo $product->get_price_html(); ?></h5>
+<div class="flex gap-4">
+    <h5 class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?> mb-5"><?php echo $product->get_price_html(); ?></h5>
+    <div style="color: green;"><?php _e('Available', 'wps-juniper'); ?></div>
+</div>
