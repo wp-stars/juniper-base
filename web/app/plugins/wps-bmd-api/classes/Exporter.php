@@ -114,7 +114,7 @@ class Exporter
 
         // orderingParty
         $orderingParty = [];
-        $orderingParty['bmd:ExternalOrderingPartyID'] = get_current_user_id();
+        $orderingParty['bmd:ExternalOrderingPartyID'] = '';//get_current_user_id();
         $orderingParty['bmd:VATIdentificationNumber'] = $vat_id;
         $orderingParty['bmd:Email'] = $this->order->get_billing_email();
         $orderingParty['bmd:Address'] = $orderingPartyAddress;
