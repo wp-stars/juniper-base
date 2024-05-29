@@ -183,11 +183,22 @@ add_action('rest_api_init', function () {
 
 /**
  * Add the Musterbestellung product to the cart if it is not already in the cart.
- *
- * @param int $product_id The product ID to add to the cart.
  */
-function manageMusterboxProductInCart(int $product_id): void
+function manageMusterboxProductInCart(): void
 {
+
+    // de: 13819
+    // en: 13840
+
+    // get current language from wpml
+    $currentLang = apply_filters( 'wpml_current_language', NULL );
+
+    // Product ID of the Musterbestellung product
+    $product_id = 13840;
+    if($currentLang === 'de'){
+        $product_id = 13819;
+    }
+
     $cart = WC()->cart->get_cart();
     $musterboxIsinCart = false;
     $musterProductsSelected = 0;
@@ -235,14 +246,14 @@ function update_musterbestellung_products(WP_REST_Request $request) {
     }
 
     // 12603 product ID of the Musterbestellung product
-    manageMusterboxProductInCart(12603);
+    manageMusterboxProductInCart();
 
     if($updateCart) {
         foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
             if (isset($cart_item['data']) && $cart_item['data']->get_type() === 'musterbestellung') {
                 if (!empty($productIds)) {
 
-                    manageMusterboxProductInCart(12603);
+                    manageMusterboxProductInCart();
 
                     // Update cart item with custom data
                     WC()->cart->cart_contents[$cart_item_key]['musterbestellung_custom_data'] = array_map('setupMusterbestellungData', $productIds);
