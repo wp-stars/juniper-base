@@ -20,7 +20,7 @@ const FilterTextSearch = (data) => {
 		onChange(value)
 	}, [value]);
 	
-	return <div className={'flex items-center border-b py-2 col-span-12 max.w.96 mb-7 focus-visible:border-0'}>
+	return <div className={'flex items-center border-b py-2 col-span-12 mb-4 focus-visible:border-0'}>
 		<SearchGlassIcon />
 		<input
 			className={'appearance-none bg-transparent border-none w-full text-primary mr-3 py-1 px-2 leading-tight focus:outline-none focus:shadow-none focus-visible:ring-transparent'}

@@ -2,8 +2,11 @@ import React, {useEffect, useState} from "react";
 import {useMediaQuery} from "react-responsive";
 import MobileFilter from "./SingleFilterComponents/MobileFilter";
 import {
-    filterOptionToElement,
-    loadInPostsFromPage, postApplysToTax, postInSelection, postInTextSelection,
+    filterOptionToElement, isArray, loadInPostsFromPage,
+    postHasSampleAvailable,
+    postInSelection,
+    postInTextSelection,
+    postIsAvailableOnline,
     renderPost,
     rerenderSlick
 } from "../utils";
@@ -18,11 +21,21 @@ const FilterNew = (data) => {
 
     const resturl = data.restUrl
 
+    const sample_available = data.sample_available
+    const online_available = data.online_available
+
+    const show_sample_available_filter = sample_available === 'filter'
+    const show_online_available_filter = online_available === 'filter'
+
+    const always_filter_sample_available = sample_available === 'outright'
+    const always_filter_online_available = online_available === 'outright'
+
     // noinspection JSUnresolvedReference
     const translationObject = translation ?? {
         loading: '',
         no_results: '',
         open_filter: '',
+        results_label: '',
         metals_accessories: '',
         colors: '',
         product_category: '',
@@ -92,33 +105,48 @@ const FilterNew = (data) => {
     }
 
     function applyFilter(filter) {
-        const filterOptions = Object.entries(filter).filter(keyValue => keyValue[1] !== '')
+        let filterOptions = Object.entries(filter).filter(keyValue => keyValue[1] !== '')
 
         let toFilterData = allPosts
 
-        if(data.shop) {
-            filterOptions.push(['onlineAvailable', true])
-        }
+        // filter out false values
+        filterOptions = filterOptions.filter((filter) => filter[1] && filter[1].length !== 0)
 
-        for (const filterValue of filterOptions) {
-            switch (filterValue[0]) {
+        for (const filterOption of filterOptions) {
+            const filterOptionName = filterOption[0]
+            const filterValue = filterOption[1]
+
+            console.log(filterValue)
+
+            switch (filterOptionName) {
                 case 'searchText':
                     toFilterData = toFilterData.filter((post) => postInTextSelection(filterValue[1].toLowerCase().trim(), post))
                     break
-                case 'purchasability':
-                    toFilterData = toFilterData.filter((post) => post.taxonomies["purchasability"]?.some(term => term.slug === filterValue[1]))
+                case 'sampleAvailable':
+                    toFilterData = toFilterData.filter(postHasSampleAvailable)
                     break
                 case 'onlineAvailable':
-                    if(!filterValue[1]) { continue }
-                    toFilterData = toFilterData.filter((post) => post.price != null && post.price > 0)
+                    toFilterData = toFilterData.filter(postIsAvailableOnline)
                     break
                 default:
-                    toFilterData = toFilterData.filter((post) => postInSelection(filterValue, post))
+                    if(isArray(filterValue)) {
+                        toFilterData = toFilterData.filter((post) => filterValue.some((singleValue) => postInSelection(filterOptionName, singleValue.value, post)))
+                    } else {
+                        toFilterData = toFilterData.filter((post) => postInSelection(filterOptionName, filterValue.value, post))
+                    }
             }
 
         }
 
         setFilteredPosts(toFilterData)
+    }
+
+    function setUpFilterPresets() {
+        setFilterSelected(prevFilter => ({
+            ...prevFilter,
+            sampleAvailable: always_filter_sample_available,
+            onlineAvailable: always_filter_online_available
+        }))
     }
 
     function applyValueToFilter(filterKey, filterValue) {
@@ -133,8 +161,6 @@ const FilterNew = (data) => {
     function setUpFilters() {
         const filterOptions = data.filterOptions ?? []
 
-        console.log(filterOptions)
-
         const preparedOptions = filterOptions.map((filterOption) => {
             filterOption.onChange = (selected) => {
                 applyValueToFilter(filterOption.filter_choices, selected)
@@ -142,7 +168,7 @@ const FilterNew = (data) => {
 
             filterOption.chooseTag = translationObject.choose
 
-            filterOption.label = translationObject[filterOption.name] ?  translationObject[filterOption.name] : filterOption.label
+            filterOption.label = translationObject[filterOption.name] ? translationObject[filterOption.name] : filterOption.label
 
             filterOption.url = filterOption.filter_choices.replaceAll('_', '-')
 
@@ -173,6 +199,7 @@ const FilterNew = (data) => {
         currentlyLoading(true)
 
         setUpFilters()
+        setUpFilterPresets()
         loadPosts()
     }, []);
 
@@ -199,32 +226,36 @@ const FilterNew = (data) => {
                         <div className={'grid grid-cols-3 gap-y-14 sm:gap-7 mt-6 sm:mt-0'}>
                             {filterOptions.map(filterOptionToElement)}
                         </div>
-                        <div className="flex flex-row gap-5 col-span-12">
-                            <div>
-                                <FilterCheckbox
+                        <div className="flex flex-row justify-between gap-5 col-span-12">
+                            <div className={'flex flex-row gap-5'}>
+                                {show_sample_available_filter && <FilterCheckbox
                                     key={'sampleAvailable'}
                                     name={'sampleAvailable'}
                                     label={translation.filter_sample_available}
                                     url={'purchasability'}
-                                    onChange={(isChecked) => setFilterSelected(prevFilters => ({
-                                        ...prevFilters,
-                                        purchasability: isChecked ? 'muster-verfuegbar' : ''
-                                    }))}
-                                />
-                            </div>
-                            <div className="col-span-12 block mb-8">
-                                {!data.shop && (
-                                    <FilterCheckbox
-                                        key={'onlineAvailable'}
-                                        name={'onlineAvailable'}
-                                        label={translation.filter_online_available}
-                                        url={'online-available'}
-                                        isChecked={filterSelected.onlineAvailable}
-                                        onChange={(isChecked) => setFilterSelected(prevFilters => ({
+                                    onChange={(isChecked) => setFilterSelected(prevFilters => (
+                                        {
+                                            ...prevFilters,
+                                            sampleAvailable: isChecked
+                                        }
+                                    ))}
+                                />}
+                                {show_online_available_filter && <FilterCheckbox
+                                    key={'onlineAvailable'}
+                                    name={'onlineAvailable'}
+                                    label={translation.filter_online_available}
+                                    url={'online-available'}
+                                    isChecked={filterSelected.onlineAvailable}
+                                    onChange={(isChecked) => setFilterSelected(prevFilters => (
+                                        {
                                             ...prevFilters,
                                             onlineAvailable: isChecked
-                                        }))}
-                                    />)}
+                                        }
+                                    ))}
+                                />}
+                            </div>
+                            <div className={'flex flex-row gap-3 text-sm font-medium text-gray-900 mr-1'}>
+                                {translationObject.results_label}: {filteredPosts.length}
                             </div>
                         </div>
                     </>
@@ -243,7 +274,7 @@ const FilterNew = (data) => {
             </div>
             <div className={'container flex justify-center items-center my-24 flex-col gap-y-6'}>
                 {isCurrentlyLoading
-                    ? <span className={'loading-spinner'}/>
+                    ? <span className={'loading-spinner'} />
                     : morePostsToDisplay() && (
                     <button onClick={showMore} disabled={!morePostsToDisplay()}
                             className="inline-flex items-center gap-x-2.5">
