@@ -63,15 +63,15 @@ add_filter( 'timber/acf-gutenberg-blocks-data/filter', function ( $context ) {
 	$data_arr['postType']      = $context['fields']['post_type'];
 	$data_arr['restUrl']       = get_rest_url();
 	$data_arr['filterOptions'] = $context['fields']['filter_options'];
-	$data_arr['title']         = $context['fields']['title'];
+	$data_arr['title']         = __($context['fields']['title'], 'text-domain');
 
-	$data_arr['shop'] = $context['fields']['shop'];
+	$data_arr['sample_available'] = $context['fields']['sample_available'];
+	$data_arr['online_available'] = $context['fields']['online_available'];
 
 	$context['data'] = json_encode( $data_arr );
 
 	return $context;
-}
-);
+});
 
 function juniper_excerpt_length( $length ) {
 	return 20;

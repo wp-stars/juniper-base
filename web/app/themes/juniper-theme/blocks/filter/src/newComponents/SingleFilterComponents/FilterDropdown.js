@@ -1,54 +1,109 @@
 import React, {useEffect, useState} from "react";
 import {getUrlParamValue} from "../../utils";
 
+import Select from "react-select";
+
 const FilterDropdown = (data) => {
 
-	data = data.data ? data.data : data
+    data = data.data ? data.data : data
 
-	const key = data.key
-	const label = data.label
+    const key = data.key
+    const label = data.label
+    const name = data.name
+    const chooseTag = data.chooseTag
+    const urlParam = data.url ?? ''
+    const onChange = data.onChange
 
-	const name = data.name
+    const multiSelection = data.multiSelect ?? true
 
-	const chooseTag = data.chooseTag
+    const taxOptionsRaw = data.tax_options ?? []
 
-	const [options, setOptions] = useState(data.tax_options ?? []);
+    const [options, setOptions] = useState([]);
 
-	const urlParam = data.url ?? ''
+    const [values, setValues] = useState([]);
 
-	const onChange = data.onChange
+    function setDefaultSelectionFromUrl() {
+        const urlParamValueRaw = getUrlParamValue(urlParam)
 
-	const [value, setValue] = useState('');
+        const urlParamValues = urlParamValueRaw.split(',')
 
-	useEffect(() => {
-		onChange(value)
-	}, [value]);
+        const preSelectedOptions = options.filter((element) => {
+            return urlParamValues.includes(element.slug)
+        })
 
-	useEffect(() => {
-		const preSelectedOption = options.find((element) => {
-			return element.slug === getUrlParamValue(urlParam)
-		})
+        const preSelectedOptionTermIds = preSelectedOptions.map((term) => term.term_id)
 
-		setValue(preSelectedOption ? preSelectedOption.term_id : '')
-	}, [])
+        setValues(preSelectedOptionTermIds)
+    }
 
-	return <div key={key} className="relative w-full max-w-full mb-2.5">
-		<label>{label}</label>
-		<select
-			value={value} // This will show the current state or "none" if undefined
-			onChange={(event) => {
-				const selected = event.target.value
-				setValue(selected)
-			}}
-			className="select-filter block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-[0.95rem] pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-[#737373] text-sm"
-		>
-			<option value="">{chooseTag} {label}</option>
-			{options.map((term) => (
-				<option key={term.term_id}
-						value={term.term_id}>{term.name}</option>
-			))}
-		</select>
-	</div>
+    function mapToOptionObject(tax) {
+        return {label: tax.name, value: tax.term_id};
+    }
+
+    function addCategoryToOptions(newCategory) {
+        setOptions((prevOptions) => {
+            prevOptions.push(newCategory)
+            return prevOptions
+        })
+    }
+
+    function generateCategoryBaseConstruct(name) {
+        return {
+            label: name,
+            options: []
+        };
+    }
+
+    function generateCategoryOfParent(parent) {
+        const newCategory = generateCategoryBaseConstruct(parent.name);
+
+        newCategory.options = taxOptionsRaw
+            .filter((tax) => tax.parent === parent.term_id || tax.term_id === parent.term_id)
+            .map(mapToOptionObject)
+            // sorts category head to top
+            .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label ? -1 : 1)
+
+        return newCategory;
+    }
+
+    function prepareSelectorOptions() {
+        const parents = taxOptionsRaw
+            .filter((tax) => tax.parent)
+            .map((tax) => tax.parent)
+            .filter((tax, index, self) => self.indexOf(tax) === index)
+
+        const parentTaxms = taxOptionsRaw.filter((tax) => parents.includes(tax.term_id))
+
+        parentTaxms.forEach((parent) => {
+            const category = generateCategoryOfParent(parent);
+
+            addCategoryToOptions(category);
+        })
+        
+        const othersCat = generateCategoryBaseConstruct('others');
+
+        othersCat.options = taxOptionsRaw.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject)
+
+        addCategoryToOptions(othersCat);
+    }
+
+    useEffect(() => {
+        prepareSelectorOptions()
+        setDefaultSelectionFromUrl();
+    }, [])
+
+    return <div key={key} className="relative w-full max-w-full mb-4">
+        <label>{label}</label>
+        <Select
+            isMulti={multiSelection}
+            defaultValue={values}
+            name={label}
+            options={options}
+            onChange={(newValue) => {
+                onChange(newValue)
+            }}
+        />
+    </div>
 }
 
 export default FilterDropdown

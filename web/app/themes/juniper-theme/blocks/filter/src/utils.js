@@ -1,11 +1,14 @@
 import React from "react";
-import FilterCheckbox from "./newComponents/SingleFilterComponents/FilterCheckbox";
 import FilterDropdown from "./newComponents/SingleFilterComponents/FilterDropdown";
 import axios from "axios";
 
 export function isIterable(obj) {
     // checks for null and undefined
     return typeof obj[Symbol.iterator] === 'function';
+}
+
+export function isArray(variable) {
+    return Array.isArray(variable)
 }
 
 export function rerenderSlick() {
@@ -47,19 +50,13 @@ export function getUrlParamValue(param) {
     
     const foundValue = queryArray.find((element) => element.key === param)
 
-    return foundValue ? foundValue.value : null
+    return foundValue
+        ? decodeURIComponent(foundValue.value)
+        : ''
 }
 
-
 export function filterOptionToElement(filterOption) {
-    switch (filterOption.type) {
-        case 'checkbox':
-            return <FilterCheckbox data={filterOption}/>
-        case 'dropdown':
-            return <FilterDropdown data={filterOption}/>
-        default:
-            return 'hello'
-    }
+    return <FilterDropdown data={filterOption}/>
 }
 
 export function postApplysToTax(post, tax, value) {
@@ -78,16 +75,14 @@ export function postApplysToTax(post, tax, value) {
     }) !== -1
 }
 
-export function postInSelection(filterSelection, post) {
-    const taxonomyName = filterSelection[0]
+export function postInSelection(taxonomyName, taxonomyValue, post) {
     // noinspection JSCheckFunctionSignatures
-    const taxonomyValue = parseInt(filterSelection[1])
+    taxonomyValue = parseInt(taxonomyValue)
 
     return postApplysToTax(post, taxonomyName, taxonomyValue)
 }
 
 export function postInTextSelection(text, post) {
-
     return post.post_title.toLowerCase().includes(text)
         || post.excerpt.toLowerCase().includes(text)
         || post.description_text && post.description_text.toLowerCase().includes(text)
@@ -96,4 +91,12 @@ export function postInTextSelection(text, post) {
         || post.features_text && post.features_text.toLowerCase().includes(text)
         || post.areas_of_application && post.areas_of_application.toLowerCase().includes(text)
         || Object.values(post.taxonomies).some(taxonomy => taxonomy.some(term => term.name.toLowerCase().includes(text)))
+}
+
+export function postIsAvailableOnline(post) {
+    return post.price != null && post.price > 0
+}
+
+export function postHasSampleAvailable(post) {
+    return post.taxonomies["purchasability"]?.some(term => term.slug === 'muster-verfuegbar')
 }
