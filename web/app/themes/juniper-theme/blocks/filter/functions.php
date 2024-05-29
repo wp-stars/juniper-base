@@ -145,6 +145,13 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 		];
 	}
 
+    // exclude invisible products
+    $tax_query[] = [
+        'taxonomy' => 'product_visibility',
+        'field'    => 'name',
+        'terms'    => 'exclude-from-catalog',
+        'operator' => 'NOT IN',
+    ];
 
 	$args = [
 		'post_type' => $post_type,
