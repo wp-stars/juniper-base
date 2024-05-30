@@ -721,3 +721,7 @@ add_filter('woocommerce_checkout_fields', function($fields){
 add_action('woocommerce_checkout_billing', function(){
     echo '<div class="my-8">' . __('*) Required', 'wps-juniper') . '</div>';
 }, 9999);
+
+add_filter('woocommerce_get_checkout_page_id', function($page_id) {
+	return apply_filters('wpml_object_id', $page_id, 'page');
+});
