@@ -11,6 +11,7 @@ import {
 import {PlusButtonIcon} from "./Icons";
 import FilterTextSearch from "./SingleFilterComponents/FilterTextSearch";
 import FilterCheckbox from "./SingleFilterComponents/FilterCheckbox";
+import translationObject from "../TranslationObject";
 
 const FilterNew = (data) => {
     const title = data.title ?? '';
@@ -28,24 +29,6 @@ const FilterNew = (data) => {
     const always_filter_sample_available = sample_available === 'outright'
     const always_filter_online_available = online_available === 'outright'
 
-    // noinspection JSUnresolvedReference
-    const translationObject = translation ?? {
-        loading: '',
-        no_results: '',
-        open_filter: '',
-        results_label: '',
-        metals_accessories: '',
-        colors: '',
-        product_category: '',
-        checkbox: '',
-        product_search: '',
-        load_more: '',
-        choose: '',
-        filter_delete_button: '',
-        filter_sample_available: '',
-        filter_online_available: '',
-    };
-
     const postsPerPage = 6
 
     const [numberOfPostsVisible, setNumberOfPostsVisible] = useState(postsPerPage);
@@ -55,8 +38,6 @@ const FilterNew = (data) => {
     // selection of the filter (what to filter for)
     const [filterSelected, setFilterSelected] = useState({})
 
-    const [shouldShowFilterItems, showFilterItems] = useState(true)
-
     // all posts that exist
     const [allPosts, setAllPosts] = useState(data.posts)
     // posts after being run through the filter
@@ -65,8 +46,6 @@ const FilterNew = (data) => {
     const [postsToDisplay, setPostsToDisplay] = useState(data.posts.slice(0, postsPerPage))
 
     const [isCurrentlyLoading, currentlyLoading] = useState(false)
-
-    const currentlyMobile = useMediaQuery({query: '(max-width: 640px) '})
 
     function morePostsToDisplay() {
         return postsToDisplay.length < filteredPosts.length
@@ -125,7 +104,7 @@ const FilterNew = (data) => {
                     toFilterData = toFilterData.filter(postIsAvailableOnline)
                     break
                 default:
-                    if(isArray(filterValue)) {
+                    if (isArray(filterValue)) {
                         toFilterData = toFilterData.filter((post) => filterValue.some((singleValue) => postInSelection(filterOptionName, singleValue.value, post)))
                     } else {
                         toFilterData = toFilterData.filter((post) => postInSelection(filterOptionName, filterValue.value, post))
@@ -161,8 +140,6 @@ const FilterNew = (data) => {
             filterOption.onChange = (selected) => {
                 applyValueToFilter(filterOption.filter_choices, selected)
             }
-
-            filterOption.chooseTag = translationObject.choose
 
             filterOption.label = translationObject[filterOption.name] ? translationObject[filterOption.name] : filterOption.label
 
@@ -265,7 +242,7 @@ const FilterNew = (data) => {
             </div>
             <div className={'container flex justify-center items-center my-24 flex-col gap-y-6'}>
                 {isCurrentlyLoading
-                    ? <span className={'loading-spinner'} />
+                    ? <span className={'loading-spinner'}/>
                     : morePostsToDisplay() && (
                     <button onClick={showMore} disabled={!morePostsToDisplay()}
                             className="inline-flex items-center gap-x-2.5">

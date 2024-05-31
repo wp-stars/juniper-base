@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {getUrlParamValue} from "../../utils";
 
-import Select, { components, GroupProps } from 'react-select';
+import Select, { components } from 'react-select';
 
 import colorCodes from "../../ColorCodes";
 import convert from "color-convert";
+import translationObject from "../../TranslationObject";
 
 const FilterDropdown = (data) => {
 
@@ -12,8 +13,6 @@ const FilterDropdown = (data) => {
 
     const key = data.key
     const label = data.label
-    const name = data.name
-    const chooseTag = data.chooseTag
     const urlParam = data.url ?? ''
     const onChange = data.onChange
 
@@ -127,6 +126,7 @@ const FilterDropdown = (data) => {
             onChange={(newValue) => {
                 onChange(newValue)
             }}
+            placeholder={translationObject.product_search}
             components={{ Option }}
         />
     </div>
