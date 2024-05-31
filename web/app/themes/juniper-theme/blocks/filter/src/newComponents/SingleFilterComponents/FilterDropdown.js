@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {getUrlParamValue} from "../../utils";
 
-import Select from "react-select";
+import Select, { components, GroupProps } from 'react-select';
+
+import colorCodes from "../../ColorCodes";
+import convert from "color-convert";
 
 const FilterDropdown = (data) => {
 
@@ -36,8 +39,22 @@ const FilterDropdown = (data) => {
         setValues(preSelectedOptionTermIds)
     }
 
+    /**
+     * @param baseColor {String}
+     * @returns {string}
+     */
+    function generateGradientCssTagForColor(baseColor) {
+        const colorCodes = convert.hex.rgb(baseColor)
+
+        const colorCodesJoin = colorCodes.join(',')
+
+        return `linear-gradient(90deg, rgba(${colorCodesJoin},0) 0%, rgba(${colorCodesJoin},0.7581232322030375) 35%, rgba(${colorCodesJoin},1) 59%)`
+    }
+
     function mapToOptionObject(tax) {
-        return {label: tax.name, value: tax.term_id};
+        const colorStyle = generateGradientCssTagForColor(colorCodes.getEntryWithSlugLike(tax.slug))
+
+        return {label: tax.name, value: tax.term_id, colorStyle: colorStyle};
     }
 
     function addCategoryToOptions(newCategory) {
@@ -79,7 +96,7 @@ const FilterDropdown = (data) => {
 
             addCategoryToOptions(category);
         })
-        
+
         const othersCat = generateCategoryBaseConstruct('others');
 
         othersCat.options = taxOptionsRaw.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject)
@@ -92,6 +109,14 @@ const FilterDropdown = (data) => {
         setDefaultSelectionFromUrl();
     }, [])
 
+    const Option = (props) => {
+        return (
+            <div style={{background: props.data.colorStyle}}>
+                <components.Option {...props} />
+            </div>
+        );
+    };
+
     return <div key={key} className="relative w-full max-w-full mb-4">
         <label>{label}</label>
         <Select
@@ -102,6 +127,7 @@ const FilterDropdown = (data) => {
             onChange={(newValue) => {
                 onChange(newValue)
             }}
+            components={{ Option }}
         />
     </div>
 }

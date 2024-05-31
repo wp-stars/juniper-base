@@ -109,14 +109,12 @@ const FilterNew = (data) => {
 
         let toFilterData = allPosts
 
-        // filter out false values
+        // filter out false and empty values
         filterOptions = filterOptions.filter((filter) => filter[1] && filter[1].length !== 0)
 
         for (const filterOption of filterOptions) {
             const filterOptionName = filterOption[0]
             const filterValue = filterOption[1]
-
-            console.log(filterValue)
 
             switch (filterOptionName) {
                 case 'searchText':
