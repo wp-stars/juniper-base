@@ -402,8 +402,10 @@ function wps_add_to_context( $context ) {
 
     if($current_language === 'de'){
         $context['page_banner']     = 'Entdecken Sie unseren neuen Galvano Online-Shop';
+        $context['products_products_button_label'] = 'Produkte';
     }else{
         $context['page_banner']     = 'Discover our new Galvano Online Shop';
+        $context['products_products_button_label'] = 'Products';
     }
 
     if(WC()->cart) {
@@ -715,4 +717,12 @@ add_filter('woocommerce_checkout_fields', function($fields){
     }
     return $fields;
 
+});
+
+add_action('woocommerce_checkout_billing', function(){
+    echo '<div class="my-8">' . __('*) Required', 'wps-juniper') . '</div>';
+}, 9999);
+
+add_filter('woocommerce_get_checkout_page_id', function($page_id) {
+	return apply_filters('wpml_object_id', $page_id, 'page');
 });

@@ -145,6 +145,13 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 		];
 	}
 
+    // exclude invisible products
+    $tax_query[] = [
+        'taxonomy' => 'product_visibility',
+        'field'    => 'name',
+        'terms'    => 'exclude-from-catalog',
+        'operator' => 'NOT IN',
+    ];
 
 	$args = [
 		'post_type' => $post_type,
@@ -156,7 +163,8 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 		$args['tax_query'] = $tax_query;
 	}
 
-	$cachingToken  = 'wps_filter_cache_' . md5( json_encode( $args ) );
+    $currentLang = apply_filters( 'wpml_current_language', NULL );
+    $cachingToken  = 'wps_filter_cache_' . $currentLang . '_' . md5( json_encode( $args ) );
 	$cachedData    = get_transient( $cachingToken );
 	$cacheDuration = HOUR_IN_SECONDS;
 
