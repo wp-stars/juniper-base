@@ -678,8 +678,8 @@ add_action('init', function(){
         $site_url = '/';
         $shop_url = get_permalink(wc_get_page_id('shop'));
 
-        $site_caption = __('Zurück zur Startseite', 'wps');
-        $shop_caption = __('Online Shop entdecken', 'wps');
+        $site_caption = __('Back to the Homepage', 'wps-juniper'); // Zurück zur Startseite
+        $shop_caption = __('Discover our online shop', 'wps-juniper'); // Online Shop entdecken
 
         ob_start();
         ?>
