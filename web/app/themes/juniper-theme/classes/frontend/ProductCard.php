@@ -12,27 +12,24 @@ class ProductCard {
     }
 
     public function product_card_html( $atts ) {
-        header('Content-Type: text/html; charset=utf-8');
+//        header('Content-Type: text/html; charset=utf-8');
         $product_id = $atts['product_id'];
         $product = wc_get_product($product_id);
 
-        $html = "";
+		$product_title = mb_convert_encoding( $product->get_title(), 'ISO-8859-1');
 
-      
-        $metals_terms = wp_get_post_terms($product_id, 'metals-and-accessories', array('fields' => 'names'));
+	    $metals_terms = wp_get_post_terms( $product_id, 'metals-and-accessories', [ 'fields' => 'names' ] );
         // $color_terms = wp_get_post_terms($product_id, 'color', array('fields' => 'names'));
-        $category_terms = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'names'));
+        $category_terms = wp_get_post_terms( $product_id, 'product_cat', [ 'fields' => 'names' ] );
         // $application_terms = wp_get_post_terms($product_id, 'application', array('fields' => 'names'));
 
         $terms = array_merge($metals_terms, $category_terms);
-
 
         // Check if there are any terms and not an error
         if (!is_wp_error($terms) && !empty($terms)) {
             // Implode the names array to a single string separated by "|"
             // $terms_string = ;
             $terms_string = htmlspecialchars(implode(' | ', $terms), ENT_QUOTES, 'UTF-8');
-
         } else {
             $terms_string = '';
         }
@@ -73,7 +70,7 @@ class ProductCard {
                 <div class="flex flex-col px-[20px] justify-between grow">
                     <p class="uppercase mb-8 text-xs"><?= $terms_string; ?></p>
                     <a href="<?= $product->get_permalink(); ?>">
-                        <h4 class="mb-8"><?= $product->get_title(); ?></h4>
+                        <h4 class="mb-8"><?= $product_title ?></h4>
                     </a>
                     <h5 class="mb-8">
                         <?php 
