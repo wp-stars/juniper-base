@@ -263,6 +263,7 @@ function enqueue_ls_scripts() {
 
     $translation_array = array(
         'loading' => __('Laden...', 'text-domain'),
+		'results_label' => __('Produkte gefunden', 'text-domain'),
         'no_results' => __('Keine Ergebnise.', 'text-domain'),
         'open_filter' => __('Filter öffnen', 'text-domain'),
         'metals-and-accessories' => __(' Metalle und Zubehör', 'text-domain'),
