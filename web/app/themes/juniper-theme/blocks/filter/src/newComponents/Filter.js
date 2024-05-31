@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {useMediaQuery} from "react-responsive";
-import MobileFilter from "./SingleFilterComponents/MobileFilter";
 import {
     filterOptionToElement, isArray, loadInPostsFromPage,
     postHasSampleAvailable,
@@ -207,60 +205,55 @@ const FilterNew = (data) => {
         <div className={"w-full"}>
             <div className={"container"}><h1 className={"mb-0 sm:mb-6"}>{title}</h1></div>
             <div className={"container mx-auto"}>
-                {currentlyMobile ? <MobileFilter data={data}/> : null}
-                {shouldShowFilterItems ?
-                    <>
-                        <div id={'filter-items'} className={'grid grid-cols-12 justify-start mt-6 sm:mt-0'}>
-                            <FilterTextSearch
-                                label={'Product Search'}
-                                name={'Product Search'}
-                                url={'text'}
-                                placeholder={translationObject.product_search}
-                                onChange={(newValue) =>
-                                    applyValueToFilter('searchText', newValue.trim().toLowerCase())
+                <div id={'filter-items'} className={'grid grid-cols-12 justify-start mt-6 sm:mt-0'}>
+                    <FilterTextSearch
+                        label={'Product Search'}
+                        name={'Product Search'}
+                        url={'text'}
+                        placeholder={translationObject.product_search}
+                        onChange={(newValue) =>
+                            applyValueToFilter('searchText', newValue.trim().toLowerCase())
+                        }
+                    />
+                </div>
+                <div className={'grid grid-cols-1 md:grid-cols-3 sm:gap-7 mt-6 sm:mt-0'}>
+                    {filterOptions.map(filterOptionToElement)}
+                </div>
+                <div className="flex flex-row justify-between gap-5 col-span-12">
+                    <div className={'flex flex-row gap-5'}>
+                        {show_sample_available_filter && <FilterCheckbox
+                            key={'sampleAvailable'}
+                            name={'sampleAvailable'}
+                            label={translation.filter_sample_available}
+                            url={'purchasability'}
+                            onChange={(isChecked) => setFilterSelected(prevFilters => (
+                                {
+                                    ...prevFilters,
+                                    sampleAvailable: isChecked
                                 }
-                            />
-                        </div>
-                        <div className={'grid grid-cols-3 gap-y-14 sm:gap-7 mt-6 sm:mt-0'}>
-                            {filterOptions.map(filterOptionToElement)}
-                        </div>
-                        <div className="flex flex-row justify-between gap-5 col-span-12">
-                            <div className={'flex flex-row gap-5'}>
-                                {show_sample_available_filter && <FilterCheckbox
-                                    key={'sampleAvailable'}
-                                    name={'sampleAvailable'}
-                                    label={translation.filter_sample_available}
-                                    url={'purchasability'}
-                                    onChange={(isChecked) => setFilterSelected(prevFilters => (
-                                        {
-                                            ...prevFilters,
-                                            sampleAvailable: isChecked
-                                        }
-                                    ))}
-                                />}
-                                {show_online_available_filter && <FilterCheckbox
-                                    key={'onlineAvailable'}
-                                    name={'onlineAvailable'}
-                                    label={translation.filter_online_available}
-                                    url={'online-available'}
-                                    isChecked={filterSelected.onlineAvailable}
-                                    onChange={(isChecked) => setFilterSelected(prevFilters => (
-                                        {
-                                            ...prevFilters,
-                                            onlineAvailable: isChecked
-                                        }
-                                    ))}
-                                />}
-                            </div>
-                            <div className={'flex flex-row gap-3 text-sm font-medium text-gray-900 mr-1'}>
-                                {translationObject.results_label}: {filteredPosts.length}
-                            </div>
-                        </div>
-                    </>
-                    : null}
+                            ))}
+                        />}
+                        {show_online_available_filter && <FilterCheckbox
+                            key={'onlineAvailable'}
+                            name={'onlineAvailable'}
+                            label={translation.filter_online_available}
+                            url={'online-available'}
+                            isChecked={filterSelected.onlineAvailable}
+                            onChange={(isChecked) => setFilterSelected(prevFilters => (
+                                {
+                                    ...prevFilters,
+                                    onlineAvailable: isChecked
+                                }
+                            ))}
+                        />}
+                    </div>
+                    <div className={'flex flex-row gap-3 text-sm font-medium text-gray-900 mr-1'}>
+                        {translationObject.results_label}: {filteredPosts.length}
+                    </div>
+                </div>
             </div>
             <div className={'container mt-5'}>
-                <div className={"grid grid-cols-3 mb-10 gap-y-14 sm:gap-7 filter-grid flex flex-wrap"}>
+                <div className={"grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex flex-wrap"}>
                     {postsToDisplay.length ?
                         postsToDisplay.map((post, index) => {
                             return renderPost(post, index)
