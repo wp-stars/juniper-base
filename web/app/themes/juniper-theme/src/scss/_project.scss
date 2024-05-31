@@ -1401,3 +1401,17 @@ div.ls-news-slider-post-card div.ls-post-card__header div.ls-post-card__categpor
     justify-content: center;
     align-items: center;
 }
+
+div.wp-block-ls-text-media__column ul li {
+
+    display: block;
+
+    &::before {
+        content: "¯";
+        padding-right: 10px;
+        font-size: 1em;
+        line-height: 1em;
+        vertical-align: bottom;
+        font-weight: bold;
+    }
+}
