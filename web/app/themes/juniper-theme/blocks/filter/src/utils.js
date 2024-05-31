@@ -98,5 +98,5 @@ export function postIsAvailableOnline(post) {
 }
 
 export function postHasSampleAvailable(post) {
-    return post.taxonomies["purchasability"]?.some(term => term.slug === 'muster-verfuegbar')
+    return post.taxonomies["purchasability"]?.some(term => term.slug === 'muster-verfuegbar' || term.slug === 'sample-available-en')
 }

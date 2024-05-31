@@ -42,18 +42,7 @@ add_filter( 'timber/acf-gutenberg-blocks-data/filter', function ( $context ) {
 			                    'hide_empty' => false, // Set to true if you want to exclude terms with no posts.
 		                    ] );
 
-		$translated_term_ids = [];
-
-		foreach ( $terms as $term ) {
-			$translated_term_ids[] = apply_filters( 'wpml_object_id', $term->term_id, $tax, false, $current_language );
-		}
-
-		$terms = array_filter($terms, function($term) use ($translated_term_ids) {
-			return in_array( $term->term_id, $translated_term_ids);
-		});
-
 		$context['fields']['filter_options'][ $key ]['tax_options'] = $terms;
-		$context['fields']['filter_options'][ $key ]['tax_options_translation_ids'] = $translated_term_ids;
 	}
 
 	$data_arr = wps_get_filter_posts( $post_type, $taxonomies = [], 1, '' );

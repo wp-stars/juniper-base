@@ -264,7 +264,8 @@ function enqueue_ls_scripts() {
     $translation_array = array(
         'loading' => __('Loading...', 'wps-juniper'), // 'Laden...
         'no_results' => __('No results.', 'wps-juniper'), // Keine Ergebnisse.
-        'open_filter' => __('Open filter', 'wps-juniper'), // Filter öffnen
+        'select_label' => __('Select...', 'wps-juniper'),
+		'open_filter' => __('Open filter', 'wps-juniper'), // Filter öffnen
         'metals-and-accessories' => __('Metals and accessories', 'wps-juniper'), // Metalle und Zubehör
         'color' => __('Colors', 'wps-juniper'), // Farben
         'product_cat' => __('Categories', 'wps-juniper'), // Kategorien
@@ -272,8 +273,8 @@ function enqueue_ls_scripts() {
         'product_search' => __('Search products...', 'wps-juniper'), // Suche Produkte
         'load_more' => __('load more', 'wps-juniper'), // mehr laden
 		'choose' => __('select', 'wps-juniper'), // Wähle
-	    'filter_delete_button' => __('Reset filter', 'wps-juniper'), // Alle Filter zurücksetzten
-	    'filter_sample_available' => __('Sample available', 'wps-juniper'), // Muster verfügbar
+		'filter_delete_button' => __('Reset filter', 'wps-juniper'), // Alle Filter zurücksetzten
+		'filter_sample_available' => __('Sample available', 'wps-juniper'), // Muster verfügbar
 		'filter_online_available' => __('Online available', 'wps-juniper'), // Online verfügbar
     );
 
