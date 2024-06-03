@@ -126,7 +126,7 @@ const FilterDropdown = (data) => {
             onChange={(newValue) => {
                 onChange(newValue)
             }}
-            placeholder={translationObject.product_search}
+            placeholder={translationObject.select_label}
             components={{ Option }}
         />
     </div>
