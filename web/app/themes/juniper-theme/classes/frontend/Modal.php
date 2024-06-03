@@ -20,6 +20,7 @@ class Modal
     public string $view = 'defaultModal.twig';
     public ModalStatus $status = ModalStatus::closed;
     public array $variables = [];
+    public string $language = '';
 
     //submitButton
     public bool $showSubmitButton = false;
@@ -35,6 +36,7 @@ class Modal
     {
         $this->submitButtonLabel = __('Speichern', 'wps');
         $this->closeButtonLabel = __('Schließen', 'wps');
+        $this->language = apply_filters( 'wpml_current_language', '' );
     }
 
     public function getStatus(): string

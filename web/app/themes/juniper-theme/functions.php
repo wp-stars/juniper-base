@@ -581,7 +581,12 @@ add_filter('wps_modal_render', function($modal){
             }
         }
 
-        $modal->content = do_shortcode("[gravityform id='1' field_values='productName={$productName}' title='false' description='false' ajax='true']");
+        $formID = 1;
+        if($modal->language === 'en'){
+            $formID = 8;
+        }
+
+        $modal->content = do_shortcode("[gravityform id='{$formID}' field_values='productName={$productName}' title='false' description='false' ajax='true']");
         return $modal;
     }
 
