@@ -18,7 +18,7 @@
  * Text Domain:       wps-price-calculation-formula
  */
 
-use WPS\PriceCalculationFormula\PriceFormulaHandler;
+use PriceCalculationFormula\PriceFormulaHandler;
 
 require_once 'classes/Plugin.php';
 require_once 'classes/PriceFormulaHandler.php';
@@ -26,12 +26,12 @@ require_once 'classes/FormulaProduct.php';
 require_once 'classes/TransformationVariablesRepository.php';
 require_once 'classes/Logger.php';
 
-new WPS\PriceCalculationFormula\Plugin(__DIR__);
+new PriceCalculationFormula\Plugin(__DIR__);
 
 register_activation_hook( __FILE__, function(){
 
     // create the logging tables
-    WPS\PriceCalculationFormula\Logger::createPriceLogTable();
-    WPS\PriceCalculationFormula\Logger::createFormulaVariablesLogTable();
+    PriceCalculationFormula\Logger::createPriceLogTable();
+    PriceCalculationFormula\Logger::createFormulaVariablesLogTable();
 
 });

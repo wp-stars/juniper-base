@@ -27,8 +27,8 @@ function rocket_exlude_wps_hide_login_page( $urls, $show_safe_content = true ) {
 	if ( class_exists( 'WPS_Hide_Login' ) ) {
 		$wps_hide_login = new WPS_Hide_Login();
 		$urls[]         = rocket_clean_exclude_file( $wps_hide_login->new_login_url() );
-	} elseif ( class_exists( '\WPS\WPS_Hide_Login\Plugin' ) ) {
-		$urls[] = rocket_clean_exclude_file( \WPS\WPS_Hide_Login\Plugin::get_instance()->new_login_url() );
+	} elseif ( class_exists( '\WPS_Hide_Login\Plugin' ) ) {
+		$urls[] = rocket_clean_exclude_file( \WPS_Hide_Login\Plugin::get_instance()->new_login_url() );
 	}
 
 	return $urls;

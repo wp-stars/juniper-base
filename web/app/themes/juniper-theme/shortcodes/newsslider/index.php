@@ -9,7 +9,7 @@
  * @package Limesoda\\Astra_Child\\Shortcodes\\Newsslider
  */
 
-namespace WPS\Shortcodes\Newsslider;
+namespace Shortcodes\Newsslider;
 
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.

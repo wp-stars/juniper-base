@@ -1,6 +1,6 @@
 <?php
 
-namespace WPS\PriceCalculationFormula;
+namespace PriceCalculationFormula;
 
 class Plugin
 {

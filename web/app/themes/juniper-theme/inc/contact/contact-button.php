@@ -8,7 +8,7 @@
  * @link https://limesoda.com/
  */
 
-namespace WPS\Contact\WPS_Contact_Button;
+namespace Contact\WPS_Contact_Button;
 
 /** Enqueue Job Detail Page Styles and Scripts */
 function enqueue_contact_assets() {
@@ -28,7 +28,7 @@ function enqueue_contact_assets() {
 		filemtime(THEME_DIR . 'assets/css/contact-button.css'),
 	);
 }
-add_action('wp_enqueue_scripts', '\WPS\Contact\WPS_Contact_Button\enqueue_contact_assets');
+add_action('wp_enqueue_scripts', '\Contact\WPS_Contact_Button\enqueue_contact_assets');
 
 add_action('astra_body_bottom', function() {
 	$url_de = get_the_permalink(get_page_by_title('Kontakt')) . '/#fragen-musterbestellung';

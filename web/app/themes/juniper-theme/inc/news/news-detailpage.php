@@ -9,7 +9,7 @@
  * @link https://limesoda.com/
  */
 
-namespace WPS\News\Detailpage;
+namespace News\Detailpage;
 
 /** Enqueue News Detail Page Styles and Scripts */
 function enqueue_post_assets() {
@@ -52,7 +52,7 @@ function enqueue_post_assets() {
 	);
 
 }
-add_action('wp_enqueue_scripts', '\WPS\News\Detailpage\enqueue_post_assets');
+add_action('wp_enqueue_scripts', '\News\Detailpage\enqueue_post_assets');
 
 /** Breadcrumbs */
 add_action('astra_primary_content_top', function() {
@@ -80,7 +80,7 @@ function disable_post_title() {
 	add_filter('astra_featured_image_enabled', '__return_false');
 
 }
-add_action('wp', '\WPS\News\Detailpage\disable_post_title');
+add_action('wp', '\News\Detailpage\disable_post_title');
 
 /**
  * Disable standard the content
@@ -161,4 +161,4 @@ function disable_the_content($the_content) {
 		return $html;
 	}
 }
-add_filter('the_content', '\WPS\News\Detailpage\disable_the_content');
+add_filter('the_content', '\News\Detailpage\disable_the_content');

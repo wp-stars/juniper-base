@@ -8,7 +8,7 @@
  * @link https://limesoda.com/
  */
 
-namespace WPS\Cover\LS_Cover_Slider;
+namespace Cover\LS_Cover_Slider;
 
 /**
  * Add Custom Fields
@@ -299,9 +299,9 @@ if (function_exists('acf_add_local_field_group')) {
 add_action('wp', function () {
     $cover_slider = get_field('activate_cover_slider');
     if ($cover_slider && $cover_slider[0] === 'true') {
-        add_action('wp_enqueue_scripts', '\WPS\Cover\LS_Cover_Slider\enqueue_cover_assets');
-        //add_action('astra_content_before', '\WPS\Cover\LS_Cover_Slider\add_cover_slider_markup');
-        add_action('wps_before_content', '\WPS\Cover\LS_Cover_Slider\add_cover_slider_markup');
+        add_action('wp_enqueue_scripts', '\Cover\LS_Cover_Slider\enqueue_cover_assets');
+        //add_action('astra_content_before', '\Cover\LS_Cover_Slider\add_cover_slider_markup');
+        add_action('wps_before_content', '\Cover\LS_Cover_Slider\add_cover_slider_markup');
     }
 });
 
