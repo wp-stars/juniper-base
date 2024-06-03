@@ -117,6 +117,18 @@ Config::define('SCRIPT_DEBUG', false);
 ini_set('display_errors', '0');
 
 /**
+ * WP Rocket's API key
+ */
+if ( env( 'WP_ROCKET_KEY' ) ) {
+	define( 'WP_ROCKET_KEY', env( 'WP_ROCKET_KEY' ) );
+}
+
+/** WP Rocket registration email */
+if ( env( 'WP_ROCKET_EMAIL' ) ) {
+	define( 'WP_ROCKET_EMAIL', env( 'WP_ROCKET_EMAIL' ) );
+}
+
+/**
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
  * See https://codex.wordpress.org/Function_Reference/is_ssl#Notes
  */
