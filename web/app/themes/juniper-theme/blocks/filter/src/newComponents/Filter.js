@@ -95,7 +95,7 @@ const FilterNew = (data) => {
 
             switch (filterOptionName) {
                 case 'searchText':
-                    toFilterData = toFilterData.filter((post) => postInTextSelection(filterValue[1].toLowerCase().trim(), post))
+                    toFilterData = toFilterData.filter((post) => postInTextSelection(filterValue.toLowerCase().trim(), post))
                     break
                 case 'sampleAvailable':
                     toFilterData = toFilterData.filter(postHasSampleAvailable)
