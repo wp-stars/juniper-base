@@ -252,7 +252,7 @@ const FilterNew = (data) => {
                 )
                 }
                 <p className={'text-base leading-normal italic'}>
-                    {postsToDisplay.length} von {filteredPosts.length} Produkten
+                    {numberOfPostsVisible} von {filteredPosts.length} Produkten
                 </p>
             </div>
         </div>

@@ -77,13 +77,15 @@ const FilterDropdown = (data) => {
 
     function generateCategoryBaseConstruct(name) {
         return {
-            label: name,
+            label: `${name}`,
             options: []
         };
     }
 
     function generateCategoryOfParent(parent) {
         const newCategory = generateCategoryBaseConstruct(parent.name);
+
+        parent.name = `${translationObject.all_label} ${parent.name}`
 
         newCategory.options = taxOptionsRaw
             .filter((tax) => tax.parent === parent.term_id || tax.term_id === parent.term_id)
@@ -108,11 +110,15 @@ const FilterDropdown = (data) => {
             addCategoryToOptions(category);
         })
 
-        const othersCat = generateCategoryBaseConstruct('others');
+        const othersLabel = parentTaxms.length > 0
+            ? `${translationObject.others_label} ${label}`
+            : ''
 
-        othersCat.options = taxOptionsRaw.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject)
+        const others = generateCategoryBaseConstruct(othersLabel);
 
-        addCategoryToOptions(othersCat);
+        others.options = taxOptionsRaw.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject)
+
+        addCategoryToOptions(others);
     }
 
     useEffect(() => {
@@ -138,7 +144,7 @@ const FilterDropdown = (data) => {
             onChange={(newValue) => {
                 onChange(newValue)
             }}
-            placeholder={translationObject.select_label}
+            placeholder={`${label} ${translationObject.select_label}`}
             components={{ Option }}
         />
     </div>

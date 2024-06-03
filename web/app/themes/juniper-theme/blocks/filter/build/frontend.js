@@ -4443,6 +4443,8 @@ var _translation;
 const translationObject = (_translation = translation) !== null && _translation !== void 0 ? _translation : {
   loading: '',
   no_results: '',
+  all_label: '',
+  others_label: '',
   open_filter: '',
   select_label: '',
   select: '',
@@ -4676,7 +4678,7 @@ const FilterNew = data => {
     className: "inline-flex items-center gap-x-2.5"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icons__WEBPACK_IMPORTED_MODULE_2__.PlusButtonIcon, null), _TranslationObject__WEBPACK_IMPORTED_MODULE_5__["default"].load_more), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: 'text-base leading-normal italic'
-  }, postsToDisplay.length, " von ", filteredPosts.length, " Produkten")));
+  }, numberOfPostsVisible, " von ", filteredPosts.length, " Produkten")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FilterNew);
 
@@ -4855,12 +4857,13 @@ const FilterDropdown = data => {
   }
   function generateCategoryBaseConstruct(name) {
     return {
-      label: name,
+      label: `${name}`,
       options: []
     };
   }
   function generateCategoryOfParent(parent) {
     const newCategory = generateCategoryBaseConstruct(parent.name);
+    parent.name = `${_TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].all_label} ${parent.name}`;
     newCategory.options = taxOptionsRaw.filter(tax => tax.parent === parent.term_id || tax.term_id === parent.term_id).map(mapToOptionObject)
     // sorts category head to top
     .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label ? -1 : 1);
@@ -4873,9 +4876,10 @@ const FilterDropdown = data => {
       const category = generateCategoryOfParent(parent);
       addCategoryToOptions(category);
     });
-    const othersCat = generateCategoryBaseConstruct('others');
-    othersCat.options = taxOptionsRaw.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject);
-    addCategoryToOptions(othersCat);
+    const othersLabel = parentTaxms.length > 0 ? `${_TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].others_label} ${label}` : '';
+    const others = generateCategoryBaseConstruct(othersLabel);
+    others.options = taxOptionsRaw.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject);
+    addCategoryToOptions(others);
   }
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     prepareSelectorOptions();
@@ -4901,7 +4905,7 @@ const FilterDropdown = data => {
     onChange: newValue => {
       onChange(newValue);
     },
-    placeholder: _TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].select_label,
+    placeholder: `${label} ${_TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].select_label}`,
     components: {
       Option
     }
