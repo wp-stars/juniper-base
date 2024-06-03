@@ -63,6 +63,9 @@ class WC_Customizations {
             'callback' => array($this, 'product_technical_data_tab'),
         );
 
+        // remove additional information tab
+        unset($tabs['additional_information']);
+
         return $tabs;
     }
 
