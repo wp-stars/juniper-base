@@ -347,7 +347,7 @@ function save_musterbestellung_data_with_order($item, $cart_item_key, $values, $
         foreach ($values['musterbestellung_custom_data'] as $key => $value) {
             $index = $key + 1;
             $item->add_meta_data("Product $index ID", $value['product_id']);
-            $item->add_meta_data("Product $index Name", $values['product_name']);
+            $item->add_meta_data("Product $index Name", $value['product_name']);
         }
     }
 }
