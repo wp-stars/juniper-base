@@ -60,7 +60,7 @@ const FilterNew = (data) => {
         setNumberOfPostsVisible(postsToDisplay.length)
     }
 
-    function loadPosts(lastAdded = 1, currentPage = 0, postsPulled = []) {
+    function loadPosts(lastAdded = 1, currentPage = 1, postsPulled = []) {
         if (lastAdded <= 0) {
             currentlyLoading(false)
             return
