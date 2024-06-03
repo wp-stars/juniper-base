@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getUrlParamValue} from "../../utils";
 
-import Select, { components } from 'react-select';
+import Select, {components} from 'react-select';
 
 import colorCodes from "../../ColorCodes";
 import convert from "color-convert";
@@ -29,13 +29,25 @@ const FilterDropdown = (data) => {
 
         const urlParamValues = urlParamValueRaw.split(',')
 
-        const preSelectedOptions = options.filter((element) => {
-            return urlParamValues.includes(element.slug)
+        const preSelectedOptions = options.map((optionCategory) => {
+            const filterCategoryOptions = optionCategory.options
+
+            return filterCategoryOptions.filter(filterCategoryOption => urlParamValues.includes(filterCategoryOption.slug))
         })
 
-        const preSelectedOptionTermIds = preSelectedOptions.map((term) => term.term_id)
+        const cleanedPreSelectedOptions = preSelectedOptions.filter(options => options.length > 0)
 
-        setValues(preSelectedOptionTermIds)
+        const preselectedTermIds = []
+
+        cleanedPreSelectedOptions.forEach((options) => {
+            options.forEach(option => {
+                preselectedTermIds.push(option)
+            })
+        })
+
+        console.log(preselectedTermIds)
+
+        setValues(preselectedTermIds)
     }
 
     /**
@@ -53,7 +65,7 @@ const FilterDropdown = (data) => {
     function mapToOptionObject(tax) {
         const colorStyle = generateGradientCssTagForColor(colorCodes.getEntryWithSlugLike(tax.slug))
 
-        return {label: tax.name, value: tax.term_id, colorStyle: colorStyle};
+        return {label: tax.name, value: tax.term_id, colorStyle: colorStyle, slug: tax.slug};
     }
 
     function addCategoryToOptions(newCategory) {
@@ -105,7 +117,7 @@ const FilterDropdown = (data) => {
 
     useEffect(() => {
         prepareSelectorOptions()
-        setDefaultSelectionFromUrl();
+        setDefaultSelectionFromUrl()
     }, [])
 
     const Option = (props) => {
@@ -126,7 +138,7 @@ const FilterDropdown = (data) => {
             onChange={(newValue) => {
                 onChange(newValue)
             }}
-            placeholder={translationObject.product_search}
+            placeholder={translationObject.select_label}
             components={{ Option }}
         />
     </div>

@@ -60,7 +60,7 @@ const FilterNew = (data) => {
         setNumberOfPostsVisible(postsToDisplay.length)
     }
 
-    function loadPosts(lastAdded = 1, currentPage = 0, postsPulled = []) {
+    function loadPosts(lastAdded = 1, currentPage = 1, postsPulled = []) {
         if (lastAdded <= 0) {
             currentlyLoading(false)
             return
@@ -95,7 +95,7 @@ const FilterNew = (data) => {
 
             switch (filterOptionName) {
                 case 'searchText':
-                    toFilterData = toFilterData.filter((post) => postInTextSelection(filterValue[1].toLowerCase().trim(), post))
+                    toFilterData = toFilterData.filter((post) => postInTextSelection(filterValue.toLowerCase().trim(), post))
                     break
                 case 'sampleAvailable':
                     toFilterData = toFilterData.filter(postHasSampleAvailable)

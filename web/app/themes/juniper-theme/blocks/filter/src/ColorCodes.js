@@ -33,9 +33,8 @@ class ColorCodes {
      * @returns {String}
      */
     getEntryWithSlugLike(slug) {
-        console.log(slug)
 
-        const foundEntryParamSlugInc = this.colorCodeEntries.find((entry) => 
+        const foundEntryParamSlugInc = this.colorCodeEntries.find((entry) =>
             entry.slugs.find(entrySlugs => slug.includes(entrySlugs)) !== undefined)
         const foundEntrySlugInc = this.colorCodeEntries.find((entry) => 
             entry.slugs.find(entrySlugs => entrySlugs.includes(slug)) !== undefined)
