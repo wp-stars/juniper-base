@@ -1,6 +1,8 @@
 const translationObject = translation ?? {
     loading: '',
     no_results: '',
+    all_label: '',
+    others_label: '',
     open_filter: '',
     select_label: '',
     select: '',
