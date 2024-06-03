@@ -1415,3 +1415,11 @@ div.wp-block-ls-text-media__column ul li {
         font-weight: bold;
     }
 }
+
+html, body {
+    --gf-local-bg-color: #000;
+}
+
+input.gform_button.button {
+    background-color: #000 !important;
+}
