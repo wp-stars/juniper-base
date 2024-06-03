@@ -1,6 +1,6 @@
 <?php
 
-namespace wps\bmd;
+namespace bmd;
 
 class Plugin
 {

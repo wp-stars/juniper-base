@@ -1,7 +1,7 @@
 <?php
 
 
-namespace WPS\frontend;
+namespace frontend;
 
 class ProductCard {
     

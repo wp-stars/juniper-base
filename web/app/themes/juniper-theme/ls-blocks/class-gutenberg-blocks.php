@@ -9,7 +9,7 @@
  * @package Limesoda\\Astra_Child\\Blocks
  */
 
-namespace WPS\Blocks;
+namespace Blocks;
 
 use WP_Block_Type_Registry;
 

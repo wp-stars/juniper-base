@@ -4,12 +4,12 @@
  *
  * @link https://wp-stars.com
  * @since 1.0.0
- * @package WPS\Shortcodes
+ * @package Shortcodes
  */
 
-namespace WPS\Shortcodes;
+namespace Shortcodes;
 
-use const WPS\THEME_DIR;
+use const THEME_DIR;
 
 /**
  *  Autoload all shortcodes

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPS\frontend;
+namespace frontend;
 
 class WC_Customizations {
 
