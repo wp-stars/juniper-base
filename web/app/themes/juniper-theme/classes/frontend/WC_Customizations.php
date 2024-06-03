@@ -26,6 +26,17 @@ class WC_Customizations {
         if (!is_user_logged_in() && is_checkout()) {
             add_filter('woocommerce_checkout_registration_enabled', '__return_false');
         }
+
+        add_filter('woocommerce_display_product_attributes', array($this, 'remove_weight_from_product_attributes'), 999, 2);
+    }
+
+    public function remove_weight_from_product_attributes($product_attributes, $product){
+
+        if(isset($product_attributes['weight'])){
+            unset($product_attributes['weight']);
+        }
+
+        return $product_attributes;
     }
 
     public function login_checkout_form(){
