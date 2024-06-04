@@ -1,6 +1,6 @@
 <?php
 
-namespace wps\bmd;
+namespace bmd;
 
 use DOMDocument;
 use \SimpleXMLElement;

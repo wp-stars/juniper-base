@@ -1,6 +1,6 @@
 <?php
 
-namespace wps\frontend;
+namespace frontend;
 
 use Timber\Timber;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPS\PriceCalculationFormula;
+namespace PriceCalculationFormula;
 
 use \WC_Product_Simple;
 use \WC_Product;

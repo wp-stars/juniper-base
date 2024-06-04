@@ -5,7 +5,7 @@
  * @package IWGPlating
  */
 
-namespace WPS\API\Samples;
+namespace API\Samples;
 
 use WP_REST_Server;
 use WP_REST_Request;
@@ -32,7 +32,7 @@ function get_samples(WP_REST_Request $request) {
 add_action('rest_api_init', function () {
 	register_rest_route('ls/v1', '/samples/', [
 		'methods' => WP_REST_Server::READABLE,
-		'callback' => 'WPS\API\Samples\get_samples',
+		'callback' => 'API\Samples\get_samples',
 		'permission_callback' => '__return_true',
 	]);
 });

@@ -28,7 +28,7 @@ With this approach you can create theme code with logic files separated from fro
 
 ## Requirements
 
-- PHP >= 7.4
+- PHP >= 7.4 (better 8+)
 - Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 
 ## Local Installation

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPS\frontend;
+namespace frontend;
 
 class WC_Customizations {
 
@@ -62,6 +62,9 @@ class WC_Customizations {
             'priority' => 50,
             'callback' => array($this, 'product_technical_data_tab'),
         );
+
+        // remove additional information tab
+        unset($tabs['additional_information']);
 
         return $tabs;
     }

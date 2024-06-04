@@ -5,7 +5,7 @@
  * @package IWGPlating
  */
 
-namespace WPS\API\MetalPrices;
+namespace API\MetalPrices;
 
 use WP_REST_Server;
 use WP_REST_Request;
@@ -127,7 +127,7 @@ function get_metalprices(WP_REST_Request $request) {
 add_action('rest_api_init', function () {
 	register_rest_route('ls/v1', '/metalprices/', [
 		'methods' => WP_REST_Server::READABLE,
-		'callback' => 'WPS\API\MetalPrices\get_metalprices',
+		'callback' => 'API\MetalPrices\get_metalprices',
 		'permission_callback' => '__return_true',
 	]);
 });
