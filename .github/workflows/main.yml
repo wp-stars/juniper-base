@@ -11,6 +11,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Replace Borlabs Cookie Password in auth.json
+        run: |
+          sed -i 's/"password": ""/"password": "${{ secrets.BORLABS_COOKIE_PASSWORD }}"/g' auth.json       
+
       - name: Configure SSH Key
         run: |
           echo "${{ secrets.DEPLOY_KEY }}" > deploy_key
