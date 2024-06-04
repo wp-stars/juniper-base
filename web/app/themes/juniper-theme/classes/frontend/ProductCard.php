@@ -8,7 +8,7 @@ class ProductCard {
     public function __construct() {
         add_shortcode('wps_get_product_card', [$this, 'product_card_html']);
 
-        header('Content-Type: text/html; charset=utf-8');
+//        header('Content-Type: text/html; charset=utf-8');
     }
 
     public function product_card_html( $atts ) {
@@ -16,7 +16,9 @@ class ProductCard {
         $product_id = $atts['product_id'];
         $product = wc_get_product($product_id);
 
-		$product_title = mb_convert_encoding( $product->get_title(), 'ISO-8859-1');
+	    $product_title = !empty($atts['encoding']) 
+			? mb_convert_encoding( $product->get_title(), $atts['encoding'])
+			: $product->get_title();
 
 	    $metals_terms = wp_get_post_terms( $product_id, 'metals-and-accessories', [ 'fields' => 'names' ] );
         // $color_terms = wp_get_post_terms($product_id, 'color', array('fields' => 'names'));

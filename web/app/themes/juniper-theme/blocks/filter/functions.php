@@ -220,9 +220,11 @@ function wps_get_filter_posts( $post_type, $taxonomies, $page, $search = '' ) {
 
 		$post_obj->product_type = $product_type;
 
-		$encodedHtml = base64_encode( do_shortcode( "[wps_get_product_card product_id='{$post->ID}']" ) );
-
-		$post_obj->html = $encodedHtml;
+		$rendered_card = do_shortcode( "[wps_get_product_card product_id='{$post->ID}' encoding='ISO-8859-1']" );
+		
+		$encoded_html = base64_encode($rendered_card);
+		
+		$post_obj->html = $encoded_html;
 
 		$post_arr[] = $post_obj;
 	}

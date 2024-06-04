@@ -71,6 +71,8 @@ export function postApplysToTax(post, tax, value) {
     const taxonomyToCheck = taxonomies[tax]
 
     return taxonomyToCheck.findIndex((taxObj) => {
+        console.log(taxObj.term_id + " " + value)
+
         return taxObj.term_id === value
     }) !== -1
 }
@@ -99,4 +101,8 @@ export function postIsAvailableOnline(post) {
 
 export function postHasSampleAvailable(post) {
     return post.taxonomies["purchasability"]?.some(term => term.slug === 'muster-verfuegbar' || term.slug === 'sample-available-en')
+}
+
+export function hideOptionName(option, parent) {
+    return parent !== undefined && (parent.slug === 'weisstoene' || parent.slug === 'white-tone')
 }

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getUrlParamValue} from "../../utils";
+import {getUrlParamValue, hideOptionName} from "../../utils";
 
 import Select, {components} from 'react-select';
 
@@ -45,8 +45,6 @@ const FilterDropdown = (data) => {
             })
         })
 
-        console.log(preselectedTermIds)
-
         setValues(preselectedTermIds)
     }
 
@@ -62,10 +60,12 @@ const FilterDropdown = (data) => {
         return `linear-gradient(90deg, rgba(${colorCodesJoin},0) 0%, rgba(${colorCodesJoin},0.7581232322030375) 35%, rgba(${colorCodesJoin},1) 59%)`
     }
 
-    function mapToOptionObject(tax) {
+    function mapToOptionObject(tax, parent) {
         const colorStyle = generateGradientCssTagForColor(colorCodes.getEntryWithSlugLike(tax.slug))
 
-        return {label: tax.name, value: tax.term_id, colorStyle: colorStyle, slug: tax.slug};
+        const optionLabel = !hideOptionName(tax, parent) ? tax.name : ' - '
+
+        return {label: optionLabel, value: tax.term_id, colorStyle: colorStyle, slug: tax.slug};
     }
 
     function addCategoryToOptions(newCategory) {
@@ -89,7 +89,7 @@ const FilterDropdown = (data) => {
 
         newCategory.options = taxOptionsRaw
             .filter((tax) => tax.parent === parent.term_id || tax.term_id === parent.term_id)
-            .map(mapToOptionObject)
+            .map(tax  => mapToOptionObject(tax, parent))
             // sorts category head to top
             .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label ? -1 : 1)
 

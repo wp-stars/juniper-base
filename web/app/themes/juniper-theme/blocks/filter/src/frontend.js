@@ -9,7 +9,8 @@ const setupFilters = () => {
         let data = JSON.parse(div.dataset.initialData);
         const root = ReactDOM.createRoot(div)
         root.render(<FilterNew {...data} />);
-        div.classList.remove('filter-entry')
+        div.classList.remove('filter-block')
+        div.classList.remove('hidden')
     })
 };
 
