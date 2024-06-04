@@ -4615,6 +4615,7 @@ const FilterNew = data => {
     setUpFilterPresets();
     loadPosts();
   }, []);
+  console.log(allPosts);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(_utils__WEBPACK_IMPORTED_MODULE_1__.rerenderSlick, [postsToDisplay]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
@@ -4827,7 +4828,6 @@ const FilterDropdown = data => {
         preselectedTermIds.push(option);
       });
     });
-    console.log(preselectedTermIds);
     setValues(preselectedTermIds);
   }
 
@@ -4840,10 +4840,11 @@ const FilterDropdown = data => {
     const colorCodesJoin = colorCodes.join(',');
     return `linear-gradient(90deg, rgba(${colorCodesJoin},0) 0%, rgba(${colorCodesJoin},0.7581232322030375) 35%, rgba(${colorCodesJoin},1) 59%)`;
   }
-  function mapToOptionObject(tax) {
+  function mapToOptionObject(tax, parent) {
     const colorStyle = generateGradientCssTagForColor(_ColorCodes__WEBPACK_IMPORTED_MODULE_2__["default"].getEntryWithSlugLike(tax.slug));
+    const optionLabel = !(0,_utils__WEBPACK_IMPORTED_MODULE_1__.hideOptionName)(tax, parent) ? tax.name : ' - ';
     return {
-      label: tax.name,
+      label: optionLabel,
       value: tax.term_id,
       colorStyle: colorStyle,
       slug: tax.slug
@@ -4864,7 +4865,7 @@ const FilterDropdown = data => {
   function generateCategoryOfParent(parent) {
     const newCategory = generateCategoryBaseConstruct(parent.name);
     parent.name = `${_TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].all_label} ${parent.name}`;
-    newCategory.options = taxOptionsRaw.filter(tax => tax.parent === parent.term_id || tax.term_id === parent.term_id).map(mapToOptionObject)
+    newCategory.options = taxOptionsRaw.filter(tax => tax.parent === parent.term_id || tax.term_id === parent.term_id).map(tax => mapToOptionObject(tax, parent))
     // sorts category head to top
     .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label ? -1 : 1);
     return newCategory;
@@ -4979,6 +4980,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   clone: () => (/* binding */ clone),
 /* harmony export */   filterOptionToElement: () => (/* binding */ filterOptionToElement),
 /* harmony export */   getUrlParamValue: () => (/* binding */ getUrlParamValue),
+/* harmony export */   hideOptionName: () => (/* binding */ hideOptionName),
 /* harmony export */   isArray: () => (/* binding */ isArray),
 /* harmony export */   isIterable: () => (/* binding */ isIterable),
 /* harmony export */   loadInPostsFromPage: () => (/* binding */ loadInPostsFromPage),
@@ -5059,6 +5061,7 @@ function postApplysToTax(post, tax, value) {
   }
   const taxonomyToCheck = taxonomies[tax];
   return taxonomyToCheck.findIndex(taxObj => {
+    console.log(taxObj.term_id + " " + value);
     return taxObj.term_id === value;
   }) !== -1;
 }
@@ -5075,6 +5078,9 @@ function postIsAvailableOnline(post) {
 }
 function postHasSampleAvailable(post) {
   return post.taxonomies["purchasability"]?.some(term => term.slug === 'muster-verfuegbar' || term.slug === 'sample-available-en');
+}
+function hideOptionName(option, parent) {
+  return parent !== undefined && (parent.slug === 'weisstoene' || parent.slug === 'white-tone');
 }
 
 /***/ }),
@@ -15029,7 +15035,8 @@ const setupFilters = () => {
     root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_newComponents_Filter__WEBPACK_IMPORTED_MODULE_2__["default"], {
       ...data
     }));
-    div.classList.remove('filter-entry');
+    div.classList.remove('filter-block');
+    div.classList.remove('hidden');
   });
 };
 document.addEventListener('DOMContentLoaded', setupFilters);

@@ -176,6 +176,8 @@ const FilterNew = (data) => {
         loadPosts()
     }, []);
 
+    console.log(allPosts)
+
     useEffect(rerenderSlick, [postsToDisplay]);
 
     return (
