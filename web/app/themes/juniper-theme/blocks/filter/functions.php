@@ -198,6 +198,8 @@ function wps_get_filter_posts( $post_type, $page ) {
 
 	$posts = array_map('get_post', $product_ids);
 
+	$posts = array_filter($posts);
+
 	$post_arr = array_map('Blocks\Filter\map_post_to_filter_post_obj', $posts);
 
 	$data_arr['posts']       = $post_arr;
