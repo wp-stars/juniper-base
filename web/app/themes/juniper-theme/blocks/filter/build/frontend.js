@@ -4516,7 +4516,7 @@ const FilterNew = data => {
   const [postsToDisplay, setPostsToDisplay] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(data.posts.slice(0, postsPerPage));
   const [isCurrentlyLoading, currentlyLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   function morePostsToDisplay() {
-    return postsToDisplay.length < filteredPosts.length;
+    return false;
   }
   function showMore() {
     const current = numberOfPostsVisible !== null && numberOfPostsVisible !== void 0 ? numberOfPostsVisible : 0;
@@ -4525,18 +4525,24 @@ const FilterNew = data => {
     setNumberOfPostsVisible(postsToDisplay.length);
   }
   function loadPosts(lastAdded = 1, currentPage = 1, postsPulled = []) {
-    if (lastAdded <= 0) {
-      currentlyLoading(false);
-      return;
-    }
-    const nextPostsPromise = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.loadInPostsFromPage)(resturl, postType, currentPage);
-    nextPostsPromise.then(nextPosts => {
-      const postsAdded = nextPosts.length;
-      const allPostsPulled = postsPulled.concat(nextPosts);
-      setAllPosts(allPostsPulled);
-      currentPage++;
-      loadPosts(postsAdded, currentPage, allPostsPulled);
-    });
+    // if (lastAdded <= 0) {
+    //     currentlyLoading(false)
+    //     return
+    // }
+    //
+    // const nextPostsPromise = loadInPostsFromPage(resturl, postType, currentPage)
+    //
+    // nextPostsPromise.then((nextPosts) => {
+    //     const postsAdded = nextPosts.length
+    //
+    //     const allPostsPulled = postsPulled.concat(nextPosts)
+    //
+    //     setAllPosts(allPostsPulled)
+    //
+    //     currentPage++
+    //
+    //     loadPosts(postsAdded, currentPage, allPostsPulled)
+    // })
   }
   function applyFilter(filter) {
     let filterOptions = Object.entries(filter).filter(keyValue => keyValue[1] !== '');
@@ -4606,17 +4612,19 @@ const FilterNew = data => {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     applyFilter(filterSelected);
   }, [allPosts]);
+
+  // useEffect(() => {
+  //     setPostsToDisplay(filteredPosts.slice(0, numberOfPostsVisible))
+  // }, [filteredPosts]);
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    setPostsToDisplay(filteredPosts.slice(0, numberOfPostsVisible));
-  }, [filteredPosts]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    currentlyLoading(true);
+    currentlyLoading(false);
     setUpFilters();
     setUpFilterPresets();
-    loadPosts();
+    // loadPosts()
+    (0,_utils__WEBPACK_IMPORTED_MODULE_1__.rerenderSlick)();
   }, []);
-  console.log(allPosts);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(_utils__WEBPACK_IMPORTED_MODULE_1__.rerenderSlick, [postsToDisplay]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(_utils__WEBPACK_IMPORTED_MODULE_1__.rerenderSlick, [filteredPosts]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4665,7 +4673,7 @@ const FilterNew = data => {
     className: 'container mt-5'
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex flex-wrap"
-  }, postsToDisplay.length ? postsToDisplay.map((post, index) => {
+  }, filteredPosts.length ? filteredPosts.map((post, index) => {
     return (0,_utils__WEBPACK_IMPORTED_MODULE_1__.renderPost)(post, index);
   }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'w-full text-center'
@@ -4677,9 +4685,7 @@ const FilterNew = data => {
     onClick: showMore,
     disabled: !morePostsToDisplay(),
     className: "inline-flex items-center gap-x-2.5"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icons__WEBPACK_IMPORTED_MODULE_2__.PlusButtonIcon, null), _TranslationObject__WEBPACK_IMPORTED_MODULE_5__["default"].load_more), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: 'text-base leading-normal italic'
-  }, numberOfPostsVisible, " von ", filteredPosts.length, " Produkten")));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icons__WEBPACK_IMPORTED_MODULE_2__.PlusButtonIcon, null), _TranslationObject__WEBPACK_IMPORTED_MODULE_5__["default"].load_more)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FilterNew);
 
@@ -4747,7 +4753,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const FilterCheckbox = data => {
   data = data.data ? data.data : data;
-  const key = data.key;
   const label = data.label;
   const name = data.name;
   const urlParam = data.url;
@@ -4756,7 +4761,6 @@ const FilterCheckbox = data => {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'block'
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    key: key,
     id: name,
     type: "checkbox",
     checked: isChecked,
@@ -5013,7 +5017,6 @@ function rerenderSlick() {
   document.dispatchEvent(event);
 }
 function clone(obj) {
-  console.log(JSON.stringify(obj));
   return JSON.parse(JSON.stringify(obj));
 }
 async function loadInPostsFromPage(restUrl = '', postType = 'product', pageNum = 0) {
@@ -5061,7 +5064,6 @@ function postApplysToTax(post, tax, value) {
   }
   const taxonomyToCheck = taxonomies[tax];
   return taxonomyToCheck.findIndex(taxObj => {
-    console.log(taxObj.term_id + " " + value);
     return taxObj.term_id === value;
   }) !== -1;
 }

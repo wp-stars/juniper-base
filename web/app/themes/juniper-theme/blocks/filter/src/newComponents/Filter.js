@@ -48,7 +48,7 @@ const FilterNew = (data) => {
     const [isCurrentlyLoading, currentlyLoading] = useState(false)
 
     function morePostsToDisplay() {
-        return postsToDisplay.length < filteredPosts.length
+        return false
     }
 
     function showMore() {
@@ -61,24 +61,24 @@ const FilterNew = (data) => {
     }
 
     function loadPosts(lastAdded = 1, currentPage = 1, postsPulled = []) {
-        if (lastAdded <= 0) {
-            currentlyLoading(false)
-            return
-        }
-
-        const nextPostsPromise = loadInPostsFromPage(resturl, postType, currentPage)
-
-        nextPostsPromise.then((nextPosts) => {
-            const postsAdded = nextPosts.length
-
-            const allPostsPulled = postsPulled.concat(nextPosts)
-
-            setAllPosts(allPostsPulled)
-
-            currentPage++
-
-            loadPosts(postsAdded, currentPage, allPostsPulled)
-        })
+        // if (lastAdded <= 0) {
+        //     currentlyLoading(false)
+        //     return
+        // }
+        //
+        // const nextPostsPromise = loadInPostsFromPage(resturl, postType, currentPage)
+        //
+        // nextPostsPromise.then((nextPosts) => {
+        //     const postsAdded = nextPosts.length
+        //
+        //     const allPostsPulled = postsPulled.concat(nextPosts)
+        //
+        //     setAllPosts(allPostsPulled)
+        //
+        //     currentPage++
+        //
+        //     loadPosts(postsAdded, currentPage, allPostsPulled)
+        // })
     }
 
     function applyFilter(filter) {
@@ -110,7 +110,6 @@ const FilterNew = (data) => {
                         toFilterData = toFilterData.filter((post) => postInSelection(filterOptionName, filterValue.value, post))
                     }
             }
-
         }
 
         setFilteredPosts(toFilterData)
@@ -141,7 +140,9 @@ const FilterNew = (data) => {
                 applyValueToFilter(filterOption.filter_choices, selected)
             }
 
-            filterOption.label = translationObject[filterOption.name] ? translationObject[filterOption.name] : filterOption.label
+            filterOption.label = translationObject[filterOption.name]
+                ? translationObject[filterOption.name]
+                : filterOption.label
 
             filterOption.url = filterOption.filter_choices.replaceAll('_', '-')
 
@@ -164,21 +165,20 @@ const FilterNew = (data) => {
         applyFilter(filterSelected)
     }, [allPosts]);
 
-    useEffect(() => {
-        setPostsToDisplay(filteredPosts.slice(0, numberOfPostsVisible))
-    }, [filteredPosts]);
+    // useEffect(() => {
+    //     setPostsToDisplay(filteredPosts.slice(0, numberOfPostsVisible))
+    // }, [filteredPosts]);
 
     useEffect(() => {
-        currentlyLoading(true)
+        currentlyLoading(false)
 
         setUpFilters()
         setUpFilterPresets()
-        loadPosts()
+        // loadPosts()
+        rerenderSlick()
     }, []);
 
-    console.log(allPosts)
-
-    useEffect(rerenderSlick, [postsToDisplay]);
+    useEffect(rerenderSlick, [filteredPosts]);
 
     return (
         <div className={"w-full"}>
@@ -233,8 +233,8 @@ const FilterNew = (data) => {
             </div>
             <div className={'container mt-5'}>
                 <div className={"grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex flex-wrap"}>
-                    {postsToDisplay.length ?
-                        postsToDisplay.map((post, index) => {
+                    {filteredPosts.length ?
+                        filteredPosts.map((post, index) => {
                             return renderPost(post, index)
                         })
                         : <div className={'w-full text-center'}>
@@ -253,9 +253,6 @@ const FilterNew = (data) => {
                     </button>
                 )
                 }
-                <p className={'text-base leading-normal italic'}>
-                    {numberOfPostsVisible} von {filteredPosts.length} Produkten
-                </p>
             </div>
         </div>
     )

@@ -17,8 +17,6 @@ export function rerenderSlick() {
 }
 
 export function clone(obj) {
-    console.log(JSON.stringify(obj))
-
     return JSON.parse(JSON.stringify(obj))
 }
 
@@ -71,8 +69,6 @@ export function postApplysToTax(post, tax, value) {
     const taxonomyToCheck = taxonomies[tax]
 
     return taxonomyToCheck.findIndex((taxObj) => {
-        console.log(taxObj.term_id + " " + value)
-
         return taxObj.term_id === value
     }) !== -1
 }
