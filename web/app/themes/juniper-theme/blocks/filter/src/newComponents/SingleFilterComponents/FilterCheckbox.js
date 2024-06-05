@@ -5,7 +5,6 @@ const FilterCheckbox = (data) => {
 
 	data = data.data ? data.data : data
 
-	const key = data.key
 	const label = data.label
 	const name = data.name
 
@@ -18,7 +17,6 @@ const FilterCheckbox = (data) => {
 	return (
 		<div className={'block'}>
 			<input
-				key={key}
 				id={name}
 				type={"checkbox"}
 				checked={isChecked}
