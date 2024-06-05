@@ -137,23 +137,21 @@ if (!class_exists('FooterNewsletter')) {
             }
 
             ob_start();
-            echo do_shortcode("[borlabs-cookie id=\"hubspot\" type=\"content-blocker\"]
-                 <script>
-                     //window.BorlabsCookie.callWhenLoaded('hbspt', function () { 
-                         window.setTimeout(function () { 
-                             hbspt.forms.create({ 
-                                 portalId: '25864699', 
-                                 formId: '$formId', 
-                                 target: '.newsletter-wrapper-$form_id'
-                             });
-                         }, 3000);
-                     //});
-                 </script>
-            [/borlabs-cookie]");
+
+            ?>
+            <script>
+                hbspt.forms.create({
+                    portalId: '25864699',
+                    formId: '<?= $formId; ?>',
+                    target: '.newsletter-wrapper-<?= $form_id?>'
+                });
+            </script>
+            <?php
+
             $newsletterForm = ob_get_contents();
             ob_get_clean();
 
-            $button = '<button class="newsletterBtn">' . __('Subscribe', 'iwgplating') . '</button>';
+            $button = '<button class="newsletterBtn">' . __('Subscribe', 'wps-juniper') . '</button>';
 
             // Set the flag to indicate that the modal has been displayed
             self::$modal_displayed = true;
