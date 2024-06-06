@@ -77,7 +77,9 @@ export function getDefaultSelectionFromUrl(urlParam, preparedOptions) {
     const preSelectedOptions = preparedOptions.map((optionCategory) => {
         const filterCategoryOptions = optionCategory.options
 
-        return filterCategoryOptions.filter(filterCategoryOption => urlParamValues.includes(filterCategoryOption.slug))
+        return filterCategoryOptions.filter(filterCategoryOption => {
+            return urlParamValues.includes(filterCategoryOption.slug)
+        })
     })
 
     const cleanedPreSelectedOptions = preSelectedOptions.filter(options => options.length > 0)
@@ -90,5 +92,5 @@ export function getDefaultSelectionFromUrl(urlParam, preparedOptions) {
         })
     })
 
-    return preselectedTermIds[0]
+    return preselectedTermIds
 }
