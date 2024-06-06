@@ -4672,9 +4672,10 @@ const FilterNew = data => {
   }, _TranslationObject__WEBPACK_IMPORTED_MODULE_5__["default"].results_label, ": ", filteredPosts.length))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'container mt-5'
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex flex-wrap"
+    className: "grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex-wrap"
   }, filteredPosts.length ? filteredPosts.map((post, index) => {
-    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__.renderPost)(post, index);
+    const showDirectly = index < postsPerPage;
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__.renderPost)(post, index, showDirectly, _utils__WEBPACK_IMPORTED_MODULE_1__.refreshSlick);
   }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'w-full text-center'
   }, _TranslationObject__WEBPACK_IMPORTED_MODULE_5__["default"].no_results))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4731,6 +4732,59 @@ const PlusButtonIcon = () => {
     fill: "black"
   }));
 };
+
+/***/ }),
+
+/***/ "./src/newComponents/ProductComponent/SingleProduct.js":
+/*!*************************************************************!*\
+  !*** ./src/newComponents/ProductComponent/SingleProduct.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SingleProduct)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_intersection_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-intersection-observer */ "./node_modules/react-intersection-observer/index.mjs");
+
+
+
+function SingleProduct(data) {
+  var _data$htmlEnc, _data$index, _data$showDirectly, _data$whenInView;
+  const html = atob((_data$htmlEnc = data.htmlEnc) !== null && _data$htmlEnc !== void 0 ? _data$htmlEnc : '');
+  const index = (_data$index = data.index) !== null && _data$index !== void 0 ? _data$index : 0;
+  const showDirectly = (_data$showDirectly = data.showDirectly) !== null && _data$showDirectly !== void 0 ? _data$showDirectly : false;
+  const whenInView = (_data$whenInView = data.whenInView) !== null && _data$whenInView !== void 0 ? _data$whenInView : () => {};
+  const {
+    ref,
+    inView,
+    entry
+  } = (0,react_intersection_observer__WEBPACK_IMPORTED_MODULE_1__.useInView)({
+    threshold: 0,
+    triggerOnce: true
+  });
+  const [displayClass, setDisplayClass] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(mapToDisplayClass(showDirectly));
+  function mapToDisplayClass(shouldShow) {
+    return shouldShow ? 'show' : 'hidden';
+  }
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const displayClass = mapToDisplayClass(inView || showDirectly);
+    whenInView();
+    setDisplayClass(displayClass);
+  }, [inView]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: index,
+    ref: ref
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: 'flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow ' + displayClass,
+    dangerouslySetInnerHTML: {
+      __html: html
+    }
+  }));
+}
 
 /***/ }),
 
@@ -4818,7 +4872,7 @@ const FilterDropdown = data => {
   const taxOptionsRaw = (_data$tax_options = data.tax_options) !== null && _data$tax_options !== void 0 ? _data$tax_options : [];
   const [options, setOptions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [values, setValues] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  function setDefaultSelectionFromUrl() {
+  function getDefaultSelectionFromUrl() {
     const urlParamValueRaw = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam);
     const urlParamValues = urlParamValueRaw.split(',');
     const preSelectedOptions = options.map(optionCategory => {
@@ -4832,7 +4886,7 @@ const FilterDropdown = data => {
         preselectedTermIds.push(option);
       });
     });
-    setValues(preselectedTermIds);
+    return preselectedTermIds[0];
   }
 
   /**
@@ -4888,7 +4942,7 @@ const FilterDropdown = data => {
   }
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     prepareSelectorOptions();
-    setDefaultSelectionFromUrl();
+    setValues(getDefaultSelectionFromUrl());
   }, []);
   const Option = props => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4993,6 +5047,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   postInSelection: () => (/* binding */ postInSelection),
 /* harmony export */   postInTextSelection: () => (/* binding */ postInTextSelection),
 /* harmony export */   postIsAvailableOnline: () => (/* binding */ postIsAvailableOnline),
+/* harmony export */   refreshSlick: () => (/* binding */ refreshSlick),
 /* harmony export */   renderPost: () => (/* binding */ renderPost),
 /* harmony export */   rerenderSlick: () => (/* binding */ rerenderSlick)
 /* harmony export */ });
@@ -5001,6 +5056,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _newComponents_SingleFilterComponents_FilterDropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./newComponents/SingleFilterComponents/FilterDropdown */ "./src/newComponents/SingleFilterComponents/FilterDropdown.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _newComponents_ProductComponent_SingleProduct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./newComponents/ProductComponent/SingleProduct */ "./src/newComponents/ProductComponent/SingleProduct.js");
+
 
 
 
@@ -5016,6 +5073,10 @@ function rerenderSlick() {
   const event = new Event('filterRenderingDone');
   document.dispatchEvent(event);
 }
+function refreshSlick() {
+  const event = new Event('filterRefreshRenderedElements');
+  document.dispatchEvent(event);
+}
 function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
@@ -5028,13 +5089,12 @@ async function loadInPostsFromPage(restUrl = '', postType = 'product', pageNum =
   };
   return responseData.posts;
 }
-function renderPost(post, index) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index,
-    className: 'flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow',
-    dangerouslySetInnerHTML: {
-      __html: atob(post.html)
-    }
+function renderPost(post, index, showDirectly = false, whenInView = () => {}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_newComponents_ProductComponent_SingleProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    index: index,
+    htmlEnc: post.html,
+    showDirectly: showDirectly,
+    whenInView: whenInView
   });
 }
 function getUrlParamValue(param) {
@@ -13886,6 +13946,320 @@ function rectToClientRect(rect) {
 
 
 
+
+/***/ }),
+
+/***/ "./node_modules/react-intersection-observer/index.mjs":
+/*!************************************************************!*\
+  !*** ./node_modules/react-intersection-observer/index.mjs ***!
+  \************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   InView: () => (/* binding */ InView),
+/* harmony export */   defaultFallbackInView: () => (/* binding */ defaultFallbackInView),
+/* harmony export */   observe: () => (/* binding */ observe),
+/* harmony export */   useInView: () => (/* binding */ useInView)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+"use client";
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+
+// src/InView.tsx
+
+
+// src/observe.ts
+var observerMap = /* @__PURE__ */ new Map();
+var RootIds = /* @__PURE__ */ new WeakMap();
+var rootId = 0;
+var unsupportedValue = void 0;
+function defaultFallbackInView(inView) {
+  unsupportedValue = inView;
+}
+function getRootId(root) {
+  if (!root)
+    return "0";
+  if (RootIds.has(root))
+    return RootIds.get(root);
+  rootId += 1;
+  RootIds.set(root, rootId.toString());
+  return RootIds.get(root);
+}
+function optionsToId(options) {
+  return Object.keys(options).sort().filter(
+    (key) => options[key] !== void 0
+  ).map((key) => {
+    return `${key}_${key === "root" ? getRootId(options.root) : options[key]}`;
+  }).toString();
+}
+function createObserver(options) {
+  const id = optionsToId(options);
+  let instance = observerMap.get(id);
+  if (!instance) {
+    const elements = /* @__PURE__ */ new Map();
+    let thresholds;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        var _a;
+        const inView = entry.isIntersecting && thresholds.some((threshold) => entry.intersectionRatio >= threshold);
+        if (options.trackVisibility && typeof entry.isVisible === "undefined") {
+          entry.isVisible = inView;
+        }
+        (_a = elements.get(entry.target)) == null ? void 0 : _a.forEach((callback) => {
+          callback(inView, entry);
+        });
+      });
+    }, options);
+    thresholds = observer.thresholds || (Array.isArray(options.threshold) ? options.threshold : [options.threshold || 0]);
+    instance = {
+      id,
+      observer,
+      elements
+    };
+    observerMap.set(id, instance);
+  }
+  return instance;
+}
+function observe(element, callback, options = {}, fallbackInView = unsupportedValue) {
+  if (typeof window.IntersectionObserver === "undefined" && fallbackInView !== void 0) {
+    const bounds = element.getBoundingClientRect();
+    callback(fallbackInView, {
+      isIntersecting: fallbackInView,
+      target: element,
+      intersectionRatio: typeof options.threshold === "number" ? options.threshold : 0,
+      time: 0,
+      boundingClientRect: bounds,
+      intersectionRect: bounds,
+      rootBounds: bounds
+    });
+    return () => {
+    };
+  }
+  const { id, observer, elements } = createObserver(options);
+  const callbacks = elements.get(element) || [];
+  if (!elements.has(element)) {
+    elements.set(element, callbacks);
+  }
+  callbacks.push(callback);
+  observer.observe(element);
+  return function unobserve() {
+    callbacks.splice(callbacks.indexOf(callback), 1);
+    if (callbacks.length === 0) {
+      elements.delete(element);
+      observer.unobserve(element);
+    }
+    if (elements.size === 0) {
+      observer.disconnect();
+      observerMap.delete(id);
+    }
+  };
+}
+
+// src/InView.tsx
+function isPlainChildren(props) {
+  return typeof props.children !== "function";
+}
+var InView = class extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+    __publicField(this, "node", null);
+    __publicField(this, "_unobserveCb", null);
+    __publicField(this, "handleNode", (node) => {
+      if (this.node) {
+        this.unobserve();
+        if (!node && !this.props.triggerOnce && !this.props.skip) {
+          this.setState({ inView: !!this.props.initialInView, entry: void 0 });
+        }
+      }
+      this.node = node ? node : null;
+      this.observeNode();
+    });
+    __publicField(this, "handleChange", (inView, entry) => {
+      if (inView && this.props.triggerOnce) {
+        this.unobserve();
+      }
+      if (!isPlainChildren(this.props)) {
+        this.setState({ inView, entry });
+      }
+      if (this.props.onChange) {
+        this.props.onChange(inView, entry);
+      }
+    });
+    this.state = {
+      inView: !!props.initialInView,
+      entry: void 0
+    };
+  }
+  componentDidMount() {
+    this.unobserve();
+    this.observeNode();
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.rootMargin !== this.props.rootMargin || prevProps.root !== this.props.root || prevProps.threshold !== this.props.threshold || prevProps.skip !== this.props.skip || prevProps.trackVisibility !== this.props.trackVisibility || prevProps.delay !== this.props.delay) {
+      this.unobserve();
+      this.observeNode();
+    }
+  }
+  componentWillUnmount() {
+    this.unobserve();
+  }
+  observeNode() {
+    if (!this.node || this.props.skip)
+      return;
+    const {
+      threshold,
+      root,
+      rootMargin,
+      trackVisibility,
+      delay,
+      fallbackInView
+    } = this.props;
+    this._unobserveCb = observe(
+      this.node,
+      this.handleChange,
+      {
+        threshold,
+        root,
+        rootMargin,
+        // @ts-ignore
+        trackVisibility,
+        // @ts-ignore
+        delay
+      },
+      fallbackInView
+    );
+  }
+  unobserve() {
+    if (this._unobserveCb) {
+      this._unobserveCb();
+      this._unobserveCb = null;
+    }
+  }
+  render() {
+    const { children } = this.props;
+    if (typeof children === "function") {
+      const { inView, entry } = this.state;
+      return children({ inView, entry, ref: this.handleNode });
+    }
+    const {
+      as,
+      triggerOnce,
+      threshold,
+      root,
+      rootMargin,
+      onChange,
+      skip,
+      trackVisibility,
+      delay,
+      initialInView,
+      fallbackInView,
+      ...props
+    } = this.props;
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
+      as || "div",
+      { ref: this.handleNode, ...props },
+      children
+    );
+  }
+};
+
+// src/useInView.tsx
+
+function useInView({
+  threshold,
+  delay,
+  trackVisibility,
+  rootMargin,
+  root,
+  triggerOnce,
+  skip,
+  initialInView,
+  fallbackInView,
+  onChange
+} = {}) {
+  var _a;
+  const [ref, setRef] = react__WEBPACK_IMPORTED_MODULE_0__.useState(null);
+  const callback = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  const [state, setState] = react__WEBPACK_IMPORTED_MODULE_0__.useState({
+    inView: !!initialInView,
+    entry: void 0
+  });
+  callback.current = onChange;
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(
+    () => {
+      if (skip || !ref)
+        return;
+      let unobserve;
+      unobserve = observe(
+        ref,
+        (inView, entry) => {
+          setState({
+            inView,
+            entry
+          });
+          if (callback.current)
+            callback.current(inView, entry);
+          if (entry.isIntersecting && triggerOnce && unobserve) {
+            unobserve();
+            unobserve = void 0;
+          }
+        },
+        {
+          root,
+          rootMargin,
+          threshold,
+          // @ts-ignore
+          trackVisibility,
+          // @ts-ignore
+          delay
+        },
+        fallbackInView
+      );
+      return () => {
+        if (unobserve) {
+          unobserve();
+        }
+      };
+    },
+    // We break the rule here, because we aren't including the actual `threshold` variable
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      // If the threshold is an array, convert it to a string, so it won't change between renders.
+      Array.isArray(threshold) ? threshold.toString() : threshold,
+      ref,
+      root,
+      rootMargin,
+      triggerOnce,
+      skip,
+      trackVisibility,
+      fallbackInView,
+      delay
+    ]
+  );
+  const entryTarget = (_a = state.entry) == null ? void 0 : _a.target;
+  const previousEntryTarget = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  if (!ref && entryTarget && !triggerOnce && !skip && previousEntryTarget.current !== entryTarget) {
+    previousEntryTarget.current = entryTarget;
+    setState({
+      inView: !!initialInView,
+      entry: void 0
+    });
+  }
+  const result = [setRef, state.inView, state.entry];
+  result.ref = result[0];
+  result.inView = result[1];
+  result.entry = result[2];
+  return result;
+}
+
+//# sourceMappingURL=index.mjs.map
 
 /***/ }),
 
