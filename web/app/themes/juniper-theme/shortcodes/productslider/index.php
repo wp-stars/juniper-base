@@ -77,6 +77,11 @@ if (!class_exists('Productslider')) {
 			$excluded_product = get_page_by_title('musterbestellung', OBJECT, 'product');
 			$excluded_product_id = $excluded_product ? $excluded_product->ID : 0;
 
+            $postNotIn = [13819, 13840];
+            $postNotIn[] = $excluded_product_id;
+            $postNotIn = array_unique($postNotIn);
+            $postNotIn = implode(',', $postNotIn);
+
 			$html = '<div class="ls-shortcode-product-grid container my-8">';
 			$html .= '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-10 gap-y-14 sm:gap-[42px] filter-grid flex flex-wrap">';
 
@@ -86,7 +91,7 @@ if (!class_exists('Productslider')) {
 				'posts_per_page' => 6,
 				'orderby' => 'date',
 				'order' => 'DESC',
-				'post__not_in' => [$excluded_product_id], // Exclude the specified product
+                'post__not_in' => [$postNotIn], // Exclude the specified product
 			]);
 
 			if ($query->have_posts()) {
@@ -99,7 +104,7 @@ if (!class_exists('Productslider')) {
 				}
 				wp_reset_postdata();
 			} else {
-				$html .= '<p>' . __('No products found', 'text-domain') . '</p>';
+				$html .= '<p>' . __('No products found', 'wps-juniper') . '</p>';
 			}
 
 			$html .= '</div>';
