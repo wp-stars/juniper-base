@@ -161,3 +161,7 @@
 .filter-toggle.open .open-toggle {
     display: none;
 }
+
+.slick-active > div {
+    height: 100%;
+}
