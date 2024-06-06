@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {getUrlParamValue} from "../../utils";
+import {getUrlParamValue} from "../../../utils";
 
 const FilterCheckbox = (data) => {
 

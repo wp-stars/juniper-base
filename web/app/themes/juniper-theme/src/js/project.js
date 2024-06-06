@@ -56,22 +56,38 @@ jQuery(document).ready(function() {
         // Initialize the slider first with default settings
         $element.each(function() {
             const $slider = jQuery(this);
-            if (!$slider.hasClass('slick-initialized')) {
-                $slider.slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    fade: true,
-                    dots: false // Initialize without dots
-                });
 
-                // Check the number of slides after initialization
-                const slideCount = $slider.slick('getSlick').slideCount;
-                if (slideCount > 1) {
-                    // Update the slider options to show dots if there are more than one slide
-                    $slider.slick('slickSetOption', 'dots', true, true);
-                }
+            if ($slider.hasClass('slick-initialized')) {
+                return
             }
+
+            $slider.slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                fade: true,
+                dots: false // Initialize without dots
+            });
+
+            // Check the number of slides after initialization
+            const slideCount = $slider.slick('getSlick').slideCount;
+            if (slideCount > 1) {
+                // Update the slider options to show dots if there are more than one slide
+                $slider.slick('slickSetOption', 'dots', true, true);
+            }
+        });
+    };
+
+    const refreshSlider = ($element) => {
+        // Initialize the slider first with default settings
+        $element.each(function() {
+            const $slider = jQuery(this);
+
+            if (!$slider.hasClass('slick-initialized')) {
+                return
+            }
+
+            $slider.slick('resize')
         });
     };
 
@@ -95,4 +111,8 @@ jQuery(document).ready(function() {
     jQuery(document).on('filterRenderingDone', function () {
         initSlider(jQuery('.product-card-slider')); // Reinitialize the slider after filter rendering is done
     });
+
+    jQuery(document).on('filterRefreshRenderedElements', function() {
+        refreshSlider(jQuery('.product-card-slider'));
+    })
 });

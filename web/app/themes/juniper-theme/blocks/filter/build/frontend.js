@@ -4479,8 +4479,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ "./src/utils.js");
 /* harmony import */ var _Icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Icons */ "./src/newComponents/Icons.js");
-/* harmony import */ var _SingleFilterComponents_FilterTextSearch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleFilterComponents/FilterTextSearch */ "./src/newComponents/SingleFilterComponents/FilterTextSearch.js");
-/* harmony import */ var _SingleFilterComponents_FilterCheckbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SingleFilterComponents/FilterCheckbox */ "./src/newComponents/SingleFilterComponents/FilterCheckbox.js");
+/* harmony import */ var _SingleFilterComponents_Text_FilterTextSearch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleFilterComponents/Text/FilterTextSearch */ "./src/newComponents/SingleFilterComponents/Text/FilterTextSearch.js");
+/* harmony import */ var _SingleFilterComponents_Checkbox_FilterCheckbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SingleFilterComponents/Checkbox/FilterCheckbox */ "./src/newComponents/SingleFilterComponents/Checkbox/FilterCheckbox.js");
 /* harmony import */ var _TranslationObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../TranslationObject */ "./src/TranslationObject.js");
 
 
@@ -4636,7 +4636,7 @@ const FilterNew = data => {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: 'filter-items',
     className: 'grid grid-cols-12 justify-start mt-6 sm:mt-0'
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_FilterTextSearch__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_Text_FilterTextSearch__WEBPACK_IMPORTED_MODULE_3__["default"], {
     label: 'Product Search',
     name: 'Product Search',
     url: 'text',
@@ -4648,7 +4648,7 @@ const FilterNew = data => {
     className: "flex flex-row justify-between gap-5 col-span-12"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'flex flex-row gap-5'
-  }, show_sample_available_filter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_FilterCheckbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, show_sample_available_filter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_Checkbox_FilterCheckbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: 'sampleAvailable',
     name: 'sampleAvailable',
     label: translation.filter_sample_available,
@@ -4657,7 +4657,7 @@ const FilterNew = data => {
       ...prevFilters,
       sampleAvailable: isChecked
     }))
-  }), show_online_available_filter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_FilterCheckbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), show_online_available_filter && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SingleFilterComponents_Checkbox_FilterCheckbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: 'onlineAvailable',
     name: 'onlineAvailable',
     label: translation.filter_online_available,
@@ -4672,9 +4672,10 @@ const FilterNew = data => {
   }, _TranslationObject__WEBPACK_IMPORTED_MODULE_5__["default"].results_label, ": ", filteredPosts.length))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'container mt-5'
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex flex-wrap"
+    className: "grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex-wrap"
   }, filteredPosts.length ? filteredPosts.map((post, index) => {
-    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__.renderPost)(post, index);
+    const showDirectly = index < postsPerPage;
+    return (0,_utils__WEBPACK_IMPORTED_MODULE_1__.renderPost)(post, index, showDirectly, _utils__WEBPACK_IMPORTED_MODULE_1__.refreshSlick);
   }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: 'w-full text-center'
   }, _TranslationObject__WEBPACK_IMPORTED_MODULE_5__["default"].no_results))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4734,10 +4735,63 @@ const PlusButtonIcon = () => {
 
 /***/ }),
 
-/***/ "./src/newComponents/SingleFilterComponents/FilterCheckbox.js":
-/*!********************************************************************!*\
-  !*** ./src/newComponents/SingleFilterComponents/FilterCheckbox.js ***!
-  \********************************************************************/
+/***/ "./src/newComponents/ProductComponent/SingleProduct.js":
+/*!*************************************************************!*\
+  !*** ./src/newComponents/ProductComponent/SingleProduct.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SingleProduct)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_intersection_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-intersection-observer */ "./node_modules/react-intersection-observer/index.mjs");
+
+
+
+function SingleProduct(data) {
+  var _data$htmlEnc, _data$index, _data$showDirectly, _data$whenInView;
+  const html = atob((_data$htmlEnc = data.htmlEnc) !== null && _data$htmlEnc !== void 0 ? _data$htmlEnc : '');
+  const index = (_data$index = data.index) !== null && _data$index !== void 0 ? _data$index : 0;
+  const showDirectly = (_data$showDirectly = data.showDirectly) !== null && _data$showDirectly !== void 0 ? _data$showDirectly : false;
+  const whenInView = (_data$whenInView = data.whenInView) !== null && _data$whenInView !== void 0 ? _data$whenInView : () => {};
+  const {
+    ref,
+    inView,
+    entry
+  } = (0,react_intersection_observer__WEBPACK_IMPORTED_MODULE_1__.useInView)({
+    threshold: 0,
+    triggerOnce: true
+  });
+  const [displayClass, setDisplayClass] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(mapToDisplayClass(showDirectly));
+  function mapToDisplayClass(shouldShow) {
+    return shouldShow ? 'show' : 'hidden';
+  }
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const displayClass = mapToDisplayClass(inView || showDirectly);
+    whenInView();
+    setDisplayClass(displayClass);
+  }, [inView]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: index,
+    ref: ref
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: 'flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow ' + displayClass,
+    dangerouslySetInnerHTML: {
+      __html: html
+    }
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/newComponents/SingleFilterComponents/Checkbox/FilterCheckbox.js":
+/*!*****************************************************************************!*\
+  !*** ./src/newComponents/SingleFilterComponents/Checkbox/FilterCheckbox.js ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4747,7 +4801,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils */ "./src/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils */ "./src/utils.js");
 
 
 
@@ -4780,10 +4834,10 @@ const FilterCheckbox = data => {
 
 /***/ }),
 
-/***/ "./src/newComponents/SingleFilterComponents/FilterDropdown.js":
-/*!********************************************************************!*\
-  !*** ./src/newComponents/SingleFilterComponents/FilterDropdown.js ***!
-  \********************************************************************/
+/***/ "./src/newComponents/SingleFilterComponents/Dropdown/FilterDropdown.js":
+/*!*****************************************************************************!*\
+  !*** ./src/newComponents/SingleFilterComponents/Dropdown/FilterDropdown.js ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4793,15 +4847,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils */ "./src/utils.js");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/index-a301f526.esm.js");
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
-/* harmony import */ var _ColorCodes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ColorCodes */ "./src/ColorCodes.js");
-/* harmony import */ var color_convert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! color-convert */ "./node_modules/color-convert/index.js");
-/* harmony import */ var color_convert__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(color_convert__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _TranslationObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../TranslationObject */ "./src/TranslationObject.js");
-
-
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/index-a301f526.esm.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
+/* harmony import */ var _TranslationObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../TranslationObject */ "./src/TranslationObject.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/newComponents/SingleFilterComponents/Dropdown/utils.js");
 
 
 
@@ -4816,101 +4865,32 @@ const FilterDropdown = data => {
   const onChange = data.onChange;
   const multiSelection = (_data$multiSelect = data.multiSelect) !== null && _data$multiSelect !== void 0 ? _data$multiSelect : true;
   const taxOptionsRaw = (_data$tax_options = data.tax_options) !== null && _data$tax_options !== void 0 ? _data$tax_options : [];
-  const [options, setOptions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [values, setValues] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  function setDefaultSelectionFromUrl() {
-    const urlParamValueRaw = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.getUrlParamValue)(urlParam);
-    const urlParamValues = urlParamValueRaw.split(',');
-    const preSelectedOptions = options.map(optionCategory => {
-      const filterCategoryOptions = optionCategory.options;
-      return filterCategoryOptions.filter(filterCategoryOption => urlParamValues.includes(filterCategoryOption.slug));
-    });
-    const cleanedPreSelectedOptions = preSelectedOptions.filter(options => options.length > 0);
-    const preselectedTermIds = [];
-    cleanedPreSelectedOptions.forEach(options => {
-      options.forEach(option => {
-        preselectedTermIds.push(option);
-      });
-    });
-    setValues(preselectedTermIds);
-  }
-
-  /**
-   * @param baseColor {String}
-   * @returns {string}
-   */
-  function generateGradientCssTagForColor(baseColor) {
-    const colorCodes = color_convert__WEBPACK_IMPORTED_MODULE_3___default().hex.rgb(baseColor);
-    const colorCodesJoin = colorCodes.join(',');
-    return `linear-gradient(90deg, rgba(${colorCodesJoin},0) 0%, rgba(${colorCodesJoin},0.7581232322030375) 35%, rgba(${colorCodesJoin},1) 59%)`;
-  }
-  function mapToOptionObject(tax, parent) {
-    const colorStyle = generateGradientCssTagForColor(_ColorCodes__WEBPACK_IMPORTED_MODULE_2__["default"].getEntryWithSlugLike(tax.slug));
-    const optionLabel = !(0,_utils__WEBPACK_IMPORTED_MODULE_1__.hideOptionName)(tax, parent) ? tax.name : ' - ';
-    return {
-      label: optionLabel,
-      value: tax.term_id,
-      colorStyle: colorStyle,
-      slug: tax.slug
-    };
-  }
-  function addCategoryToOptions(newCategory) {
-    setOptions(prevOptions => {
-      prevOptions.push(newCategory);
-      return prevOptions;
-    });
-  }
-  function generateCategoryBaseConstruct(name) {
-    return {
-      label: `${name}`,
-      options: []
-    };
-  }
-  function generateCategoryOfParent(parent) {
-    const newCategory = generateCategoryBaseConstruct(parent.name);
-    parent.name = `${_TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].all_label} ${parent.name}`;
-    newCategory.options = taxOptionsRaw.filter(tax => tax.parent === parent.term_id || tax.term_id === parent.term_id).map(tax => mapToOptionObject(tax, parent))
-    // sorts category head to top
-    .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label ? -1 : 1);
-    return newCategory;
-  }
-  function prepareSelectorOptions() {
-    const parents = taxOptionsRaw.filter(tax => tax.parent).map(tax => tax.parent).filter((tax, index, self) => self.indexOf(tax) === index);
-    const parentTaxms = taxOptionsRaw.filter(tax => parents.includes(tax.term_id));
-    parentTaxms.forEach(parent => {
-      const category = generateCategoryOfParent(parent);
-      addCategoryToOptions(category);
-    });
-    const othersLabel = parentTaxms.length > 0 ? `${_TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].others_label} ${label}` : '';
-    const others = generateCategoryBaseConstruct(othersLabel);
-    others.options = taxOptionsRaw.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject);
-    addCategoryToOptions(others);
-  }
+  const _options = (0,_utils__WEBPACK_IMPORTED_MODULE_2__["default"])(taxOptionsRaw, label);
+  const _preselectedValues = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.getDefaultSelectionFromUrl)(urlParam, _options);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    prepareSelectorOptions();
-    setDefaultSelectionFromUrl();
+    onChange(_preselectedValues);
   }, []);
   const Option = props => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       style: {
         background: props.data.colorStyle
       }
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_5__.c.Option, {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_3__.c.Option, {
       ...props
     }));
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: key,
     className: "relative w-full max-w-full mb-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isMulti: multiSelection,
-    defaultValue: values,
+    defaultValue: _preselectedValues,
     name: label,
-    options: options,
+    options: _options,
     onChange: newValue => {
       onChange(newValue);
     },
-    placeholder: `${label} ${_TranslationObject__WEBPACK_IMPORTED_MODULE_4__["default"].select_label}`,
+    placeholder: `${label} ${_TranslationObject__WEBPACK_IMPORTED_MODULE_1__["default"].select_label}`,
     components: {
       Option
     }
@@ -4920,10 +4900,93 @@ const FilterDropdown = data => {
 
 /***/ }),
 
-/***/ "./src/newComponents/SingleFilterComponents/FilterTextSearch.js":
-/*!**********************************************************************!*\
-  !*** ./src/newComponents/SingleFilterComponents/FilterTextSearch.js ***!
-  \**********************************************************************/
+/***/ "./src/newComponents/SingleFilterComponents/Dropdown/utils.js":
+/*!********************************************************************!*\
+  !*** ./src/newComponents/SingleFilterComponents/Dropdown/utils.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ prepareDropdownOptions),
+/* harmony export */   getDefaultSelectionFromUrl: () => (/* binding */ getDefaultSelectionFromUrl)
+/* harmony export */ });
+/* harmony import */ var _TranslationObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../TranslationObject */ "./src/TranslationObject.js");
+/* harmony import */ var _ColorCodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../ColorCodes */ "./src/ColorCodes.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils */ "./src/utils.js");
+/* harmony import */ var color_convert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! color-convert */ "./node_modules/color-convert/index.js");
+/* harmony import */ var color_convert__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(color_convert__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+function prepareDropdownOptions(rawOptions, label) {
+  const cateogoryOptions = [];
+  const parents = rawOptions.filter(tax => tax.parent).map(tax => tax.parent).filter((tax, index, self) => self.indexOf(tax) === index);
+  const parentTaxms = rawOptions.filter(tax => parents.includes(tax.term_id));
+  parentTaxms.forEach(parent => {
+    const category = generateCategoryOfParent(parent, rawOptions);
+    cateogoryOptions.push(category);
+  });
+  const othersLabel = parentTaxms.length > 0 ? `${_TranslationObject__WEBPACK_IMPORTED_MODULE_0__["default"].others_label} ${label}` : '';
+  const others = generateCategoryBaseConstruct(othersLabel);
+  others.options = rawOptions.filter(tax => !tax.parent && !parents.includes(tax.term_id)).map(mapToOptionObject);
+  cateogoryOptions.push(others);
+  return cateogoryOptions;
+}
+function generateCategoryOfParent(parent, rawOptions) {
+  const newCategory = generateCategoryBaseConstruct(parent.name);
+  parent.name = `${_TranslationObject__WEBPACK_IMPORTED_MODULE_0__["default"].all_label} ${parent.name}`;
+  newCategory.options = rawOptions.filter(tax => tax.parent === parent.term_id || tax.term_id === parent.term_id).map(tax => mapToOptionObject(tax, parent))
+  // sorts category head to top
+  .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label ? -1 : 1);
+  return newCategory;
+}
+function generateCategoryBaseConstruct(name) {
+  return {
+    label: `${name}`,
+    options: []
+  };
+}
+function mapToOptionObject(tax, parent) {
+  const colorStyle = generateGradientCssTagForColor(_ColorCodes__WEBPACK_IMPORTED_MODULE_1__["default"].getEntryWithSlugLike(tax.slug));
+  const optionLabel = !(0,_utils__WEBPACK_IMPORTED_MODULE_2__.hideOptionName)(tax, parent) ? tax.name : ' - ';
+  return {
+    label: optionLabel,
+    value: tax.term_id,
+    colorStyle: colorStyle,
+    slug: tax.slug
+  };
+}
+function generateGradientCssTagForColor(baseColor) {
+  const colorCodes = color_convert__WEBPACK_IMPORTED_MODULE_3___default().hex.rgb(baseColor);
+  const colorCodesJoin = colorCodes.join(',');
+  return `linear-gradient(90deg, rgba(${colorCodesJoin},0) 0%, rgba(${colorCodesJoin},0.7581232322030375) 35%, rgba(${colorCodesJoin},1) 59%)`;
+}
+function getDefaultSelectionFromUrl(urlParam, preparedOptions) {
+  const urlParamValueRaw = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.getUrlParamValue)(urlParam);
+  const urlParamValues = urlParamValueRaw.split(',');
+  const preSelectedOptions = preparedOptions.map(optionCategory => {
+    const filterCategoryOptions = optionCategory.options;
+    return filterCategoryOptions.filter(filterCategoryOption => urlParamValues.includes(filterCategoryOption.slug));
+  });
+  const cleanedPreSelectedOptions = preSelectedOptions.filter(options => options.length > 0);
+  const preselectedTermIds = [];
+  cleanedPreSelectedOptions.forEach(options => {
+    options.forEach(option => {
+      preselectedTermIds.push(option);
+    });
+  });
+  return preselectedTermIds[0];
+}
+
+/***/ }),
+
+/***/ "./src/newComponents/SingleFilterComponents/Text/FilterTextSearch.js":
+/*!***************************************************************************!*\
+  !*** ./src/newComponents/SingleFilterComponents/Text/FilterTextSearch.js ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -4933,8 +4996,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Icons */ "./src/newComponents/Icons.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils */ "./src/utils.js");
+/* harmony import */ var _Icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Icons */ "./src/newComponents/Icons.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils */ "./src/utils.js");
 
 
 
@@ -4993,14 +5056,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   postInSelection: () => (/* binding */ postInSelection),
 /* harmony export */   postInTextSelection: () => (/* binding */ postInTextSelection),
 /* harmony export */   postIsAvailableOnline: () => (/* binding */ postIsAvailableOnline),
+/* harmony export */   refreshSlick: () => (/* binding */ refreshSlick),
 /* harmony export */   renderPost: () => (/* binding */ renderPost),
 /* harmony export */   rerenderSlick: () => (/* binding */ rerenderSlick)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _newComponents_SingleFilterComponents_FilterDropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./newComponents/SingleFilterComponents/FilterDropdown */ "./src/newComponents/SingleFilterComponents/FilterDropdown.js");
+/* harmony import */ var _newComponents_SingleFilterComponents_Dropdown_FilterDropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./newComponents/SingleFilterComponents/Dropdown/FilterDropdown */ "./src/newComponents/SingleFilterComponents/Dropdown/FilterDropdown.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _newComponents_ProductComponent_SingleProduct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./newComponents/ProductComponent/SingleProduct */ "./src/newComponents/ProductComponent/SingleProduct.js");
+
 
 
 
@@ -5016,6 +5082,10 @@ function rerenderSlick() {
   const event = new Event('filterRenderingDone');
   document.dispatchEvent(event);
 }
+function refreshSlick() {
+  const event = new Event('filterRefreshRenderedElements');
+  document.dispatchEvent(event);
+}
 function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
@@ -5028,13 +5098,12 @@ async function loadInPostsFromPage(restUrl = '', postType = 'product', pageNum =
   };
   return responseData.posts;
 }
-function renderPost(post, index) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index,
-    className: 'flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow',
-    dangerouslySetInnerHTML: {
-      __html: atob(post.html)
-    }
+function renderPost(post, index, showDirectly = false, whenInView = () => {}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_newComponents_ProductComponent_SingleProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    index: index,
+    htmlEnc: post.html,
+    showDirectly: showDirectly,
+    whenInView: whenInView
   });
 }
 function getUrlParamValue(param) {
@@ -5052,7 +5121,7 @@ function getUrlParamValue(param) {
   return foundValue ? decodeURIComponent(foundValue.value) : '';
 }
 function filterOptionToElement(filterOption) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_newComponents_SingleFilterComponents_FilterDropdown__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_newComponents_SingleFilterComponents_Dropdown_FilterDropdown__WEBPACK_IMPORTED_MODULE_1__["default"], {
     data: filterOption
   });
 }
@@ -13886,6 +13955,320 @@ function rectToClientRect(rect) {
 
 
 
+
+/***/ }),
+
+/***/ "./node_modules/react-intersection-observer/index.mjs":
+/*!************************************************************!*\
+  !*** ./node_modules/react-intersection-observer/index.mjs ***!
+  \************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   InView: () => (/* binding */ InView),
+/* harmony export */   defaultFallbackInView: () => (/* binding */ defaultFallbackInView),
+/* harmony export */   observe: () => (/* binding */ observe),
+/* harmony export */   useInView: () => (/* binding */ useInView)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+"use client";
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+
+// src/InView.tsx
+
+
+// src/observe.ts
+var observerMap = /* @__PURE__ */ new Map();
+var RootIds = /* @__PURE__ */ new WeakMap();
+var rootId = 0;
+var unsupportedValue = void 0;
+function defaultFallbackInView(inView) {
+  unsupportedValue = inView;
+}
+function getRootId(root) {
+  if (!root)
+    return "0";
+  if (RootIds.has(root))
+    return RootIds.get(root);
+  rootId += 1;
+  RootIds.set(root, rootId.toString());
+  return RootIds.get(root);
+}
+function optionsToId(options) {
+  return Object.keys(options).sort().filter(
+    (key) => options[key] !== void 0
+  ).map((key) => {
+    return `${key}_${key === "root" ? getRootId(options.root) : options[key]}`;
+  }).toString();
+}
+function createObserver(options) {
+  const id = optionsToId(options);
+  let instance = observerMap.get(id);
+  if (!instance) {
+    const elements = /* @__PURE__ */ new Map();
+    let thresholds;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        var _a;
+        const inView = entry.isIntersecting && thresholds.some((threshold) => entry.intersectionRatio >= threshold);
+        if (options.trackVisibility && typeof entry.isVisible === "undefined") {
+          entry.isVisible = inView;
+        }
+        (_a = elements.get(entry.target)) == null ? void 0 : _a.forEach((callback) => {
+          callback(inView, entry);
+        });
+      });
+    }, options);
+    thresholds = observer.thresholds || (Array.isArray(options.threshold) ? options.threshold : [options.threshold || 0]);
+    instance = {
+      id,
+      observer,
+      elements
+    };
+    observerMap.set(id, instance);
+  }
+  return instance;
+}
+function observe(element, callback, options = {}, fallbackInView = unsupportedValue) {
+  if (typeof window.IntersectionObserver === "undefined" && fallbackInView !== void 0) {
+    const bounds = element.getBoundingClientRect();
+    callback(fallbackInView, {
+      isIntersecting: fallbackInView,
+      target: element,
+      intersectionRatio: typeof options.threshold === "number" ? options.threshold : 0,
+      time: 0,
+      boundingClientRect: bounds,
+      intersectionRect: bounds,
+      rootBounds: bounds
+    });
+    return () => {
+    };
+  }
+  const { id, observer, elements } = createObserver(options);
+  const callbacks = elements.get(element) || [];
+  if (!elements.has(element)) {
+    elements.set(element, callbacks);
+  }
+  callbacks.push(callback);
+  observer.observe(element);
+  return function unobserve() {
+    callbacks.splice(callbacks.indexOf(callback), 1);
+    if (callbacks.length === 0) {
+      elements.delete(element);
+      observer.unobserve(element);
+    }
+    if (elements.size === 0) {
+      observer.disconnect();
+      observerMap.delete(id);
+    }
+  };
+}
+
+// src/InView.tsx
+function isPlainChildren(props) {
+  return typeof props.children !== "function";
+}
+var InView = class extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+    __publicField(this, "node", null);
+    __publicField(this, "_unobserveCb", null);
+    __publicField(this, "handleNode", (node) => {
+      if (this.node) {
+        this.unobserve();
+        if (!node && !this.props.triggerOnce && !this.props.skip) {
+          this.setState({ inView: !!this.props.initialInView, entry: void 0 });
+        }
+      }
+      this.node = node ? node : null;
+      this.observeNode();
+    });
+    __publicField(this, "handleChange", (inView, entry) => {
+      if (inView && this.props.triggerOnce) {
+        this.unobserve();
+      }
+      if (!isPlainChildren(this.props)) {
+        this.setState({ inView, entry });
+      }
+      if (this.props.onChange) {
+        this.props.onChange(inView, entry);
+      }
+    });
+    this.state = {
+      inView: !!props.initialInView,
+      entry: void 0
+    };
+  }
+  componentDidMount() {
+    this.unobserve();
+    this.observeNode();
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.rootMargin !== this.props.rootMargin || prevProps.root !== this.props.root || prevProps.threshold !== this.props.threshold || prevProps.skip !== this.props.skip || prevProps.trackVisibility !== this.props.trackVisibility || prevProps.delay !== this.props.delay) {
+      this.unobserve();
+      this.observeNode();
+    }
+  }
+  componentWillUnmount() {
+    this.unobserve();
+  }
+  observeNode() {
+    if (!this.node || this.props.skip)
+      return;
+    const {
+      threshold,
+      root,
+      rootMargin,
+      trackVisibility,
+      delay,
+      fallbackInView
+    } = this.props;
+    this._unobserveCb = observe(
+      this.node,
+      this.handleChange,
+      {
+        threshold,
+        root,
+        rootMargin,
+        // @ts-ignore
+        trackVisibility,
+        // @ts-ignore
+        delay
+      },
+      fallbackInView
+    );
+  }
+  unobserve() {
+    if (this._unobserveCb) {
+      this._unobserveCb();
+      this._unobserveCb = null;
+    }
+  }
+  render() {
+    const { children } = this.props;
+    if (typeof children === "function") {
+      const { inView, entry } = this.state;
+      return children({ inView, entry, ref: this.handleNode });
+    }
+    const {
+      as,
+      triggerOnce,
+      threshold,
+      root,
+      rootMargin,
+      onChange,
+      skip,
+      trackVisibility,
+      delay,
+      initialInView,
+      fallbackInView,
+      ...props
+    } = this.props;
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
+      as || "div",
+      { ref: this.handleNode, ...props },
+      children
+    );
+  }
+};
+
+// src/useInView.tsx
+
+function useInView({
+  threshold,
+  delay,
+  trackVisibility,
+  rootMargin,
+  root,
+  triggerOnce,
+  skip,
+  initialInView,
+  fallbackInView,
+  onChange
+} = {}) {
+  var _a;
+  const [ref, setRef] = react__WEBPACK_IMPORTED_MODULE_0__.useState(null);
+  const callback = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  const [state, setState] = react__WEBPACK_IMPORTED_MODULE_0__.useState({
+    inView: !!initialInView,
+    entry: void 0
+  });
+  callback.current = onChange;
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(
+    () => {
+      if (skip || !ref)
+        return;
+      let unobserve;
+      unobserve = observe(
+        ref,
+        (inView, entry) => {
+          setState({
+            inView,
+            entry
+          });
+          if (callback.current)
+            callback.current(inView, entry);
+          if (entry.isIntersecting && triggerOnce && unobserve) {
+            unobserve();
+            unobserve = void 0;
+          }
+        },
+        {
+          root,
+          rootMargin,
+          threshold,
+          // @ts-ignore
+          trackVisibility,
+          // @ts-ignore
+          delay
+        },
+        fallbackInView
+      );
+      return () => {
+        if (unobserve) {
+          unobserve();
+        }
+      };
+    },
+    // We break the rule here, because we aren't including the actual `threshold` variable
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      // If the threshold is an array, convert it to a string, so it won't change between renders.
+      Array.isArray(threshold) ? threshold.toString() : threshold,
+      ref,
+      root,
+      rootMargin,
+      triggerOnce,
+      skip,
+      trackVisibility,
+      fallbackInView,
+      delay
+    ]
+  );
+  const entryTarget = (_a = state.entry) == null ? void 0 : _a.target;
+  const previousEntryTarget = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  if (!ref && entryTarget && !triggerOnce && !skip && previousEntryTarget.current !== entryTarget) {
+    previousEntryTarget.current = entryTarget;
+    setState({
+      inView: !!initialInView,
+      entry: void 0
+    });
+  }
+  const result = [setRef, state.inView, state.entry];
+  result.ref = result[0];
+  result.inView = result[1];
+  result.entry = result[2];
+  return result;
+}
+
+//# sourceMappingURL=index.mjs.map
 
 /***/ }),
 

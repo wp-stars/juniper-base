@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {SearchGlassIcon} from "../Icons";
-import {getUrlParamValue} from "../../utils";
+import {SearchGlassIcon} from "../../Icons";
+import {getUrlParamValue} from "../../../utils";
 
 const FilterTextSearch = (data) => {
 	const label = data.label
