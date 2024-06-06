@@ -87,8 +87,8 @@ class ProductCard {
                             <?php else: 
                                 $price_html = $product->get_price_html();
                                 if ( $price_html ) : ?>
-                                    <span class="price"><?php echo $price_html; ?></span>
-                                <?php endif; 
+                                    <span class="price"><?php echo $price_html; ?></span><span class="ml-2 text-sm font-thin"><?php _e('excl. VAT', 'juniper-theme'); ?></span>
+                                <?php endif;
                             endif;
                         ?>
                     </h5>
