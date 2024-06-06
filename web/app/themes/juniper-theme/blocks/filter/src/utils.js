@@ -1,5 +1,5 @@
 import React from "react";
-import FilterDropdown from "./newComponents/SingleFilterComponents/FilterDropdown";
+import FilterDropdown from "./newComponents/SingleFilterComponents/Dropdown/FilterDropdown";
 import axios from "axios";
 import SingleProduct from "./newComponents/ProductComponent/SingleProduct";
 

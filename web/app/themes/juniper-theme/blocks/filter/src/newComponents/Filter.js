@@ -9,8 +9,8 @@ import {
     rerenderSlick
 } from "../utils";
 import {PlusButtonIcon} from "./Icons";
-import FilterTextSearch from "./SingleFilterComponents/FilterTextSearch";
-import FilterCheckbox from "./SingleFilterComponents/FilterCheckbox";
+import FilterTextSearch from "./SingleFilterComponents/Text/FilterTextSearch";
+import FilterCheckbox from "./SingleFilterComponents/Checkbox/FilterCheckbox";
 import translationObject from "../TranslationObject";
 
 const FilterNew = (data) => {
