@@ -1,6 +1,7 @@
 import React from "react";
 import FilterDropdown from "./newComponents/SingleFilterComponents/FilterDropdown";
 import axios from "axios";
+import SingleProduct from "./newComponents/ProductComponent/SingleProduct";
 
 export function isIterable(obj) {
     // checks for null and undefined
@@ -16,6 +17,11 @@ export function rerenderSlick() {
     document.dispatchEvent(event);
 }
 
+export function refreshSlick() {
+    const event = new Event('filterRefreshRenderedElements')
+    document.dispatchEvent(event)
+}
+
 export function clone(obj) {
     return JSON.parse(JSON.stringify(obj))
 }
@@ -28,10 +34,12 @@ export async function loadInPostsFromPage(restUrl = '', postType = 'product', pa
     return responseData.posts;
 }
 
-export function renderPost(post, index) {
-    return <div key={index}
-                className={'flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow'}
-                dangerouslySetInnerHTML={{ __html: atob(post.html) }}
+export function renderPost(post, index, showDirectly = false, whenInView = (() => {})) {
+    return <SingleProduct
+        index={index}
+        htmlEnc={post.html}
+        showDirectly={showDirectly}
+        whenInView={whenInView}
     />
 }
 
