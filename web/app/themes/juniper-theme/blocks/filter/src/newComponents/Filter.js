@@ -4,7 +4,7 @@ import {
     postHasSampleAvailable,
     postInSelection,
     postInTextSelection,
-    postIsAvailableOnline,
+    postIsAvailableOnline, refreshSlick,
     renderPost,
     rerenderSlick
 } from "../utils";
@@ -232,10 +232,11 @@ const FilterNew = (data) => {
                 </div>
             </div>
             <div className={'container mt-5'}>
-                <div className={"grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex flex-wrap"}>
+                <div className={"grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex-wrap"}>
                     {filteredPosts.length ?
                         filteredPosts.map((post, index) => {
-                            return renderPost(post, index)
+                            const showDirectly = index < postsPerPage
+                            return renderPost(post, index, showDirectly, refreshSlick)
                         })
                         : <div className={'w-full text-center'}>
                             {translationObject.no_results}
