@@ -122,7 +122,7 @@ if (!class_exists('FooterNewsletter')) {
             echo '<p class="font-bold leading-6 pb-2">' . __('Newsletter','wps-juniper') . '</p>';
 
             $privacyPageUrl = (get_locale() === "de_DE") ? '/datenschutz' : '/en/privacy-policy/';
-            echo '<p class="mb-7" >' . sprintf(__('Register now and always be well informed! Here you will find information about our <a class="underline hover:no-underline" target="_blank" href="%s">privacy delaration</a>.','wps-juniper'), $privacyPageUrl) . '</p>';
+            echo '<p class="mb-7" >' . sprintf(__('Register now and always be well informed! Here you will find information about our <a class="underline hover:no-underline" target="_blank" href="%s">privacy policy</a>.','wps-juniper'), $privacyPageUrl) . '</p>';
 
             if (self::$modal_displayed) {
                 return ''; // Return empty string if modal has already been displayed
