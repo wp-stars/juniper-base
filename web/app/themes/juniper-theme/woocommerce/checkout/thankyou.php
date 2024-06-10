@@ -18,6 +18,10 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+$thank_you_animation_id = apply_filters('wps_get_attachment_id_with_name_like', 'Vielen Dank Bestellung Animation');
+$thank_you_animation_source = wp_get_attachment_url($thank_you_animation_id);
+
 ?>
 
 <div class="woocommerce-order container">
@@ -40,6 +44,14 @@ defined( 'ABSPATH' ) || exit;
 			</p>
 
 		<?php else : ?>
+			<div class="w-full h-96 flex justify-center items-center">
+				<lottie-player
+					autoplay
+					class="h-2/3"
+					mode="normal"
+					src="<?= $thank_you_animation_source ?>"
+				></lottie-player>
+			</div>
 			<h1 class="mt-12"><?php _e('Thank you', 'woocommerce');?></h1>
 			<?php wc_get_template( 'checkout/order-received.php', array( 'order' => $order ) ); ?>
 
