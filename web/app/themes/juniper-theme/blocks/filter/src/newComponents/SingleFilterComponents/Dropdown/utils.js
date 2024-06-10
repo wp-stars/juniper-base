@@ -54,11 +54,12 @@ function generateCategoryBaseConstruct(name) {
 }
 
 function mapToOptionObject(tax, parent) {
-    const colorStyle = generateGradientCssTagForColor(colorCodes.getEntryWithSlugLike(tax.slug))
+    const colorCode = colorCodes.getEntryWithSlugLike(tax.slug)
+    const colorStyle = generateGradientCssTagForColor(colorCode)
 
-    const optionLabel = !hideOptionName(tax, parent) ? tax.name : ' - '
+    const optionLabel = !hideOptionName(tax, parent) ? tax.name : '  '
 
-    return {label: optionLabel, value: tax.term_id, colorStyle: colorStyle, slug: tax.slug};
+    return {label: optionLabel, value: tax.term_id, colorStyle: colorStyle, slug: tax.slug, color: colorCode, parent: parent};
 }
 
 function generateGradientCssTagForColor(baseColor) {

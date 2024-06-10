@@ -33,7 +33,6 @@ class ColorCodes {
      * @returns {String}
      */
     getEntryWithSlugLike(slug) {
-
         const foundEntryParamSlugInc = this.colorCodeEntries.find((entry) =>
             entry.slugs.find(entrySlugs => slug.includes(entrySlugs)) !== undefined)
         const foundEntrySlugInc = this.colorCodeEntries.find((entry) => 
@@ -41,7 +40,9 @@ class ColorCodes {
 
         const foundEntry = foundEntryParamSlugInc === undefined ? foundEntrySlugInc : foundEntryParamSlugInc
 
-        return foundEntry !== undefined ? foundEntry.baseColor : '#ffffff'
+        return foundEntry !== undefined
+            ? foundEntry.baseColor
+            : '#ffffff'
     }
 }
 

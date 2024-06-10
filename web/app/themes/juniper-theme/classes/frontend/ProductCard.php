@@ -41,7 +41,7 @@ class ProductCard {
 
         ob_start();
         ?>
-            <div class="overflow-hidden shadow-lg relative product-card h-[100%] pb-[20px] border border-solid border-[#DCDDDE] col-span-6 sm:col-span-3 md:col-span-2 flex flex-col">
+            <div class="overflow-hidden isolate shadow-lg relative product-card h-[100%] pb-[20px] border border-solid border-[#DCDDDE] col-span-6 sm:col-span-3 md:col-span-2 flex flex-col">
             <?php
                 $label_new = get_field('label-new', $product->get_id());
                 if ($label_new) { ?>

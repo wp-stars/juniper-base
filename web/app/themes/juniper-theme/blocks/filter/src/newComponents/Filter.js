@@ -59,27 +59,6 @@ const FilterNew = (data) => {
         setNumberOfPostsVisible(postsToDisplay.length)
     }
 
-    function loadPosts(lastAdded = 1, currentPage = 1, postsPulled = []) {
-        // if (lastAdded <= 0) {
-        //     currentlyLoading(false)
-        //     return
-        // }
-        //
-        // const nextPostsPromise = loadInPostsFromPage(resturl, postType, currentPage)
-        //
-        // nextPostsPromise.then((nextPosts) => {
-        //     const postsAdded = nextPosts.length
-        //
-        //     const allPostsPulled = postsPulled.concat(nextPosts)
-        //
-        //     setAllPosts(allPostsPulled)
-        //
-        //     currentPage++
-        //
-        //     loadPosts(postsAdded, currentPage, allPostsPulled)
-        // })
-    }
-
     function applyFilter(filter) {
         let filterOptions = Object.entries(filter).filter(keyValue => keyValue[1] !== '')
 
@@ -164,10 +143,6 @@ const FilterNew = (data) => {
         applyFilter(filterSelected)
     }, [allPosts]);
 
-    // useEffect(() => {
-    //     setPostsToDisplay(filteredPosts.slice(0, numberOfPostsVisible))
-    // }, [filteredPosts]);
-
     useEffect(() => {
         currentlyLoading(false)
 
@@ -206,7 +181,7 @@ const FilterNew = (data) => {
                 <div data-aos={'fade-up'}
                      data-aos-delay={'100'}
                      data-aos-offset={0}
-                     className={'grid grid-cols-1 md:grid-cols-3 sm:gap-7 mt-6 sm:mt-0'}>
+                     className={'grid grid-cols-1 md:grid-cols-3 relative z-10 sm:gap-7 mt-6 sm:mt-0'}>
                     {filterOptions.map(filterOptionToElement)}
                 </div>
 
