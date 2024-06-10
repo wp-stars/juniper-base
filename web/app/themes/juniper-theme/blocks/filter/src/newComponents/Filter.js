@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
-    filterOptionToElement, isArray, loadInPostsFromPage,
-    postHasSampleAvailable,
+    filterOptionToElement, isArray, postHasSampleAvailable,
     postInSelection,
     postInTextSelection,
     postIsAvailableOnline, refreshSlick,
@@ -182,9 +181,17 @@ const FilterNew = (data) => {
 
     return (
         <div className={"w-full"}>
-            <div className={"container"}><h1 className={"mb-0 sm:mb-6"}>{title}</h1></div>
+            <div className={"container"}>
+                <h1
+                    data-aos={'fade-up'}
+                    className={"mb-0 sm:mb-6"}>{title}</h1>
+            </div>
             <div className={"container mx-auto"}>
-                <div id={'filter-items'} className={'grid grid-cols-12 justify-start mt-6 sm:mt-0'}>
+                <div id={'filter-items'}
+                     data-aos={'fade-up'}
+                     data-aos-delay={'50'}
+                     data-aos-offset={0}
+                     className={'grid grid-cols-12 justify-start mt-6 sm:mt-0'}>
                     <FilterTextSearch
                         label={'Product Search'}
                         name={'Product Search'}
@@ -195,10 +202,18 @@ const FilterNew = (data) => {
                         }
                     />
                 </div>
-                <div className={'grid grid-cols-1 md:grid-cols-3 sm:gap-7 mt-6 sm:mt-0'}>
+
+                <div data-aos={'fade-up'}
+                     data-aos-delay={'100'}
+                     data-aos-offset={0}
+                     className={'grid grid-cols-1 md:grid-cols-3 sm:gap-7 mt-6 sm:mt-0'}>
                     {filterOptions.map(filterOptionToElement)}
                 </div>
-                <div className="flex flex-row justify-between gap-5 col-span-12">
+
+                <div data-aos={'fade-up'}
+                     data-aos-delay={'150'}
+                     data-aos-offset={0}
+                     className="flex flex-row justify-between gap-5 col-span-12">
                     <div className={'flex flex-row gap-5'}>
                         {show_sample_available_filter && <FilterCheckbox
                             key={'sampleAvailable'}
@@ -242,18 +257,6 @@ const FilterNew = (data) => {
                             {translationObject.no_results}
                         </div>}
                 </div>
-            </div>
-            <div className={'container flex justify-center items-center my-24 flex-col gap-y-6'}>
-                {isCurrentlyLoading
-                    ? <span className={'loading-spinner'}/>
-                    : morePostsToDisplay() && (
-                    <button onClick={showMore} disabled={!morePostsToDisplay()}
-                            className="inline-flex items-center gap-x-2.5">
-                        <PlusButtonIcon/>
-                        {translationObject.load_more}
-                    </button>
-                )
-                }
             </div>
         </div>
     )

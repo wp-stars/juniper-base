@@ -30,7 +30,10 @@ export default function SingleProduct(data) {
 
     return (
         <div key={index}
-             ref={ref}>
+             ref={ref}
+             data-aos="fade-up"
+             data-aos-delay={'200'}
+             >
             <div
                 className={'flex flex-col h-full col-span-3 sm:col-span-1 gap-y-14 sm:gap-y-0 flex-grow ' + displayClass}
                 dangerouslySetInnerHTML={{__html: html}}
