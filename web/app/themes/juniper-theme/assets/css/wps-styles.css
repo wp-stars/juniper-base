@@ -47,8 +47,8 @@ a.borlabs-cookie-preference svg {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
@@ -171,110 +171,174 @@ a.borlabs-cookie-preference svg {
     margin-bottom: 1.75em !important;
 }
 
-
-.loading-spinner{
-        width: 40px;
-        height: 40px;
-        border: 3px solid #000;
-        border-bottom-color: transparent;
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-        }
-    
-        @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #000;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
 }
 
-@media screen and (max-width:767px) {
-    .products-mobile{
-        gap: 23px;
-    display: flex;
-    flex-direction: column;
-    padding: 18px 0px;
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
     }
-     .products-mobile .product-slot{
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes homeSliderBackground {
+    0% {
+        margin-left: 0;
+        margin-top: 0;
+    }
+    100% {
+        margin-left: -90px;
+        margin-top: 125px;
+    }
+}
+
+@keyframes homeSliderImage {
+    0% {
+        border-bottom-left-radius: 0px !important;
+    }
+    100% {
+        border-bottom-left-radius: 200px !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .products-mobile {
+        gap: 23px;
+        display: flex;
+        flex-direction: column;
+        padding: 18px 0px;
+    }
+
+    .products-mobile .product-slot {
         height: 70px;
     }
-.products-mobile .product-slot .tooltip{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 20px;
-}
-.products-mobile .product-slot .product{
-    width: 69px;
-    height: 69px;
-    min-width: 69px;
-    min-height: 69px;
-    border-radius: 69px;
-border: 1px solid  #DCDDDE;
-}
-.products-mobile .product-slot .product img{
-    width: 69px;
-    height: 69px;
-    min-width: 69px;
-    min-height: 69px;
-    object-fit: cover;
-}
-.products-mobile .product-slot .tooltiptext{
-    position: relative;
-    background-color: transparent;
-    visibility: visible;
-    top: 0px;
-    right: 0px;
-    white-space: normal;
-    font-size: 18px;
-font-style: normal;
-font-weight: 500;
-width: 100%;
-padding-left: 12px;
+
+    .products-mobile .product-slot .tooltip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 20px;
+    }
+
+    .products-mobile .product-slot .product {
+        width: 69px;
+        height: 69px;
+        min-width: 69px;
+        min-height: 69px;
+        border-radius: 69px;
+        border: 1px solid #DCDDDE;
+    }
+
+    .products-mobile .product-slot .product img {
+        width: 69px;
+        height: 69px;
+        min-width: 69px;
+        min-height: 69px;
+        object-fit: cover;
+    }
+
+    .products-mobile .product-slot .tooltiptext {
+        position: relative;
+        background-color: transparent;
+        visibility: visible;
+        top: 0px;
+        right: 0px;
+        white-space: normal;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        width: 100%;
+        padding-left: 12px;
+    }
+
+    .products-mobile .product-slot .delete-product {
+        border-radius: 40px;
+        border: 1px solid #CC1718;
+
+        background: #FEF0EF;
+        display: flex;
+        width: 31px;
+        height: 31px;
+        min-height: 31px;
+        min-width: 31px;
+        padding: 6px;
+        justify-content: center;
+        align-items: center;
+        margin-left: 25px;
+    }
+
+    .products-mobile .product-slot .delete-product svg {
+        height: 13px;
+        width: 13px;
+    }
+
+    .products-mobile .placeholder {
+        position: absolute;
+        height: 69px;
+        width: 69px;
+        left: 20px;
+        border-width: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .products-mobile .product-loading {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
 }
 
-.products-mobile .product-slot .delete-product{
-    border-radius: 40px;
-border: 1px solid #CC1718;
+/* --- homepage slider startup animation --- */
 
-background: #FEF0EF;
-display: flex;
-width: 31px;
-height: 31px;
-min-height: 31px;
-min-width: 31px;
-padding: 6px;
-justify-content: center;
-align-items: center;
-margin-left: 25px;
+.slider-initial .slider-slideInFromBottom {
+    animation: ease-out slideInFromBottom 1s 300ms;
 }
 
-.products-mobile .product-slot .delete-product svg{
-    height: 13px;
-    width: 13px;
+.slider-initial .slider-slideFromRight {
+    animation: ease-out slideInFromRight 1s 300ms;
 }
 
-.products-mobile .placeholder{
-    position: absolute;
-    height: 69px;
-    width: 69px;
-    left: 20px;
-    border-width: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.products-mobile .product-loading{
-    position: absolute; 
-  left: 0; 
-  right: 0; 
-  margin-left: auto; 
-  margin-right: auto; 
-
+.slider-initial .colored__background .n2-ss-layer-with-background::before {
+    animation: ease-out homeSliderBackground 1s 300ms;
 }
 
+.slider-initial .colored__background .n2-ss-layer-with-background img {
+    animation: ease-out homeSliderImage 1s 300ms;
 }
