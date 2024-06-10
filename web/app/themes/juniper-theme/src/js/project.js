@@ -116,3 +116,27 @@ jQuery(document).ready(function() {
         refreshSlider(jQuery('.product-card-slider'));
     })
 });
+
+HTMLCollection.prototype.toConnectedArray = function () {
+    const connectedArray = []
+    for (const block of this) {
+        connectedArray.push(block)
+    }
+    return connectedArray
+}
+
+Array.prototype.last = function () {
+    return this[this.length - 1]
+}
+
+Array.prototype.first = function () {
+    return this[0] ?? null
+}
+
+Array.prototype.removeUndefined = function () {
+    return this.filter(isDefined)
+}
+
+Element.prototype.appendBefore = function (element, parentNode = null) {
+    element.parentNode.insertBefore(this, element);
+};

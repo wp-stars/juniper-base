@@ -145,6 +145,9 @@ function juniper_theme_enqueue() {
 	wp_enqueue_script( 'aos-js', get_template_directory_uri() . '/src/js/aos/aos.js', [], '3.0.0', true);
 	wp_enqueue_script( 'aos-starter', get_template_directory_uri() . '/src/js/aos/aos-enqueue.js', [], '3.0.0', true);
 
+	wp_enqueue_script( 'lottie-js', get_template_directory_uri() . '/src/js/lottie/lottie-player.js', [], 'latest', true);
+	wp_enqueue_script( 'lottie-on-click', get_template_directory_uri() . '/src/js/lottie/onClickPlay.js', ['lottie-js'], filemtime( __DIR__ . '/src/js/lottie/onClickPlay.js'), true);
+	
 //    wp_enqueue_script( 'filter-js', get_template_directory_uri() . '/blocks/filter/src/components/Filter.js', array(), $refresh_cache_time, true );
 //    wp_enqueue_script( 'checkbox-js', get_template_directory_uri() . '/blocks/filter/src/components/Checkbox.js', array(), $refresh_cache_time, true );
 
@@ -301,7 +304,7 @@ if ( ! class_exists( 'Timber' ) ) {
         }
     );
 
-    \add_filter(
+    add_filter(
         'template_include',
         function ( $template ) {
             return get_stylesheet_directory() . '/static/no-timber.html';
@@ -364,7 +367,7 @@ function wps_juniper_register_nav_menu(){
 }
 \add_action( 'after_setup_theme', 'wps_juniper_register_nav_menu', 0 );
 
-\add_filter( 'timber/context', 'wps_add_to_context' );
+add_filter( 'timber/context', 'wps_add_to_context' );
 function wps_add_to_context( $context ) {
     $custom_logo_id                 = \get_theme_mod( 'custom_logo' );
     $logo                           = \wp_get_attachment_image_url( $custom_logo_id , 'full' );
@@ -466,7 +469,7 @@ use MailPoetGF;
 //\add_action( 'init', [ MailPoetGF::get_instance(), 'init' ] );
 
 
-\add_filter( 'render_block', 'wps_juniper_add_class_to_list_block', 10, 2 );
+add_filter( 'render_block', 'wps_juniper_add_class_to_list_block', 10, 2 );
 function wps_juniper_add_class_to_list_block( $block_content, $block ) {
     if ( 'core/group' === $block['blockName'] ) {
         $block_content = new \WP_HTML_Tag_Processor( $block_content );
@@ -478,7 +481,7 @@ function wps_juniper_add_class_to_list_block( $block_content, $block ) {
     return $block_content;
 }
 
-\add_filter('acf/settings/remove_wp_meta_box', '__return_false');
+add_filter( 'acf/settings/remove_wp_meta_box', '__return_false');
 function wps_juniper_acf_init() {
 
     \acf_update_setting('google_api_key', 'AIzaSyA2nwpgRNcXh27RBL41e47d6pFcJda9qiY');
@@ -492,10 +495,10 @@ function wps_juniper_acf_init() {
 function wps_juniper_excerpt_more( $more ) {
     return ' [...]';
 }
-\add_filter( 'excerpt_more', 'wps_juniper_excerpt_more' );
+add_filter( 'excerpt_more', 'wps_juniper_excerpt_more' );
 
 
-\add_filter('locale', 'change_gravity_forms_language');
+add_filter( 'locale', 'change_gravity_forms_language');
 function change_gravity_forms_language($locale) {
 
     if (\class_exists('RGForms')) {
@@ -510,16 +513,26 @@ function allow_svg_upload($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
-\add_filter('upload_mimes', 'allow_svg_upload');
+
+add_filter( 'upload_mimes', 'allow_svg_upload');
+
+function allow_json_mime_types( $mimes ) {
+	// New allowed mime types.
+	$mimes['json'] = 'application/json';
+
+	return $mimes;
+}
+add_filter( 'upload_mimes', 'allow_json_mime_types' );
 
 // Additional security measures for SVG uploads
 function validate_svg_upload($file, $filename, $mimes) {
-    if (\substr($filename, -4) === '.svg' && $file['type'] === 'image/svg+xml') {
+    if ( str_ends_with( $filename, '.svg' ) && $file['type'] === 'image/svg+xml') {
         $file['type'] = 'image/svg+xml';
     }
+	
     return $file;
 }
-\add_filter('wp_check_filetype_and_ext', 'validate_svg_upload', 10, 4);
+add_filter( 'wp_check_filetype_and_ext', 'validate_svg_upload', 10, 4);
 
 // Add woocommerce support
 function theme_add_woocommerce_support() {
@@ -734,4 +747,15 @@ add_action('woocommerce_checkout_billing', function(){
 
 add_filter('woocommerce_get_checkout_page_id', function($page_id) {
 	return apply_filters('wpml_object_id', $page_id, 'page');
+});
+
+add_filter('wps_get_attachment_id_with_name_like', function($attachment_name) {
+	global $wpdb;
+
+	$attachment_name = "%$attachment_name%";
+
+	$query = $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type = 'attachment' AND post_title LIKE %s", $attachment_name);
+
+	return $wpdb->get_var($query) ?? 0;
+
 });
