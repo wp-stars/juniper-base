@@ -80,7 +80,7 @@ const injectProductsHTML = (products, productIds) => {
                     <div class="product overflow-hidden rounded-full">
                         <img src="${product.image[0]}" style="display: block;">
                     </div>
-                    <span class="tooltiptext bg-accent rounded-sm px-2 py-2 text-black invisible group-hover:visible whitespace-nowrap">${product.name}</span>
+                    <span class="tooltiptext bg-accent rounded-sm px-2 py-2 text-black invisible group-hover:visible whitespace-nowrap truncate">${product.name}</span>
 
                     <button class="delete-product" data-product-id="${product.id}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none">
