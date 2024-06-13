@@ -2,6 +2,9 @@
 
 namespace Blocks\Filter;
 
+require_once __DIR__ . '/prebuildCache/PrebuildCache.php';
+
+use blocks\filter\prebuildCache\PrebuildCache;
 use stdClass;
 use WP_Post;
 
@@ -196,11 +199,9 @@ function wps_get_filter_posts( $post_type, $page ) {
 		$product_ids = $cachedData;
 	}
 
-	$posts = array_map('get_post', $product_ids);
+	$post_arr = array_map('Blocks\Filter\map_post_to_filter_post_obj', $product_ids);
 
-	$posts = array_filter($posts);
-
-	$post_arr = array_map('Blocks\Filter\map_post_to_filter_post_obj', $posts);
+	$post_arr = array_filter($post_arr);
 
 	$data_arr['posts']       = $post_arr;
 
@@ -212,57 +213,12 @@ function wps_get_filter_posts( $post_type, $page ) {
  *
  * @return stdClass
  */
-function map_post_to_filter_post_obj( WP_Post $post ): stdClass {
-	$fields = get_fields( $post->ID );
-
-	$post_obj     = new stdClass();
-	$post_obj->ID = $post->ID;
-	//		$post_obj->fields               = get_fields(json_encode($post));
-	$post_obj->excerpt           = htmlspecialchars( wp_trim_excerpt( '', $post ) );
-	$post_obj->post_title        = htmlspecialchars( $post->post_title );
-	$post_obj->post_name         = htmlspecialchars( $post->post_name );
-	$post_obj->date              = htmlspecialchars( $post->post_date );
-	$post_obj->featured_image    = htmlspecialchars( get_the_post_thumbnail_url( $post ) );
-	$post_obj->link              = htmlspecialchars( get_permalink( $post ) );
-	$post_obj->price             = (int) ( wc_get_product( $post->ID ) )->get_regular_price();
-	$post_obj->subheadline       = htmlspecialchars( $fields['wps_sp_subheadline'] ?? '' );
-	$post_obj->description_title = htmlspecialchars( $fields['wps_sp_description_title'] ?? '' );
-	$post_obj->description_text  = htmlspecialchars( $fields['wps_sp_description_text'] ?? '' );
-	//		$post_obj->features_text        = htmlspecialchars( $fields['wps_sp_features_text'] ?? '' );
-	//		$post_obj->areas_of_application = htmlspecialchars( $fields['wps_sp_areas_of_application_text'] ?? '' );
-
-	$taxonomies = get_post_taxonomies( $post );
-
-	$taxonomy_data = [];
-	foreach ( $taxonomies as $taxonomy ) {
-		$terms = get_the_terms( $post, $taxonomy );
-		if ( $terms && ! is_wp_error( $terms ) ) {
-			foreach ( $terms as $term ) {
-				$taxonomy_data[ $taxonomy ][] = [
-					'term_id' => $term->term_id,
-					'name'    => $term->name,
-					'slug'    => $term->slug
-				];
-			}
-		}
+function map_post_to_filter_post_obj( $post_id, $reload_cache = false): stdClass {
+	try {
+		return PrebuildCache::get_instance()->get_prebuild( $post_id, $reload_cache );
+	} catch ( \Exception $e ) {
+		return json_decode( PrebuildCache::get_instance()->generate_prebuild_json( $post_id));
 	}
-
-	$post_obj->taxonomies = $taxonomy_data;
-
-	$terms        = get_the_terms( $post, 'product_type' );
-	$product_type = $terms && ! is_wp_error( $terms )
-		? $terms[0]->name
-		: '';
-
-	$post_obj->product_type = $product_type;
-
-	$rendered_card = do_shortcode( "[wps_get_product_card product_id='{$post->ID}' encoding='ISO-8859-1']" );
-
-	$encoded_html = base64_encode( $rendered_card );
-
-	$post_obj->html = $encoded_html;
-
-	return $post_obj;
 }
 
 function display_woocommerce_notices_on_add_to_cart( $content ) {

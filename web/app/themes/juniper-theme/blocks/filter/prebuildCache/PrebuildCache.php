@@ -35,6 +35,10 @@ class PrebuildCache {
 		}
 	}
 
+	public function get_current_cache(): array {
+		return $this->cache_loaded;
+	}
+
 	/**
 	 * @throws Exception
 	 */
@@ -54,15 +58,19 @@ class PrebuildCache {
 	/**
 	 * @throws Exception
 	 */
-	public function get_prebuild( int $id ): ?stdClass {
-		if ( ! get_post( $id ) ) {
-			return null;
+	public function get_prebuild( int $id, $force_cache_rebuild = false ): ?stdClass {
+		if( !get_post_status($id) ) {
+			return new stdClass();
+		}
+
+		if($force_cache_rebuild) {
+			$this->refill_prebuild( $id);
 		}
 
 		$pregen_cache_still_uptodate = $this->json_from_cache_still_uptodate( $id, self::$standard_ttl );
 		$pregen_exists               = $this->entry_exists( $id );
 
-		if ( $pregen_exists && $pregen_cache_still_uptodate) {
+		if ( $pregen_exists && $pregen_cache_still_uptodate ) {
 			return json_decode( $this->pull_pregen_entry_json( $id ) );
 		}
 
@@ -110,7 +118,7 @@ class PrebuildCache {
 		return $this->cache_loaded[ $id ]->pregen_time;
 	}
 
-	private function generate_prebuild_json( int $post_íd ): string {
+	public function generate_prebuild_json( int $post_íd ): string {
 		$post = get_post( $post_íd );
 
 		$fields = get_fields( $post->ID );
@@ -168,6 +176,7 @@ class PrebuildCache {
 
 		return json_encode( $post_obj );
 	}
+
 }
 
 /**
