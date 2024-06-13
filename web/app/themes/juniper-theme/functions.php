@@ -84,10 +84,10 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 
         try {
             $wp_root_path = str_replace('/wp-content/themes', '', get_theme_root());
-            $compiler = new \ScssPhp\ScssPhp\Compiler();
+            $compiler = new Compiler();
             $compiler->setImportPaths(__DIR__ . '/scss');
-            $compiler->setOutputStyle(\ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
-            $compiler->setSourceMap(\ScssPhp\ScssPhp\Compiler::SOURCE_MAP_FILE);
+            $compiler->setOutputStyle( OutputStyle::COMPRESSED);
+            $compiler->setSourceMap( Compiler::SOURCE_MAP_FILE);
             $compiler->setSourceMapOptions([
                 'sourceMapURL' =>  get_stylesheet_directory_uri() . '/style.map',
                 'sourceMapBasepath' => get_stylesheet_directory_uri(),//$wp_root_path
@@ -119,7 +119,10 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 }
 
 function juniper_theme_enqueue() {
-    $refresh_cache_time = time();
+	wp_enqueue_style('flowbite-css', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.css', [], filemtime(__DIR__ . '/src/js/flowbite/flowbite.min.css'));
+	wp_enqueue_script( 'flowbite-js', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.js', [], '1.0', true);
+
+	$refresh_cache_time = time();
     // wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'nav-js', get_template_directory_uri() . '/src/js/nav.js', array(), $refresh_cache_time, true );
     wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', array(), $refresh_cache_time, true );
@@ -147,9 +150,6 @@ function juniper_theme_enqueue() {
 
 	wp_enqueue_script( 'lottie-js', get_template_directory_uri() . '/src/js/lottie/lottie-player.js', [], 'latest', true);
 	wp_enqueue_script( 'lottie-on-click', get_template_directory_uri() . '/src/js/lottie/onClickPlay.js', ['lottie-js'], filemtime( __DIR__ . '/src/js/lottie/onClickPlay.js'), true);
-
-	wp_enqueue_style('flowbite-js', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.css', [], filemtime(__DIR__ . '/src/js/flowbite/flowbite.min.css'));
-	wp_enqueue_script( 'flowbite-css', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.js', [], '1.0', true);
 
 //    wp_enqueue_script( 'filter-js', get_template_directory_uri() . '/blocks/filter/src/components/Filter.js', array(), $refresh_cache_time, true );
 //    wp_enqueue_script( 'checkbox-js', get_template_directory_uri() . '/blocks/filter/src/components/Checkbox.js', array(), $refresh_cache_time, true );
@@ -464,9 +464,8 @@ function wpse_enqueues() {
 
 require_once __DIR__.'/classes/MailPoetGF.php';
 
-use frontend\Modal;
-use frontend\ModalStatus;
-use MailPoetGF;
+use ScssPhp\ScssPhp\Compiler;
+use ScssPhp\ScssPhp\OutputStyle;
 
 // define in init so plugin functions are available in this class
 //\add_action( 'init', [ MailPoetGF::get_instance(), 'init' ] );
