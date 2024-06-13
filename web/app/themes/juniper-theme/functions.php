@@ -8,7 +8,6 @@
  * @since   Timber 0.1
  */
 
-
 /**
  * Define Constants
  */
@@ -24,6 +23,7 @@ $composer_autoload = __DIR__ . '/vendor/autoload.php';
 
 if ( file_exists( $composer_autoload ) ) {
     require_once $composer_autoload;
+
     $timber = new \Timber\Timber();
 }
 
@@ -147,7 +147,10 @@ function juniper_theme_enqueue() {
 
 	wp_enqueue_script( 'lottie-js', get_template_directory_uri() . '/src/js/lottie/lottie-player.js', [], 'latest', true);
 	wp_enqueue_script( 'lottie-on-click', get_template_directory_uri() . '/src/js/lottie/onClickPlay.js', ['lottie-js'], filemtime( __DIR__ . '/src/js/lottie/onClickPlay.js'), true);
-	
+
+	wp_enqueue_style('flowbite-js', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.css', [], filemtime(__DIR__ . '/src/js/flowbite/flowbite.min.css'));
+	wp_enqueue_script( 'flowbite-css', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.js', [], '1.0', true);
+
 //    wp_enqueue_script( 'filter-js', get_template_directory_uri() . '/blocks/filter/src/components/Filter.js', array(), $refresh_cache_time, true );
 //    wp_enqueue_script( 'checkbox-js', get_template_directory_uri() . '/blocks/filter/src/components/Checkbox.js', array(), $refresh_cache_time, true );
 
