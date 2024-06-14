@@ -12,7 +12,7 @@ import FilterTextSearch from "./SingleFilterComponents/Text/FilterTextSearch";
 import FilterCheckbox from "./SingleFilterComponents/Checkbox/FilterCheckbox";
 import translationObject from "../TranslationObject";
 
-const FilterNew = (data) => {
+const Filter = (data) => {
     const title = data.title ?? '';
 
     const postType = data.postType ?? 'product'
@@ -36,6 +36,8 @@ const FilterNew = (data) => {
     const [filterOptions, setFilterOptions] = useState([])
     // selection of the filter (what to filter for)
     const [filterSelected, setFilterSelected] = useState({})
+
+    console.log(filterOptions)
 
     // all posts that exist
     const [allPosts, setAllPosts] = useState(data.posts)
@@ -237,4 +239,4 @@ const FilterNew = (data) => {
     )
 }
 
-export default FilterNew;
+export default Filter;
