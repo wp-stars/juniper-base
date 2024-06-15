@@ -14,7 +14,7 @@ class MockedProductCardRenderer extends CardRenderer {
 			'0.00',
 			false,
 			'#',
-			['animate-pulse']
+			['animate-pulse', 'blur']
 		);
 	}
 }
