@@ -54,9 +54,13 @@ class PrebuildCache {
 	/**
 	 * @throws Exception
 	 */
-	public function get_prebuild( int $id ): ?stdClass {
+	public function get_prebuild( int $id, $force_refill ): ?stdClass {
 		if ( ! get_post( $id ) ) {
 			return null;
+		}
+
+		if($force_refill) {
+			$this->refill_prebuild($id);
 		}
 
 		$pregen_cache_still_uptodate = $this->json_from_cache_still_uptodate( $id, self::$standard_ttl );
@@ -110,7 +114,7 @@ class PrebuildCache {
 		return $this->cache_loaded[ $id ]->pregen_time;
 	}
 
-	private function generate_prebuild_json( int $post_íd ): string {
+	public function generate_prebuild_json( int $post_íd ): string {
 		$post = get_post( $post_íd );
 
 		$fields = get_fields( $post->ID );

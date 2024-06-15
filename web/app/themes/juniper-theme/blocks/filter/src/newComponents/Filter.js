@@ -1,23 +1,24 @@
 import React, {useEffect, useState} from "react";
 import {
-    filterOptionToElement, isArray, postHasSampleAvailable,
+    filterOptionToElement, isArray, loadingElement, loadInPostsFromPage, postHasSampleAvailable,
     postInSelection,
     postInTextSelection,
-    postIsAvailableOnline, refreshSlick,
+    postIsAvailableOnline, refreshSlick, renderMock,
     renderPost,
     rerenderSlick
 } from "../utils";
-import {PlusButtonIcon} from "./Icons";
 import FilterTextSearch from "./SingleFilterComponents/Text/FilterTextSearch";
 import FilterCheckbox from "./SingleFilterComponents/Checkbox/FilterCheckbox";
 import translationObject from "../TranslationObject";
 
-const FilterNew = (data) => {
+const Filter = (data) => {
     const title = data.title ?? '';
 
     const postType = data.postType ?? 'product'
 
-    const resturl = data.restUrl
+    const endpoint = data.pullEndpoint
+
+    const nocache = data.nocache ?? false
 
     const sample_available = data.sample_available
     const online_available = data.online_available
@@ -30,7 +31,8 @@ const FilterNew = (data) => {
 
     const postsPerPage = 6
 
-    const [numberOfPostsVisible, setNumberOfPostsVisible] = useState(postsPerPage);
+    // mocked card render
+    const mockedCard = data.mocked
 
     // filter options that get displayed
     const [filterOptions, setFilterOptions] = useState([])
@@ -38,25 +40,20 @@ const FilterNew = (data) => {
     const [filterSelected, setFilterSelected] = useState({})
 
     // all posts that exist
-    const [allPosts, setAllPosts] = useState(data.posts)
+    const [allPosts, setAllPosts] = useState([])
     // posts after being run through the filter
-    const [filteredPosts, setFilteredPosts] = useState(data.posts)
-    // posts that get displayed
-    const [postsToDisplay, setPostsToDisplay] = useState(data.posts.slice(0, postsPerPage))
+    const [filteredPosts, setFilteredPosts] = useState([])
 
-    const [isCurrentlyLoading, currentlyLoading] = useState(false)
+    const [loading, isLoading] = useState(true);
 
-    function morePostsToDisplay() {
-        return false
-    }
+    function loadPosts() {
+        isLoading(true)
+        const posts = loadInPostsFromPage(endpoint, postType, 0, nocache);
 
-    function showMore() {
-        const current = numberOfPostsVisible ?? 0
-
-        const nextPosts = filteredPosts.slice(current, postsPerPage + current)
-
-        setPostsToDisplay(postsToDisplay.concat(nextPosts))
-        setNumberOfPostsVisible(postsToDisplay.length)
+        posts.then((data) => {
+            setAllPosts(data)
+            isLoading(false)
+        })
     }
 
     function applyFilter(filter) {
@@ -143,25 +140,23 @@ const FilterNew = (data) => {
         applyFilter(filterSelected)
     }, [allPosts]);
 
-    useEffect(() => {
-        currentlyLoading(false)
-
+    useEffect(async() => {
         setUpFilters()
         setUpFilterPresets()
-        // loadPosts()
+        loadPosts()
         rerenderSlick()
     }, []);
 
     useEffect(rerenderSlick, [filteredPosts]);
 
     return (
-        <div className={"w-full"}>
-            <div className={"container"}>
+        <div className={"w-full container"}>
+            <div className={""}>
                 <h1
                     data-aos={'fade-up'}
                     className={"mb-0 sm:mb-6"}>{title}</h1>
             </div>
-            <div className={"container mx-auto"}>
+            <div className={"mx-auto"}>
                 <div id={'filter-items'}
                      data-aos={'fade-up'}
                      data-aos-delay={'50'}
@@ -217,18 +212,20 @@ const FilterNew = (data) => {
                         />}
                     </div>
                     <div className={'flex flex-row gap-3 text-sm font-medium text-gray-900 mr-1'}>
-                        {translationObject.results_label}: {filteredPosts.length}
+                        {translationObject.results_label}: {filteredPosts?.length}
                     </div>
                 </div>
             </div>
-            <div className={'container mt-5'}>
+            <div className={'mt-5 relative isolate'}>
+                {loading && loadingElement()}
                 <div className={"grid grid-cols-1 md:grid-cols-3 md:mb-10 md:gap-7 filter-grid flex-wrap"}>
-                    {filteredPosts.length ?
+                    {allPosts?.length === 0 && [...Array(6).keys()].map(() => renderMock(mockedCard))}
+                    {filteredPosts?.length ?
                         filteredPosts.map((post, index) => {
                             const showDirectly = index < postsPerPage
-                            return renderPost(post, index, showDirectly, refreshSlick)
+                            return renderPost(post, index, false, refreshSlick)
                         })
-                        : <div className={'w-full text-center'}>
+                        : <div className={'w-full text-center col-span-3'}>
                             {translationObject.no_results}
                         </div>}
                 </div>
@@ -237,4 +234,4 @@ const FilterNew = (data) => {
     )
 }
 
-export default FilterNew;
+export default Filter;

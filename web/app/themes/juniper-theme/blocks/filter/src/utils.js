@@ -26,12 +26,13 @@ export function clone(obj) {
     return JSON.parse(JSON.stringify(obj))
 }
 
-export async function loadInPostsFromPage(restUrl = '', postType = 'product', pageNum = 0) {
-    const endpoint = `${restUrl}wps/v1/data?post_type=${postType}&page=${pageNum}`
+export async function loadInPostsFromPage(endpointUrl = '', postType = 'product', pageNum = 0, nocache) {
+    const endpoint = `${endpointUrl}&post_type=${postType}&page=${pageNum}&nocache=${nocache}`
     const response = await axios.get(endpoint)
 
     const responseData = response.data ?? {posts: []}
-    return responseData.posts;
+
+    return responseData.data;
 }
 
 export function renderPost(post, index, showDirectly = false, whenInView = (() => {})) {
@@ -43,6 +44,25 @@ export function renderPost(post, index, showDirectly = false, whenInView = (() =
     />
 }
 
+export function renderMock(mockHtml) {
+    return <SingleProduct
+        index={Math.random()}
+        htmlEnc={mockHtml}
+        showDirectly={true}
+        whenInView={() => {}}
+    />
+}
+export function loadingElement() {
+    return <div className={'absolute z-10 w-full py-12'}>
+        <div className='flex space-x-2 justify-center items-center bg-transparent'>
+            <span className='sr-only'>Loading...</span>
+            <div className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+            <div
+                className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+            <div className='h-8 w-8 bg-black rounded-full animate-bounce'></div>
+        </div>
+    </div>;
+}
 export function getUrlParamValue(param) {
     const currentQuery = window.location.search.substring(1)
     
