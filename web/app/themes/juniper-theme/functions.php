@@ -758,6 +758,12 @@ add_filter('wps_get_attachment_id_with_name_like', function($attachment_name) {
 
 	$query = $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type = 'attachment' AND post_title LIKE %s", $attachment_name);
 
-	return $wpdb->get_var($query) ?? 0;
+	return $wpdb->get_var( $query ) ?? 0;
+} );
 
-});
+add_filter( 'woocommerce_format_sale_price', function ( $price, $regular_price, $sale_price ) {
+	$regular_price = wc_price( $regular_price);
+	$sale_price = wc_price($sale_price);
+
+	return sprintf('<div class="flex flex-row"><span class="regular-price line-through pr-2 text-[#737373]">%s</span><span class="sale-price">%s</span></div>', $regular_price, $sale_price);
+},          10, 3 );
