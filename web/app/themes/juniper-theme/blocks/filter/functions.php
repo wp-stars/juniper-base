@@ -54,12 +54,18 @@ add_filter( 'timber/acf-gutenberg-blocks-data/filter', function ( $context ) {
 		$context['fields']['filter_options'][ $key ]['tax_options'] = $terms;
 	}
 
-	$data_arr = wps_get_filter_posts( $post_type, 1 );
+	//	$data_arr['posts'] = wps_get_filter_posts( $post_type, 0 );
+
+	$post_mock_card     = do_shortcode( '[wps_get_mocked_card encoding=\'ISO-8859-1\']' );
+	$data_arr['mocked'] = base64_encode( $post_mock_card );
+
+	$nocache = isset( $_GET['nocache'] ) && $_GET['nocache'] == 1;
+	$data_arr['nocache'] = $nocache;
 
 	$post_type                 = get_post_type_object( $context['fields']['post_type'] );
 	$data_arr['postName']      = $post_type->labels->name;
 	$data_arr['postType']      = $context['fields']['post_type'];
-	$data_arr['restUrl']       = get_rest_url();
+	$data_arr['pullEndpoint']  = get_admin_url() . 'admin-ajax.php?action=getPostFilter';
 	$data_arr['filterOptions'] = $context['fields']['filter_options'];
 	$data_arr['title']         = __( $context['fields']['title'], 'text-domain' );
 
@@ -116,9 +122,9 @@ function wps_get_filter_post_ids( $post_type ): array {
 
 	$translation_exsist = table_exists( 'icl_translations' );
 
-	$current_language_code = apply_filters('wpml_current_language', null);
+	$current_language_code = apply_filters( 'wpml_current_language', null );
 
-	if($translation_exsist) {
+	if ( $translation_exsist ) {
 		$translation_post_type = 'post_' . $post_type;
 
 		$query = "SELECT ID FROM $wpdb->posts WHERE 
@@ -127,17 +133,17 @@ function wps_get_filter_post_ids( $post_type ): array {
                           AND post_status = 'publish'
                         ORDER BY post_date DESC";
 
-		$replacements = [$current_language_code, $translation_post_type];
+		$replacements = [ $current_language_code, $translation_post_type ];
 
 	} else {
 		$query = "SELECT ID FROM $wpdb->posts WHERE post_type = %s AND ID NOT IN (SELECT object_id FROM wp_term_relationships WHERE term_taxonomy_id IN (SELECT term_taxonomy_id FROM wp_term_taxonomy WHERE term_id IN (SELECT term_id FROM wp_terms WHERE slug = 'exclude-from-catalog'))) AND post_status = 'publish' ORDER BY post_date DESC";
 
-		$replacements = [$post_type];
+		$replacements = [ $post_type ];
 	}
 
-	$query = $wpdb->prepare($query, $replacements);
+	$query = $wpdb->prepare( $query, $replacements );
 
-	return $wpdb->get_col($query);
+	return $wpdb->get_col( $query );
 }
 
 /**
@@ -148,7 +154,7 @@ function wps_get_filter_post_ids( $post_type ): array {
 function table_exists( $table_name ): bool {
 	global $wpdb;
 
-	$existing_tables = $wpdb->get_col('SHOW TABLES');
+	$existing_tables = $wpdb->get_col( 'SHOW TABLES' );
 
 	return in_array( $wpdb->prefix . $table_name, $existing_tables );
 }
@@ -160,7 +166,9 @@ function wps_get_filter_posts( $post_type, $page = 0, $per_page = 6 ): array {
 	$cachedData    = get_transient( $cachingToken );
 	$cacheDuration = HOUR_IN_SECONDS;
 
-	if ( isset( $_GET['nocache'] ) && $_GET['nocache'] == 1 ) {
+	$nocache = isset( $_GET['nocache'] ) && $_GET['nocache'] == 1;
+
+	if ( $nocache ) {
 		delete_transient( $cachingToken );
 		$cachedData = null;
 	}
@@ -180,17 +188,18 @@ function wps_get_filter_posts( $post_type, $page = 0, $per_page = 6 ): array {
 
 	//	$products_to_load = array_splice( $product_ids, $page * $per_page, $per_page);
 
-	$post_arr = array_map( 'Blocks\Filter\map_post_to_filter_post_obj', $product_ids );
+	$post_arr = array_map( fn( $post_id ) => map_post_to_filter_post_obj( $post_id, $nocache ), $product_ids );
 
 	return array_filter( $post_arr );
 }
 
 /**
- * @param mixed $post
+ * @param $post_id
+ * @param bool $reload_cache
  *
  * @return stdClass
  */
-function map_post_to_filter_post_obj( $post_id, $reload_cache = false ): stdClass {
+function map_post_to_filter_post_obj( $post_id, bool $reload_cache = false ): stdClass {
 	try {
 		return PrebuildCache::get_instance()->get_prebuild( $post_id, $reload_cache );
 	} catch ( \Exception $e ) {

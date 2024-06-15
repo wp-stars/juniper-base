@@ -14,10 +14,7 @@ class ProductCard {
 	public function __construct() {
 		add_shortcode( 'wps_get_product_card', [ $this, 'product_card_html' ] );
 		add_shortcode( 'wps_get_mocked_card', [$this, 'product_card_mock_html']);
-		//        header('Content-Type: text/html; charset=utf-8');
 	}
-
-
 
 	public function product_card_html( $atts ): string {
 		$product_id = $atts['product_id'];
