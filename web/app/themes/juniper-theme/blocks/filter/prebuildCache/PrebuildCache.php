@@ -98,6 +98,7 @@ class PrebuildCache {
 		update_post_meta( $id, self::$FILTER_PREGEN_JSON_META_KEY, $generated_prebuild );
 		update_post_meta( $id, self::$FILTER_PREGEN_TIME_META_KEY, $now_date_time_formated );
 
+		// TODO: implement only generate new entry
 		$this->load_cache_into_instance();
 	}
 
