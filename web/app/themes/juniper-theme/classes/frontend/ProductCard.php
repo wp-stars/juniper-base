@@ -1,9 +1,13 @@
 <?php
 
-
 namespace frontend;
 
-require_once __DIR__ . '/ProductCardData.php';
+use frontend\ProductCard\MockedProductCardRenderer;
+use frontend\ProductCard\ProductCardRenderer;
+
+require_once __DIR__ . '/ProductCard/CardRenderer.php';
+require_once __DIR__ . '/ProductCard/ProductCardRenderer.php';
+require_once __DIR__ . '/ProductCard/MockedProductCardRenderer.php';
 
 class ProductCard {
 
@@ -18,9 +22,15 @@ class ProductCard {
 	public function product_card_html( $atts ): string {
 		$product_id = $atts['product_id'];
 
-		$product_card = ProductCardData::generate_on_product_id( $product_id, $atts['encoding']);
+		$product_card = ProductCardRenderer::generate( $product_id, $atts['encoding']);
 
 		return $product_card->render();
+	}
+
+	public function product_card_mock_html(): string {
+		$mock_product_card = MockedProductCardRenderer::generate( null, '');
+
+		return $mock_product_card->render();
 	}
 
 }
