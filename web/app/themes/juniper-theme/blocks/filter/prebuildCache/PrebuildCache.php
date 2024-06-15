@@ -60,7 +60,7 @@ class PrebuildCache {
 		}
 
 		if($force_refill) {
-			$this->refill_prebuild( $id);
+			$this->refill_prebuild($id);
 		}
 
 		$pregen_cache_still_uptodate = $this->json_from_cache_still_uptodate( $id, self::$standard_ttl );
