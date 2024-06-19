@@ -14,9 +14,10 @@ RewriteRule . /iwg/web/index.php [L]
 
 # END WordPress
 
-#RewriteEngine on
-#Redirect 301 /uploads/2022/09/IWG-Broschuere-Ansicht-Einzelseiten-1.pdf https://www.iwgplating.com/app/uploads/2022/09/IWG-Broschuere-Ansicht-Einzelseiten-1.pdf
-
+# Redirect /wp-content/uploads to /app/uploads
+<IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteCond %{REQUEST_URI} ^/uploads/(.*)$
-RewriteRule ^uploads/(.*)$ /app/uploads/$1 [R=301,L]
+RewriteBase /
+RewriteCond %{REQUEST_URI} ^/wp-content/uploads/(.*)$
+RewriteRule ^wp-content/uploads/(.*)$ /app/uploads/$1 [R=301,L]
+</IfModule>
