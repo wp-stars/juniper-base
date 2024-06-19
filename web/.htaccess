@@ -13,3 +13,10 @@ RewriteRule . /iwg/web/index.php [L]
 </IfModule>
 
 # END WordPress
+
+#RewriteEngine on
+#Redirect 301 /uploads/2022/09/IWG-Broschuere-Ansicht-Einzelseiten-1.pdf https://www.iwgplating.com/app/uploads/2022/09/IWG-Broschuere-Ansicht-Einzelseiten-1.pdf
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} ^/uploads/(.*)$
+RewriteRule ^uploads/(.*)$ /app/uploads/$1 [R=301,L]
