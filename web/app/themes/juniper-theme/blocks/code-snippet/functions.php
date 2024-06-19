@@ -1,21 +1,33 @@
 <?php
 
-add_action('wp_enqueue_scripts', function() {
-	if (has_block('acf/code-snippet')) {
-	$time = time();
+add_action( 'wp_enqueue_scripts', function () {
+	if ( ! has_block( 'acf/code-snippet' ) ) {
+		return;
+	}
+
+	$time       = time();
 	$theme_path = get_template_directory_uri();
 
-		wp_enqueue_style('code-snippet-css', $theme_path . '/blocks/code-snippet/style.css', array(), $time, 'all');
-		wp_enqueue_script('code-snippet-js', $theme_path . '/blocks/code-snippet/script.js', array(), $time, true);
-		wp_enqueue_style('code-snippet-css-prism', $theme_path . '/blocks/code-snippet/style-prism.css', array(), $time, 'all');
-		wp_enqueue_script('code-snippet-js-prism', $theme_path . '/blocks/code-snippet/script-prism.js', array(), $time, true);
+	$style_file_path = $theme_path . '/blocks/code-snippet/style-prism.css';
+	$script_file_path = $theme_path . '/blocks/code-snippet/script-prism.js';
+
+	if ( empty( file_get_contents( $style_file_path ) ) ) {
+		return;
 	}
-});
 
- add_filter(
+	wp_enqueue_style( 'code-snippet-css-prism', $style_file_path, [], $time, 'all' );
 
- 	'timber/acf-gutenberg-blocks-data/code-snippet',
+	if ( empty( file_get_contents( $script_file_path ) ) ) {
+		return;
+	}
 
- 	function( $context ) {
- 	return $context;
- });
+	wp_enqueue_script( 'code-snippet-js-prism', $script_file_path, [], $time, true );
+} );
+
+add_filter(
+
+	'timber/acf-gutenberg-blocks-data/code-snippet',
+
+	function ( $context ) {
+		return $context;
+	} );

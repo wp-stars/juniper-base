@@ -30,6 +30,8 @@ export async function loadInPostsFromPage(endpointUrl = '', postType = 'product'
     const endpoint = `${endpointUrl}&post_type=${postType}&page=${pageNum}&nocache=${nocache}`
     const response = await axios.get(endpoint)
 
+    console.log(nocache)
+
     const responseData = response.data ?? {posts: []}
 
     return responseData.data;

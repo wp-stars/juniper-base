@@ -2,14 +2,35 @@
 
 add_action(
     'wp_enqueue_scripts', function () {
-        if (has_block('acf/breadcrumbs')) {
-            $time = time();
-            $theme_path = get_template_directory_uri();
+	if ( ! has_block( 'acf/breadcrumbs' ) ) {
+		return;
+	}
+	$time       = time();
+	$theme_path = get_template_directory_uri();
 
-            wp_enqueue_style('breadcrumbs-css', $theme_path . '/blocks/breadcrumbs/style.css', array(), $time, 'all');
-            wp_enqueue_script('breadcrumbs-js', $theme_path . '/blocks/breadcrumbs/script.js', array(), $time, true);
-        }
-    }
+	$style_file_path = $theme_path . '/blocks/breadcrumbs/style.css';
+	$script_file_path =  $theme_path . '/blocks/breadcrumbs/script.js';
+
+	$style_file_content = file_get_contents( $style_file_path );
+
+	if ( empty( $style_file_content ) ) {
+		return;
+	}
+
+	unset( $style_file_content );
+
+	wp_enqueue_style('breadcrumbs-css', $style_file_path, array(), $time, 'all');
+
+	$script_file_content = file_get_contents( $script_file_path );
+
+	if ( empty( $script_file_content ) ) {
+		return;
+	}
+
+	unset( $script_file_content );
+
+	wp_enqueue_script('breadcrumbs-js',$script_file_path , array(), $time, true);
+}
 );
 
 add_filter(

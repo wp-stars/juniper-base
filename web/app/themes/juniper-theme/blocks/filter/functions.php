@@ -17,19 +17,15 @@ add_action(
 	$time       = time();
 	$theme_path = get_template_directory_uri();
 
-	wp_enqueue_style( 'filter-css', $theme_path . '/blocks/filter/style.css', [], $time, 'all' );
+	//iwg/web/app/themes/juniper-theme/blocks/filter/build
+
+	$style_file_path  = $theme_path . '/blocks/filter/style.css';
+	$script_file_path = $theme_path . '/blocks/filter/script.js';
+
+	wp_enqueue_style( 'filter-css', $theme_path . '/blocks/filter/style.css', [], $time );
 	wp_enqueue_script( 'filter-js', $theme_path . '/blocks/filter/script.js', [], $time, true );
 
-	wp_enqueue_script( 'filterBlock', $theme_path . '/blocks/filter/build/frontend.js', [
-		'wp-blocks',
-		'wp-element',
-		'wp-editor',
-		'wp-api',
-		'wp-element',
-		'wp-i18n',
-		'wp-polyfill',
-		'wp-api-fetch',
-	],                 $time, true );
+	wp_enqueue_script( 'filterBlock', $theme_path . '/blocks/filter/build/frontend.js', [ 'wp-blocks' ], filemtime( __DIR__ . '/blocks/filter/build/frontend.js' ), true );
 }
 );
 

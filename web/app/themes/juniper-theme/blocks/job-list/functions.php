@@ -2,14 +2,28 @@
 
 add_action(
     'wp_enqueue_scripts', function () {
-        if (has_block('acf/job-list')) {
-            $time = time();
-            $theme_path = get_template_directory_uri();
+	if ( ! has_block( 'acf/job-list' ) ) {
+		return;
+	}
 
-            wp_enqueue_style('job-list-css', $theme_path . '/blocks/job-list/style.css', array(), $time, 'all');
-            wp_enqueue_script('job-list-js', $theme_path . '/blocks/job-list/script.js', array(), $time, true);
-        }
-    }
+	$time       = time();
+	$theme_path = get_template_directory_uri();
+
+	$style_file_path = $theme_path . '/blocks/job-list/style.css';
+	$script_file_path = $theme_path . '/blocks/job-list/script.js';
+
+	if ( empty( file_get_contents( $style_file_path ) ) ) {
+		return;
+	}
+
+	wp_enqueue_style('job-list-css', $theme_path . '/blocks/job-list/style.css', array(), $time, 'all');
+
+	if ( empty( file_get_contents( $script_file_path ) ) ) {
+		return;
+	}
+
+	wp_enqueue_script('job-list-js', $theme_path . '/blocks/job-list/script.js', array(), $time, true);
+}
 );
 
 add_filter(

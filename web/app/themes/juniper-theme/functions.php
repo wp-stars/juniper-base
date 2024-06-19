@@ -43,27 +43,15 @@ add_filter( 'rest_endpoints', function ( $endpoints ) {
 	return $endpoints;
 } );
 
-// add_action('init', function() {
-//     $user_id = email_exists('will@wp-stars.com');
-//     // Redirect URL //
-//     if ( !is_wp_error( $user_id ) )
-//     {
-//         wp_clear_auth_cookie();
-//         wp_set_current_user ( $user_id );
-//         wp_set_auth_cookie  ( $user_id );
-
-//         wp_safe_redirect( '/' );
-//         exit();
-//     }
-// });
-
 /**
  * @param string $scssFile the File we want to watch
  * @param bool $is_import the watched file is a file that gets importet in scss via @import
  * @param string $fileToCombile the file that needs to be recombiled when the $scssFile file changes
+ *
+ * @throws SassException
  */
 
-function check_for_recompile( string $scssFile, bool $is_import = false, string $fileToCombile = '' ) {
+function check_for_recompile( string $scssFile, bool $is_import = false, string $fileToCombile = '' ): void {
 	$css_file = __DIR__ . '/src/css/theme.min.css';
 	$map_file = 'style.map';
 
@@ -72,7 +60,7 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 		// show message for Administrators
 		if ( function_exists( 'current_user_can' ) ) {
 			if ( current_user_can( 'Administrator' ) ) {
-				$style = "position:fixed; top: 0; left: 0; right: 0; background: red; color: white; text-align: center; padding: 0.5rem;";
+				$style = 'position:fixed; top: 0; left: 0; right: 0; background: red; color: white; text-align: center; padding: 0.5rem;';
 				echo '<div style="' . $style . '">' . $scssFile . ' - file not found in scss compiler' . '</div>';
 			}
 		}
@@ -111,7 +99,7 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 			// show message for Administrators
 			if ( function_exists( 'current_user_can' ) ) {
 				if ( current_user_can( 'administrator' ) ) {
-					$style = "position:fixed; top: 0; left: 0; right: 0; background: red; color: white; text-align: center; padding: 0.5rem; z-index: 999999999;";
+					$style = 'position:fixed; top: 0; left: 0; right: 0; background: red; color: white; text-align: center; padding: 0.5rem; z-index: 999999999;';
 					echo '<div style="' . $style . '">scssphp: Unable to compile content: ' . $e->getMessage() . '</div>';
 				}
 			}
@@ -119,26 +107,27 @@ function check_for_recompile( string $scssFile, bool $is_import = false, string 
 	}
 }
 
-function juniper_theme_enqueue() {
-	$refresh_cache_time = time();
-	// wp_enqueue_script( 'app-js', get_template_directory_uri() . '/src/js/_app.js', array(), $refresh_cache_time, true );
+/**
+ * @throws SassException
+ */
+function juniper_theme_enqueue(): void {
 	wp_enqueue_style( 'flowbite-js', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.css', [], filemtime( __DIR__ . '/src/js/flowbite/flowbite.min.css' ) );
 	wp_enqueue_script( 'flowbite-css', get_template_directory_uri() . '/src/js/flowbite/flowbite.min.js', [], '1.0', true );
 
-	wp_enqueue_script( 'nav-js', get_template_directory_uri() . '/src/js/nav.js', [], $refresh_cache_time, true );
-	wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', [], $refresh_cache_time, true );
+	wp_enqueue_script( 'nav-js', get_template_directory_uri() . '/src/js/nav.js', [], filemtime( get_template_directory_uri() . '/src/js/nav.js'), true );
+	wp_enqueue_script( 'project-js', get_template_directory_uri() . '/src/js/project.js', [], filemtime( get_template_directory_uri() . '/src/js/project.js'), true );
 
 	$shop_url = rtrim( home_url(), '/' );
 	wp_localize_script( 'project-js', 'scriptData', [ 'shopUrl' => $shop_url ] );
 
-	wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', [], $refresh_cache_time );
+	wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/src/css/_tailwindStyles.css', [], filemtime( get_template_directory_uri() . '/src/css/_tailwindStyles.css' ) );
 
 	check_for_recompile( __DIR__ . '/src/scss/_project.scss', true, __DIR__ . '/src/scss/_project.scss' );
 
-	wp_enqueue_style( 'font-css', get_template_directory_uri() . '/fonts.css', [], $refresh_cache_time );
-	wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/_tailwind.css', [], $refresh_cache_time );
-	wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/src/css/theme.min.css', [], $refresh_cache_time );
-	wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style.css', [], $refresh_cache_time );
+	wp_enqueue_style( 'font-css', get_template_directory_uri() . '/fonts.css', [], filemtime( get_template_directory_uri() . '/fonts.css'));
+	wp_enqueue_style( 'tailwind-css', get_template_directory_uri() . '/_tailwind.css', [], filemtime( get_template_directory_uri() . '/_tailwind.css' ));
+	wp_enqueue_style( 'theme-css', get_template_directory_uri() . '/src/css/theme.min.css', [], filemtime( get_template_directory_uri() . '/src/css/theme.min.css' ) );
+	wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style.css', [], filemtime( get_template_directory_uri() . '/style.css' ) );
 
 	wp_enqueue_style( 'slick-css', get_template_directory_uri() . '/src/js/slick/slick.min.css', [], '1.8.1' );
 	wp_enqueue_style( 'slick-theme-css', get_template_directory_uri() . '/src/js/slick/slick-theme.min.css', [], '1.8.1' );
@@ -151,12 +140,8 @@ function juniper_theme_enqueue() {
 	wp_enqueue_script( 'lottie-js', get_template_directory_uri() . '/src/js/lottie/lottie-player.js', [], 'latest', true );
 	wp_enqueue_script( 'lottie-on-click', get_template_directory_uri() . '/src/js/lottie/onClickPlay.js', [ 'lottie-js' ], filemtime( __DIR__ . '/src/js/lottie/onClickPlay.js' ), true );
 
-	//    wp_enqueue_script( 'filter-js', get_template_directory_uri() . '/blocks/filter/src/components/Filter.js', array(), $refresh_cache_time, true );
-	//    wp_enqueue_script( 'checkbox-js', get_template_directory_uri() . '/blocks/filter/src/components/Checkbox.js', array(), $refresh_cache_time, true );
-
-	// wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/custom-musterbestellung.js', array('jquery'), null, true);
-	// wp_enqueue_script('my-custom-script', get_template_directory_uri() . '/assets/js/single-musterbestellung.js', array('jquery'), null, true);
-
+	wp_enqueue_style( 'swiper-css', get_template_directory_uri() . '/src/js/swiper/swiper-bundle.min.css', [], '1.0');
+	wp_enqueue_script( 'swiper-js', get_template_directory_uri() . '/src/js/swiper/swiper-bundle.min.js', [], '1.0', true);
 }
 
 
@@ -167,7 +152,7 @@ add_action( 'wp_enqueue_scripts', 'juniper_theme_enqueue' );
  * Required WordPress enqueue statements for child theme
  * Registers Parent theme and main child theme assets
  */
-function enqueue_ls_scripts() {
+function enqueue_ls_scripts(): void {
 	/** Deregister and register jquery to load in footer (enqueue happens per script dependency) */
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', includes_url( '/js/jquery/jquery.js' ), false, null, true );
@@ -195,18 +180,6 @@ function enqueue_ls_scripts() {
 			filemtime( THEME_DIR . 'assets/css/productfinder.css' ),
 		);
 	}
-
-	/*$asset_file = include THEME_DIR . '/index.asset.php';
-	wp_register_script(
-		'custom-script',
-		THEME_URI . 'index.js',
-		$asset_file['dependencies'],
-		$asset_file['version'],
-		true
-	);
-	wp_enqueue_script(
-		'custom-script'
-	);*/
 
 	// Load css and js for homepage slider
 	if ( is_front_page() ) {
@@ -469,6 +442,7 @@ require_once __DIR__ . '/classes/MailPoetGF.php';
 use frontend\Modal;
 use frontend\ModalStatus;
 use MailPoetGF;
+use ScssPhp\ScssPhp\Exception\SassException;
 
 // define in init so plugin functions are available in this class
 //\add_action( 'init', [ MailPoetGF::get_instance(), 'init' ] );
