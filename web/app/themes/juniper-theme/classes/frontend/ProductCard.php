@@ -18,8 +18,9 @@ class ProductCard {
 
 	public function product_card_html( $atts ): string {
 		$product_id = $atts['product_id'];
+        $encoding = $atts['encoding'] ?? '';
 
-		$product_card = ProductCardRenderer::generate( $product_id, $atts['encoding']);
+		$product_card = ProductCardRenderer::generate( $product_id, $encoding);
 
 		return $product_card->render();
 	}
