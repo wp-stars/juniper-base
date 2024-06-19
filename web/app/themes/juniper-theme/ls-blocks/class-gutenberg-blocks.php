@@ -295,50 +295,7 @@ if (!class_exists('Gutenberg_Blocks')) {
 		 */
 		public function enqueue_block_override_editor_assets() {
 			foreach (self::$blocks as $block) {
-				$group = $block['group'] ?? 'ls';
-
-				// Only enqueue assets for block overrides. custom blocks are enqueued automatically with register_block_assets.
-				if ($group !== 'ls') {
-					$dir = $group . '-' . $block['slug'];
-					$asset_file = include THEME_DIR . '/ls-blocks/' . $dir . '/index.asset.php';
-
-					wp_enqueue_script(
-						'block-frontend-script-' . $dir,
-						THEME_URI . 'ls-blocks/' . $dir . '/index.js',
-						$asset_file['dependencies'],
-						$asset_file['version'],
-						true
-					);
-					wp_enqueue_script(
-						'block-editor-script-' . $dir,
-						THEME_URI . 'ls-blocks/' . $dir . '/edit.js',
-						$asset_file['dependencies'],
-						$asset_file['version'],
-						true
-					);
-					wp_localize_script(
-						'block-frontend-script-' . $dir,
-						'wpVars',
-						$block['localized_vars']
-					);
-					wp_localize_script(
-						'block-editor-script-' . $dir,
-						'wpVars',
-						$block['localized_vars']
-					);
-					wp_enqueue_style(
-						'block-frontend-style-' . $dir,
-						THEME_URI . 'ls-blocks/' . $dir . '/index.css',
-						[],
-						filemtime(THEME_DIR . 'ls-blocks/' . $dir . '/index.css')
-					);
-					wp_enqueue_style(
-						'block-editor-style-' . $dir,
-						THEME_URI . 'ls-blocks/' . $dir . '/index.css',
-						[],
-						filemtime(THEME_DIR . 'ls-blocks/' . $dir . '/index.css')
-					);
-				}
+				$this->enqueue_single_editor_block( $block );
 			}
 		}
 
@@ -349,17 +306,82 @@ if (!class_exists('Gutenberg_Blocks')) {
 		 */
 		public function load_script_translations() {
 			foreach (self::$blocks as $block) {
-				$group = $block['group'] ?? 'ls';
-				$script_handle = 'block-editor-script-' . $group . '-' . $block['slug'];
-
-				if (function_exists('wp_set_script_translations') && wp_script_is($script_handle, 'registered')) {
-					wp_set_script_translations(
-						$script_handle,
-						'example',
-						THEME_DIR . 'languages'
-					);
-				}
+				$this->load_single_block_script_translation( $block );
 			}
+		}
+
+		/**
+		 * @param mixed $block
+		 *
+		 * @return void
+		 */
+		public function enqueue_single_editor_block( mixed $block ): void {
+			$group = $block['group'] ?? 'ls';
+
+			// Only enqueue assets for block overrides. custom blocks are enqueued automatically with register_block_assets.
+			if ( $group == 'ls' ) {
+				return;
+			}
+
+			$dir        = $group . '-' . $block['slug'];
+			$asset_file = include THEME_DIR . '/ls-blocks/' . $dir . '/index.asset.php';
+
+			wp_enqueue_script(
+				'block-frontend-script-' . $dir,
+				THEME_URI . 'ls-blocks/' . $dir . '/index.js',
+				$asset_file['dependencies'],
+				$asset_file['version'],
+				true
+			);
+			wp_enqueue_script(
+				'block-editor-script-' . $dir,
+				THEME_URI . 'ls-blocks/' . $dir . '/edit.js',
+				$asset_file['dependencies'],
+				$asset_file['version'],
+				true
+			);
+			wp_localize_script(
+				'block-frontend-script-' . $dir,
+				'wpVars',
+				$block['localized_vars']
+			);
+			wp_localize_script(
+				'block-editor-script-' . $dir,
+				'wpVars',
+				$block['localized_vars']
+			);
+			wp_enqueue_style(
+				'block-frontend-style-' . $dir,
+				THEME_URI . 'ls-blocks/' . $dir . '/index.css',
+				[],
+				filemtime( THEME_DIR . 'ls-blocks/' . $dir . '/index.css' )
+			);
+			wp_enqueue_style(
+				'block-editor-style-' . $dir,
+				THEME_URI . 'ls-blocks/' . $dir . '/index.css',
+				[],
+				filemtime( THEME_DIR . 'ls-blocks/' . $dir . '/index.css' )
+			);
+		}
+
+		/**
+		 * @param mixed $block
+		 *
+		 * @return void
+		 */
+		public function load_single_block_script_translation( mixed $block ): void {
+			$group         = $block['group'] ?? 'ls';
+			$script_handle = 'block-editor-script-' . $group . '-' . $block['slug'];
+
+			if ( ! function_exists( 'wp_set_script_translations' ) || ! wp_script_is( $script_handle, 'registered' ) ) {
+				return;
+			}
+
+			wp_set_script_translations(
+				$script_handle,
+				'example',
+				THEME_DIR . 'languages'
+			);
 		}
 	}
 }

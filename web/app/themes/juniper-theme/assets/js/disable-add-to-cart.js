@@ -17,3 +17,12 @@ addCartButtons.forEach(function(button) {
         }
     }
 });
+
+window.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.wc-block-cart-item__remove-link').forEach(function(button){
+        const ariaLabel = button.getAttributeNode('aria-label').value;
+        if(ariaLabel == "Farbmuster aus Warenkorb entfernen" || ariaLabel == "Remove Farbmuster from cart" || ariaLabel == "Remove Color samples from cart"){
+            button.remove();
+        }
+    });
+}, false);
