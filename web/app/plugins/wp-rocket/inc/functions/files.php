@@ -803,10 +803,17 @@ function rocket_clean_home_feeds() {
  * @param WP_Filesystem_Direct|null $filesystem Optional. Instance of filesystem handler.
  */
 function rocket_clean_domain( $lang = '', $filesystem = null ) {
+	if ( did_action( 'rocket_after_clean_domain' ) ) {
+		return;
+	}
+
+	if ( rocket_is_importing() ) {
+		return;
+	}
+
 	$urls = ( ! $lang || is_object( $lang ) || is_array( $lang ) || is_int( $lang ) )
 		? (array) get_rocket_i18n_uri()
 		: (array) get_rocket_i18n_home_url( $lang );
-
 	/**
 	 * Filter URLs to delete all caching files from a domain.
 	 *
@@ -875,6 +882,16 @@ function rocket_clean_domain( $lang = '', $filesystem = null ) {
 		 */
 		do_action( 'after_rocket_clean_domain', $root, $lang, $url ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals
 	}
+
+	/**
+	 * Fires after all cache files was deleted.
+	 *
+	 * @since 3.15.5
+	 *
+	 * @param string $lang The current lang to purge.
+	 * @param array|string[] $urls  All urls to clean.
+	 */
+	do_action( 'rocket_after_clean_domain', $lang, $urls );
 
 	return true;
 }
