@@ -385,13 +385,8 @@ function wps_add_to_context( $context ) {
 	$context['parent_page_title']  = '';
 	$context['parent_page_url']    = '';
 
-	if ( $current_language === 'de' ) {
-		$context['page_banner']                    = 'Entdecken Sie unseren neuen Galvano Online-Shop';
-		$context['products_products_button_label'] = 'Produkte';
-	} else {
-		$context['page_banner']                    = 'Discover our new Galvano Online Shop';
-		$context['products_products_button_label'] = 'Products';
-	}
+	$context['page_banner'] = __('Discover our new Galvano Online Shop', 'wps-juniper');
+	$context['products_products_button_label'] = __('Products', 'wps-juniper');
 
 	if ( WC()->cart ) {
 		$context['cart_count'] = \WC()->cart->get_cart_contents_count();
