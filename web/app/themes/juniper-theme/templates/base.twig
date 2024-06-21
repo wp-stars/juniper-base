@@ -50,7 +50,7 @@
 									</a>
 									<a class="relative" href="{{ cart_url}}">
 										{% if cart_count > 0 %}
-											<span class="absolute rounded-full bg-accent text-black py-0 px-[6px] top-[-23px]">
+											<span id="cart-counter" class="absolute rounded-full bg-accent text-black py-0 px-[6px] top-[-23px]">
 												{{ cart_count }}
 											</span>
 										{% endif %}

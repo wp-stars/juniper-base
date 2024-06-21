@@ -117,6 +117,84 @@ jQuery(document).ready(function() {
     })
 });
 
+function isDefined(variable) {
+    return typeof variable !== 'undefined';
+}
+
+function getNextOuterClass(current, className) {
+    const currentContainsClass = current.classList.contains(className)
+
+    return currentContainsClass
+        ? current
+        : getNextOuterClass(current.parentNode, className)
+}
+
+function getNextInnerClass(current, className) {
+    const currentContainsClass = current.classList.contains(className)
+
+    if(currentContainsClass) {
+        return current
+    }
+
+    const nextInnerClass = current.children.toConnectedArray().map((element) => {
+        return getNextInnerClass(element, className)
+    })
+
+    return nextInnerClass?.first()
+}
+
+function getNearestClass(current, className) {
+    const currentContainsClass = current.classList.contains(className)
+
+    if(currentContainsClass) {
+        return current
+    }
+
+    const nextInnerClass = getNextInnerClass(current, className)
+
+    if(!nextInnerClass) {
+        const parent = current.parentNode
+
+        return getNearestClass(parent, className)
+    } else {
+        return nextInnerClass
+    }
+
+}
+
+function elementContainsImg(elementBase) {
+    return elementBase.getElementsByTagName("img")
+}
+
+function findNextOuterImage(elementBase) {
+    const children = elementBase.children
+
+    for (const child of children) {
+        const images = elementContainsImg(child)
+
+        if (images.length > 0) {
+            return images[0]
+        }
+    }
+
+
+    const parent = elementBase.parentNode
+    return findNextOuterImage(parent)
+}
+
+function spliceCollection(collection, chunkSize) {
+    const chunks = [[]]
+    for (let i = 0; i < collection.length; i++) {
+        try {
+            chunks[Math.floor(i / chunkSize)].push(collection.item(i))
+        } catch (e) {
+            chunks[Math.floor(i / chunkSize)] = []
+            chunks[Math.floor(i / chunkSize)].push(collection.item(i))
+        }
+    }
+    return chunks
+}
+
 HTMLCollection.prototype.toConnectedArray = function () {
     const connectedArray = []
     for (const block of this) {

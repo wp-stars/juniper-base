@@ -142,6 +142,8 @@ function juniper_theme_enqueue(): void {
 
 	wp_enqueue_style( 'swiper-css', get_template_directory_uri() . '/src/js/swiper/swiper-bundle.min.css', [], '1.0');
 	wp_enqueue_script( 'swiper-js', get_template_directory_uri() . '/src/js/swiper/swiper-bundle.min.js', [], '1.0', true);
+
+	wp_enqueue_script( 'woocommerce-cart-icon-counter-updater', get_template_directory_uri() . '/src/js/woocomemrce/cartCounterUpdater.js', [], 1, true);
 }
 
 
