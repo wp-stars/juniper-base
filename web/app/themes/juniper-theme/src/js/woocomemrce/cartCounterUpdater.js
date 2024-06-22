@@ -12,9 +12,11 @@ addEventListener('DOMContentLoaded', function () {
 
         const cartElements = document.getElementsByClassName('wc-block-cart-items__row').toConnectedArray()
 
-        const costDisplayElement = document.getElementsByClassName('wc-block-components-totals-item__value').item(0)
+        const costDisplayElement = document.getElementsByClassName('wc-block-components-totals-item__value').toConnectedArray()[0]
 
-        if(cartElements.length === 0) { return }
+        if (cartElements.length === 0) {
+            return
+        }
 
         function addButtonEventListener(element, updateNumber) {
             if (element.classList.contains(cartCounterInitClass)) {
@@ -33,12 +35,16 @@ addEventListener('DOMContentLoaded', function () {
         })
 
         subtractionButtons.forEach((element) => {
-           addButtonEventListener(element, -1);
+            addButtonEventListener(element, -1);
         })
 
         removeButtons.forEach((element) => {
-           addButtonEventListener(element, -1);
+            addButtonEventListener(element, -1);
         })
+
+        if (!costDisplayElement) {
+            return
+        }
 
         generalSyncObserver.disconnect()
         generalSyncObserver = new MutationObserver(() => runGeneralSync(cartElements))
@@ -73,7 +79,7 @@ addEventListener('DOMContentLoaded', function () {
         cartElements.forEach((element) => {
             const quantityCounterElement = getNextInnerClass(element, 'wc-block-components-quantity-selector__input')
 
-            if(!quantityCounterElement) {
+            if (!quantityCounterElement) {
                 return
             }
 
