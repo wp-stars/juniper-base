@@ -752,6 +752,10 @@ add_filter( 'wps_get_attachment_id_with_name_like', function ( $attachment_name 
 	return $wpdb->get_var( $query ) ?? 0;
 } );
 
+add_filter( 'test_string', function() {
+	return 'test string';
+});
+
 add_filter( 'woocommerce_format_sale_price', function ( $price, $regular_price, $sale_price ) {
 	$regular_price = wc_price( $regular_price);
 	$sale_price = wc_price($sale_price);
