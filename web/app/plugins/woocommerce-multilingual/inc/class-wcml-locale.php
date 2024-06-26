@@ -24,6 +24,13 @@ class WCML_Locale {
 		return load_plugin_textdomain( 'woocommerce-multilingual', false, WCML_PLUGIN_FOLDER . '/locale' );
 	}
 
+	/**
+	 * @deprcated since 5.3.6.
+	 *
+	 * @param string|false $lang_code
+	 *
+	 * @return bool|void
+	 */
 	public function switch_locale( $lang_code = false ) {
 		global $l10n, $st_gettext_hooks;
 		static $original_l10n;
