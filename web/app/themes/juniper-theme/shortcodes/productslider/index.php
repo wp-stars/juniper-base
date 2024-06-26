@@ -88,7 +88,7 @@ if (!class_exists('Productslider')) {
 			$query = new \WP_Query([
 				'post_type' => 'product',
 				'post_status' => 'publish',
-				'posts_per_page' => 6,
+				'posts_per_page' => 3,
 				'orderby' => 'date',
 				'order' => 'DESC',
                 'post__not_in' => [$postNotIn], // Exclude the specified product
@@ -109,6 +109,10 @@ if (!class_exists('Productslider')) {
 
 			$html .= '</div>';
 			$html .= '</div>';
+
+            $html .= '<div class="container flex justify-center mb-6">';
+            $html .= '<a href="' . get_permalink(wc_get_page_id( 'shop' )) . '" class="btn btn-accent font-semibold w-auto">' . __('Shop', 'wps-juniper') . '</a>';
+            $html .= '</div>';
 
 			return $html;
 		}
