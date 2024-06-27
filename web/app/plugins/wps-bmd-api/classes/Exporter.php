@@ -162,6 +162,23 @@ class Exporter
             ];
         }
 
+        // append shipping item to order
+        $shippingItems = $this->order->get_items('shipping');
+        if(is_array($shippingItems) && count($shippingItems) > 0){
+            foreach ($shippingItems as $shippingItem){
+                $itemPos++;
+                $itemList[] = [
+                    'n1:OrderPosNumber' => $itemPos,
+                    'n1:DistributorsArticleNo' => '9600200',
+                    'n1:DistributorsArticleName' => $shippingItem->get_name(),
+                    'n1:OrderQuantity' => 1,
+                    'n1:Price' => $shippingItem->get_total(),
+                    'n1:DiscountAmount' => 0.00,
+                    'n1:DeliveryDate' => ''
+                ];
+            }
+        }
+
         $this->getOrderDate();
 
         return $this->data = [
