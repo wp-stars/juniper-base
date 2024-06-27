@@ -114,21 +114,21 @@ class Exporter
 
         // orderingParty
         $orderingParty = [];
-        $orderingParty['bmd:ExternalOrderingPartyID'] = '';//get_current_user_id();
+        //$orderingParty['bmd:ExternalOrderingPartyID'] = '';//get_current_user_id();
         $orderingParty['bmd:VATIdentificationNumber'] = $vat_id;
         $orderingParty['bmd:Email'] = $this->order->get_billing_email();
         $orderingParty['bmd:Address'] = $orderingPartyAddress;
 
         // invoiceRecipient
         $invoiceRecipient = [];
-        $invoiceRecipient['bmd:ExternalInvoiceRecipientID'] = get_current_user_id();
+        //$invoiceRecipient['bmd:ExternalInvoiceRecipientID'] = get_current_user_id();
         $invoiceRecipient['bmd:VATIdentificationNumber'] = '';
         $invoiceRecipient['bmd:Email'] = $this->order->get_billing_email();
         $invoiceRecipient['bmd:Address'] = $invoiceRecipientAddress;
 
         // deliveryRecipient
         $deliveryRecipient = [];
-        $deliveryRecipient['bmd:ExternalDeliveryRecipientID'] = get_current_user_id();
+        //$deliveryRecipient['bmd:ExternalDeliveryRecipientID'] = get_current_user_id();
         $deliveryRecipient['bmd:VATIdentificationNumber'] = $vat_id;
         $deliveryRecipient['bmd:Email'] = $this->order->get_billing_email();
         $deliveryRecipient['bmd:Address'] = $deliveryRecipientAddress;
