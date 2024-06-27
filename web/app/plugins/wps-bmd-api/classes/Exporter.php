@@ -11,7 +11,7 @@ class Exporter
     public array $data = [];
     public \WC_Order $order;
     public string $xml = '';
-    public string $uploadDir = 'bmd-exports';
+    public string $uploadDir = 'bmd-exports/export';
 
     /**
      * @param \WC_Order $order
