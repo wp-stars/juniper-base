@@ -526,7 +526,6 @@ require_once THEME_DIR . 'ls-blocks/class-gutenberg-blocks.php';
 require_once THEME_DIR . 'shortcodes/index.php';
 require_once THEME_DIR . 'api/metalprices.php';
 require_once THEME_DIR . 'api/samples.php';
-// require_once THEME_DIR . 'inc/product/product-detailpage.php';
 require_once THEME_DIR . 'inc/job/job-detailpage.php';
 require_once THEME_DIR . 'inc/contact/contact-button.php';
 require_once THEME_DIR . 'inc/cover/cover-slider.php';
@@ -590,12 +589,6 @@ add_filter( 'wps_modal_render', function ( $modal ) {
 		return $modal;
 	}
 
-	if ( isset( $_POST['action'] ) && $_POST['action'] === 'sample-box-full' ) {
-		//$modal->title = __('thank you for your enquiry', 'wps-modal'); //'Vielen Dank für Ihre Anfrage';
-		//$modal->content = __('thank you for your enquiry', 'wps-modal'); //'Bis zum nächsten Einkauf';
-		//$modal->open();
-	}
-
 	return $modal;
 } );
 
@@ -615,12 +608,12 @@ add_action( 'init', function () {
 
 // Woocommerce related hooks
 require_once __DIR__ . '/classes/frontend/WC_Customizations.php';
-$woocommerce = new frontend\WC_Customizations();
+new frontend\WC_Customizations();
 
 
 // Product Card related hooks
 require_once __DIR__ . '/classes/frontend/ProductCard.php';
-$productCard = new frontend\ProductCard();
+new frontend\ProductCard();
 
 
 // musterbestellung related code
@@ -713,16 +706,6 @@ add_action( 'init', function () {
 		return ob_get_clean();
 	} );
 } );
-
-// replace "<sup>®</sup>" and "®" with "&reg;"
-/*add_filter('woocommerce_product_title', function($title, $product){
-
-    $title = preg_replace('/<sup>®<\/sup>/', '&reg;', $title);
-    $title = preg_replace('/®/', '&reg;', $title);
-
-    return $title;
-
-}, 9999, 2);*/
 
 add_filter( 'woocommerce_checkout_fields', function ( $fields ) {
 

@@ -442,14 +442,7 @@ class WCML_Store_Pages {
 	}
 
 	private function switch_lang( $lang_code = false ) {
-
-		$is_mo_loading_disabled = WPML_Theme_Localization_Type::USE_ST_AND_NO_MO_FILES === $this->sitepress->get_setting( 'theme_localization_type' );
-
-		if ( ! $is_mo_loading_disabled ) {
-			$this->woocommerce_wpml->locale->switch_locale( $lang_code );
-		} else {
-			$this->sitepress->switch_lang( $lang_code );
-		}
+		$this->sitepress->switch_lang( $lang_code );
 	}
 
 	/**

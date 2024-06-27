@@ -15,6 +15,7 @@ class WP_Installer {
 
 	const TOOLSET_TYPES = 'Toolset Types';
 	const LEGACY_FREE_TYPES_SUBSCRIPTION_ID = 5495;
+    const GRACE_TIME = MONTH_IN_SECONDS;
 
 	protected static $_instance = null;
 
@@ -1812,10 +1813,8 @@ class WP_Installer {
 	}
 
 	public function repository_has_in_grace_subscription( $repository_id, $expiredForPeriod = 0 ) {
-		return $this->repository_has_subscription( $repository_id ) &&
-			   $this->repository_has_valid_subscription($repository_id, $expiredForPeriod) &&
-			   $this->repository_is_in_grace_period( $repository_id, $expiredForPeriod ) &&
-			   ! $this->repository_has_refunded_subscription( $repository_id );
+		return $this->repository_has_expired_subscription( $repository_id ) &&
+			    $this->repository_is_in_grace_period( $repository_id, $expiredForPeriod );
 	}
 
 	public function get_generic_product_name( $repository_id ) {
@@ -2087,7 +2086,6 @@ class WP_Installer {
 		$plugins = get_plugins();
 
 		foreach ( $plugins as $plugin_id => $plugin ) {
-
 			$wp_plugin_slug = dirname( $plugin_id );
 
 			// Exception: embedded plugins
@@ -2163,6 +2161,9 @@ class WP_Installer {
 				foreach ( $package['products'] as $product ) {
 
 					foreach ( $product['plugins'] as $plugin_slug ) {
+                        if( ! array_key_exists( $plugin_slug, $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'] ) ) {
+                            continue;
+                        }
 
 						$download = $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ];
 
@@ -2597,7 +2598,13 @@ class WP_Installer {
 									) {
 										$display_subscription_notice = false;
 									} else {
-										if( $this->repository_has_expired_subscription( $repository_id ) ) {
+										if( $this->repository_has_in_grace_subscription( $repository_id, self::GRACE_TIME ) ) {
+											$display_subscription_notice = [
+												'type'    => 'in_grace',
+												'repo'    => $repository_id,
+												'product' => $repository['data']['product-name']
+											];
+										} elseif( $this->repository_has_expired_subscription( $repository_id ) ) {
 											$display_subscription_notice = [
 													'type' => 'expired',
 													'repo' => $repository_id,
@@ -2957,23 +2964,17 @@ class WP_Installer {
 								foreach ( $package['products'] as $product ) {
 
 									foreach ( $product['plugins'] as $plugin_slug ) {
-
-										$download = $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ];
-
-										if ( $download['slug'] == $wp_plugin_slug ) {
+										if ( $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ]['slug'] == $wp_plugin_slug ) {
+											$download = $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ];
 											$plugin_repository = $repository_id;
 											$product_name      = $repository['data']['product-name'];
 											$plugin_name       = $download['name'];
 											$free_on_wporg     = ! empty( $download['free-on-wporg'] ) && $download['channel'] == WP_Installer_Channels::CHANNEL_PRODUCTION;
 											break;
 										}
-
 									}
-
 								}
-
 							}
-
 						}
 
 						if ( $plugin_repository ) {
@@ -3073,7 +3074,7 @@ class WP_Installer {
 
 					if ( ! $site_key ) {
 						list( $plugin_repository, $site_key ) = $this->match_product_in_external_repository( $plugin_repository, $wp_plugin_slug );
-                    }
+					}
 
 					if ( $site_key ) {
 						try {

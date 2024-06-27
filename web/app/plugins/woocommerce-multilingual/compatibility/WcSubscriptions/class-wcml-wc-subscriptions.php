@@ -70,10 +70,17 @@ class WCML_WC_Subscriptions implements \IWPML_Action {
 		return isset( $new_subscription_ranges ) ? $new_subscription_ranges : $subscription_ranges;
 	}
 
-	public function register_endpoint( $query_vars, $wc_vars, $obj ) {
+	/**
+	 * @param array           $query_vars
+	 * @param array           $wc_vars
+	 * @param \WCML_Endpoints $wcmlEndpoints
+	 *
+	 * @return array
+	 */
+	public function register_endpoint( $query_vars, $wc_vars, $wcmlEndpoints ) {
+		$query_vars['view-subscription'] = $wcmlEndpoints->get_endpoint_translation( 'view-subscription' );
+		$query_vars['subscriptions']     = $wcmlEndpoints->get_endpoint_translation( 'subscriptions' );
 
-		$query_vars['view-subscription'] = $obj->get_endpoint_translation( 'view-subscription', isset( $wc_vars['view-subscription'] ) ? $wc_vars['view-subscription'] : 'view-subscription' );
-		$query_vars['subscriptions']     = $obj->get_endpoint_translation( 'subscriptions', isset( $wc_vars['subscriptions'] ) ? $wc_vars['subscriptions'] : 'subscriptions' );
 		return $query_vars;
 	}
 

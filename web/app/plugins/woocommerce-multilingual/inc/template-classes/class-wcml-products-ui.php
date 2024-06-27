@@ -403,6 +403,13 @@ class WCML_Products_UI extends WCML_Templates_Factory {
 			return false;
 		}
 
+		if ( $title_sort && ! in_array( $title_sort, [ 'asc', 'desc', 'ASC', 'DESC' ], true ) ) {
+			$title_sort = false;
+		}
+		if ( $date_sort && ! in_array( $date_sort, [ 'asc', 'desc', 'ASC', 'DESC' ], true ) ) {
+			$date_sort = false;
+		}
+
 		$current_language = $slang;
 		$prepare_arg      = [];
 		$prepare_arg[]    = '%' . $title . '%';
@@ -592,19 +599,19 @@ class WCML_Products_UI extends WCML_Templates_Factory {
 	}
 
 	public function get_current_page_number() {
-		$pn = isset( $_GET['paged'] ) ? $_GET['paged'] : 1;
+		$pn = isset( $_GET['paged'] ) ? intval( $_GET['paged'] ) : 1;
 
 		return $pn;
 	}
 
 	public function get_page_limit() {
-		$lm = ( isset( $_GET['lm'] ) && $_GET['lm'] > 0 ) ? $_GET['lm'] : 20;
+		$lm = ( isset( $_GET['lm'] ) && intval( $_GET['lm'] ) > 0 ) ? intval( $_GET['lm'] ) : 20;
 
 		return $lm;
 	}
 
 	public function get_source_language() {
-		$slang = isset( $_GET['slang'] ) && $_GET['slang'] !== 'all' ? $_GET['slang'] : false;
+		$slang = isset( $_GET['slang'] ) && $_GET['slang'] !== 'all' ? sanitize_text_field( $_GET['slang'] ) : false;
 
 		return $slang;
 	}
