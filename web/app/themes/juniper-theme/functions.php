@@ -608,12 +608,12 @@ add_action( 'init', function () {
 
 // Woocommerce related hooks
 require_once __DIR__ . '/classes/frontend/WC_Customizations.php';
-$woocommerce = new frontend\WC_Customizations();
+new frontend\WC_Customizations();
 
 
 // Product Card related hooks
 require_once __DIR__ . '/classes/frontend/ProductCard.php';
-$productCard = new frontend\ProductCard();
+new frontend\ProductCard();
 
 
 // musterbestellung related code
