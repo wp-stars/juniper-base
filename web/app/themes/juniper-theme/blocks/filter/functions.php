@@ -19,9 +19,6 @@ add_action(
 
 	//iwg/web/app/themes/juniper-theme/blocks/filter/build
 
-	$style_file_path  = $theme_path . '/blocks/filter/style.css';
-	$script_file_path = $theme_path . '/blocks/filter/script.js';
-
 	wp_enqueue_style( 'filter-css', $theme_path . '/blocks/filter/style.css', [], $time );
 	wp_enqueue_script( 'filter-js', $theme_path . '/blocks/filter/script.js', [], $time, true );
 

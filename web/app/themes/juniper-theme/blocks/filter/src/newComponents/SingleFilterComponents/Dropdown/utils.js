@@ -41,10 +41,11 @@ function generateCategoryOfParent(parent, rawOptions) {
         .filter((tax) => tax.parent === parent.term_id || tax.term_id === parent.term_id)
         .map(tax => mapToOptionObject(tax, parent))
         // sorts category head to top
-        .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label ? -1 : 1)
+        .sort((taxA, taxB) => taxA.label === mapToOptionObject(parent).label || taxA.color > taxB.color ? -1 : 1)
 
     return newCategory;
 }
+
 
 function generateCategoryBaseConstruct(name) {
     return {

@@ -57,6 +57,18 @@ const FilterDropdown = (data) => {
                 },
             };
         },
+        placeholder: (styles)=> ({
+            ...styles,
+            transition: 'color 100ms ease-in-out'
+        }),
+        container: (styles) => ({
+            ...styles,
+            ':hover div[class$="-placeholder"]': {
+                color: 'black',
+                fontWeight: '700',
+            }
+        }),
+
         multiValue: (styles, {data}) => {
             const color = chroma(data.color);
 
@@ -93,6 +105,8 @@ const FilterDropdown = (data) => {
 
                 paddingRight: '1rem',
                 paddingLeft: '1rem',
+
+
             }
         },
 
@@ -107,8 +121,17 @@ const FilterDropdown = (data) => {
                     backgroundColor: color.css(),
                     color: '#000',
                 },
-        }},
+            }
+        },
     };
+
+    const customTheme = ((theme) => ({
+        ...theme,
+        colors: {
+            ...theme.colors,
+            primary: 'black',
+        }
+    }))
 
     useEffect(() => {
         onChange(_preselectedValues)
@@ -116,7 +139,7 @@ const FilterDropdown = (data) => {
 
     const Option = (props) => {
         return (
-            <div style={{background: props.data.colorStyle}}>
+            <div style={{background: props.data.colorStyle, fontWeight: '600'}}>
                 <components.Option {...props} />
             </div>
         );
@@ -135,6 +158,7 @@ const FilterDropdown = (data) => {
             placeholder={`${label} ${translationObject.select_label}`}
             components={{Option}}
             styles={colourStyles}
+            theme={customTheme}
         />
     </div>
 }
