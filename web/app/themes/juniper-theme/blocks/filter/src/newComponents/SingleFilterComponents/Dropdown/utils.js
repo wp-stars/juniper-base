@@ -96,3 +96,12 @@ export function getDefaultSelectionFromUrl(urlParam, preparedOptions) {
 
     return preselectedTermIds
 }
+
+/**
+ * @param label {string}
+ * @param selectLabel {string}
+ * @return {string}
+ */
+export function preparePlaceholder(label, selectLabel) {
+    return selectLabel.includes('%s') ? selectLabel.replaceAll('%s', label) : `${label} ${selectLabel}`
+}

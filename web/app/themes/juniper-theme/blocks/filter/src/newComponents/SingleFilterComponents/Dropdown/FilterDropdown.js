@@ -5,7 +5,7 @@ import chroma from 'chroma-js';
 import Select, {components} from 'react-select';
 
 import translationObject from "../../../TranslationObject";
-import prepareDropdownOptions, {getDefaultSelectionFromUrl} from "./utils";
+import prepareDropdownOptions, {getDefaultSelectionFromUrl, preparePlaceholder} from "./utils";
 import {clone, hideOptionName} from "../../../utils";
 
 const FilterDropdown = (data) => {
@@ -13,7 +13,7 @@ const FilterDropdown = (data) => {
     data = data.data ? data.data : data
 
     const key = data.key
-    const label = data.label
+    const label = preparePlaceholder(data.label, translationObject.select_label)
     const urlParam = data.url ?? ''
     const onChange = data.onChange
 
@@ -155,7 +155,7 @@ const FilterDropdown = (data) => {
             onChange={(newValue) => {
                 onChange(newValue)
             }}
-            placeholder={`${label} ${translationObject.select_label}`}
+            placeholder={label}
             components={{Option}}
             styles={colourStyles}
             theme={customTheme}

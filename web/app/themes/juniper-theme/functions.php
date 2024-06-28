@@ -247,7 +247,7 @@ function enqueue_ls_scripts(): void {
 		'all_label'               => __( 'all', 'wps-juniper' ), // Alle
 		'others_label'            => __( 'other', 'wps-juniper' ), // Andere
 		'no_results'              => __( 'No results.', 'wps-juniper' ), // Keine Ergebnisse.
-		'select_label'            => __( 'Select...', 'wps-juniper' ), // Wähle ...
+		'select_label'            => __( 'Select %s', 'wps-juniper' ), // Wähle ...
 		'open_filter'             => __( 'Open filter', 'wps-juniper' ), // Filter öffnen
 		'metals-and-accessories'  => __( 'Metals and accessories', 'wps-juniper' ), // Metalle und Zubehör
 		'color'                   => __( 'Colours', 'wps-juniper' ), // Farben
