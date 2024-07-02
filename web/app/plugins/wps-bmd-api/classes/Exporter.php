@@ -122,7 +122,7 @@ class Exporter
         // invoiceRecipient
         $invoiceRecipient = [];
         //$invoiceRecipient['bmd:ExternalInvoiceRecipientID'] = get_current_user_id();
-        $invoiceRecipient['bmd:VATIdentificationNumber'] = '';
+        $invoiceRecipient['bmd:VATIdentificationNumber'] = $vat_id;
         $invoiceRecipient['bmd:Email'] = $this->order->get_billing_email();
         $invoiceRecipient['bmd:Address'] = $invoiceRecipientAddress;
 
