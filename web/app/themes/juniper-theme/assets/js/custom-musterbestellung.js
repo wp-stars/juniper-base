@@ -1,84 +1,90 @@
-const cookieName = 'musterbestellungProducts';
-let isUpdating = false;
+const customMusterbestellung = () => {
+    const cookieName = 'musterbestellungProducts';
+    let isUpdating = false;
 
-function fetchAndUpdateMusterbestellung(reload = false) {
-    showLoading();
-    const productIds = JSON.parse(getCookie(cookieName)) || [];
-    toggleMusterbestellungVisibility(productIds.length > 0); // Update visibility based on cookie content
-    isUpdating = true;
-    fetch(`${customMusterbestellungParams.restUrl}wps/v1/musterbestellung/?ids=${productIds.join(',')}`)
-        .then(response => response.json())
-        .then(products => {
-            if (reload) {
-                window.location.reload();
-                return;
-            }
-            isUpdating = false;
-            injectProductsHTML(products, productIds);
-        });
-}
+    function fetchAndUpdateMusterbestellung(reload = false) {
+        showLoading();
 
-const showLoading = () => {
-    const containers = document.querySelectorAll('#musterbestellung .products, #musterbestellung-mobile .products-mobile');
-    containers.forEach(container => {
-        container.innerHTML = '';
+        const productIds = JSON.parse(getCookie(cookieName)) || [];
+        toggleMusterbestellungVisibility(productIds.length > 0); // Update visibility based on cookie content
 
-        const loadingDiv = document.createElement('div');
-        loadingDiv.classList.add('products-loading');
-        loadingDiv.innerHTML = `
+        isUpdating = true;
+
+        fetch(`${customMusterbestellungParams.restUrl}wps/v1/musterbestellung/?ids=${productIds.join(',')}`)
+            .then(response => response.json())
+            .then(products => {
+                if (reload) {
+                    window.location.reload();
+                    return;
+                }
+
+                isUpdating = false;
+                injectProductsHTML(products, productIds);
+            });
+    }
+
+    const showLoading = () => {
+        const containers = document.querySelectorAll('#musterbestellung .products, #musterbestellung-mobile .products-mobile');
+        containers.forEach(container => {
+            container.innerHTML = '';
+
+            const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('products-loading');
+            loadingDiv.innerHTML = `
             <img src="${customMusterbestellungParams.themeUrl}/assets/img/musterbestellung-loading.svg" alt="loading" />
         `;
-        container.appendChild(loadingDiv);
-    });
-};
+            container.appendChild(loadingDiv);
+        });
+    };
 
-const initializeMusterbestellung = () => {
-    let products = customMusterbestellungParams.musterbestellungProducts;
-    let productIds = products.map(product => product.id);
-    toggleMusterbestellungVisibility(productIds.length > 0); // Toggle visibility based on product count
-    injectProductsHTML(products, productIds);
-};
+    const initializeMusterbestellung = () => {
+        let products = customMusterbestellungParams.musterbestellungProducts;
+        let productIds = products.map(product => product.id);
+        toggleMusterbestellungVisibility(productIds.length > 0); // Toggle visibility based on product count
+        injectProductsHTML(products, productIds);
+    };
 
-const toggleMusterbestellungVisibility = (isVisible) => {
-    const musterbestellungDiv = document.getElementById('musterbestellung');
-    const musterbestellungMobileDiv = document.getElementById('musterbestellung-mobile');
- 
-    if (isVisible) {
-        musterbestellungDiv.style.display = ''; // Reset to default or use 'block'
-        musterbestellungMobileDiv.style.display = ''; // Reset to default or use 'block'
-      
-    } else {
-        musterbestellungDiv.style.display = 'none'; // Hide the div
-        musterbestellungMobileDiv.style.display = 'none'; // Hide the div
-       
-    }
-};
+    const toggleMusterbestellungVisibility = (isVisible) => {
+        const musterbestellungDiv = document.getElementById('musterbestellung');
+        const musterbestellungMobileDiv = document.getElementById('musterbestellung-mobile');
 
-const injectProductsHTML = (products, productIds) => {
-    const containers = document.querySelectorAll('#musterbestellung .products, #musterbestellung-mobile .products-mobile');
-    const productNumberSpans = document.querySelectorAll('#musterbestellung .product-number, #musterbestellung-mobile .product-number');
+        if (isVisible) {
+            musterbestellungDiv.style.display = ''; // Reset to default or use 'block'
+            musterbestellungMobileDiv.style.display = ''; // Reset to default or use 'block'
 
-    // Update the product number display
-    productNumberSpans.forEach(span => {
-        span.textContent = `${products.length}/3`;
-    });
+        } else {
+            musterbestellungDiv.style.display = 'none'; // Hide the div
+            musterbestellungMobileDiv.style.display = 'none'; // Hide the div
 
-    // Clear existing products and fill up to 3 product slots in each container
-    containers.forEach(container => {
-        container.innerHTML = '';
-        for (let i = 0; i < 3; i++) {
-            const product = products[i];
+        }
+    };
 
-            var shopUrl = scriptData.shopUrl;
-            var productFinderPath = '/productfinder?purchasability=true';
-            var fullUrl = shopUrl + productFinderPath;
+    const injectProductsHTML = (products, productIds) => {
+        const containers = document.querySelectorAll('#musterbestellung .products, #musterbestellung-mobile .products-mobile');
+        const productNumberSpans = document.querySelectorAll('#musterbestellung .product-number, #musterbestellung-mobile .product-number');
 
-            const productDiv = document.createElement('div');
-            productDiv.className = 'product-slot';
-            productDiv.innerHTML = product && product.image ? `
+        // Update the product number display
+        productNumberSpans.forEach(span => {
+            span.textContent = `${products.length}/3`;
+        });
+
+        // Clear existing products and fill up to 3 product slots in each container
+        containers.forEach(container => {
+            container.innerHTML = '';
+
+            for (let i = 0; i < 3; i++) {
+                const product = products[i];
+
+                const shopUrl = scriptData.shopUrl;
+                const productFinderPath = '/productfinder?purchasability=true';
+                const fullUrl = shopUrl + productFinderPath;
+
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product-slot';
+                productDiv.innerHTML = product && product.image ? `
                 <div class="tooltip group mb-4">
                     <div class="product overflow-hidden rounded-full">
-                        <img src="${product.image[0]}" style="display: block;">
+                        <img src="${product.image[0]}" style="display: block;" alt="material-sample-${product.name}">
                     </div>
                     <span class="tooltiptext bg-accent rounded-sm px-2 py-2 text-black invisible group-hover:visible whitespace-nowrap truncate">${product.name}</span>
 
@@ -95,101 +101,145 @@ const injectProductsHTML = (products, productIds) => {
                     </svg>
                     </a>
                 </div>`;
-            container.appendChild(productDiv);
-        }
-    });
-
-    attachDeleteEventListeners(productIds);
-};
-
-function attachDeleteEventListeners(productIds) {
-    const deleteButtons = document.querySelectorAll('.delete-product');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const productId = e.currentTarget.getAttribute('data-product-id');
-            const updatedProductIds = productIds.filter(id => id !== productId);
-            setCookie(cookieName, JSON.stringify(updatedProductIds));
-            fetchAndUpdateMusterbestellung(true);
-        });
-    });
-}
-
-function setCookie(name, value) {
-    const expiryDate = new Date();
-    expiryDate.setTime(expiryDate.getTime() + (365 * 24 * 60 * 60 * 1000)); // Set cookie to expire in 1 year
-    const expires = "expires=" + expiryDate.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-        const cookieValue = parts.pop().split(';').shift();
-        return cookieValue;
-    }
-    return null; // Return null if cookie does not exist
-}
-
-const handleMusterbestellungSelectsUpdate = () => {
-    let selects = document.querySelectorAll('.musterbestellung-custom-fields select');
-    let cookieArr = getCookie(cookieName);
-    let valuesToEnable = [];
-
-    if (selects.length && cookieArr.length) {
-        selects.forEach(select => {
-            if (!cookieArr.includes(select.value)) {
-                valuesToEnable.push(select.value);
-                select.value = '';
+                container.appendChild(productDiv);
             }
         });
 
-        selects.forEach(select => {
-            select.querySelectorAll('option').forEach(option => {
-                if (valuesToEnable.includes(option.value)) {
-                    option.disabled = false;
+        attachDeleteEventListeners(productIds);
+    };
+
+    function removeProductFromList(target, productIds) {
+        const productId = target.getAttribute('data-product-id');
+        
+        const updatedProductIds = productIds.filter(id => id !== productId);
+        setCookie(cookieName, JSON.stringify(updatedProductIds));
+        fetchAndUpdateMusterbestellung(true);
+    }
+
+    function attachDeleteEventListeners(productIds) {
+        const deleteButtons = document.querySelectorAll('.delete-product');
+
+        deleteButtons.forEach(button => {
+            button.onClick = (e) => {
+                removeProductFromList(e.target, productIds)
+            };
+        })
+    }
+
+    function setCookie(name, value) {
+        const expiryDate = new Date();
+        expiryDate.setTime(expiryDate.getTime() + (365 * 24 * 60 * 60 * 1000)); // Set cookie to expire in 1 year
+        const expires = "expires=" + expiryDate.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+            const cookieValue = parts.pop().split(';').shift();
+            return cookieValue;
+        }
+        return null; // Return null if cookie does not exist
+    }
+
+    const handleMusterbestellungSelectsUpdate = () => {
+        let selects = document.querySelectorAll('.musterbestellung-custom-fields select');
+        let cookieArr = getCookie(cookieName);
+        let valuesToEnable = [];
+
+        if (selects.length && cookieArr.length) {
+            selects.forEach(select => {
+                if (!cookieArr.includes(select.value)) {
+                    valuesToEnable.push(select.value);
+                    select.value = '';
                 }
+            });
+
+            selects.forEach(select => {
+                select.querySelectorAll('option').forEach(option => {
+                    if (valuesToEnable.includes(option.value)) {
+                        option.disabled = false;
+                    }
+                });
+            });
+        }
+    };
+
+    function setupMutationObserverForCartRemovalListener(root) {
+        const initClass = 'cartRemovalListenerInit'
+
+        /**
+         * @param root {HTMLElement}
+         *
+         * @return HTMLElement
+         */
+        function findCartContainer(root) {
+            return root.getElementsByClassName('wc-block-cart-items')[0]
+        }
+
+        const cartContainer = findCartContainer(root)
+
+        if(!cartContainer || cartContainer.classList.value.includes(initClass)) {
+            return
+        }
+
+        cartContainer.classList.add(initClass)
+
+        const cartItems = cartContainer.getElementsByClassName('wc-block-cart-items__row')
+        const cartItemRemoalLink = cartItems.toConnectedArray().map((element) => element.getElementsByClassName('wc-block-cart-item__remove-link')[0])
+
+        cartItemRemoalLink.forEach((removalLink) => removalLink.addEventListener('click', function(target) {
+
+        }))
+    }
+
+    initializeMusterbestellung();
+    // Set up an observer to watch for cookie changes
+    let lastCookie = document.cookie;
+    setInterval(() => {
+        if (document.cookie !== lastCookie && !isUpdating) {
+            lastCookie = document.cookie;
+            fetchAndUpdateMusterbestellung(false);
+            handleMusterbestellungSelectsUpdate();
+        }
+    }, 1000); // Poll every 1000ms
+
+    // add to musterbestellung
+    function attachAppendEventListeners() {
+        const appendButtons = document.querySelectorAll('.add-to-musterbestellung');
+        appendButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productId = e.currentTarget.getAttribute('data-product-id');
+                let products = JSON.parse(getCookie(cookieName)) || [];
+
+                // Check if there are already 3 products in the list
+                if (products.length >= 3) {
+                    openModal('full-samplebox-modal');
+                    return;
+                }
+
+                // Check if the product is already in the list
+                if (products.includes(productId)) {
+                    return;
+                }
+
+                // Add the new product and update the cookie
+                products.push(productId);
+                setCookie(cookieName, JSON.stringify(products));
+                fetchAndUpdateMusterbestellung(true);
             });
         });
     }
-};
 
-initializeMusterbestellung();
-// Set up an observer to watch for cookie changes
-let lastCookie = document.cookie;
-setInterval(() => {
-    if (document.cookie !== lastCookie && !isUpdating) {
-        lastCookie = document.cookie;
-        fetchAndUpdateMusterbestellung(false);
-        handleMusterbestellungSelectsUpdate();
-    }
-}, 1000); // Poll every 1000ms
+    attachAppendEventListeners();
 
-// add to musterbestellung
-function attachAppendEventListeners() {
-    const appendButtons = document.querySelectorAll('.add-to-musterbestellung');
-    appendButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const productId = e.currentTarget.getAttribute('data-product-id');
-            let products = JSON.parse(getCookie(cookieName)) || [];
+    const generalContainer = document.getElementById('content')
+    const setupCartRemovalListener = new MutationObserver(() => {
+        setupMutationObserverForCartRemovalListener(generalContainer)
+    })
 
-            // Check if there are already 3 products in the list
-            if (products.length >= 3) {
-                openModal('full-samplebox-modal');
-                return;
-            }
-
-            // Check if the product is already in the list
-            if (products.includes(productId)) {
-                return;
-            }
-
-            // Add the new product and update the cookie
-            products.push(productId);
-            setCookie(cookieName, JSON.stringify(products));
-            fetchAndUpdateMusterbestellung(true);
-        });
-    });
+    setupCartRemovalListener.observe(generalContainer, { childList: true, attributes: true, subtree: true })
 }
 
-attachAppendEventListeners();
+addEventListener('DOMContentLoaded', customMusterbestellung)
